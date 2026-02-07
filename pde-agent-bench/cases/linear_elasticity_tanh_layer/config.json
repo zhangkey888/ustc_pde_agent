@@ -1,0 +1,127 @@
+{
+  "id": "linear_elasticity_tanh_layer",
+  "pde_classification": {
+    "equation_type": "linear_elasticity",
+    "math_type": [
+      "elliptic"
+    ]
+  },
+  "oracle_config": {
+    "pde": {
+      "type": "linear_elasticity",
+      "description": "Manufactured displacement with tanh shear layer (tests sharp interior gradients)",
+      "pde_params": {
+        "E": 1.0,
+        "nu": 0.3
+      },
+      "manufactured_solution": {
+        "u": [
+          "tanh(6*(y-0.5))*sin(pi*x)",
+          "0.1*sin(2*pi*x)*sin(pi*y)"
+        ]
+      }
+    },
+    "domain": {
+      "type": "unit_square"
+    },
+    "mesh": {
+      "resolution": 170,
+      "cell_type": "triangle"
+    },
+    "fem": {
+      "family": "Lagrange",
+      "degree": 1
+    },
+    "bc": {
+      "dirichlet": {
+        "on": "all",
+        "value": "u"
+      }
+    },
+    "output": {
+      "format": "npz",
+      "field": "displacement_magnitude",
+      "grid": {
+        "bbox": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "nx": 50,
+        "ny": 50
+      }
+    },
+    "oracle_solver": {
+      "ksp_type": "gmres",
+      "pc_type": "ilu",
+      "rtol": 1e-10,
+      "atol": 1e-12
+    }
+  },
+  "evaluation_config": {
+    "target_metric": "rel_L2_grid",
+    "timeout_sec": 300,
+    "tolerance": 10,
+    "accuracy_tolerance": 10,
+    "time_tolerance": 3,
+    "target_error": 0.01
+  },
+  "agent_knobs": [
+    {
+      "name": "mesh_resolution",
+      "description": "Spatial discretization fidelity"
+    },
+    {
+      "name": "element_degree",
+      "description": "Finite element polynomial degree"
+    },
+    {
+      "name": "ksp_type",
+      "description": "Krylov method for the linear solve"
+    },
+    {
+      "name": "pc_type",
+      "description": "Preconditioner choice for the linear solve"
+    },
+    {
+      "name": "rtol",
+      "description": "Linear solver relative tolerance"
+    }
+  ],
+  "baseline": {
+    "error_ref": 0.01,
+    "time_ref": 10.0,
+    "description": "Oracle baseline performance"
+  },
+  "difficulty_tiers": {
+    "accuracy": {
+      "level_1": {
+        "target_error": 1.0,
+        "name": "Low/Engineering"
+      },
+      "level_2": {
+        "target_error": 0.01,
+        "name": "Medium/Standard"
+      },
+      "level_3": {
+        "target_error": 0.0001,
+        "name": "High/Scientific"
+      }
+    },
+    "speed": {
+      "fast": {
+        "time_budget": 1.0,
+        "name": "Real-time"
+      },
+      "medium": {
+        "time_budget": 10.0,
+        "name": "Interactive"
+      },
+      "slow": {
+        "time_budget": 100.0,
+        "name": "Batch"
+      }
+    }
+  }
+}

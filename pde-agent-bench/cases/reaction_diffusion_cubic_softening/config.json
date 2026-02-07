@@ -1,0 +1,136 @@
+{
+  "id": "reaction_diffusion_cubic_softening",
+  "pde_classification": {
+    "equation_type": "reaction_diffusion",
+    "math_type": [
+      "reaction_diffusion"
+    ]
+  },
+  "oracle_config": {
+    "pde": {
+      "type": "reaction_diffusion",
+      "description": "Transient cubic reaction with softening (negative cubic term, tests bistability)",
+      "pde_params": {
+        "epsilon": 0.1,
+        "reaction": {
+          "type": "cubic",
+          "alpha": 1.5,
+          "beta": -2.0
+        }
+      },
+      "time": {
+        "t0": 0.0,
+        "t_end": 0.25,
+        "dt": 0.005,
+        "scheme": "backward_euler"
+      },
+      "manufactured_solution": {
+        "u": "exp(-t)*(0.15*sin(3*pi*x)*sin(2*pi*y))"
+      }
+    },
+    "domain": {
+      "type": "unit_square"
+    },
+    "mesh": {
+      "resolution": 150,
+      "cell_type": "triangle"
+    },
+    "fem": {
+      "family": "Lagrange",
+      "degree": 1
+    },
+    "bc": {
+      "dirichlet": {
+        "on": "all",
+        "value": "u"
+      }
+    },
+    "output": {
+      "format": "npz",
+      "field": "scalar",
+      "grid": {
+        "bbox": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "nx": 70,
+        "ny": 70
+      }
+    },
+    "oracle_solver": {
+      "rtol": 1e-10,
+      "atol": 1e-12,
+      "max_it": 50,
+      "ksp_type": "gmres",
+      "pc_type": "ilu",
+      "ksp_rtol": 1e-10
+    }
+  },
+  "evaluation_config": {
+    "target_metric": "rel_L2_grid",
+    "timeout_sec": 300,
+    "tolerance": 10,
+    "accuracy_tolerance": 10,
+    "time_tolerance": 3,
+    "target_error": 0.01
+  },
+  "agent_knobs": [
+    {
+      "name": "reaction_alpha/beta",
+      "description": "Cubic reaction parameters"
+    },
+    {
+      "name": "epsilon",
+      "description": "Diffusion coefficient"
+    },
+    {
+      "name": "mesh_resolution",
+      "description": "Spatial mesh resolution"
+    },
+    {
+      "name": "dt",
+      "description": "Time step size; smaller improves accuracy but increases runtime"
+    },
+    {
+      "name": "time_scheme",
+      "description": "Time integrator (backward_euler/crank_nicolson/bdf2)"
+    }
+  ],
+  "baseline": {
+    "error_ref": 0.01,
+    "time_ref": 10.0,
+    "description": "Oracle baseline performance"
+  },
+  "difficulty_tiers": {
+    "accuracy": {
+      "level_1": {
+        "target_error": 1.0,
+        "name": "Low/Engineering"
+      },
+      "level_2": {
+        "target_error": 0.01,
+        "name": "Medium/Standard"
+      },
+      "level_3": {
+        "target_error": 0.0001,
+        "name": "High/Scientific"
+      }
+    },
+    "speed": {
+      "fast": {
+        "time_budget": 1.0,
+        "name": "Real-time"
+      },
+      "medium": {
+        "time_budget": 10.0,
+        "name": "Interactive"
+      },
+      "slow": {
+        "time_budget": 100.0,
+        "name": "Batch"
+      }
+    }
+  }
+}

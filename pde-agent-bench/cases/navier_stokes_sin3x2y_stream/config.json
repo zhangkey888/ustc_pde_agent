@@ -1,0 +1,122 @@
+{
+  "id": "navier_stokes_sin3x2y_stream",
+  "pde_classification": {
+    "equation_type": "navier_stokes",
+    "math_type": [
+      "incompressible_flow"
+    ]
+  },
+  "oracle_config": {
+    "pde": {
+      "type": "navier_stokes",
+      "description": "Manufactured divergence-free flow from psi=sin(3*pi*x)*sin(2*pi*y) (tests higher-mode nonlinearity)",
+      "pde_params": {
+        "nu": 0.1
+      },
+      "manufactured_solution": {
+        "u": [
+          "2*pi*cos(2*pi*y)*sin(3*pi*x)",
+          "-3*pi*cos(3*pi*x)*sin(2*pi*y)"
+        ],
+        "p": "cos(pi*x)*cos(2*pi*y)"
+      }
+    },
+    "domain": {
+      "type": "unit_square"
+    },
+    "mesh": {
+      "resolution": 104,
+      "cell_type": "triangle"
+    },
+    "fem": {
+      "degree_u": 2,
+      "degree_p": 1
+    },
+    "bc": {
+      "dirichlet": {
+        "on": "all",
+        "value": "u"
+      }
+    },
+    "output": {
+      "format": "npz",
+      "field": "velocity_magnitude",
+      "grid": {
+        "bbox": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "nx": 50,
+        "ny": 50
+      }
+    },
+    "oracle_solver": {
+      "rtol": 1e-10,
+      "atol": 1e-12,
+      "max_it": 110
+    }
+  },
+  "evaluation_config": {
+    "target_metric": "rel_L2_grid",
+    "timeout_sec": 300,
+    "tolerance": 10,
+    "accuracy_tolerance": 10,
+    "time_tolerance": 3,
+    "target_error": 0.01
+  },
+  "agent_knobs": [
+    {
+      "name": "mesh_resolution",
+      "description": "Spatial discretization fidelity"
+    },
+    {
+      "name": "degree_u/degree_p",
+      "description": "Stable mixed velocity-pressure element degrees"
+    },
+    {
+      "name": "newton_rtol",
+      "description": "Nonlinear convergence tolerance"
+    },
+    {
+      "name": "newton_max_it",
+      "description": "Maximum nonlinear iterations"
+    }
+  ],
+  "baseline": {
+    "error_ref": 0.01,
+    "time_ref": 10.0,
+    "description": "Oracle baseline performance"
+  },
+  "difficulty_tiers": {
+    "accuracy": {
+      "level_1": {
+        "target_error": 1.0,
+        "name": "Low/Engineering"
+      },
+      "level_2": {
+        "target_error": 0.01,
+        "name": "Medium/Standard"
+      },
+      "level_3": {
+        "target_error": 0.0001,
+        "name": "High/Scientific"
+      }
+    },
+    "speed": {
+      "fast": {
+        "time_budget": 1.0,
+        "name": "Real-time"
+      },
+      "medium": {
+        "time_budget": 10.0,
+        "name": "Interactive"
+      },
+      "slow": {
+        "time_budget": 100.0,
+        "name": "Batch"
+      }
+    }
+  }
+}
