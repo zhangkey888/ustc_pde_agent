@@ -53,7 +53,7 @@ class DefaultAgent:
         self.model = model
         self.env = env
         self.extra_template_vars = {}
-
+        self.role = kwargs.get("role", "solver")
     def render_template(self, template: str, **kwargs) -> str:
         template_vars = self.config.model_dump() | self.env.get_template_vars() | self.model.get_template_vars()
         return Template(template, undefined=StrictUndefined).render(
