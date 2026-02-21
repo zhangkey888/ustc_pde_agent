@@ -189,14 +189,12 @@
     
 #     def cleanup(self):
 #         pass
-"""
-MiniSWE Agent Wrapper for PDEBench (Dual-Agent Orchestrator Integration)
-"""
 import sys
 import re
 import yaml
 import os
 import shutil
+import urllib.parse
 from pathlib import Path
 from typing import Dict, Any
 
@@ -208,15 +206,10 @@ try:
     from minisweagent.models.litellm_model import LitellmModel
     from minisweagent import package_dir
     
-    # === 新增：尝试导入 Orchestrator ===
-    # 假设 pde_orchestrator.py 在 src/minisweagent/ 下，或者在你的 PYTHONPATH 中
-    # 如果找不到，请调整此处的 import
+    # === 尝试导入 Orchestrator ===
     try:
         from minisweagent.agents.pde_orchestrator import PDEOrchestrator
     except ImportError:
-        # 如果你把 orchestrator 放到了别的地方，比如和 wrapper 同级，请改为:
-        # from .pde_orchestrator import PDEOrchestrator
-        # 或者直接在这里抛出更友好的错误
         sys.path.append(os.path.join(package_dir, "..")) # 尝试上一级
         from pde_orchestrator import PDEOrchestrator
         
@@ -227,6 +220,9 @@ class MiniSWEWrapper(BaseAgent):
     def _setup(self):
         # 1. 基础配置
         self.model_name = self.config.get('model', 'gpt-4o')
+        
+        # === 新增：提取 URL 兼容配置 (自定义 API Base) ===
+        self.api_base = self.config.get('api_base') or self.config.get('base_url')
         
         # 2. 设置结果存储路径
         default_root = "/data5/store1/zky/ustc_pde_agent/pde-agent-bench/results/miniswe_dual"
@@ -255,6 +251,8 @@ class MiniSWEWrapper(BaseAgent):
         }
 
         print(f"🔧 Initializing MiniSWE Dual-Agent Wrapper")
+        if self.api_base:
+            print(f"🌐 Using custom API Base URL: {self.api_base}")
         print(f"📂 Persistent Workspace: {self.results_root}")
         print(f"📜 Prompts: {self.task_prompts_path}")
 
@@ -263,11 +261,20 @@ class MiniSWEWrapper(BaseAgent):
         执行双 Agent 流程
         """
         # 1. 准备工作目录
-        case_id = context.get('case_id')
-        case_workspace = self.results_root / case_id
+        raw_case_id = str(context.get('case_id', 'default_case'))
+        
+        # === 新增：URL 兼容模式 ===
+        # 如果 case_id 是 URL（包含 http, // 或特殊字符），将其替换为安全的文件系统目录名
+        safe_case_id = re.sub(r'[^a-zA-Z0-9_\-]', '_', raw_case_id)
+        # 去掉首尾可能多余的下划线，避免目录名太丑
+        safe_case_id = safe_case_id.strip("_") 
+        
+        case_workspace = self.results_root / safe_case_id
         case_workspace.mkdir(parents=True, exist_ok=True)
         
-        print(f"🤖 MiniSWE (Dual) starts for case: {case_id}")
+        print(f"🤖 MiniSWE (Dual) starts for case: {raw_case_id}")
+        if raw_case_id != safe_case_id:
+            print(f"📁 URL mapped to safe workspace: {safe_case_id}")
         
         original_cwd = os.getcwd()
 
@@ -276,15 +283,17 @@ class MiniSWEWrapper(BaseAgent):
             os.chdir(case_workspace)
 
             # 3. 初始化环境和模型
-            # LocalEnvironment 会自动使用当前的 CWD
             env = LocalEnvironment(workspace_dir=".")
             
-            # 兼容处理模型名称 (特别是 DeepSeek/Azure)
-            # 如果 config 里传入了 `openai/deepseek-chat`，这里直接用
-            model_obj = LitellmModel(model_name=self.model_name)
+            # === 新增：在模型初始化中注入 URL 配置 ===
+            model_kwargs = {"model_name": self.model_name}
+            if self.api_base:
+                # 兼容 litellm 的基础 URL 参数传递
+                model_kwargs["api_base"] = self.api_base 
+                
+            model_obj = LitellmModel(**model_kwargs)
             
             # 4. 初始化 Orchestrator
-            # 注意：Orchestrator 负责实例化 Generator 和 Verifier
             orchestrator = PDEOrchestrator(
                 model=model_obj,
                 env=env,
@@ -293,8 +302,6 @@ class MiniSWEWrapper(BaseAgent):
             )
 
             # 5. 构造 Full Prompt
-            # PDEBench 传来的 prompt 已经包含了题目描述
-            # 我们只需要追加动作指南，告诉 Agent 1 必须写文件
             action_instructions = (
                 "\n\n"
                 "===========================================================\n"
@@ -309,27 +316,23 @@ class MiniSWEWrapper(BaseAgent):
             
             # 6. 运行双 Agent 流水线
             try:
-                # orchestrator.run 返回 (status, message/history)
                 exit_status, result_history = orchestrator.run(full_prompt)
             except SystemExit:
                 exit_status, result_history = "EXIT", "SystemExit triggered"
             except Exception as e:
-                # 捕获 Orchestrator 内部未捕获的异常
                 import traceback
                 traceback.print_exc()
                 exit_status, result_history = "ERROR", str(e)
 
-            # 7. 提取最终代码 (逻辑不变)
-            # 无论 Agent 2 是否修改了代码，只要文件在磁盘上，就是最新的
+            # 7. 提取最终代码
             final_code = ""
             solver_file = Path("solver.py")
             
             if solver_file.exists():
-                print(f"  📄 Found solver.py on disk (Verified Version).")
+                print(f"  📄 Found solver.py on disk (Verified Version).")
                 final_code = solver_file.read_text()
             else:
-                print(f"  ⚠️ solver.py missing. Attempting history extraction...")
-                # 尝试从历史记录提取 (虽然 Dual Agent 的 history 比较复杂，通常是 str)
+                print(f"  ⚠️ solver.py missing. Attempting history extraction...")
                 final_code = self._extract_code_from_history(result_history)
                 if final_code:
                     solver_file.write_text(final_code)
@@ -345,7 +348,7 @@ class MiniSWEWrapper(BaseAgent):
                 )
 
             return AgentResponse(
-                success=(exit_status == "Submitted"), # 只有 Verifier 提交才算 Success
+                success=(exit_status == "Submitted"), 
                 code=final_code,
                 raw_response=str(result_history),
                 agent_name=self.agent_name
