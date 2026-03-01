@@ -32,8 +32,8 @@ cd PDEAgent
 pip install -r requirements.txt
 Usage
 Simply describe your physical problem in natural language, and PDEAgent will handle the meshing, boundary conditions, and solver execution.
+```
 
-Python
 from pdeagent import PDEAgent
 
 # Initialize the agent
@@ -63,7 +63,6 @@ PDEAgent has been rigorously evaluated on the PDEAgentBenchmark. Instead of mere
 📄 Citation
 If you find this project useful in your research, please consider citing our paper:
 
-代码段
 @article{yourname2025pdeagent,
   title={PDEAgent: An Autonomous Large Language Model System for Partial Differential Equation Solving},
   author={Your Name and Co-authors},
