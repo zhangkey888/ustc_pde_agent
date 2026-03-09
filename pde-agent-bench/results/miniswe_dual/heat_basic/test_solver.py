@@ -1,66 +1,39 @@
 import numpy as np
-import sys
-sys.path.insert(0, '.')
+import time
+
 from solver import solve
 
-# Test 1: Normal case with time info
-print("Test 1: Normal case with time info")
-case_spec1 = {
+case_spec = {
     "pde": {
-        "time": {
-            "t_end": 0.1,
-            "dt": 0.01,
-            "scheme": "backward_euler"
-        }
+        "type": "heat",
+        "coefficients": {"kappa": 1.0},
+        "time": {"t_end": 0.1, "dt": 0.01, "scheme": "backward_euler"},
     },
-    "coefficients": {
-        "kappa": 1.0
-    }
+    "domain": {"type": "unit_square"},
+    "output": {"nx": 50, "ny": 50},
 }
-result1 = solve(case_spec1)
-print(f"  Mesh resolution: {result1['solver_info']['mesh_resolution']}")
-print(f"  dt: {result1['solver_info']['dt']}")
-print(f"  n_steps: {result1['solver_info']['n_steps']}")
-print(f"  ksp_type: {result1['solver_info']['ksp_type']}")
-print(f"  pc_type: {result1['solver_info']['pc_type']}")
-print(f"  iterations: {result1['solver_info']['iterations']}")
-print(f"  Has wall_time_sec: {'wall_time_sec' in result1['solver_info']}")
 
-# Test 2: Missing time key (should use defaults)
-print("\nTest 2: Missing time key")
-case_spec2 = {
-    "coefficients": {
-        "kappa": 1.0
-    }
-}
-result2 = solve(case_spec2)
-print(f"  dt: {result2['solver_info']['dt']}")
-print(f"  n_steps: {result2['solver_info']['n_steps']}")
+t0 = time.perf_counter()
+result = solve(case_spec)
+elapsed = time.perf_counter() - t0
 
-# Test 3: Partial time info
-print("\nTest 3: Partial time info (only t_end)")
-case_spec3 = {
-    "pde": {
-        "time": {
-            "t_end": 0.05
-        }
-    },
-    "coefficients": {
-        "kappa": 1.0
-    }
-}
-result3 = solve(case_spec3)
-print(f"  dt: {result3['solver_info']['dt']}")
-print(f"  n_steps: {result3['solver_info']['n_steps']}")
+u_grid = result["u"]
+info = result["solver_info"]
 
-# Check accuracy
+t_end = 0.1
 nx, ny = 50, 50
-x_vals = np.linspace(0.0, 1.0, nx)
-y_vals = np.linspace(0.0, 1.0, ny)
-X, Y = np.meshgrid(x_vals, y_vals, indexing='ij')
-u_exact = np.exp(-0.1) * np.sin(np.pi * X) * np.sin(np.pi * Y)
-error = np.abs(result1['u'] - u_exact)
-max_error = np.max(error)
-print(f"\nMax error for test 1: {max_error:.2e}")
-print(f"Accuracy requirement: {max_error <= 1.42e-03}")
+xg = np.linspace(0, 1, nx)
+yg = np.linspace(0, 1, ny)
+X, Y = np.meshgrid(xg, yg, indexing='ij')
+u_exact = np.exp(-t_end) * np.sin(np.pi * X) * np.sin(np.pi * Y)
 
+l2_error = np.sqrt(np.mean((u_grid - u_exact) ** 2))
+linf_error = np.max(np.abs(u_grid - u_exact))
+
+print(f"Wall time: {elapsed:.3f} s")
+print(f"L2 error:  {l2_error:.6e}")
+print(f"Linf error: {linf_error:.6e}")
+print(f"Solver info: {info}")
+print(f"NaN count: {np.isnan(u_grid).sum()}")
+print(f"Pass accuracy: {l2_error <= 1.42e-3}")
+print(f"Pass time: {elapsed <= 9.727}")

@@ -92,7 +92,7 @@ Notes:
 
 **Pass/Fail Criteria (single tier):**
 - Accuracy: error ≤ 3.53e-01
-- Time: wall_time_sec ≤ 25.307s
+- Time: wall_time_sec ≤ 25.023s
 
 ---
 

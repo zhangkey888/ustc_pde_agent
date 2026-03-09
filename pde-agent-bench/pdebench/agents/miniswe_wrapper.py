@@ -27,7 +27,7 @@
         
 #         # 2. 设置结果存储路径 (对应你脚本里的 results_dir)
 #         # 默认路径硬编码为你提供的路径，也可以在 configs/miniswepde.json 里改
-#         default_root = "/data5/store1/zky/pde-agent-bench/results/miniswepde"
+#         default_root = "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results/miniswepde"
 #         self.results_root = Path(self.config.get('results_root', default_root))
         
 #         # 3. 加载 MiniSWE 默认配置 (填补 Pydantic 校验所需的 templates)
@@ -229,7 +229,7 @@ class MiniSWEWrapper(BaseAgent):
         self.model_name = self.config.get('model', 'gpt-4o')
         
         # 2. 设置结果存储路径
-        default_root = "/data5/store1/zky/ustc_pde_agent/pde-agent-bench/results/miniswe_dual"
+        default_root = "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results/miniswe_dual"
         self.results_root = Path(self.config.get('results_root', default_root))
         
         # 3. 加载基础配置 (default.yaml)
@@ -280,8 +280,22 @@ class MiniSWEWrapper(BaseAgent):
             env = LocalEnvironment(workspace_dir=".")
             
             # 兼容处理模型名称 (特别是 DeepSeek/Azure)
-            # 如果 config 里传入了 `openai/deepseek-chat`，这里直接用
-            model_obj = LitellmModel(model_name=self.model_name)
+            # 构建 model_kwargs，传递 api_key 和 base_url 给 litellm
+            model_kwargs = {}
+            if self.config.get('api_key'):
+                model_kwargs['api_key'] = self.config['api_key']
+            if self.config.get('base_url'):
+                model_kwargs['api_base'] = self.config['base_url']  # litellm 使用 api_base
+            if self.config.get('temperature'):
+                model_kwargs['temperature'] = self.config['temperature']
+            if self.config.get('max_tokens'):
+                model_kwargs['max_tokens'] = self.config['max_tokens']
+            
+            model_obj = LitellmModel(
+                model_name=self.model_name, 
+                model_kwargs=model_kwargs,
+                cost_tracking="ignore_errors"  # 忽略模型价格未注册的错误
+            )
             
             # 4. 初始化 Orchestrator
             # 注意：Orchestrator 负责实例化 Generator 和 Verifier

@@ -1,5 +1,5 @@
 """Oracle solver package."""
 
-from .oracle import OracleSolver
+from .oracle import OracleSolver, generate
 
-__all__ = ["OracleSolver"]
+__all__ = ["OracleSolver", "generate"]

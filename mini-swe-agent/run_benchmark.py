@@ -15,8 +15,8 @@ app = typer.Typer()
 console = Console()
 
 # --- 这里填入你 pdeagentbench 的绝对路径 ---
-# 例如: "/data5/store1/zky/pde-agent-bench/cases"
-PDEBENCH_ROOT = "/data5/store1/zky/pde-agent-bench"  # <--- 请修改这里 !!!
+# 例如: "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/cases"
+PDEBENCH_ROOT = "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench"  # <--- 请修改这里 !!!
 
 MASTER_INSTRUCTION = """
 You are an expert computational scientist. Your task is to generate a complete Python solver script using FEniCSx (dolfinx) for a given PDE problem.

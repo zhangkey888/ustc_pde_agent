@@ -22,7 +22,7 @@ app = typer.Typer()
 console = Console()
 
 # --- 全局常量 ---
-PDEBENCH_ROOT = "/data5/store1/zky/pde-agent-bench"  # 你的数据根目录
+PDEBENCH_ROOT = "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench"  # 你的数据根目录
 
 # 这是一个总的格式约束，会拼接到每个具体 Case 的描述前
 # 保持了对 solver.py, solution.npz, meta.json 的强制要求

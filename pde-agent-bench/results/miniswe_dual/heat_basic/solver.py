@@ -1,338 +1,151 @@
 import numpy as np
 from mpi4py import MPI
-from dolfinx import mesh, fem, io, geometry
+from dolfinx import mesh, fem, geometry
 from dolfinx.fem import petsc
 import ufl
 from petsc4py import PETSc
-import time
 
 ScalarType = PETSc.ScalarType
 
+
 def solve(case_spec: dict) -> dict:
-    """
-    Solve the heat equation with adaptive mesh refinement and time-stepping.
-    """
-    # Start timing
-    start_time = time.time()
-    
-    # Extract parameters from case_spec with defaults
-    time_info = case_spec.get('pde', {}).get('time', {})
-    t_end = time_info.get('t_end', 0.1)
-    dt_suggested = time_info.get('dt', 0.01)
-    time_scheme = time_info.get('scheme', 'backward_euler')
-    
-    # Coefficients
-    kappa = case_spec.get('coefficients', {}).get('kappa', 1.0)
-    
-    # Adaptive mesh refinement parameters
-    resolutions = [32, 64, 128]
-    convergence_tol = 0.01  # 1% relative error tolerance
-    
-    # Initialize variables for convergence checking
-    prev_norm = None
-    final_solution = None
-    final_mesh_resolution = None
-    final_u = None
-    final_domain = None
-    final_V = None
-    
-    # Solver info to be populated
-    solver_info = {
-        'mesh_resolution': None,
-        'element_degree': 1,
-        'ksp_type': 'gmres',
-        'pc_type': 'hypre',
-        'rtol': 1e-8,
-        'iterations': 0,
-        'dt': dt_suggested,
-        'n_steps': int(t_end / dt_suggested),
-        'time_scheme': time_scheme,
-    }
-    
-    # Total linear iterations across all solves
+    pde = case_spec.get("pde", {})
+    coeffs = pde.get("coefficients", {})
+    kappa = coeffs.get("kappa", 1.0)
+
+    time_params = pde.get("time", {})
+    t_end = time_params.get("t_end", 0.1)
+    dt = time_params.get("dt", 0.01)
+    scheme = time_params.get("scheme", "backward_euler")
+
+    output_spec = case_spec.get("output", {})
+    nx_out = output_spec.get("nx", 50)
+    ny_out = output_spec.get("ny", 50)
+
+    element_degree = 2
+    N = 32
+
+    comm = MPI.COMM_WORLD
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+
+    V = fem.functionspace(domain, ("Lagrange", element_degree))
+    x = ufl.SpatialCoordinate(domain)
+
+    t_const = fem.Constant(domain, ScalarType(0.0))
+    dt_const = fem.Constant(domain, ScalarType(dt))
+    kappa_const = fem.Constant(domain, ScalarType(kappa))
+
+    f_ufl = ufl.exp(-t_const) * ufl.sin(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1]) * (-1.0 + 2.0 * kappa_const * ufl.pi**2)
+
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+    u_n = fem.Function(V, name="u_n")
+    u_n.interpolate(lambda X: np.sin(np.pi * X[0]) * np.sin(np.pi * X[1]))
+
+    u_initial_func = fem.Function(V, name="u_initial")
+    u_initial_func.interpolate(lambda X: np.sin(np.pi * X[0]) * np.sin(np.pi * X[1]))
+
+    a = u * v * ufl.dx + dt_const * kappa_const * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+    L = u_n * v * ufl.dx + dt_const * f_ufl * v * ufl.dx
+
+    boundary_facets = mesh.locate_entities_boundary(domain, fdim, lambda X: np.ones(X.shape[1], dtype=bool))
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    u_bc = fem.Function(V)
+    u_bc.x.array[:] = 0.0
+    bc = fem.dirichletbc(u_bc, dofs)
+
+    a_form = fem.form(a)
+    L_form = fem.form(L)
+
+    A = petsc.assemble_matrix(a_form, bcs=[bc])
+    A.assemble()
+
+    b = fem.petsc.create_vector(V)
+    u_sol = fem.Function(V, name="u_sol")
+
+    solver = PETSc.KSP().create(domain.comm)
+    solver.setOperators(A)
+    solver.setType(PETSc.KSP.Type.CG)
+    pc = solver.getPC()
+    pc.setType(PETSc.PC.Type.HYPRE)
+    solver.setTolerances(rtol=1e-10, atol=1e-12, max_it=1000)
+    solver.setUp()
+
+    t = 0.0
+    n_steps = 0
     total_iterations = 0
-    
-    # Adaptive mesh loop
-    for N in resolutions:
-        comm = MPI.COMM_WORLD
-        
-        # Create mesh
-        domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
-        
-        # Function space
-        V = fem.functionspace(domain, ("Lagrange", 1))
-        
-        # Define trial and test functions
-        u_n = fem.Function(V)  # Previous time step
-        u = fem.Function(V)    # Current time step (unknown)
-        v = ufl.TestFunction(V)
-        
-        # Initial condition: u(x,0) = sin(pi*x)*sin(pi*y)
-        def u0_func(x):
-            return np.sin(np.pi * x[0]) * np.sin(np.pi * x[1])
-        u_n.interpolate(u0_func)
-        
-        # Time-stepping parameters
-        dt = dt_suggested
-        n_steps = int(t_end / dt)
-        if n_steps == 0:
-            n_steps = 1
-            dt = t_end
-        
-        # Update n_steps in solver_info
-        solver_info['n_steps'] = n_steps
-        solver_info['dt'] = dt
-        
-        # Time variable for source term and boundary condition
-        t_var = fem.Constant(domain, ScalarType(0.0))
-        
-        # Spatial coordinates
-        x = ufl.SpatialCoordinate(domain)
-        
-        # Source term f derived from manufactured solution
-        # u_exact = exp(-t)*sin(pi*x)*sin(pi*y)
-        # f = ∂u/∂t - ∇·(κ ∇u) 
-        #   = -exp(-t)*sin(pi*x)*sin(pi*y) - κ*(-2π²)*exp(-t)*sin(pi*x)*sin(pi*y)
-        #   = exp(-t)*sin(pi*x)*sin(pi*y)*(-1 + 2κπ²)
-        # With κ=1: f = exp(-t)*sin(pi*x)*sin(pi*y)*(2π² - 1)
-        f_expr = ufl.exp(-t_var) * ufl.sin(np.pi * x[0]) * ufl.sin(np.pi * x[1]) * (2 * np.pi**2 * kappa - 1)
-        
-        # Variational form for backward Euler
-        F = (u - u_n) / dt * v * ufl.dx + kappa * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx - f_expr * v * ufl.dx
-        
-        # Boundary condition: u = g on ∂Ω
-        # g = exp(-t)*sin(pi*x)*sin(pi*y) on boundary
-        def boundary_marker(x):
-            # Mark all boundaries
-            return np.logical_or.reduce([
-                np.isclose(x[0], 0.0),
-                np.isclose(x[0], 1.0),
-                np.isclose(x[1], 0.0),
-                np.isclose(x[1], 1.0)
-            ])
-        
-        tdim = domain.topology.dim
-        fdim = tdim - 1
-        boundary_facets = mesh.locate_entities_boundary(domain, fdim, boundary_marker)
-        dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
-        
-        # Create boundary condition function
-        u_bc = fem.Function(V)
-        
-        # Time-stepping loop
-        linear_iterations_this_mesh = 0
-        
-        for step in range(n_steps):
-            t = (step + 1) * dt
-            t_var.value = t
-            
-            # Update boundary condition for current time
-            def bc_func(x):
-                return np.exp(-t) * np.sin(np.pi * x[0]) * np.sin(np.pi * x[1])
-            u_bc.interpolate(bc_func)
-            
-            # Apply boundary condition
-            bc = fem.dirichletbc(u_bc, dofs)
-            
-            # Create nonlinear problem
-            try:
-                # Try with iterative solver options first
-                petsc_options = {
-                    "ksp_type": "gmres",
-                    "pc_type": "hypre",
-                    "ksp_rtol": 1e-8,
-                    "ksp_max_it": 1000,
-                    "snes_rtol": 1e-8,
-                    "snes_atol": 1e-10,
-                    "snes_max_it": 10,
-                }
-                
-                problem = petsc.NonlinearProblem(
-                    F, u, 
-                    bcs=[bc], 
-                    petsc_options_prefix='pdebench_',
-                    petsc_options=petsc_options
-                )
-                
-                # Solve
-                u_sol = problem.solve()
-                
-                # Get SNES and KSP information
-                snes = problem.solver
-                ksp = snes.getKSP()
-                
-                # Get linear iterations
-                linear_its = ksp.getIterationNumber()
-                linear_iterations_this_mesh += linear_its
-                
-                # Update solver info based on what worked
-                if step == 0:  # Only set once
-                    ksp_type = ksp.getType()
-                    pc = ksp.getPC()
-                    pc_type = pc.getType()
-                    solver_info['ksp_type'] = str(ksp_type).split('.')[-1].lower()
-                    solver_info['pc_type'] = str(pc_type).split('.')[-1].lower()
-                
-            except Exception as e:
-                # If iterative solver fails, try with direct solver
-                print(f"Iterative solver failed at step {step}: {e}, trying direct solver")
-                petsc_options = {
-                    "ksp_type": "preonly",
-                    "pc_type": "lu",
-                    "snes_rtol": 1e-8,
-                    "snes_atol": 1e-10,
-                    "snes_max_it": 10,
-                }
-                
-                problem = petsc.NonlinearProblem(
-                    F, u, 
-                    bcs=[bc], 
-                    petsc_options_prefix='pdebench_',
-                    petsc_options=petsc_options
-                )
-                
-                u_sol = problem.solve()
-                
-                # Get SNES and KSP information
-                snes = problem.solver
-                ksp = snes.getKSP()
-                
-                # Get linear iterations
-                linear_its = ksp.getIterationNumber()
-                linear_iterations_this_mesh += linear_its
-                
-                # Update solver info
-                if step == 0:  # Only set once
-                    ksp_type = ksp.getType()
-                    pc = ksp.getPC()
-                    pc_type = pc.getType()
-                    solver_info['ksp_type'] = str(ksp_type).split('.')[-1].lower()
-                    solver_info['pc_type'] = str(pc_type).split('.')[-1].lower()
-            
-            # Update for next time step
-            u_n.x.array[:] = u.x.array[:]
-        
-        total_iterations += linear_iterations_this_mesh
-        
-        # Compute L2 norm of solution for convergence checking
-        norm_form = fem.form(ufl.inner(u, u) * ufl.dx)
-        norm_value = np.sqrt(fem.assemble_scalar(norm_form))
-        
-        # Check convergence
-        if prev_norm is not None:
-            relative_error = abs(norm_value - prev_norm) / norm_value if norm_value > 0 else 1.0
-            if relative_error < convergence_tol:
-                # Converged!
-                final_solution = u
-                final_mesh_resolution = N
-                final_u = u
-                final_domain = domain
-                final_V = V
-                solver_info['mesh_resolution'] = N
-                solver_info['iterations'] = total_iterations
-                break
-        
-        prev_norm = norm_value
-        final_solution = u
-        final_mesh_resolution = N
-        final_u = u
-        final_domain = domain
-        final_V = V
-    
-    # If loop finished without break, use the finest mesh result
-    if solver_info['mesh_resolution'] is None:
-        solver_info['mesh_resolution'] = resolutions[-1]
-        solver_info['iterations'] = total_iterations
-    
-    # Sample solution on 50x50 uniform grid
-    nx, ny = 50, 50
-    x_vals = np.linspace(0.0, 1.0, nx)
-    y_vals = np.linspace(0.0, 1.0, ny)
-    X, Y = np.meshgrid(x_vals, y_vals, indexing='ij')
-    
-    # Create points array for evaluation (shape (3, nx*ny))
-    points = np.zeros((3, nx * ny))
-    points[0, :] = X.flatten()
-    points[1, :] = Y.flatten()
-    points[2, :] = 0.0  # z-coordinate for 2D
-    
-    # Evaluate solution at points
-    bb_tree = geometry.bb_tree(final_domain, final_domain.topology.dim)
-    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
-    colliding_cells = geometry.compute_colliding_cells(final_domain, cell_candidates, points.T)
-    
+    num_steps = int(round(t_end / dt))
+
+    for step in range(num_steps):
+        t += dt
+        t_const.value = t
+
+        with b.localForm() as loc:
+            loc.set(0)
+        petsc.assemble_vector(b, L_form)
+        petsc.apply_lifting(b, [a_form], bcs=[[bc]])
+        b.ghostUpdate(addv=PETSc.InsertMode.ADD, mode=PETSc.ScatterMode.REVERSE)
+        petsc.set_bc(b, [bc])
+
+        solver.solve(b, u_sol.x.petsc_vec)
+        u_sol.x.scatter_forward()
+        total_iterations += solver.getIterationNumber()
+        n_steps += 1
+        u_n.x.array[:] = u_sol.x.array[:]
+
+    x_grid = np.linspace(0, 1, nx_out)
+    y_grid = np.linspace(0, 1, ny_out)
+    X_grid, Y_grid = np.meshgrid(x_grid, y_grid, indexing='ij')
+    points_2d = np.column_stack([X_grid.ravel(), Y_grid.ravel()])
+    points_3d = np.zeros((points_2d.shape[0], 3))
+    points_3d[:, 0] = points_2d[:, 0]
+    points_3d[:, 1] = points_2d[:, 1]
+
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points_3d)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points_3d)
+
+    u_values = np.full(points_3d.shape[0], np.nan)
     points_on_proc = []
     cells_on_proc = []
     eval_map = []
-    for i in range(points.shape[1]):
+    for i in range(points_3d.shape[0]):
         links = colliding_cells.links(i)
         if len(links) > 0:
-            points_on_proc.append(points.T[i])
+            points_on_proc.append(points_3d[i])
             cells_on_proc.append(links[0])
             eval_map.append(i)
-    
-    u_values = np.full((points.shape[1],), np.nan)
+
     if len(points_on_proc) > 0:
-        vals = final_u.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+        vals = u_sol.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
         u_values[eval_map] = vals.flatten()
-    
-    # Reshape to (nx, ny)
-    u_grid = u_values.reshape((nx, ny))
-    
-    # Also get initial condition on the same grid
-    u0_sampled = fem.Function(final_V)
-    def u0_exact(x):
-        return np.sin(np.pi * x[0]) * np.sin(np.pi * x[1])
-    u0_sampled.interpolate(u0_exact)
-    
-    u0_values = np.full((points.shape[1],), np.nan)
+
+    u_grid = u_values.reshape((nx_out, ny_out))
+
+    u_init_values = np.full(points_3d.shape[0], np.nan)
     if len(points_on_proc) > 0:
-        vals0 = u0_sampled.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
-        u0_values[eval_map] = vals0.flatten()
-    u0_grid = u0_values.reshape((nx, ny))
-    
+        vals2 = u_initial_func.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+        u_init_values[eval_map] = vals2.flatten()
+    u_initial_grid = u_init_values.reshape((nx_out, ny_out))
+
+    solver.destroy()
+    A.destroy()
+    b.destroy()
+
     return {
         "u": u_grid,
-        "u_initial": u0_grid,
-        "solver_info": solver_info
-    }
-
-# For testing if run directly
-if __name__ == "__main__":
-    # Test case
-    case_spec = {
-        "pde": {
-            "time": {
-                "t_end": 0.1,
-                "dt": 0.01,
-                "scheme": "backward_euler"
-            }
-        },
-        "coefficients": {
-            "kappa": 1.0
+        "u_initial": u_initial_grid,
+        "solver_info": {
+            "mesh_resolution": N,
+            "element_degree": element_degree,
+            "ksp_type": "cg",
+            "pc_type": "hypre",
+            "rtol": 1e-10,
+            "iterations": total_iterations,
+            "dt": dt,
+            "n_steps": n_steps,
+            "time_scheme": scheme,
         }
     }
-    
-    result = solve(case_spec)
-    print(f"Mesh resolution used: {result['solver_info']['mesh_resolution']}")
-    print(f"Total linear iterations: {result['solver_info']['iterations']}")
-    print(f"Solution shape: {result['u'].shape}")
-    
-    # Compute error against exact solution
-    nx, ny = 50, 50
-    x_vals = np.linspace(0.0, 1.0, nx)
-    y_vals = np.linspace(0.0, 1.0, ny)
-    X, Y = np.meshgrid(x_vals, y_vals, indexing='ij')
-    
-    # Exact solution at t=0.1: exp(-0.1)*sin(pi*x)*sin(pi*y)
-    u_exact = np.exp(-0.1) * np.sin(np.pi * X) * np.sin(np.pi * Y)
-    
-    error = np.abs(result['u'] - u_exact)
-    max_error = np.max(error)
-    mean_error = np.mean(error)
-    
-    print(f"Max error: {max_error:.2e}")
-    print(f"Mean error: {mean_error:.2e}")
-    print(f"Accuracy requirement: ≤ 1.42e-03")
-    print(f"Pass accuracy: {max_error <= 1.42e-03}")
-
