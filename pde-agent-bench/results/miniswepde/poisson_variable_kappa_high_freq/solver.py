@@ -10,6 +10,7 @@ def solve(case_spec: dict) -> dict:
     """Solve Poisson equation with variable kappa."""
     
     comm = MPI.COMM_WORLD
+    ScalarType = PETSc.ScalarType
     
     # Parameters: degree 2 on N=64 mesh gives excellent accuracy and speed
     element_degree = 2
