@@ -1,7 +1,7 @@
 {
   "agent_name": "codepde",
   "codepde_path": "/data5/store1/zky/ustc_pde_agent/CodePDE",
-  "model": "deepseek-chat",
+  "model": "test",
   "api_key": "sk-79edf0768e21480f81d675af7503f7ec",
   "base_url": "https://api.deepseek.com", 
   "temperature": 0.1,

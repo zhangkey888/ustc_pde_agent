@@ -1,0 +1,24 @@
+# 忽略配置文件（包含 API Key 等敏感信息）
+pde-agent-bench/pdebench/configs/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 日志
+*.log
+
+# 环境
+.env
+.venv/
+venv/

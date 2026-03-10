@@ -1,8 +1,8 @@
 {
     "agent_name": "openhands",
-    "model": "deepseek-chat",
-    "api_key": "sk-79edf0768e21480f81d675af7503f7ec",
-    "base_url": "https://api.deepseek.com",
-    "workspace_dir": "/data5/store1/zky/ustc_pde_agent/pde-agent-bench/workspace_openhands",
+    "model": "openai/claude-opus-4-6",
+    "api_key": "AUlyxwZOuqNS9Q5tDuX5PHq3@3378",
+    "base_url": "http://v2.open.venus.oa.com/llmproxy",
+    "workspace_dir": "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/workspace_openhands",
     "timeout": 600
   }

@@ -240,7 +240,7 @@ class OpenHandsWrapper(BaseAgent):
         
         self.workspace_dir = self.config.get(
             'workspace_dir', 
-            '/data5/store1/zky/ustc_pde_agent/pde-agent-bench/results/openhands/workspace'
+            '/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results/openhands/workspace'
         )
         os.makedirs(self.workspace_dir, exist_ok=True)
 
