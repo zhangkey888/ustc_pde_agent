@@ -16,7 +16,7 @@ build/
 *.swo
 
 # 日志
-*.log
+# *.log
 
 # 环境
 .env
