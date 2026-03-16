@@ -1,0 +1,4027 @@
+nohup: ignoring input
+/data1/miniconda3/envs/pdebench_v2/lib/python3.12/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.3) or chardet (7.0.1)/charset_normalizer (3.4.5) doesn't match a supported version!
+  warnings.warn(
+
+================================================================================
+🚀 PDEBench - LLM/Code Agent Evaluation
+================================================================================
+📁 Data: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/data/benchmark.jsonl
+📁 Output: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results
+🤖 Agents: codepde
+⏱️  Timeout: 300s
+================================================================================
+   ✓ codepde: Code Agent
+
+📊 Loaded 241 cases from benchmark
+
+
+################################################################################
+# Agent: codepde
+################################################################################
+
+[1/241]
+============================================================
+📋 Case: poisson_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.02s to generate the response.
+It takes claude-opus-4-6 18.86s to generate the response.
+It takes claude-opus-4-6 20.01s to generate the response.
+   📊 Tokens: in=19635, out=4150
+   ⏱️  Latency: 59.93s
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 1.387s
+   ✅ Status: PASS
+
+[2/241]
+============================================================
+📋 Case: poisson_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.03s to generate the response.
+It takes claude-opus-4-6 20.65s to generate the response.
+It takes claude-opus-4-6 23.24s to generate the response.
+   📊 Tokens: in=19722, out=4412
+   ⏱️  Latency: 65.94s
+   🔧 Executing solver...
+   📊 Error: 4.11e-04, Time: 1.885s
+   ✅ Status: PASS
+
+[3/241]
+============================================================
+📋 Case: poisson_quadrilateral
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.23s to generate the response.
+It takes claude-opus-4-6 21.77s to generate the response.
+It takes claude-opus-4-6 22.30s to generate the response.
+   📊 Tokens: in=19575, out=4719
+   ⏱️  Latency: 68.32s
+   🔧 Executing solver...
+   📊 Error: 2.40e-04, Time: 1.493s
+   ✅ Status: FAIL
+
+[4/241]
+============================================================
+📋 Case: poisson_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 18.98s to generate the response.
+It takes claude-opus-4-6 19.26s to generate the response.
+It takes claude-opus-4-6 20.10s to generate the response.
+   📊 Tokens: in=19542, out=4208
+   ⏱️  Latency: 60.37s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[5/241]
+============================================================
+📋 Case: poisson_high_contrast_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.75s to generate the response.
+It takes claude-opus-4-6 19.88s to generate the response.
+It takes claude-opus-4-6 23.63s to generate the response.
+   📊 Tokens: in=19599, out=4802
+   ⏱️  Latency: 66.28s
+   🔧 Executing solver...
+   📊 Error: 1.32e-04, Time: 1.639s
+   ✅ Status: PASS
+
+[6/241]
+============================================================
+📋 Case: poisson_rhs_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.24s to generate the response.
+It takes claude-opus-4-6 17.82s to generate the response.
+It takes claude-opus-4-6 18.14s to generate the response.
+   📊 Tokens: in=19518, out=4217
+   ⏱️  Latency: 59.22s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[7/241]
+============================================================
+📋 Case: poisson_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.75s to generate the response.
+It takes claude-opus-4-6 21.31s to generate the response.
+It takes claude-opus-4-6 21.77s to generate the response.
+   📊 Tokens: in=19683, out=4691
+   ⏱️  Latency: 66.85s
+   🔧 Executing solver...
+   📊 Error: 1.26e-03, Time: 1.036s
+   ✅ Status: PASS
+
+[8/241]
+============================================================
+📋 Case: poisson_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 23.75s to generate the response.
+It takes claude-opus-4-6 22.20s to generate the response.
+It takes claude-opus-4-6 23.12s to generate the response.
+   📊 Tokens: in=19671, out=4667
+   ⏱️  Latency: 71.09s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[9/241]
+============================================================
+📋 Case: poisson_polynomial_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.21s to generate the response.
+It takes claude-opus-4-6 18.93s to generate the response.
+It takes claude-opus-4-6 18.35s to generate the response.
+   📊 Tokens: in=19617, out=4132
+   ⏱️  Latency: 58.51s
+   🔧 Executing solver...
+   📊 Error: 2.26e-04, Time: 0.997s
+   ✅ Status: PASS
+
+[10/241]
+============================================================
+📋 Case: poisson_constant_kappa10
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 17.79s to generate the response.
+It takes claude-opus-4-6 21.18s to generate the response.
+It takes claude-opus-4-6 19.79s to generate the response.
+   📊 Tokens: in=19641, out=4512
+   ⏱️  Latency: 60.78s
+   🔧 Executing solver...
+   📊 Error: 2.96e-04, Time: 0.999s
+   ✅ Status: PASS
+
+[11/241]
+============================================================
+📋 Case: poisson_p3_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.85s to generate the response.
+It takes claude-opus-4-6 20.06s to generate the response.
+It takes claude-opus-4-6 20.13s to generate the response.
+   📊 Tokens: in=19647, out=4575
+   ⏱️  Latency: 62.06s
+   🔧 Executing solver...
+   📊 Error: 3.61e-07, Time: 1.415s
+   ✅ Status: PASS
+
+[12/241]
+============================================================
+📋 Case: poisson_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.75s to generate the response.
+It takes claude-opus-4-6 18.98s to generate the response.
+It takes claude-opus-4-6 20.57s to generate the response.
+   📊 Tokens: in=19608, out=4145
+   ⏱️  Latency: 61.33s
+   🔧 Executing solver...
+   📊 Error: 4.80e-06, Time: 1.214s
+   ✅ Status: PASS
+
+[13/241]
+============================================================
+📋 Case: poisson_oscillatory_rhs_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 17.17s to generate the response.
+It takes claude-opus-4-6 21.14s to generate the response.
+It takes claude-opus-4-6 18.10s to generate the response.
+   📊 Tokens: in=19620, out=4118
+   ⏱️  Latency: 58.42s
+   🔧 Executing solver...
+   📊 Error: 1.38e-04, Time: 1.212s
+   ✅ Status: PASS
+
+[14/241]
+============================================================
+📋 Case: poisson_smooth_high_contrast_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.24s to generate the response.
+It takes claude-opus-4-6 19.34s to generate the response.
+It takes claude-opus-4-6 24.46s to generate the response.
+   📊 Tokens: in=19719, out=4651
+   ⏱️  Latency: 66.06s
+   🔧 Executing solver...
+   📊 Error: 2.91e-05, Time: 1.658s
+   ✅ Status: PASS
+
+[15/241]
+============================================================
+📋 Case: poisson_quadrilateral_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.40s to generate the response.
+It takes claude-opus-4-6 19.15s to generate the response.
+It takes claude-opus-4-6 23.03s to generate the response.
+   📊 Tokens: in=19584, out=4454
+   ⏱️  Latency: 64.60s
+   🔧 Executing solver...
+   📊 Error: 1.82e-07, Time: 1.199s
+   ✅ Status: PASS
+
+[16/241]
+============================================================
+📋 Case: poisson_constant_kappa0p1
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.84s to generate the response.
+It takes claude-opus-4-6 18.94s to generate the response.
+It takes claude-opus-4-6 17.81s to generate the response.
+   📊 Tokens: in=19683, out=4190
+   ⏱️  Latency: 59.62s
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 0.998s
+   ✅ Status: PASS
+
+[17/241]
+============================================================
+📋 Case: poisson_variable_kappa_strong_smooth
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 17.80s to generate the response.
+It takes claude-opus-4-6 19.25s to generate the response.
+It takes claude-opus-4-6 19.80s to generate the response.
+   📊 Tokens: in=19797, out=4310
+   ⏱️  Latency: 58.87s
+   🔧 Executing solver...
+   📊 Error: 5.05e-04, Time: 1.896s
+   ✅ Status: PASS
+
+[18/241]
+============================================================
+📋 Case: poisson_variable_kappa_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.77s to generate the response.
+It takes claude-opus-4-6 19.33s to generate the response.
+It takes claude-opus-4-6 22.96s to generate the response.
+   📊 Tokens: in=19797, out=4470
+   ⏱️  Latency: 65.08s
+   🔧 Executing solver...
+   📊 Error: 2.49e-04, Time: 1.799s
+   ✅ Status: PASS
+
+[19/241]
+============================================================
+📋 Case: poisson_kappa_local_peak
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 25.75s to generate the response.
+It takes claude-opus-4-6 20.39s to generate the response.
+It takes claude-opus-4-6 20.09s to generate the response.
+   📊 Tokens: in=19800, out=4500
+   ⏱️  Latency: 68.25s
+   🔧 Executing solver...
+   📊 Error: 2.48e-04, Time: 1.759s
+   ✅ Status: PASS
+
+[20/241]
+============================================================
+📋 Case: poisson_kappa_two_peaks
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.37s to generate the response.
+It takes claude-opus-4-6 23.82s to generate the response.
+It takes claude-opus-4-6 20.43s to generate the response.
+   📊 Tokens: in=19887, out=4622
+   ⏱️  Latency: 65.66s
+   🔧 Executing solver...
+   📊 Error: 1.84e-04, Time: 2.147s
+   ✅ Status: PASS
+
+[21/241]
+============================================================
+📋 Case: poisson_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.37s to generate the response.
+It takes claude-opus-4-6 21.31s to generate the response.
+It takes claude-opus-4-6 28.77s to generate the response.
+   📊 Tokens: in=19746, out=5030
+   ⏱️  Latency: 74.48s
+   🔧 Executing solver...
+   📊 Error: 6.38e-04, Time: 1.466s
+   ✅ Status: PASS
+
+[22/241]
+============================================================
+📋 Case: poisson_nonseparable_xy
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.78s to generate the response.
+It takes claude-opus-4-6 27.57s to generate the response.
+It takes claude-opus-4-6 21.01s to generate the response.
+   📊 Tokens: in=19665, out=4693
+   ⏱️  Latency: 72.38s
+   🔧 Executing solver...
+   📊 Error: 4.98e-05, Time: 1.037s
+   ✅ Status: PASS
+
+[23/241]
+============================================================
+📋 Case: poisson_boundary_layer_y
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.17s to generate the response.
+It takes claude-opus-4-6 21.37s to generate the response.
+It takes claude-opus-4-6 22.05s to generate the response.
+   📊 Tokens: in=19677, out=4782
+   ⏱️  Latency: 66.63s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[24/241]
+============================================================
+📋 Case: poisson_exponential_corner
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.57s to generate the response.
+It takes claude-opus-4-6 19.79s to generate the response.
+It takes claude-opus-4-6 24.90s to generate the response.
+   📊 Tokens: in=19701, out=4352
+   ⏱️  Latency: 66.28s
+   🔧 Executing solver...
+   📊 Error: 1.99e-04, Time: 1.661s
+   ✅ Status: PASS
+
+[25/241]
+============================================================
+📋 Case: poisson_quadrilateral_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.93s to generate the response.
+It takes claude-opus-4-6 20.44s to generate the response.
+It takes claude-opus-4-6 23.17s to generate the response.
+   📊 Tokens: in=19653, out=4243
+   ⏱️  Latency: 65.56s
+   🔧 Executing solver...
+   📊 Error: 1.05e-06, Time: 1.420s
+   ✅ Status: FAIL
+
+[26/241]
+============================================================
+📋 Case: poisson_quadrilateral_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.90s to generate the response.
+It takes claude-opus-4-6 21.54s to generate the response.
+It takes claude-opus-4-6 19.29s to generate the response.
+   📊 Tokens: in=19764, out=4383
+   ⏱️  Latency: 62.75s
+   🔧 Executing solver...
+   📊 Error: 5.61e-04, Time: 1.958s
+   ✅ Status: PASS
+
+[27/241]
+============================================================
+📋 Case: poisson_p2_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.43s to generate the response.
+It takes claude-opus-4-6 20.45s to generate the response.
+It takes claude-opus-4-6 21.08s to generate the response.
+   📊 Tokens: in=19767, out=4631
+   ⏱️  Latency: 65.98s
+   🔧 Executing solver...
+   📊 Error: 1.02e-05, Time: 1.526s
+   ✅ Status: PASS
+
+[28/241]
+============================================================
+📋 Case: poisson_no_exact_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 29.43s to generate the response.
+It takes claude-opus-4-6 33.96s to generate the response.
+It takes claude-opus-4-6 34.43s to generate the response.
+   📊 Tokens: in=19602, out=7306
+   ⏱️  Latency: 99.85s
+   🔧 Executing solver...
+   📊 Error: 9.77e-01, Time: 1.085s
+   ✅ Status: FAIL
+
+[29/241]
+============================================================
+📋 Case: poisson_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.96s to generate the response.
+It takes claude-opus-4-6 19.78s to generate the response.
+It takes claude-opus-4-6 23.25s to generate the response.
+   📊 Tokens: in=19686, out=4300
+   ⏱️  Latency: 65.01s
+   🔧 Executing solver...
+   📊 Error: 1.05e-04, Time: 1.044s
+   ✅ Status: PASS
+
+[30/241]
+============================================================
+📋 Case: poisson_no_exact_variable_kappa_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 31.13s to generate the response.
+It takes claude-opus-4-6 23.60s to generate the response.
+It takes claude-opus-4-6 26.70s to generate the response.
+   📊 Tokens: in=19770, out=4472
+   ⏱️  Latency: 83.46s
+   🔧 Executing solver...
+   📊 Error: 2.48e-05, Time: 1.661s
+   ✅ Status: PASS
+
+[31/241]
+============================================================
+📋 Case: poisson_constant_kappa5
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.77s to generate the response.
+It takes claude-opus-4-6 21.03s to generate the response.
+It takes claude-opus-4-6 18.69s to generate the response.
+   📊 Tokens: in=19689, out=4835
+   ⏱️  Latency: 64.51s
+   🔧 Executing solver...
+   📊 Error: 7.61e-04, Time: 1.439s
+   ✅ Status: PASS
+
+[32/241]
+============================================================
+📋 Case: poisson_directional_high_freq_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.58s to generate the response.
+It takes claude-opus-4-6 28.06s to generate the response.
+It takes claude-opus-4-6 20.81s to generate the response.
+   📊 Tokens: in=19692, out=4791
+   ⏱️  Latency: 71.47s
+   🔧 Executing solver...
+   📊 Error: 1.82e-03, Time: 0.993s
+   ✅ Status: PASS
+
+[33/241]
+============================================================
+📋 Case: poisson_rotated_wave
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.01s to generate the response.
+It takes claude-opus-4-6 20.23s to generate the response.
+It takes claude-opus-4-6 17.94s to generate the response.
+   📊 Tokens: in=19695, out=4384
+   ⏱️  Latency: 61.21s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[34/241]
+============================================================
+📋 Case: poisson_gaussian_bump_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 24.21s to generate the response.
+It takes claude-opus-4-6 29.49s to generate the response.
+It takes claude-opus-4-6 22.19s to generate the response.
+   📊 Tokens: in=19710, out=5389
+   ⏱️  Latency: 77.92s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[35/241]
+============================================================
+📋 Case: poisson_polynomial_mixed_degree
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.20s to generate the response.
+It takes claude-opus-4-6 21.71s to generate the response.
+It takes claude-opus-4-6 24.00s to generate the response.
+   📊 Tokens: in=19656, out=4577
+   ⏱️  Latency: 67.94s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[36/241]
+============================================================
+📋 Case: poisson_nonseparable_exp_xy
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.80s to generate the response.
+It takes claude-opus-4-6 24.82s to generate the response.
+It takes claude-opus-4-6 17.46s to generate the response.
+   📊 Tokens: in=19674, out=4318
+   ⏱️  Latency: 66.11s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[37/241]
+============================================================
+📋 Case: poisson_variable_kappa_cos_sin_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.34s to generate the response.
+It takes claude-opus-4-6 32.27s to generate the response.
+It takes claude-opus-4-6 21.04s to generate the response.
+   📊 Tokens: in=19764, out=4282
+   ⏱️  Latency: 75.67s
+   🔧 Executing solver...
+   📊 Error: 6.97e-05, Time: 1.539s
+   ✅ Status: PASS
+
+[38/241]
+============================================================
+📋 Case: poisson_variable_kappa_stripes_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.50s to generate the response.
+It takes claude-opus-4-6 19.13s to generate the response.
+It takes claude-opus-4-6 22.64s to generate the response.
+   📊 Tokens: in=19743, out=4424
+   ⏱️  Latency: 64.28s
+   🔧 Executing solver...
+   📊 Error: 1.68e-04, Time: 1.879s
+   ✅ Status: PASS
+
+[39/241]
+============================================================
+📋 Case: poisson_variable_kappa_low_background
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 23.88s to generate the response.
+It takes claude-opus-4-6 18.30s to generate the response.
+It takes claude-opus-4-6 20.19s to generate the response.
+   📊 Tokens: in=19770, out=4364
+   ⏱️  Latency: 64.39s
+   🔧 Executing solver...
+   📊 Error: 7.87e-05, Time: 1.728s
+   ✅ Status: PASS
+
+[40/241]
+============================================================
+📋 Case: poisson_quadrilateral_high_freq_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 27.87s to generate the response.
+It takes claude-opus-4-6 21.10s to generate the response.
+It takes claude-opus-4-6 21.89s to generate the response.
+   📊 Tokens: in=19641, out=4765
+   ⏱️  Latency: 72.88s
+   🔧 Executing solver...
+   📊 Error: 1.91e-03, Time: 1.032s
+   ✅ Status: PASS
+
+[41/241]
+============================================================
+📋 Case: poisson_quadrilateral_boundary_layer_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.88s to generate the response.
+It takes claude-opus-4-6 22.45s to generate the response.
+It takes claude-opus-4-6 24.62s to generate the response.
+   📊 Tokens: in=19629, out=4659
+   ⏱️  Latency: 69.97s
+   🔧 Executing solver...
+   📊 Error: 1.29e-04, Time: 1.437s
+   ✅ Status: PASS
+
+[42/241]
+============================================================
+📋 Case: poisson_p2_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.60s to generate the response.
+It takes claude-opus-4-6 22.83s to generate the response.
+It takes claude-opus-4-6 23.39s to generate the response.
+   📊 Tokens: in=19728, out=5030
+   ⏱️  Latency: 70.85s
+   🔧 Executing solver...
+   📊 Error: 2.31e-05, Time: 1.111s
+   ✅ Status: FAIL
+
+[43/241]
+============================================================
+📋 Case: poisson_p3_variable_kappa_mild
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.99s to generate the response.
+It takes claude-opus-4-6 23.93s to generate the response.
+It takes claude-opus-4-6 22.11s to generate the response.
+   📊 Tokens: in=19761, out=4464
+   ⏱️  Latency: 70.05s
+   🔧 Executing solver...
+   📊 Error: 2.25e-09, Time: 1.834s
+   ✅ Status: PASS
+
+[44/241]
+============================================================
+📋 Case: poisson_no_exact_gaussian_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 31.45s to generate the response.
+It takes claude-opus-4-6 22.21s to generate the response.
+It takes claude-opus-4-6 31.01s to generate the response.
+   📊 Tokens: in=19659, out=6013
+   ⏱️  Latency: 86.70s
+   🔧 Executing solver...
+   📊 Error: 9.99e-01, Time: 1.225s
+   ✅ Status: FAIL
+
+[45/241]
+============================================================
+📋 Case: poisson_no_exact_two_gaussian_sources
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.85s to generate the response.
+It takes claude-opus-4-6 19.57s to generate the response.
+It takes claude-opus-4-6 16.34s to generate the response.
+   📊 Tokens: in=19719, out=4257
+   ⏱️  Latency: 57.78s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[46/241]
+============================================================
+📋 Case: poisson_no_exact_variable_kappa_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.13s to generate the response.
+It takes claude-opus-4-6 21.17s to generate the response.
+It takes claude-opus-4-6 19.26s to generate the response.
+   📊 Tokens: in=19806, out=4438
+   ⏱️  Latency: 63.58s
+   🔧 Executing solver...
+   📊 Error: 2.72e-05, Time: 1.683s
+   ✅ Status: PASS
+
+[47/241]
+============================================================
+📋 Case: poisson_no_exact_high_freq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.36s to generate the response.
+It takes claude-opus-4-6 26.36s to generate the response.
+It takes claude-opus-4-6 21.15s to generate the response.
+   📊 Tokens: in=19620, out=4345
+   ⏱️  Latency: 71.89s
+   🔧 Executing solver...
+   📊 Error: 7.56e-04, Time: 1.110s
+   ✅ Status: PASS
+
+[48/241]
+============================================================
+📋 Case: poisson_no_exact_low_background_kappa_constant_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 23.23s to generate the response.
+It takes claude-opus-4-6 22.22s to generate the response.
+It takes claude-opus-4-6 20.22s to generate the response.
+   📊 Tokens: in=19731, out=4678
+   ⏱️  Latency: 67.69s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[49/241]
+============================================================
+📋 Case: poisson_no_exact_quadrilateral_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 31.32s to generate the response.
+It takes claude-opus-4-6 20.07s to generate the response.
+It takes claude-opus-4-6 20.83s to generate the response.
+   📊 Tokens: in=19704, out=4326
+   ⏱️  Latency: 74.24s
+   🔧 Executing solver...
+   📊 Error: 2.47e-05, Time: 1.277s
+   ✅ Status: PASS
+
+[50/241]
+============================================================
+📋 Case: poisson_exponential_trig_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 41.71s to generate the response.
+It takes claude-opus-4-6 21.48s to generate the response.
+It takes claude-opus-4-6 31.04s to generate the response.
+   📊 Tokens: in=19683, out=4583
+   ⏱️  Latency: 96.25s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[51/241]
+============================================================
+📋 Case: heat_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.55s to generate the response.
+It takes claude-opus-4-6 36.96s to generate the response.
+It takes claude-opus-4-6 43.08s to generate the response.
+   📊 Tokens: in=19887, out=8140
+   ⏱️  Latency: 120.62s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[52/241]
+============================================================
+📋 Case: heat_longer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 34.83s to generate the response.
+It takes claude-opus-4-6 52.19s to generate the response.
+It takes claude-opus-4-6 34.61s to generate the response.
+   📊 Tokens: in=19797, out=7982
+   ⏱️  Latency: 123.65s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[53/241]
+============================================================
+📋 Case: heat_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 51.18s to generate the response.
+It takes claude-opus-4-6 37.88s to generate the response.
+It takes claude-opus-4-6 34.78s to generate the response.
+   📊 Tokens: in=19911, out=8314
+   ⏱️  Latency: 125.87s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[54/241]
+============================================================
+📋 Case: heat_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 33.86s to generate the response.
+It takes claude-opus-4-6 58.36s to generate the response.
+It takes claude-opus-4-6 38.90s to generate the response.
+   📊 Tokens: in=19788, out=7520
+   ⏱️  Latency: 133.15s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[55/241]
+============================================================
+📋 Case: heat_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 83.68s to generate the response.
+It takes claude-opus-4-6 31.33s to generate the response.
+It takes claude-opus-4-6 61.47s to generate the response.
+   📊 Tokens: in=19803, out=6971
+   ⏱️  Latency: 178.51s
+   🔧 Executing solver...
+   📊 Error: 1.45e-01, Time: 1.384s
+   ✅ Status: PASS
+
+[56/241]
+============================================================
+📋 Case: heat_no_exact_long
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 56.70s to generate the response.
+It takes claude-opus-4-6 31.93s to generate the response.
+It takes claude-opus-4-6 74.19s to generate the response.
+   📊 Tokens: in=19821, out=7139
+   ⏱️  Latency: 164.85s
+   🔧 Executing solver...
+   📊 Error: 2.08e-02, Time: 2.193s
+   ✅ Status: PASS
+
+[57/241]
+============================================================
+📋 Case: heat_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 36.42s to generate the response.
+It takes claude-opus-4-6 73.17s to generate the response.
+It takes claude-opus-4-6 79.23s to generate the response.
+   📊 Tokens: in=19878, out=8280
+   ⏱️  Latency: 190.84s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[58/241]
+============================================================
+📋 Case: heat_stiff_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 34.49s to generate the response.
+It takes claude-opus-4-6 112.51s to generate the response.
+It takes claude-opus-4-6 95.46s to generate the response.
+   📊 Tokens: in=19833, out=7591
+   ⏱️  Latency: 244.49s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[59/241]
+============================================================
+📋 Case: heat_large_kappa_fast_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 35.75s to generate the response.
+It takes claude-opus-4-6 35.79s to generate the response.
+It takes claude-opus-4-6 39.07s to generate the response.
+   📊 Tokens: in=19869, out=7709
+   ⏱️  Latency: 112.64s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[60/241]
+============================================================
+📋 Case: heat_p3_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 36.93s to generate the response.
+It takes claude-opus-4-6 37.28s to generate the response.
+It takes claude-opus-4-6 68.38s to generate the response.
+   📊 Tokens: in=19845, out=8387
+   ⏱️  Latency: 144.61s
+   🔧 Executing solver...
+   📊 Error: 2.05e-05, Time: 2.527s
+   ✅ Status: PASS
+
+[61/241]
+============================================================
+📋 Case: heat_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 57.21s to generate the response.
+It takes claude-opus-4-6 28.14s to generate the response.
+It takes claude-opus-4-6 29.82s to generate the response.
+   📊 Tokens: in=19887, out=6769
+   ⏱️  Latency: 117.20s
+   🔧 Executing solver...
+   📊 Error: 7.75e-02, Time: 1.078s
+   ✅ Status: PASS
+
+[62/241]
+============================================================
+📋 Case: heat_oscillatory_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 82.64s to generate the response.
+It takes claude-opus-4-6 27.08s to generate the response.
+It takes claude-opus-4-6 56.03s to generate the response.
+   📊 Tokens: in=19833, out=6247
+   ⏱️  Latency: 167.77s
+   🔧 Executing solver...
+   📊 Error: 1.68e-02, Time: 1.250s
+   ✅ Status: PASS
+
+[63/241]
+============================================================
+📋 Case: heat_variable_kappa_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 30.83s to generate the response.
+It takes claude-opus-4-6 36.63s to generate the response.
+It takes claude-opus-4-6 32.15s to generate the response.
+   📊 Tokens: in=19971, out=7051
+   ⏱️  Latency: 101.63s
+   🔧 Executing solver...
+   📊 Error: 4.88e-02, Time: 1.633s
+   ✅ Status: PASS
+
+[64/241]
+============================================================
+📋 Case: heat_quadrilateral_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 50.42s to generate the response.
+It takes claude-opus-4-6 30.44s to generate the response.
+It takes claude-opus-4-6 30.34s to generate the response.
+   📊 Tokens: in=19836, out=7328
+   ⏱️  Latency: 113.22s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[65/241]
+============================================================
+📋 Case: heat_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 40.47s to generate the response.
+It takes claude-opus-4-6 40.60s to generate the response.
+It takes claude-opus-4-6 97.07s to generate the response.
+   📊 Tokens: in=19977, out=9213
+   ⏱️  Latency: 180.17s
+   🔧 Executing solver...
+   📊 Error: 7.45e-04, Time: 3.374s
+   ✅ Status: PASS
+
+[66/241]
+============================================================
+📋 Case: heat_boundary_layer_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 43.82s to generate the response.
+It takes claude-opus-4-6 42.88s to generate the response.
+It takes claude-opus-4-6 38.43s to generate the response.
+   📊 Tokens: in=19872, out=8157
+   ⏱️  Latency: 127.15s
+   🔧 Executing solver...
+   📊 Error: 7.65e-05, Time: 4.381s
+   ✅ Status: PASS
+
+[67/241]
+============================================================
+📋 Case: heat_boundary_layer_y
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 53.23s to generate the response.
+It takes claude-opus-4-6 80.78s to generate the response.
+It takes claude-opus-4-6 42.49s to generate the response.
+   📊 Tokens: in=19872, out=8594
+   ⏱️  Latency: 178.52s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[68/241]
+============================================================
+📋 Case: heat_variable_kappa_strong_smooth
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.44s to generate the response.
+It takes claude-opus-4-6 37.66s to generate the response.
+It takes claude-opus-4-6 35.78s to generate the response.
+   📊 Tokens: in=20025, out=8348
+   ⏱️  Latency: 113.90s
+   🔧 Executing solver...
+   📊 Error: 5.13e-04, Time: 8.692s
+   ✅ Status: PASS
+
+[69/241]
+============================================================
+📋 Case: heat_variable_kappa_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 36.51s to generate the response.
+It takes claude-opus-4-6 36.91s to generate the response.
+It takes claude-opus-4-6 38.36s to generate the response.
+   📊 Tokens: in=20025, out=7921
+   ⏱️  Latency: 113.81s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[70/241]
+============================================================
+📋 Case: heat_large_kappa10_fast_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 33.39s to generate the response.
+It takes claude-opus-4-6 35.58s to generate the response.
+It takes claude-opus-4-6 36.74s to generate the response.
+   📊 Tokens: in=19878, out=7721
+   ⏱️  Latency: 107.73s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[71/241]
+============================================================
+📋 Case: heat_small_kappa0p1_slow_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.65s to generate the response.
+It takes claude-opus-4-6 36.81s to generate the response.
+It takes claude-opus-4-6 35.12s to generate the response.
+   📊 Tokens: in=19881, out=8000
+   ⏱️  Latency: 112.61s
+   🔧 Executing solver...
+   📊 Error: 6.71e-04, Time: 2.108s
+   ✅ Status: PASS
+
+[72/241]
+============================================================
+📋 Case: heat_quadrilateral_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.31s to generate the response.
+It takes claude-opus-4-6 38.00s to generate the response.
+It takes claude-opus-4-6 213.82s to generate the response.
+   📊 Tokens: in=19872, out=8109
+   ⏱️  Latency: 292.15s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[73/241]
+============================================================
+📋 Case: heat_p2_variable_kappa_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 47.95s to generate the response.
+It takes claude-opus-4-6 43.07s to generate the response.
+It takes claude-opus-4-6 38.23s to generate the response.
+   📊 Tokens: in=20028, out=8690
+   ⏱️  Latency: 131.27s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[74/241]
+============================================================
+📋 Case: heat_no_exact_constant_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 32.41s to generate the response.
+It takes claude-opus-4-6 42.89s to generate the response.
+It takes claude-opus-4-6 32.62s to generate the response.
+   📊 Tokens: in=19806, out=7308
+   ⏱️  Latency: 109.95s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[75/241]
+============================================================
+📋 Case: heat_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 31.66s to generate the response.
+It takes claude-opus-4-6 26.87s to generate the response.
+It takes claude-opus-4-6 54.85s to generate the response.
+   📊 Tokens: in=19902, out=6371
+   ⏱️  Latency: 115.40s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[76/241]
+============================================================
+📋 Case: heat_no_exact_gaussian_source_gaussian_ic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 30.96s to generate the response.
+It takes claude-opus-4-6 30.69s to generate the response.
+It takes claude-opus-4-6 35.85s to generate the response.
+   📊 Tokens: in=19932, out=6750
+   ⏱️  Latency: 99.53s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[77/241]
+============================================================
+📋 Case: heat_no_exact_variable_kappa_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 35.03s to generate the response.
+It takes claude-opus-4-6 32.00s to generate the response.
+It takes claude-opus-4-6 42.13s to generate the response.
+   📊 Tokens: in=19959, out=8241
+   ⏱️  Latency: 111.18s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[78/241]
+============================================================
+📋 Case: heat_gaussian_bump_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 46.39s to generate the response.
+It takes claude-opus-4-6 36.97s to generate the response.
+It takes claude-opus-4-6 39.69s to generate the response.
+   📊 Tokens: in=19905, out=8649
+   ⏱️  Latency: 125.08s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[79/241]
+============================================================
+📋 Case: heat_rotated_wave_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 44.12s to generate the response.
+It takes claude-opus-4-6 35.58s to generate the response.
+It takes claude-opus-4-6 45.74s to generate the response.
+   📊 Tokens: in=19896, out=8744
+   ⏱️  Latency: 127.46s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[80/241]
+============================================================
+📋 Case: heat_directional_high_freq_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 34.59s to generate the response.
+It takes claude-opus-4-6 38.60s to generate the response.
+It takes claude-opus-4-6 41.07s to generate the response.
+   📊 Tokens: in=19857, out=7954
+   ⏱️  Latency: 116.28s
+   🔧 Executing solver...
+   📊 Error: 2.04e-03, Time: 2.872s
+   ✅ Status: PASS
+
+[81/241]
+============================================================
+📋 Case: heat_kappa_local_peak_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 43.51s to generate the response.
+It takes claude-opus-4-6 43.78s to generate the response.
+It takes claude-opus-4-6 61.50s to generate the response.
+   📊 Tokens: in=19992, out=8399
+   ⏱️  Latency: 150.82s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[82/241]
+============================================================
+📋 Case: heat_kappa_stripes_x_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 35.09s to generate the response.
+It takes claude-opus-4-6 42.88s to generate the response.
+It takes claude-opus-4-6 41.06s to generate the response.
+   📊 Tokens: in=19956, out=7989
+   ⏱️  Latency: 121.05s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[83/241]
+============================================================
+📋 Case: heat_kappa_low_background_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 42.93s to generate the response.
+It takes claude-opus-4-6 39.13s to generate the response.
+It takes claude-opus-4-6 42.90s to generate the response.
+   📊 Tokens: in=19983, out=8298
+   ⏱️  Latency: 126.98s
+   🔧 Executing solver...
+   📊 Error: 2.02e-04, Time: 1.967s
+   ✅ Status: PASS
+
+[84/241]
+============================================================
+📋 Case: heat_quadrilateral_high_freq_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 39.73s to generate the response.
+It takes claude-opus-4-6 40.43s to generate the response.
+It takes claude-opus-4-6 36.12s to generate the response.
+   📊 Tokens: in=19854, out=8185
+   ⏱️  Latency: 118.31s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[85/241]
+============================================================
+📋 Case: heat_p3_high_freq_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 39.16s to generate the response.
+It takes claude-opus-4-6 36.60s to generate the response.
+It takes claude-opus-4-6 44.66s to generate the response.
+   📊 Tokens: in=19863, out=8232
+   ⏱️  Latency: 122.45s
+   🔧 Executing solver...
+   📊 Error: 3.11e-05, Time: 1.982s
+   ✅ Status: PASS
+
+[86/241]
+============================================================
+📋 Case: heat_long_time_moderate_dt
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 32.12s to generate the response.
+It takes claude-opus-4-6 37.30s to generate the response.
+It takes claude-opus-4-6 38.46s to generate the response.
+   📊 Tokens: in=19842, out=7931
+   ⏱️  Latency: 109.90s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[87/241]
+============================================================
+📋 Case: heat_small_dt_short_time
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 35.68s to generate the response.
+It takes claude-opus-4-6 45.36s to generate the response.
+It takes claude-opus-4-6 35.26s to generate the response.
+   📊 Tokens: in=19848, out=8042
+   ⏱️  Latency: 118.32s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[88/241]
+============================================================
+📋 Case: heat_no_exact_two_gaussian_sources
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 27.78s to generate the response.
+It takes claude-opus-4-6 32.14s to generate the response.
+It takes claude-opus-4-6 32.35s to generate the response.
+   📊 Tokens: in=19941, out=6785
+   ⏱️  Latency: 94.32s
+   🔧 Executing solver...
+   📊 Error: 2.53e-02, Time: 1.432s
+   ✅ Status: PASS
+
+[89/241]
+============================================================
+📋 Case: heat_no_exact_high_freq_initial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 27.40s to generate the response.
+It takes claude-opus-4-6 30.82s to generate the response.
+It takes claude-opus-4-6 26.36s to generate the response.
+   📊 Tokens: in=19815, out=6447
+   ⏱️  Latency: 86.61s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[90/241]
+============================================================
+📋 Case: heat_no_exact_variable_kappa_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 30.59s to generate the response.
+It takes claude-opus-4-6 29.03s to generate the response.
+It takes claude-opus-4-6 32.90s to generate the response.
+   📊 Tokens: in=20073, out=6863
+   ⏱️  Latency: 94.55s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[91/241]
+============================================================
+📋 Case: convdiff_high_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 53.94s to generate the response.
+It takes claude-opus-4-6 33.47s to generate the response.
+It takes claude-opus-4-6 36.02s to generate the response.
+   📊 Tokens: in=19884, out=6801
+   ⏱️  Latency: 125.45s
+   🔧 Executing solver...
+   📊 Error: 4.69e-05, Time: 3.043s
+   ✅ Status: FAIL
+
+[92/241]
+============================================================
+📋 Case: convdiff_low_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 27.54s to generate the response.
+It takes claude-opus-4-6 27.41s to generate the response.
+It takes claude-opus-4-6 34.50s to generate the response.
+   📊 Tokens: in=19821, out=6144
+   ⏱️  Latency: 91.48s
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 1.951s
+   ✅ Status: PASS
+
+[93/241]
+============================================================
+📋 Case: convdiff_medium_pe_diagonal
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 40.93s to generate the response.
+It takes claude-opus-4-6 31.53s to generate the response.
+It takes claude-opus-4-6 30.62s to generate the response.
+   📊 Tokens: in=19893, out=6418
+   ⏱️  Latency: 105.11s
+   🔧 Executing solver...
+   📊 Error: 3.04e-04, Time: 1.584s
+   ✅ Status: PASS
+
+[94/241]
+============================================================
+📋 Case: convdiff_high_pe_xwind_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 29.54s to generate the response.
+It takes claude-opus-4-6 32.41s to generate the response.
+It takes claude-opus-4-6 31.79s to generate the response.
+   📊 Tokens: in=19911, out=6649
+   ⏱️  Latency: 95.76s
+   🔧 Executing solver...
+   📊 Error: 9.04e-05, Time: 1.496s
+   ✅ Status: PASS
+
+[95/241]
+============================================================
+📋 Case: convdiff_high_pe_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 28.94s to generate the response.
+It takes claude-opus-4-6 28.86s to generate the response.
+It takes claude-opus-4-6 30.55s to generate the response.
+   📊 Tokens: in=19899, out=6368
+   ⏱️  Latency: 90.37s
+   🔧 Executing solver...
+   📊 Error: 4.04e-05, Time: 1.528s
+   ✅ Status: PASS
+
+[96/241]
+============================================================
+📋 Case: convdiff_p2_moderate_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 34.56s to generate the response.
+It takes claude-opus-4-6 43.82s to generate the response.
+It takes claude-opus-4-6 32.24s to generate the response.
+   📊 Tokens: in=19896, out=6819
+   ⏱️  Latency: 112.64s
+   🔧 Executing solver...
+   📊 Error: 2.47e-05, Time: 1.707s
+   ✅ Status: FAIL
+
+[97/241]
+============================================================
+📋 Case: convdiff_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 29.40s to generate the response.
+It takes claude-opus-4-6 34.52s to generate the response.
+It takes claude-opus-4-6 32.39s to generate the response.
+   📊 Tokens: in=19920, out=6264
+   ⏱️  Latency: 98.34s
+   🔧 Executing solver...
+   📊 Error: 3.55e-03, Time: 1.494s
+   ✅ Status: PASS
+
+[98/241]
+============================================================
+📋 Case: advection_pure_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 39.98s to generate the response.
+It takes claude-opus-4-6 32.69s to generate the response.
+It takes claude-opus-4-6 33.96s to generate the response.
+   📊 Tokens: in=19686, out=7293
+   ⏱️  Latency: 108.65s
+   🔧 Executing solver...
+   📊 Error: 1.13e-04, Time: 1.634s
+   ✅ Status: FAIL
+
+[99/241]
+============================================================
+📋 Case: convdiff_elliptic_low_pe_cos_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 28.11s to generate the response.
+It takes claude-opus-4-6 26.70s to generate the response.
+It takes claude-opus-4-6 32.29s to generate the response.
+   📊 Tokens: in=19872, out=6065
+   ⏱️  Latency: 89.12s
+   🔧 Executing solver...
+   📊 Error: 1.38e-04, Time: 2.044s
+   ✅ Status: PASS
+
+[100/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_rotated
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 28.92s to generate the response.
+It takes claude-opus-4-6 29.00s to generate the response.
+It takes claude-opus-4-6 33.80s to generate the response.
+   📊 Tokens: in=19950, out=5852
+   ⏱️  Latency: 93.73s
+   🔧 Executing solver...
+   📊 Error: 5.89e-04, Time: 3.216s
+   ✅ Status: FAIL
+
+[101/241]
+============================================================
+📋 Case: convdiff_elliptic_high_pe_strong_x_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 33.16s to generate the response.
+It takes claude-opus-4-6 29.55s to generate the response.
+It takes claude-opus-4-6 34.39s to generate the response.
+   📊 Tokens: in=19962, out=6836
+   ⏱️  Latency: 99.13s
+   🔧 Executing solver...
+   📊 Error: 6.29e-05, Time: 1.704s
+   ✅ Status: PASS
+
+[102/241]
+============================================================
+📋 Case: convdiff_elliptic_high_pe_strong_y_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 30.11s to generate the response.
+It takes claude-opus-4-6 32.34s to generate the response.
+It takes claude-opus-4-6 34.48s to generate the response.
+   📊 Tokens: in=19962, out=6791
+   ⏱️  Latency: 98.95s
+   🔧 Executing solver...
+   📊 Error: 9.12e-05, Time: 1.504s
+   ✅ Status: PASS
+
+[103/241]
+============================================================
+📋 Case: convdiff_elliptic_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 30.86s to generate the response.
+It takes claude-opus-4-6 33.02s to generate the response.
+It takes claude-opus-4-6 31.18s to generate the response.
+   📊 Tokens: in=19896, out=6640
+   ⏱️  Latency: 97.09s
+   🔧 Executing solver...
+   📊 Error: 3.48e-05, Time: 1.508s
+   ✅ Status: PASS
+
+[104/241]
+============================================================
+📋 Case: convdiff_elliptic_p2_moderate_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 34.22s to generate the response.
+It takes claude-opus-4-6 30.01s to generate the response.
+It takes claude-opus-4-6 33.04s to generate the response.
+   📊 Tokens: in=19908, out=6541
+   ⏱️  Latency: 99.30s
+   🔧 Executing solver...
+   📊 Error: 2.47e-05, Time: 1.807s
+   ✅ Status: FAIL
+
+[105/241]
+============================================================
+📋 Case: convdiff_elliptic_quadrilateral_medium_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 34.82s to generate the response.
+It takes claude-opus-4-6 32.54s to generate the response.
+It takes claude-opus-4-6 28.12s to generate the response.
+   📊 Tokens: in=19911, out=6289
+   ⏱️  Latency: 97.51s
+   🔧 Executing solver...
+   📊 Error: 3.06e-04, Time: 2.285s
+   ✅ Status: FAIL
+
+[106/241]
+============================================================
+📋 Case: convdiff_elliptic_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 30.73s to generate the response.
+It takes claude-opus-4-6 34.13s to generate the response.
+It takes claude-opus-4-6 27.53s to generate the response.
+   📊 Tokens: in=19869, out=5758
+   ⏱️  Latency: 94.41s
+   🔧 Executing solver...
+   📊 Error: 9.57e-03, Time: 1.527s
+   ✅ Status: PASS
+
+[107/241]
+============================================================
+📋 Case: convdiff_mixed_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 47.82s to generate the response.
+It takes claude-opus-4-6 29.83s to generate the response.
+It takes claude-opus-4-6 30.82s to generate the response.
+   📊 Tokens: in=19944, out=6802
+   ⏱️  Latency: 110.51s
+   🔧 Executing solver...
+   📊 Error: 5.04e-05, Time: 2.292s
+   ✅ Status: PASS
+
+[108/241]
+============================================================
+📋 Case: convdiff_mixed_high_pe_xwind_supg_stronger
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 33.12s to generate the response.
+It takes claude-opus-4-6 33.70s to generate the response.
+It takes claude-opus-4-6 28.38s to generate the response.
+   📊 Tokens: in=19950, out=6618
+   ⏱️  Latency: 97.22s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[109/241]
+============================================================
+📋 Case: convdiff_mixed_medium_pe_no_stabilization
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 40.52s to generate the response.
+It takes claude-opus-4-6 31.80s to generate the response.
+It takes claude-opus-4-6 37.94s to generate the response.
+   📊 Tokens: in=19905, out=6281
+   ⏱️  Latency: 112.28s
+   🔧 Executing solver...
+   📊 Error: 3.17e-04, Time: 2.945s
+   ✅ Status: FAIL
+
+[110/241]
+============================================================
+📋 Case: convdiff_mixed_layer_exp_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 31.97s to generate the response.
+It takes claude-opus-4-6 29.99s to generate the response.
+It takes claude-opus-4-6 34.71s to generate the response.
+   📊 Tokens: in=19899, out=6700
+   ⏱️  Latency: 98.69s
+   🔧 Executing solver...
+   📊 Error: 2.72e-05, Time: 3.125s
+   ✅ Status: PASS
+
+[111/241]
+============================================================
+📋 Case: convdiff_mixed_quadrilateral_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 33.55s to generate the response.
+It takes claude-opus-4-6 31.50s to generate the response.
+It takes claude-opus-4-6 35.16s to generate the response.
+   📊 Tokens: in=19902, out=6795
+   ⏱️  Latency: 102.23s
+   🔧 Executing solver...
+   📊 Error: 8.56e-05, Time: 1.557s
+   ✅ Status: FAIL
+
+[112/241]
+============================================================
+📋 Case: convdiff_mixed_p2_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 42.12s to generate the response.
+It takes claude-opus-4-6 53.14s to generate the response.
+It takes claude-opus-4-6 63.27s to generate the response.
+   📊 Tokens: in=19947, out=6842
+   ⏱️  Latency: 160.55s
+   🔧 Executing solver...
+   📊 Error: 2.55e-06, Time: 2.784s
+   ✅ Status: PASS
+
+[113/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 29.98s to generate the response.
+It takes claude-opus-4-6 29.48s to generate the response.
+It takes claude-opus-4-6 51.49s to generate the response.
+   📊 Tokens: in=19917, out=6049
+   ⏱️  Latency: 112.98s
+   🔧 Executing solver...
+   📊 Error: 1.52e-03, Time: 1.488s
+   ✅ Status: PASS
+
+[114/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 30.51s to generate the response.
+It takes claude-opus-4-6 28.91s to generate the response.
+It takes claude-opus-4-6 34.32s to generate the response.
+   📊 Tokens: in=19983, out=5789
+   ⏱️  Latency: 95.76s
+   🔧 Executing solver...
+   📊 Error: 4.37e-03, Time: 1.533s
+   ✅ Status: PASS
+
+[115/241]
+============================================================
+📋 Case: convdiff_parabolic_basic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 58.49s to generate the response.
+It takes claude-opus-4-6 44.29s to generate the response.
+It takes claude-opus-4-6 46.65s to generate the response.
+   📊 Tokens: in=20181, out=9976
+   ⏱️  Latency: 151.46s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[116/241]
+============================================================
+📋 Case: convdiff_parabolic_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 52.07s to generate the response.
+It takes claude-opus-4-6 47.10s to generate the response.
+It takes claude-opus-4-6 55.51s to generate the response.
+   📊 Tokens: in=20202, out=10144
+   ⏱️  Latency: 156.70s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[117/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_forcing
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 63.96s to generate the response.
+It takes claude-opus-4-6 34.77s to generate the response.
+It takes claude-opus-4-6 36.83s to generate the response.
+   📊 Tokens: in=20148, out=8687
+   ⏱️  Latency: 137.58s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[118/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_time_dependent_forcing
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.77s to generate the response.
+It takes claude-opus-4-6 45.07s to generate the response.
+It takes claude-opus-4-6 41.33s to generate the response.
+   📊 Tokens: in=20256, out=8773
+   ⏱️  Latency: 127.19s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[119/241]
+============================================================
+📋 Case: convdiff_elliptic_low_pe_polynomial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 21.54s to generate the response.
+It takes claude-opus-4-6 26.49s to generate the response.
+It takes claude-opus-4-6 21.76s to generate the response.
+   📊 Tokens: in=19866, out=4908
+   ⏱️  Latency: 71.81s
+   🔧 Executing solver...
+   📊 Error: 1.76e-04, Time: 1.632s
+   ✅ Status: PASS
+
+[120/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_exp_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 32.10s to generate the response.
+It takes claude-opus-4-6 32.57s to generate the response.
+It takes claude-opus-4-6 48.14s to generate the response.
+   📊 Tokens: in=19932, out=6640
+   ⏱️  Latency: 114.84s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[121/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_diagonal_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 31.02s to generate the response.
+It takes claude-opus-4-6 32.68s to generate the response.
+It takes claude-opus-4-6 28.80s to generate the response.
+   📊 Tokens: in=19950, out=6573
+   ⏱️  Latency: 94.52s
+   🔧 Executing solver...
+   📊 Error: 1.04e-03, Time: 3.273s
+   ✅ Status: FAIL
+
+[122/241]
+============================================================
+📋 Case: convdiff_elliptic_quadrilateral_low_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 26.75s to generate the response.
+It takes claude-opus-4-6 34.35s to generate the response.
+It takes claude-opus-4-6 30.55s to generate the response.
+   📊 Tokens: in=19845, out=5970
+   ⏱️  Latency: 93.67s
+   🔧 Executing solver...
+   📊 Error: 1.20e-04, Time: 2.320s
+   ✅ Status: FAIL
+
+[123/241]
+============================================================
+📋 Case: convdiff_elliptic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 41.38s to generate the response.
+It takes claude-opus-4-6 28.42s to generate the response.
+It takes claude-opus-4-6 29.26s to generate the response.
+   📊 Tokens: in=19884, out=5634
+   ⏱️  Latency: 101.08s
+   🔧 Executing solver...
+   📊 Error: 3.54e-03, Time: 1.507s
+   ✅ Status: PASS
+
+[124/241]
+============================================================
+📋 Case: convdiff_mixed_extreme_pe_supg_upwind3
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 37.12s to generate the response.
+It takes claude-opus-4-6 54.93s to generate the response.
+It takes claude-opus-4-6 43.15s to generate the response.
+   📊 Tokens: in=19947, out=7061
+   ⏱️  Latency: 137.21s
+   🔧 Executing solver...
+   📊 Error: 3.51e-05, Time: 2.143s
+   ✅ Status: PASS
+
+[125/241]
+============================================================
+📋 Case: convdiff_mixed_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 31.37s to generate the response.
+It takes claude-opus-4-6 30.62s to generate the response.
+It takes claude-opus-4-6 29.22s to generate the response.
+   📊 Tokens: in=19896, out=6457
+   ⏱️  Latency: 93.24s
+   🔧 Executing solver...
+   📊 Error: 6.06e-05, Time: 1.911s
+   ✅ Status: PASS
+
+[126/241]
+============================================================
+📋 Case: convdiff_mixed_quadrilateral_supg_upwind2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 30.83s to generate the response.
+It takes claude-opus-4-6 32.81s to generate the response.
+It takes claude-opus-4-6 29.74s to generate the response.
+   📊 Tokens: in=19914, out=6823
+   ⏱️  Latency: 95.40s
+   🔧 Executing solver...
+   📊 Error: 4.20e-05, Time: 1.538s
+   ✅ Status: PASS
+
+[127/241]
+============================================================
+📋 Case: convdiff_mixed_p3_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 34.92s to generate the response.
+It takes claude-opus-4-6 53.18s to generate the response.
+It takes claude-opus-4-6 46.69s to generate the response.
+   📊 Tokens: in=19947, out=6852
+   ⏱️  Latency: 136.81s
+   🔧 Executing solver...
+   📊 Error: 3.06e-04, Time: 2.597s
+   ✅ Status: FAIL
+
+[128/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 29.56s to generate the response.
+It takes claude-opus-4-6 44.56s to generate the response.
+It takes claude-opus-4-6 32.06s to generate the response.
+   📊 Tokens: in=19902, out=6746
+   ⏱️  Latency: 108.21s
+   🔧 Executing solver...
+   📊 Error: 5.88e-03, Time: 1.512s
+   ✅ Status: PASS
+
+[129/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/convection_diffusion_template.py
+It takes claude-opus-4-6 43.44s to generate the response.
+It takes claude-opus-4-6 43.81s to generate the response.
+It takes claude-opus-4-6 59.74s to generate the response.
+   📊 Tokens: in=19851, out=10069
+   ⏱️  Latency: 149.02s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[130/241]
+============================================================
+📋 Case: convdiff_parabolic_longer_time_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 50.51s to generate the response.
+It takes claude-opus-4-6 44.27s to generate the response.
+It takes claude-opus-4-6 59.27s to generate the response.
+   📊 Tokens: in=20160, out=9764
+   ⏱️  Latency: 156.07s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[131/241]
+============================================================
+📋 Case: convdiff_parabolic_small_dt_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 44.86s to generate the response.
+It takes claude-opus-4-6 77.79s to generate the response.
+It takes claude-opus-4-6 56.75s to generate the response.
+   📊 Tokens: in=20214, out=9175
+   ⏱️  Latency: 181.41s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[132/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 43.04s to generate the response.
+It takes claude-opus-4-6 42.02s to generate the response.
+It takes claude-opus-4-6 53.25s to generate the response.
+   📊 Tokens: in=20226, out=8975
+   ⏱️  Latency: 140.33s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[133/241]
+============================================================
+📋 Case: stokes_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 36.81s to generate the response.
+It takes claude-opus-4-6 41.70s to generate the response.
+It takes claude-opus-4-6 27.67s to generate the response.
+   📊 Tokens: in=19950, out=7739
+   ⏱️  Latency: 108.21s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[134/241]
+============================================================
+📋 Case: stokes_low_viscosity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 32.04s to generate the response.
+It takes claude-opus-4-6 30.53s to generate the response.
+It takes claude-opus-4-6 31.85s to generate the response.
+   📊 Tokens: in=19959, out=6963
+   ⏱️  Latency: 96.44s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[135/241]
+============================================================
+📋 Case: stokes_high_viscosity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.56s to generate the response.
+It takes claude-opus-4-6 31.92s to generate the response.
+It takes claude-opus-4-6 33.84s to generate the response.
+   📊 Tokens: in=19959, out=7166
+   ⏱️  Latency: 103.35s
+   🔧 Executing solver...
+   ❌ Error computation failed
+
+[136/241]
+============================================================
+📋 Case: stokes_high_frequency_flow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 33.73s to generate the response.
+It takes claude-opus-4-6 34.19s to generate the response.
+It takes claude-opus-4-6 31.14s to generate the response.
+   📊 Tokens: in=19929, out=7099
+   ⏱️  Latency: 101.08s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[137/241]
+============================================================
+📋 Case: stokes_exponential_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 41.71s to generate the response.
+It takes claude-opus-4-6 29.40s to generate the response.
+It takes claude-opus-4-6 46.62s to generate the response.
+   📊 Tokens: in=19830, out=6715
+   ⏱️  Latency: 119.75s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[138/241]
+============================================================
+📋 Case: stokes_p3p2_taylor_hood
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 64.27s to generate the response.
+It takes claude-opus-4-6 33.66s to generate the response.
+It takes claude-opus-4-6 34.15s to generate the response.
+   📊 Tokens: in=19971, out=7293
+   ⏱️  Latency: 134.10s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[139/241]
+============================================================
+📋 Case: stokes_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 32.67s to generate the response.
+It takes claude-opus-4-6 33.45s to generate the response.
+It takes claude-opus-4-6 30.23s to generate the response.
+   📊 Tokens: in=19962, out=7183
+   ⏱️  Latency: 98.37s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[140/241]
+============================================================
+📋 Case: stokes_no_exact_lid_driven_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 37.81s to generate the response.
+It takes claude-opus-4-6 40.79s to generate the response.
+It takes claude-opus-4-6 40.09s to generate the response.
+   📊 Tokens: in=19800, out=8664
+   ⏱️  Latency: 120.71s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[141/241]
+============================================================
+📋 Case: stokes_no_exact_channel_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 59.54s to generate the response.
+It takes claude-opus-4-6 53.40s to generate the response.
+It takes claude-opus-4-6 54.80s to generate the response.
+   📊 Tokens: in=19806, out=11771
+   ⏱️  Latency: 169.76s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[142/241]
+============================================================
+📋 Case: stokes_no_exact_mixed_bc_rotating_wall
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 46.84s to generate the response.
+It takes claude-opus-4-6 45.95s to generate the response.
+It takes claude-opus-4-6 56.91s to generate the response.
+   📊 Tokens: in=19806, out=11033
+   ⏱️  Latency: 151.74s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[143/241]
+============================================================
+📋 Case: stokes_no_exact_corner_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 46.51s to generate the response.
+It takes claude-opus-4-6 68.14s to generate the response.
+It takes claude-opus-4-6 45.58s to generate the response.
+   📊 Tokens: in=19935, out=10803
+   ⏱️  Latency: 162.25s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[144/241]
+============================================================
+📋 Case: stokes_no_exact_channel_poiseuille_low_nu
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 67.20s to generate the response.
+It takes claude-opus-4-6 48.04s to generate the response.
+It takes claude-opus-4-6 51.74s to generate the response.
+   📊 Tokens: in=19812, out=12613
+   ⏱️  Latency: 169.00s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[145/241]
+============================================================
+📋 Case: stokes_no_exact_double_lid_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 54.21s to generate the response.
+It takes claude-opus-4-6 56.42s to generate the response.
+It takes claude-opus-4-6 43.15s to generate the response.
+   📊 Tokens: in=19800, out=11498
+   ⏱️  Latency: 155.81s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[146/241]
+============================================================
+📋 Case: stokes_no_exact_counter_shear_open_sides
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 71.96s to generate the response.
+It takes claude-opus-4-6 45.62s to generate the response.
+It takes claude-opus-4-6 47.40s to generate the response.
+   📊 Tokens: in=19809, out=9982
+   ⏱️  Latency: 167.00s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[147/241]
+============================================================
+📋 Case: stokes_no_exact_swirl_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 47.88s to generate the response.
+It takes claude-opus-4-6 39.85s to generate the response.
+It takes claude-opus-4-6 62.44s to generate the response.
+   📊 Tokens: in=19809, out=11381
+   ⏱️  Latency: 152.19s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[148/241]
+============================================================
+📋 Case: stokes_no_exact_diagonal_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 55.02s to generate the response.
+It takes claude-opus-4-6 43.26s to generate the response.
+It takes claude-opus-4-6 60.91s to generate the response.
+   📊 Tokens: in=19806, out=11904
+   ⏱️  Latency: 161.21s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[149/241]
+============================================================
+📋 Case: stokes_no_exact_constant_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 46.18s to generate the response.
+It takes claude-opus-4-6 41.60s to generate the response.
+It takes claude-opus-4-6 52.83s to generate the response.
+   📊 Tokens: in=19803, out=10291
+   ⏱️  Latency: 142.63s
+   🔧 Executing solver...
+   📊 Error: 1.00e+00, Time: 2.769s
+   ✅ Status: FAIL
+
+[150/241]
+============================================================
+📋 Case: stokes_no_exact_outflow_top_boundary
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 50.39s to generate the response.
+It takes claude-opus-4-6 42.12s to generate the response.
+It takes claude-opus-4-6 61.12s to generate the response.
+   📊 Tokens: in=19803, out=10750
+   ⏱️  Latency: 155.65s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[151/241]
+============================================================
+📋 Case: navier_stokes_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 33.39s to generate the response.
+It takes claude-opus-4-6 34.20s to generate the response.
+It takes claude-opus-4-6 34.21s to generate the response.
+   📊 Tokens: in=19908, out=7426
+   ⏱️  Latency: 103.82s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[152/241]
+============================================================
+📋 Case: navier_stokes_low_re
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 33.05s to generate the response.
+It takes claude-opus-4-6 35.98s to generate the response.
+It takes claude-opus-4-6 38.44s to generate the response.
+   📊 Tokens: in=19893, out=7814
+   ⏱️  Latency: 109.49s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[153/241]
+============================================================
+📋 Case: navier_stokes_high_re
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 34.46s to generate the response.
+It takes claude-opus-4-6 43.20s to generate the response.
+It takes claude-opus-4-6 35.95s to generate the response.
+   📊 Tokens: in=19914, out=7501
+   ⏱️  Latency: 115.64s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[154/241]
+============================================================
+📋 Case: navier_stokes_high_frequency_flow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 42.05s to generate the response.
+It takes claude-opus-4-6 49.27s to generate the response.
+It takes claude-opus-4-6 34.03s to generate the response.
+   📊 Tokens: in=19947, out=8269
+   ⏱️  Latency: 127.37s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f60b30377e0>
+Traceback (most recent c
+
+[155/241]
+============================================================
+📋 Case: navier_stokes_p3p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.63s to generate the response.
+It takes claude-opus-4-6 67.95s to generate the response.
+It takes claude-opus-4-6 42.01s to generate the response.
+   📊 Tokens: in=19896, out=7937
+   ⏱️  Latency: 147.62s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[156/241]
+============================================================
+📋 Case: navier_stokes_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 36.68s to generate the response.
+It takes claude-opus-4-6 31.21s to generate the response.
+It takes claude-opus-4-6 55.34s to generate the response.
+   📊 Tokens: in=19869, out=7323
+   ⏱️  Latency: 125.26s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[157/241]
+============================================================
+📋 Case: navier_stokes_medium_re_stream_2x1
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 43.99s to generate the response.
+It takes claude-opus-4-6 47.31s to generate the response.
+It takes claude-opus-4-6 30.98s to generate the response.
+   📊 Tokens: in=19953, out=7542
+   ⏱️  Latency: 124.30s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[158/241]
+============================================================
+📋 Case: navier_stokes_medium_re_stream_1x2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 31.01s to generate the response.
+It takes claude-opus-4-6 32.12s to generate the response.
+It takes claude-opus-4-6 35.11s to generate the response.
+   📊 Tokens: in=19953, out=7405
+   ⏱️  Latency: 100.26s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[159/241]
+============================================================
+📋 Case: navier_stokes_high_nu_smooth_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 33.55s to generate the response.
+It takes claude-opus-4-6 33.78s to generate the response.
+It takes claude-opus-4-6 86.35s to generate the response.
+   📊 Tokens: in=19923, out=7771
+   ⏱️  Latency: 155.71s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[160/241]
+============================================================
+📋 Case: navier_stokes_low_nu_small_amplitude
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 31.89s to generate the response.
+It takes claude-opus-4-6 39.71s to generate the response.
+It takes claude-opus-4-6 32.92s to generate the response.
+   📊 Tokens: in=19893, out=7622
+   ⏱️  Latency: 106.56s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[161/241]
+============================================================
+📋 Case: navier_stokes_exponential_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.39s to generate the response.
+It takes claude-opus-4-6 33.15s to generate the response.
+It takes claude-opus-4-6 72.21s to generate the response.
+   📊 Tokens: in=19872, out=7704
+   ⏱️  Latency: 142.77s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f1f91fb37e0>
+Traceback (most recent c
+
+[162/241]
+============================================================
+📋 Case: navier_stokes_boundary_layer_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 31.95s to generate the response.
+It takes claude-opus-4-6 32.60s to generate the response.
+It takes claude-opus-4-6 30.69s to generate the response.
+   📊 Tokens: in=19899, out=7752
+   ⏱️  Latency: 97.26s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[163/241]
+============================================================
+📋 Case: navier_stokes_multiscale_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 32.66s to generate the response.
+It takes claude-opus-4-6 89.78s to generate the response.
+It takes claude-opus-4-6 48.09s to generate the response.
+   📊 Tokens: in=20031, out=7801
+   ⏱️  Latency: 172.56s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[164/241]
+============================================================
+📋 Case: navier_stokes_polynomial_stream_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 36.16s to generate the response.
+It takes claude-opus-4-6 36.24s to generate the response.
+It takes claude-opus-4-6 36.98s to generate the response.
+   📊 Tokens: in=19863, out=7855
+   ⏱️  Latency: 111.40s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[165/241]
+============================================================
+📋 Case: navier_stokes_shear_layer_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 58.37s to generate the response.
+It takes claude-opus-4-6 33.83s to generate the response.
+It takes claude-opus-4-6 32.94s to generate the response.
+   📊 Tokens: in=19935, out=7374
+   ⏱️  Latency: 127.16s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[166/241]
+============================================================
+📋 Case: navier_stokes_quadrilateral_multiscale
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 37.71s to generate the response.
+It takes claude-opus-4-6 41.74s to generate the response.
+It takes claude-opus-4-6 40.02s to generate the response.
+   📊 Tokens: in=20016, out=8320
+   ⏱️  Latency: 121.49s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[167/241]
+============================================================
+📋 Case: navier_stokes_p4p3_small_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 41.03s to generate the response.
+It takes claude-opus-4-6 32.52s to generate the response.
+It takes claude-opus-4-6 36.01s to generate the response.
+   📊 Tokens: in=19899, out=7870
+   ⏱️  Latency: 111.58s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f945f49b7e0>
+Traceback (most recent c
+
+[168/241]
+============================================================
+📋 Case: navier_stokes_no_exact_lid_driven_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 34.08s to generate the response.
+It takes claude-opus-4-6 35.68s to generate the response.
+It takes claude-opus-4-6 36.51s to generate the response.
+   📊 Tokens: in=19761, out=8400
+   ⏱️  Latency: 108.29s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f22808436a0>
+Traceback (most recent c
+
+[169/241]
+============================================================
+📋 Case: navier_stokes_no_exact_channel_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 55.07s to generate the response.
+It takes claude-opus-4-6 49.36s to generate the response.
+It takes claude-opus-4-6 50.97s to generate the response.
+   📊 Tokens: in=19767, out=11507
+   ⏱️  Latency: 157.42s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[170/241]
+============================================================
+📋 Case: navier_stokes_localized_vortex_gaussian
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 33.96s to generate the response.
+It takes claude-opus-4-6 36.11s to generate the response.
+It takes claude-opus-4-6 33.57s to generate the response.
+   📊 Tokens: in=20022, out=7702
+   ⏱️  Latency: 105.67s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[171/241]
+============================================================
+📋 Case: navier_stokes_two_vortices_gaussian_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.58s to generate the response.
+It takes claude-opus-4-6 37.43s to generate the response.
+It takes claude-opus-4-6 33.58s to generate the response.
+   📊 Tokens: in=20223, out=7554
+   ⏱️  Latency: 108.61s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[172/241]
+============================================================
+📋 Case: navier_stokes_tanh_x_shear_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.55s to generate the response.
+It takes claude-opus-4-6 74.58s to generate the response.
+It takes claude-opus-4-6 37.77s to generate the response.
+   📊 Tokens: in=19998, out=8186
+   ⏱️  Latency: 149.93s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[173/241]
+============================================================
+📋 Case: navier_stokes_sin3x2y_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 29.98s to generate the response.
+It takes claude-opus-4-6 37.43s to generate the response.
+It takes claude-opus-4-6 35.90s to generate the response.
+   📊 Tokens: in=19983, out=7554
+   ⏱️  Latency: 105.34s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fdb3ab7b7e0>
+Traceback (most recent c
+
+[174/241]
+============================================================
+📋 Case: navier_stokes_polynomial_stream_higher_degree
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 34.22s to generate the response.
+It takes claude-opus-4-6 37.90s to generate the response.
+It takes claude-opus-4-6 35.66s to generate the response.
+   📊 Tokens: in=19941, out=7616
+   ⏱️  Latency: 109.80s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[175/241]
+============================================================
+📋 Case: navier_stokes_no_exact_double_lid_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 47.88s to generate the response.
+It takes claude-opus-4-6 48.85s to generate the response.
+It takes claude-opus-4-6 40.98s to generate the response.
+   📊 Tokens: in=19773, out=11259
+   ⏱️  Latency: 139.75s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[176/241]
+============================================================
+📋 Case: navier_stokes_no_exact_counter_shear_open_sides
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 47.06s to generate the response.
+It takes claude-opus-4-6 50.96s to generate the response.
+It takes claude-opus-4-6 52.24s to generate the response.
+   📊 Tokens: in=19782, out=12673
+   ⏱️  Latency: 152.28s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[177/241]
+============================================================
+📋 Case: navier_stokes_no_exact_swirl_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 53.17s to generate the response.
+It takes claude-opus-4-6 71.32s to generate the response.
+It takes claude-opus-4-6 58.86s to generate the response.
+   📊 Tokens: in=19782, out=13118
+   ⏱️  Latency: 185.37s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[178/241]
+============================================================
+📋 Case: navier_stokes_no_exact_constant_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 50.88s to generate the response.
+It takes claude-opus-4-6 51.06s to generate the response.
+It takes claude-opus-4-6 42.62s to generate the response.
+   📊 Tokens: in=19776, out=9906
+   ⏱️  Latency: 146.58s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[179/241]
+============================================================
+📋 Case: helmholtz_basic_k5
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 18.53s to generate the response.
+It takes claude-opus-4-6 18.59s to generate the response.
+It takes claude-opus-4-6 21.03s to generate the response.
+   📊 Tokens: in=19740, out=4326
+   ⏱️  Latency: 60.18s
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 3.386s
+   ✅ Status: FAIL
+
+[180/241]
+============================================================
+📋 Case: helmholtz_low_k2_polynomial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 18.74s to generate the response.
+It takes claude-opus-4-6 21.11s to generate the response.
+It takes claude-opus-4-6 42.79s to generate the response.
+   📊 Tokens: in=19746, out=4498
+   ⏱️  Latency: 84.66s
+   🔧 Executing solver...
+   📊 Error: 2.26e-04, Time: 1.856s
+   ✅ Status: PASS
+
+[181/241]
+============================================================
+📋 Case: helmholtz_k10_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 19.19s to generate the response.
+It takes claude-opus-4-6 22.28s to generate the response.
+It takes claude-opus-4-6 21.90s to generate the response.
+   📊 Tokens: in=19758, out=4612
+   ⏱️  Latency: 65.40s
+   🔧 Executing solver...
+   📊 Error: 5.02e-04, Time: 1.157s
+   ✅ Status: PASS
+
+[182/241]
+============================================================
+📋 Case: helmholtz_k12_exponential_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 23.64s to generate the response.
+It takes claude-opus-4-6 29.98s to generate the response.
+It takes claude-opus-4-6 24.53s to generate the response.
+   📊 Tokens: in=19749, out=5097
+   ⏱️  Latency: 80.18s
+   🔧 Executing solver...
+   📊 Error: 1.22e-02, Time: 3.789s
+   ✅ Status: FAIL
+
+[183/241]
+============================================================
+📋 Case: helmholtz_k20_very_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 25.43s to generate the response.
+It takes claude-opus-4-6 26.17s to generate the response.
+It takes claude-opus-4-6 27.26s to generate the response.
+   📊 Tokens: in=19764, out=5210
+   ⏱️  Latency: 80.90s
+   🔧 Executing solver...
+   📊 Error: 1.53e-03, Time: 3.493s
+   ✅ Status: PASS
+
+[184/241]
+============================================================
+📋 Case: helmholtz_k25_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 25.17s to generate the response.
+It takes claude-opus-4-6 27.80s to generate the response.
+It takes claude-opus-4-6 29.63s to generate the response.
+   📊 Tokens: in=19746, out=5467
+   ⏱️  Latency: 84.63s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[185/241]
+============================================================
+📋 Case: helmholtz_no_exact_gaussian_source_k15
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.75s to generate the response.
+It takes claude-opus-4-6 21.46s to generate the response.
+It takes claude-opus-4-6 27.38s to generate the response.
+   📊 Tokens: in=19752, out=4385
+   ⏱️  Latency: 71.62s
+   🔧 Executing solver...
+   📊 Error: 5.01e-05, Time: 1.215s
+   ✅ Status: PASS
+
+[186/241]
+============================================================
+📋 Case: helmholtz_no_exact_two_gaussians_k18
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.11s to generate the response.
+It takes claude-opus-4-6 22.11s to generate the response.
+It takes claude-opus-4-6 21.93s to generate the response.
+   📊 Tokens: in=19827, out=4690
+   ⏱️  Latency: 68.19s
+   🔧 Executing solver...
+   📊 Error: 1.87e-05, Time: 1.968s
+   ✅ Status: PASS
+
+[187/241]
+============================================================
+📋 Case: helmholtz_no_exact_oscillatory_rhs_k22
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.73s to generate the response.
+It takes claude-opus-4-6 25.42s to generate the response.
+It takes claude-opus-4-6 22.62s to generate the response.
+   📊 Tokens: in=19728, out=4625
+   ⏱️  Latency: 72.79s
+   🔧 Executing solver...
+   📊 Error: 2.03e-04, Time: 1.661s
+   ✅ Status: PASS
+
+[188/241]
+============================================================
+📋 Case: helmholtz_no_exact_nonzero_bc_k12
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 28.48s to generate the response.
+It takes claude-opus-4-6 28.72s to generate the response.
+It takes claude-opus-4-6 30.18s to generate the response.
+   📊 Tokens: in=19692, out=5891
+   ⏱️  Latency: 89.40s
+   🔧 Executing solver...
+   📊 Error: 1.14e+00, Time: 1.156s
+   ✅ Status: FAIL
+
+[189/241]
+============================================================
+📋 Case: helmholtz_basic_k8_cos_sin
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.95s to generate the response.
+It takes claude-opus-4-6 21.30s to generate the response.
+It takes claude-opus-4-6 23.46s to generate the response.
+   📊 Tokens: in=19752, out=4713
+   ⏱️  Latency: 69.74s
+   🔧 Executing solver...
+   📊 Error: 1.17e-04, Time: 2.253s
+   ✅ Status: PASS
+
+[190/241]
+============================================================
+📋 Case: helmholtz_k15_two_mode_superposition
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 26.49s to generate the response.
+It takes claude-opus-4-6 24.57s to generate the response.
+It takes claude-opus-4-6 27.09s to generate the response.
+   📊 Tokens: in=19806, out=5160
+   ⏱️  Latency: 80.16s
+   🔧 Executing solver...
+   📊 Error: 2.32e-04, Time: 1.149s
+   ✅ Status: PASS
+
+[191/241]
+============================================================
+📋 Case: helmholtz_k18_tanh_shear_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.29s to generate the response.
+It takes claude-opus-4-6 28.11s to generate the response.
+It takes claude-opus-4-6 22.08s to generate the response.
+   📊 Tokens: in=19776, out=5116
+   ⏱️  Latency: 72.51s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[192/241]
+============================================================
+📋 Case: helmholtz_quadrilateral_k10_trig
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 25.29s to generate the response.
+It takes claude-opus-4-6 22.46s to generate the response.
+It takes claude-opus-4-6 20.79s to generate the response.
+   📊 Tokens: in=19767, out=5006
+   ⏱️  Latency: 70.56s
+   🔧 Executing solver...
+   📊 Error: 5.62e-04, Time: 6.414s
+   ✅ Status: PASS
+
+[193/241]
+============================================================
+📋 Case: helmholtz_p2_k12_high_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 22.64s to generate the response.
+It takes claude-opus-4-6 28.28s to generate the response.
+It takes claude-opus-4-6 26.17s to generate the response.
+   📊 Tokens: in=19767, out=5097
+   ⏱️  Latency: 79.11s
+   🔧 Executing solver...
+   📊 Error: 3.26e-05, Time: 1.145s
+   ✅ Status: FAIL
+
+[194/241]
+============================================================
+📋 Case: helmholtz_direct_lu_k24_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 24.52s to generate the response.
+It takes claude-opus-4-6 26.91s to generate the response.
+It takes claude-opus-4-6 24.39s to generate the response.
+   📊 Tokens: in=19770, out=5069
+   ⏱️  Latency: 77.84s
+   🔧 Executing solver...
+   📊 Error: 1.28e-03, Time: 1.147s
+   ✅ Status: PASS
+
+[195/241]
+============================================================
+📋 Case: helmholtz_no_exact_pointlike_source_k20
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 20.18s to generate the response.
+It takes claude-opus-4-6 25.51s to generate the response.
+It takes claude-opus-4-6 22.65s to generate the response.
+   📊 Tokens: in=19755, out=4464
+   ⏱️  Latency: 70.36s
+   🔧 Executing solver...
+   📊 Error: 2.63e-05, Time: 1.642s
+   ✅ Status: PASS
+
+[196/241]
+============================================================
+📋 Case: helmholtz_no_exact_sign_changing_rhs_k8
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 18.55s to generate the response.
+It takes claude-opus-4-6 21.43s to generate the response.
+It takes claude-opus-4-6 24.79s to generate the response.
+   📊 Tokens: in=19731, out=4321
+   ⏱️  Latency: 66.80s
+   🔧 Executing solver...
+   📊 Error: 1.05e-05, Time: 1.648s
+   ✅ Status: PASS
+
+[197/241]
+============================================================
+📋 Case: helmholtz_no_exact_quadrilateral_rhs_k16
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/poisson_template.py
+It takes claude-opus-4-6 21.19s to generate the response.
+It takes claude-opus-4-6 22.10s to generate the response.
+It takes claude-opus-4-6 28.06s to generate the response.
+   📊 Tokens: in=19731, out=4555
+   ⏱️  Latency: 73.37s
+   🔧 Executing solver...
+   📊 Error: 2.17e-05, Time: 1.686s
+   ✅ Status: PASS
+
+[198/241]
+============================================================
+📋 Case: biharmonic_basic_sin
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 39.66s to generate the response.
+It takes claude-opus-4-6 46.79s to generate the response.
+It takes claude-opus-4-6 25.20s to generate the response.
+   📊 Tokens: in=19674, out=5810
+   ⏱️  Latency: 113.68s
+   🔧 Executing solver...
+   📊 Error: 1.03e-04, Time: 1.529s
+   ✅ Status: PASS
+
+[199/241]
+============================================================
+📋 Case: biharmonic_polynomial_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 30.90s to generate the response.
+It takes claude-opus-4-6 29.96s to generate the response.
+It takes claude-opus-4-6 32.60s to generate the response.
+   📊 Tokens: in=19680, out=7185
+   ⏱️  Latency: 95.48s
+   🔧 Executing solver...
+   📊 Error: 1.47e-04, Time: 1.079s
+   ✅ Status: PASS
+
+[200/241]
+============================================================
+📋 Case: biharmonic_high_mode_trig
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 31.10s to generate the response.
+It takes claude-opus-4-6 25.27s to generate the response.
+It takes claude-opus-4-6 25.37s to generate the response.
+   📊 Tokens: in=19695, out=6081
+   ⏱️  Latency: 83.76s
+   🔧 Executing solver...
+   📊 Error: 3.21e-04, Time: 1.145s
+   ✅ Status: PASS
+
+[201/241]
+============================================================
+📋 Case: biharmonic_exponential_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 26.65s to generate the response.
+It takes claude-opus-4-6 27.60s to generate the response.
+It takes claude-opus-4-6 39.04s to generate the response.
+   📊 Tokens: in=19671, out=7015
+   ⏱️  Latency: 95.32s
+   🔧 Executing solver...
+   📊 Error: 2.23e-05, Time: 2.304s
+   ✅ Status: PASS
+
+[202/241]
+============================================================
+📋 Case: biharmonic_boundary_layer_like
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 28.76s to generate the response.
+It takes claude-opus-4-6 27.11s to generate the response.
+It takes claude-opus-4-6 30.41s to generate the response.
+   📊 Tokens: in=19689, out=6939
+   ⏱️  Latency: 88.30s
+   🔧 Executing solver...
+   📊 Error: 4.64e-05, Time: 1.923s
+   ✅ Status: PASS
+
+[203/241]
+============================================================
+📋 Case: biharmonic_tanh_shear_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 32.81s to generate the response.
+It takes claude-opus-4-6 27.66s to generate the response.
+It takes claude-opus-4-6 26.86s to generate the response.
+   📊 Tokens: in=19704, out=6117
+   ⏱️  Latency: 89.35s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[204/241]
+============================================================
+📋 Case: biharmonic_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 26.26s to generate the response.
+It takes claude-opus-4-6 42.23s to generate the response.
+It takes claude-opus-4-6 27.60s to generate the response.
+   📊 Tokens: in=19692, out=6178
+   ⏱️  Latency: 98.11s
+   🔧 Executing solver...
+   📊 Error: 4.31e-04, Time: 1.980s
+   ✅ Status: PASS
+
+[205/241]
+============================================================
+📋 Case: biharmonic_p2_elements
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 22.70s to generate the response.
+It takes claude-opus-4-6 30.25s to generate the response.
+It takes claude-opus-4-6 24.79s to generate the response.
+   📊 Tokens: in=19689, out=5918
+   ⏱️  Latency: 79.77s
+   🔧 Executing solver...
+   📊 Error: 9.21e-06, Time: 1.149s
+   ✅ Status: FAIL
+
+[206/241]
+============================================================
+📋 Case: biharmonic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 26.06s to generate the response.
+It takes claude-opus-4-6 57.29s to generate the response.
+It takes claude-opus-4-6 20.97s to generate the response.
+   📊 Tokens: in=19680, out=5627
+   ⏱️  Latency: 106.35s
+   🔧 Executing solver...
+   📊 Error: 3.38e-07, Time: 0.930s
+   ✅ Status: PASS
+
+[207/241]
+============================================================
+📋 Case: biharmonic_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 35.88s to generate the response.
+It takes claude-opus-4-6 22.55s to generate the response.
+It takes claude-opus-4-6 26.80s to generate the response.
+   📊 Tokens: in=19656, out=5645
+   ⏱️  Latency: 87.26s
+   🔧 Executing solver...
+   📊 Error: 2.06e-04, Time: 0.943s
+   ✅ Status: PASS
+
+[208/241]
+============================================================
+📋 Case: biharmonic_no_exact_sign_changing_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 24.98s to generate the response.
+It takes claude-opus-4-6 24.41s to generate the response.
+It takes claude-opus-4-6 25.33s to generate the response.
+   📊 Tokens: in=19659, out=5564
+   ⏱️  Latency: 76.74s
+   🔧 Executing solver...
+   📊 Error: 1.79e-05, Time: 0.756s
+   ✅ Status: PASS
+
+[209/241]
+============================================================
+📋 Case: biharmonic_no_exact_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 27.23s to generate the response.
+It takes claude-opus-4-6 27.40s to generate the response.
+It takes claude-opus-4-6 28.35s to generate the response.
+   📊 Tokens: in=19707, out=6498
+   ⏱️  Latency: 85.01s
+   🔧 Executing solver...
+   📊 Error: 2.42e-04, Time: 1.926s
+   ✅ Status: PASS
+
+[210/241]
+============================================================
+📋 Case: biharmonic_multimode_superposition
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 31.02s to generate the response.
+It takes claude-opus-4-6 30.61s to generate the response.
+It takes claude-opus-4-6 36.04s to generate the response.
+   📊 Tokens: in=19746, out=7238
+   ⏱️  Latency: 99.69s
+   🔧 Executing solver...
+   📊 Error: 1.25e-04, Time: 1.154s
+   ✅ Status: PASS
+
+[211/241]
+============================================================
+📋 Case: biharmonic_quadrilateral_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 30.42s to generate the response.
+It takes claude-opus-4-6 32.86s to generate the response.
+It takes claude-opus-4-6 36.18s to generate the response.
+   📊 Tokens: in=19689, out=6779
+   ⏱️  Latency: 101.48s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[212/241]
+============================================================
+📋 Case: biharmonic_no_exact_quadrilateral_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 32.10s to generate the response.
+It takes claude-opus-4-6 24.66s to generate the response.
+It takes claude-opus-4-6 24.75s to generate the response.
+   📊 Tokens: in=19668, out=5607
+   ⏱️  Latency: 83.53s
+   🔧 Executing solver...
+   📊 Error: 4.55e-05, Time: 1.520s
+   ✅ Status: PASS
+
+[213/241]
+============================================================
+📋 Case: linear_elasticity_near_incompressible_nu049
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 24.54s to generate the response.
+It takes claude-opus-4-6 23.34s to generate the response.
+It takes claude-opus-4-6 27.15s to generate the response.
+   📊 Tokens: in=19995, out=5002
+   ⏱️  Latency: 77.06s
+   🔧 Executing solver...
+   📊 Error: 3.46e-04, Time: 2.587s
+   ✅ Status: FAIL
+
+[214/241]
+============================================================
+📋 Case: linear_elasticity_nu045
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 25.89s to generate the response.
+It takes claude-opus-4-6 24.35s to generate the response.
+It takes claude-opus-4-6 26.31s to generate the response.
+   📊 Tokens: in=19977, out=5049
+   ⏱️  Latency: 78.57s
+   🔧 Executing solver...
+   📊 Error: 2.68e-04, Time: 2.256s
+   ✅ Status: FAIL
+
+[215/241]
+============================================================
+📋 Case: linear_elasticity_exponential_gradients
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 22.82s to generate the response.
+It takes claude-opus-4-6 26.55s to generate the response.
+It takes claude-opus-4-6 35.45s to generate the response.
+   📊 Tokens: in=19983, out=5149
+   ⏱️  Latency: 86.84s
+   🔧 Executing solver...
+   📊 Error: 3.63e-05, Time: 3.009s
+   ✅ Status: FAIL
+
+[216/241]
+============================================================
+📋 Case: linear_elasticity_tanh_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 26.05s to generate the response.
+It takes claude-opus-4-6 24.23s to generate the response.
+It takes claude-opus-4-6 24.33s to generate the response.
+   📊 Tokens: in=20016, out=5233
+   ⏱️  Latency: 76.63s
+   🔧 Executing solver...
+   📊 Error: 8.44e-05, Time: 3.786s
+   ✅ Status: FAIL
+
+[217/241]
+============================================================
+📋 Case: linear_elasticity_high_frequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 24.10s to generate the response.
+It takes claude-opus-4-6 22.39s to generate the response.
+It takes claude-opus-4-6 25.23s to generate the response.
+   📊 Tokens: in=20004, out=5151
+   ⏱️  Latency: 73.74s
+   🔧 Executing solver...
+   📊 Error: 6.25e-04, Time: 2.909s
+   ✅ Status: FAIL
+
+[218/241]
+============================================================
+📋 Case: linear_elasticity_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 23.42s to generate the response.
+It takes claude-opus-4-6 26.75s to generate the response.
+It takes claude-opus-4-6 25.32s to generate the response.
+   📊 Tokens: in=20004, out=5096
+   ⏱️  Latency: 77.52s
+   🔧 Executing solver...
+   📊 Error: 4.09e-04, Time: 2.234s
+   ✅ Status: FAIL
+
+[219/241]
+============================================================
+📋 Case: linear_elasticity_no_exact_boundary_driven
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/generic_template.py
+It takes claude-opus-4-6 61.55s to generate the response.
+It takes claude-opus-4-6 36.91s to generate the response.
+It takes claude-opus-4-6 40.37s to generate the response.
+   📊 Tokens: in=19890, out=10741
+   ⏱️  Latency: 140.85s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[220/241]
+============================================================
+📋 Case: reaction_diffusion_linear_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 37.27s to generate the response.
+It takes claude-opus-4-6 38.90s to generate the response.
+It takes claude-opus-4-6 34.77s to generate the response.
+   📊 Tokens: in=20214, out=7852
+   ⏱️  Latency: 112.96s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[221/241]
+============================================================
+📋 Case: reaction_diffusion_linear_high_frequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 49.01s to generate the response.
+It takes claude-opus-4-6 88.34s to generate the response.
+It takes claude-opus-4-6 50.70s to generate the response.
+   📊 Tokens: in=20163, out=11869
+   ⏱️  Latency: 190.07s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[222/241]
+============================================================
+📋 Case: reaction_diffusion_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 55.71s to generate the response.
+It takes claude-opus-4-6 51.65s to generate the response.
+It takes claude-opus-4-6 53.32s to generate the response.
+   📊 Tokens: in=20151, out=12612
+   ⏱️  Latency: 162.70s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[223/241]
+============================================================
+📋 Case: reaction_diffusion_cubic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 43.06s to generate the response.
+It takes claude-opus-4-6 47.58s to generate the response.
+It takes claude-opus-4-6 40.28s to generate the response.
+   📊 Tokens: in=20238, out=9197
+   ⏱️  Latency: 132.95s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fc697f634c0>
+Traceback (most recent c
+
+[224/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 40.89s to generate the response.
+It takes claude-opus-4-6 39.91s to generate the response.
+It takes claude-opus-4-6 42.62s to generate the response.
+   📊 Tokens: in=20208, out=8518
+   ⏱️  Latency: 125.44s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fb6913834c0>
+Traceback (most recent c
+
+[225/241]
+============================================================
+📋 Case: reaction_diffusion_logistic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 49.06s to generate the response.
+It takes claude-opus-4-6 54.24s to generate the response.
+It takes claude-opus-4-6 45.01s to generate the response.
+   📊 Tokens: in=20187, out=9297
+   ⏱️  Latency: 150.34s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fef489834c0>
+Traceback (most recent c
+
+[226/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 43.30s to generate the response.
+It takes claude-opus-4-6 43.41s to generate the response.
+It takes claude-opus-4-6 45.03s to generate the response.
+   📊 Tokens: in=20184, out=9203
+   ⏱️  Latency: 133.75s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fced4c5b7e0>
+Traceback (most recent c
+
+[227/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_gaussian_source_allen_cahn
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 38.76s to generate the response.
+It takes claude-opus-4-6 39.26s to generate the response.
+It takes claude-opus-4-6 33.58s to generate the response.
+   📊 Tokens: in=20316, out=7764
+   ⏱️  Latency: 113.62s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f6fe1c774c0>
+Traceback (most recent c
+
+[228/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_two_gaussians_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 33.94s to generate the response.
+It takes claude-opus-4-6 40.21s to generate the response.
+It takes claude-opus-4-6 39.65s to generate the response.
+   📊 Tokens: in=20439, out=8469
+   ⏱️  Latency: 115.83s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7efd0917b600>
+Traceback (most recent c
+
+[229/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_oscillatory_rhs_cubic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 44.16s to generate the response.
+It takes claude-opus-4-6 39.95s to generate the response.
+It takes claude-opus-4-6 33.02s to generate the response.
+   📊 Tokens: in=20250, out=8729
+   ⏱️  Latency: 119.16s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f1c6b05f560>
+Traceback (most recent c
+
+[230/241]
+============================================================
+📋 Case: reaction_diffusion_linear_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 37.03s to generate the response.
+It takes claude-opus-4-6 40.81s to generate the response.
+It takes claude-opus-4-6 39.59s to generate the response.
+   📊 Tokens: in=20112, out=8440
+   ⏱️  Latency: 119.47s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[231/241]
+============================================================
+📋 Case: reaction_diffusion_linear_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 48.86s to generate the response.
+It takes claude-opus-4-6 56.25s to generate the response.
+It takes claude-opus-4-6 54.10s to generate the response.
+   📊 Tokens: in=20118, out=11370
+   ⏱️  Latency: 161.24s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[232/241]
+============================================================
+📋 Case: reaction_diffusion_linear_multifrequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 53.43s to generate the response.
+It takes claude-opus-4-6 51.55s to generate the response.
+It takes claude-opus-4-6 53.18s to generate the response.
+   📊 Tokens: in=20160, out=11418
+   ⏱️  Latency: 160.18s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[233/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_stronger_reaction
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 48.77s to generate the response.
+It takes claude-opus-4-6 40.19s to generate the response.
+It takes claude-opus-4-6 47.83s to generate the response.
+   📊 Tokens: in=20175, out=9628
+   ⏱️  Latency: 138.82s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[234/241]
+============================================================
+📋 Case: reaction_diffusion_logistic_high_rho
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 40.87s to generate the response.
+It takes claude-opus-4-6 41.33s to generate the response.
+It takes claude-opus-4-6 44.45s to generate the response.
+   📊 Tokens: in=20163, out=9300
+   ⏱️  Latency: 128.67s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fe766277600>
+Traceback (most recent c
+
+[235/241]
+============================================================
+📋 Case: reaction_diffusion_cubic_softening
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 37.13s to generate the response.
+It takes claude-opus-4-6 39.13s to generate the response.
+It takes claude-opus-4-6 38.85s to generate the response.
+   📊 Tokens: in=20142, out=8700
+   ⏱️  Latency: 117.14s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f194ef8f600>
+Traceback (most recent c
+
+[236/241]
+============================================================
+📋 Case: reaction_diffusion_transient_linear_time_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 39.93s to generate the response.
+It takes claude-opus-4-6 35.04s to generate the response.
+It takes claude-opus-4-6 41.21s to generate the response.
+   📊 Tokens: in=20034, out=8664
+   ⏱️  Latency: 118.21s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[237/241]
+============================================================
+📋 Case: reaction_diffusion_transient_allen_cahn_time
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 44.18s to generate the response.
+It takes claude-opus-4-6 44.04s to generate the response.
+It takes claude-opus-4-6 39.09s to generate the response.
+   📊 Tokens: in=20082, out=9509
+   ⏱️  Latency: 129.34s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fd4a3a63560>
+Traceback (most recent c
+
+[238/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_sign_changing_source_allen_cahn
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 36.70s to generate the response.
+It takes claude-opus-4-6 37.71s to generate the response.
+It takes claude-opus-4-6 32.23s to generate the response.
+   📊 Tokens: in=20196, out=7725
+   ⏱️  Latency: 108.66s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f657f6674c0>
+Traceback (most recent c
+
+[239/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_localized_sink_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 44.34s to generate the response.
+It takes claude-opus-4-6 34.20s to generate the response.
+It takes claude-opus-4-6 36.37s to generate the response.
+   📊 Tokens: in=20307, out=8298
+   ⏱️  Latency: 116.93s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fa15d2674c0>
+Traceback (most recent c
+
+[240/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_quadrilateral_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 34.86s to generate the response.
+It takes claude-opus-4-6 35.31s to generate the response.
+It takes claude-opus-4-6 38.06s to generate the response.
+   📊 Tokens: in=20160, out=8193
+   ⏱️  Latency: 110.25s
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f3b719674c0>
+Traceback (most recent c
+
+[241/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_multifrequency_source_linear
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling codepde (Code Agent)...
+   ⚠️  Template not found: /data/home/bingodong/code/ustc_pde_agent/CodePDE/solvers/dolfinx_templates/heat_template.py
+It takes claude-opus-4-6 35.37s to generate the response.
+It takes claude-opus-4-6 35.77s to generate the response.
+It takes claude-opus-4-6 32.67s to generate the response.
+   📊 Tokens: in=20220, out=7864
+   ⏱️  Latency: 105.82s
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+────────────────────────────────────────────────────────────────────────────────
+📊 Summary: codepde
+────────────────────────────────────────────────────────────────────────────────
+Total Cases: 241
+Passed: 94 (39.0%)
+Avg Error: 3.70e-02
+Avg Time: 1.898s
+
+────────────────────────────────────────────────────────────────────────────────
+📊 Pass Rate by Equation Type
+────────────────────────────────────────────────────────────────────────────────
+
+  BIHARMONIC:
+    Total:      15 cases
+    Passed:     12 cases
+    Failed:     3 cases
+    Pass Rate:  80.0%
+    Avg Error:  1.32e-04
+    Avg Time:   1.411s
+
+  CONVECTION_DIFFUSION:
+    Total:      42 cases
+    Passed:     21 cases
+    Failed:     21 cases
+    Pass Rate:  50.0%
+    Avg Error:  1.02e-03
+    Avg Time:   2.006s
+
+  HEAT:
+    Total:      40 cases
+    Passed:     14 cases
+    Failed:     26 cases
+    Pass Rate:  35.0%
+    Avg Error:  2.42e-02
+    Avg Time:   2.634s
+
+  HELMHOLTZ:
+    Total:      19 cases
+    Passed:     13 cases
+    Failed:     6 cases
+    Pass Rate:  68.4%
+    Avg Error:  6.79e-02
+    Avg Time:   2.163s
+
+  LINEAR_ELASTICITY:
+    Total:      7 cases
+    Passed:     0 cases
+    Failed:     7 cases
+    Pass Rate:  0.0%
+    Avg Error:  2.95e-04
+    Avg Time:   2.797s
+
+  NAVIER_STOKES:
+    Total:      28 cases
+    Passed:     0 cases
+    Failed:     28 cases
+    Pass Rate:  0.0%
+
+  POISSON:
+    Total:      50 cases
+    Passed:     34 cases
+    Failed:     16 cases
+    Pass Rate:  68.0%
+    Avg Error:  5.10e-02
+    Avg Time:   1.433s
+
+  REACTION_DIFFUSION:
+    Total:      22 cases
+    Passed:     0 cases
+    Failed:     22 cases
+    Pass Rate:  0.0%
+
+  STOKES:
+    Total:      18 cases
+    Passed:     0 cases
+    Failed:     18 cases
+    Pass Rate:  0.0%
+    Avg Error:  1.00e+00
+    Avg Time:   2.769s
+
+────────────────────────────────────────────────────────────────────────────────
+📐 Math Type Sub-Leaderboards
+────────────────────────────────────────────────────────────────────────────────
+
+  ELLIPTIC:
+    Cases: 95
+    Pass Rate: 71/95 (74.7%)
+    Avg Metrics:
+      - condition_number_estimate: 123424.262
+      - degree: 1.937
+      - dof: 38,487
+      - efficiency_dof_per_sec: 24,490
+      - linear_iterations: 105.295
+      - resolution: 98.737
+
+  INCOMPRESSIBLE_FLOW:
+    Cases: 1
+    Pass Rate: 0/1 (0.0%)
+    Avg Metrics:
+      - linear_iterations: 0.000
+
+  MIXED_TYPE:
+    Cases: 12
+    Pass Rate: 9/12 (75.0%)
+    Avg Metrics:
+      - peclet_number: 3083.706
+      - total_variation: 216.381
+
+  PARABOLIC:
+    Cases: 14
+    Pass Rate: 14/14 (100.0%)
+    Avg Metrics:
+      - agent_degree: 1.500
+      - agent_resolution: 85.143
+      - cfl_number: 38.135
+      - dof: 21,159
+      - dt: 0.006
+      - efficiency_workrate: 227883.648
+      - linear_iterations: 734.357
+      - n_steps: 26.000
+      - t_end: 0.110
+      - time_per_step: 0.125s
+
+────────────────────────────────────────────────────────────────────────────────
+🚪 Gate Breakdown (实验 4.1)
+────────────────────────────────────────────────────────────────────────────────
+  Exec Valid:     122/241 (50.6%)
+  Accuracy Pass:  101/241 (41.9%)
+  Time Pass:       94/241 (39.0%)
+  Final Pass:      94/241 (39.0%)
+
+  Failure Distribution:
+    - accuracy: 21 (8.7%)
+    - exec: 119 (49.4%)
+    - time: 7 (2.9%)
+
+────────────────────────────────────────────────────────────────────────────────
+💰 Cost Analysis (实验 4.6)
+────────────────────────────────────────────────────────────────────────────────
+  Total Cost:     $0.0000
+  Total Tokens:   3,112,099
+  Avg Latency:    89.43s
+  Cost/Case:      $0.0000
+  Cost/Pass:      $0.0000
+  Tokens/Case:    25,509
+────────────────────────────────────────────────────────────────────────────────
+
+================================================================================
+✅ Benchmark Complete!
+📁 Results saved to: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results
+================================================================================

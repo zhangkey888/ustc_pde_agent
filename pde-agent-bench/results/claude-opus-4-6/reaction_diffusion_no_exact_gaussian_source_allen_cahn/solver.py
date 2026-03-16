@@ -1,0 +1,183 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry, nls
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parse parameters
+    pde = case_spec.get("pde", {})
+    time_params = pde.get("time", {})
+    t_end = time_params.get("t_end", 0.25)
+    dt_suggested = time_params.get("dt", 0.005)
+    
+    # Allen-Cahn reaction: R(u) = (u^3 - u) / epsilon_ac^2
+    # The standard Allen-Cahn equation is: du/dt = eps_diff * laplacian(u) - (1/eps_ac^2)*(u^3 - u) + f
+    # Or equivalently: du/dt - eps_diff * laplacian(u) + (1/eps_ac^2)*(u^3 - u) = f
+    # 
+    # For Allen-Cahn, typical epsilon (diffusion) is small. Let's check case_spec for epsilon.
+    epsilon = pde.get("epsilon", 0.01)  # diffusion coefficient
+    
+    # Allen-Cahn reaction parameter (interface width)
+    # The reaction term for Allen-Cahn is typically R(u) = (u^3 - u)/eps_ac^2
+    # But here the PDE is: du/dt - eps*laplacian(u) + R(u) = f
+    # For Allen-Cahn: R(u) = (u^3 - u) / eps_ac^2
+    # We need to figure out eps_ac. Often eps_ac = epsilon or a separate parameter.
+    # Let's use a reasonable default for Allen-Cahn on unit square
+    eps_ac = pde.get("eps_ac", epsilon)
+    
+    # Mesh and FE parameters
+    mesh_resolution = 80
+    element_degree = 1
+    dt = dt_suggested
+    n_steps = int(round(t_end / dt))
+    dt = t_end / n_steps  # adjust to hit t_end exactly
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, mesh_resolution, mesh_resolution, cell_type=mesh.CellType.triangle)
+    V = fem.functionspace(domain, ("Lagrange", element_degree))
+    
+    # Spatial coordinate
+    x = ufl.SpatialCoordinate(domain)
+    
+    # Source term
+    f_expr = 5.0 * ufl.exp(-180.0 * ((x[0] - 0.35)**2 + (x[1] - 0.55)**2))
+    
+    # Initial condition
+    u_n = fem.Function(V, name="u_n")
+    u_n.interpolate(lambda X: 0.1 * np.exp(-50.0 * ((X[0] - 0.5)**2 + (X[1] - 0.5)**2)))
+    
+    # Store initial condition for output
+    u_initial_func = fem.Function(V)
+    u_initial_func.interpolate(lambda X: 0.1 * np.exp(-50.0 * ((X[0] - 0.5)**2 + (X[1] - 0.5)**2)))
+    
+    # Current solution
+    u = fem.Function(V, name="u")
+    u.x.array[:] = u_n.x.array[:]
+    
+    v = ufl.TestFunction(V)
+    
+    # Backward Euler: (u - u_n)/dt - eps*laplacian(u) + R(u) = f
+    # Weak form: (u - u_n)/dt * v * dx + eps * grad(u) . grad(v) * dx + R(u) * v * dx = f * v * dx
+    # Allen-Cahn reaction: R(u) = (u^3 - u) / eps_ac^2
+    
+    dt_const = fem.Constant(domain, PETSc.ScalarType(dt))
+    eps_const = fem.Constant(domain, PETSc.ScalarType(epsilon))
+    
+    # Nonlinear residual F = 0
+    F = (
+        (u - u_n) / dt_const * v * ufl.dx
+        + eps_const * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+        + (1.0 / eps_ac**2) * (u**3 - u) * v * ufl.dx
+        - f_expr * v * ufl.dx
+    )
+    
+    # Boundary conditions: u = 0 on boundary (homogeneous Dirichlet)
+    # Check if g is specified
+    bc_value = pde.get("boundary_conditions", {}).get("value", 0.0)
+    
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    boundary_facets = mesh.locate_entities_boundary(
+        domain, fdim, lambda X: np.ones(X.shape[1], dtype=bool)
+    )
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    bc = fem.dirichletbc(PETSc.ScalarType(bc_value), dofs, V)
+    bcs = [bc]
+    
+    # Setup nonlinear problem
+    problem = petsc.NonlinearProblem(F, u, bcs=bcs)
+    solver = nls.petsc.NewtonSolver(comm, problem)
+    solver.convergence_criterion = "incremental"
+    solver.rtol = 1e-6
+    solver.atol = 1e-10
+    solver.max_it = 25
+    solver.relaxation_parameter = 1.0
+    
+    ksp = solver.krylov_solver
+    ksp.setType(PETSc.KSP.Type.GMRES)
+    pc = ksp.getPC()
+    pc.setType(PETSc.PC.Type.ILU)
+    ksp.setTolerances(rtol=1e-8)
+    
+    # Time stepping
+    nonlinear_iterations = []
+    total_linear_iterations = 0
+    
+    t = 0.0
+    for step in range(n_steps):
+        t += dt
+        
+        # Solve nonlinear problem
+        n_iters, converged = solver.solve(u)
+        assert converged, f"Newton solver did not converge at step {step}, t={t}"
+        u.x.scatter_forward()
+        
+        nonlinear_iterations.append(int(n_iters))
+        # Approximate linear iterations (each Newton step ~ 1 linear solve)
+        total_linear_iterations += int(n_iters)
+        
+        # Update previous solution
+        u_n.x.array[:] = u.x.array[:]
+    
+    # Evaluate solution on 60x60 grid
+    nx_out, ny_out = 60, 60
+    xs = np.linspace(0.0, 1.0, nx_out)
+    ys = np.linspace(0.0, 1.0, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0, :] = XX.ravel()
+    points[1, :] = YY.ravel()
+    
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    def eval_on_grid(func, points, colliding_cells):
+        n_pts = points.shape[1]
+        values = np.full(n_pts, np.nan)
+        points_on_proc = []
+        cells_on_proc = []
+        eval_map = []
+        for i in range(n_pts):
+            links = colliding_cells.links(i)
+            if len(links) > 0:
+                points_on_proc.append(points[:, i])
+                cells_on_proc.append(links[0])
+                eval_map.append(i)
+        if len(points_on_proc) > 0:
+            pts_arr = np.array(points_on_proc)
+            cells_arr = np.array(cells_on_proc, dtype=np.int32)
+            vals = func.eval(pts_arr, cells_arr)
+            values[eval_map] = vals.flatten()
+        return values
+    
+    u_values = eval_on_grid(u, points, colliding_cells)
+    u_grid = u_values.reshape((nx_out, ny_out))
+    
+    # Also evaluate initial condition
+    u_init_values = eval_on_grid(u_initial_func, points, colliding_cells)
+    u_init_grid = u_init_values.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": mesh_resolution,
+        "element_degree": element_degree,
+        "ksp_type": "gmres",
+        "pc_type": "ilu",
+        "rtol": 1e-8,
+        "iterations": total_linear_iterations,
+        "dt": dt,
+        "n_steps": n_steps,
+        "time_scheme": "backward_euler",
+        "nonlinear_iterations": nonlinear_iterations,
+    }
+    
+    return {
+        "u": u_grid,
+        "u_initial": u_init_grid,
+        "solver_info": solver_info,
+    }

@@ -1,0 +1,379 @@
+```python
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, nls, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+from basix.ufl import element, mixed_element
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    nu_val = 0.2
+    N = 64  # mesh resolution
+    degree_u = 2
+    degree_p = 1
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # Create mixed function space (Taylor-Hood P2/P1)
+    P2 = element("Lagrange", domain.basix_cell(), degree_u, shape=(domain.geometry.dim,))
+    P1 = element("Lagrange", domain.basix_cell(), degree_p)
+    TH = mixed_element([P2, P1])
+    W = fem.functionspace(domain, TH)
+    
+    # Also create individual spaces for BC interpolation
+    V, V_map = W.sub(0).collapse()
+    Q, Q_map = W.sub(1).collapse()
+    
+    # Parse boundary conditions from case_spec
+    bc_specs = case_spec.get("bcs", [])
+    
+    # Build boundary conditions
+    bcs = []
+    
+    for bc_spec in bc_specs:
+        bc_type = bc_spec.get("type", "")
+        location = bc_spec.get("location", "")
+        
+        if bc_type == "dirichlet":
+            # Determine which component
+            component = bc_spec.get("component", None)
+            value = bc_spec.get("value", None)
+            
+            # Determine boundary marker
+            if location == "left":
+                marker = lambda x: np.isclose(x[0], 0.0)
+            elif location == "right":
+                marker = lambda x: np.isclose(x[0], 1.0)
+            elif location == "bottom":
+                marker = lambda x: np.isclose(x[1], 0.0)
+            elif location == "top":
+                marker = lambda x: np.isclose(x[1], 1.0)
+            elif location == "all":
+                marker = lambda x: (np.isclose(x[0], 0.0) | np.isclose(x[0], 1.0) |
+                                    np.isclose(x[1], 0.0) | np.isclose(x[1], 1.0))
+            else:
+                continue
+            
+            facets = mesh.locate_entities_boundary(domain, fdim, marker)
+            
+            if component == "velocity":
+                # Vector BC on velocity
+                val_expr = bc_spec.get("value", ["0.0", "0.0"])
+                if isinstance(val_expr, list):
+                    expr_x = val_expr[0]
+                    expr_y = val_expr[1]
+                else:
+                    expr_x = str(val_expr)
+                    expr_y = str(val_expr)
+                
+                u_bc_func = fem.Function(V)
+                
+                def make_interp(ex, ey):
+                    def interp_func(x):
+                        vals = np.zeros((2, x.shape[1]))
+                        from numpy import pi, sin, cos, exp, sqrt
+                        X = x[0]
+                        Y = x[1]
+                        vals[0] = eval(ex, {"__builtins__": {}, "np": np, "pi": pi, 
+                                            "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                            "x": X, "y": Y, "X": X, "Y": Y})
+                        vals[1] = eval(ey, {"__builtins__": {}, "np": np, "pi": pi,
+                                            "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                            "x": X, "y": Y, "X": X, "Y": Y})
+                        return vals
+                    return interp_func
+                
+                u_bc_func.interpolate(make_interp(expr_x, expr_y))
+                
+                dofs = fem.locate_dofs_topological((W.sub(0), V), fdim, facets)
+                bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0))
+                bcs.append(bc)
+                
+            elif component == "velocity_x":
+                V0, V0_map = W.sub(0).sub(0).collapse()
+                u_bc_func = fem.Function(V0)
+                val_str = str(value) if value is not None else "0.0"
+                
+                def make_interp_scalar(expr_str):
+                    def interp_func(x):
+                        from numpy import pi, sin, cos, exp, sqrt
+                        X = x[0]; Y = x[1]
+                        return eval(expr_str, {"__builtins__": {}, "np": np, "pi": pi,
+                                               "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                               "x": X, "y": Y, "X": X, "Y": Y})
+                    return interp_func
+                
+                u_bc_func.interpolate(make_interp_scalar(val_str))
+                dofs = fem.locate_dofs_topological((W.sub(0).sub(0), V0), fdim, facets)
+                bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0).sub(0))
+                bcs.append(bc)
+                
+            elif component == "velocity_y":
+                V1, V1_map = W.sub(0).sub(1).collapse()
+                u_bc_func = fem.Function(V1)
+                val_str = str(value) if value is not None else "0.0"
+                
+                def make_interp_scalar(expr_str):
+                    def interp_func(x):
+                        from numpy import pi, sin, cos, exp, sqrt
+                        X = x[0]; Y = x[1]
+                        return eval(expr_str, {"__builtins__": {}, "np": np, "pi": pi,
+                                               "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                               "x": X, "y": Y, "X": X, "Y": Y})
+                    return interp_func
+                
+                u_bc_func.interpolate(make_interp_scalar(val_str))
+                dofs = fem.locate_dofs_topological((W.sub(0).sub(1), V1), fdim, facets)
+                bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0).sub(1))
+                bcs.append(bc)
+                
+            elif component == "pressure":
+                p_bc_func = fem.Function(Q)
+                val_str = str(value) if value is not None else "0.0"
+                
+                def make_interp_scalar(expr_str):
+                    def interp_func(x):
+                        from numpy import pi, sin, cos, exp, sqrt
+                        X = x[0]; Y = x[1]
+                        return eval(expr_str, {"__builtins__": {}, "np": np, "pi": pi,
+                                               "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                               "x": X, "y": Y, "X": X, "Y": Y})
+                    return interp_func
+                
+                p_bc_func.interpolate(make_interp_scalar(val_str))
+                dofs = fem.locate_dofs_topological((W.sub(1), Q), fdim, facets)
+                bc = fem.dirichletbc(p_bc_func, dofs, W.sub(1))
+                bcs.append(bc)
+    
+    # If no BCs were parsed, try to build from case_spec more carefully
+    if len(bcs) == 0:
+        # Fallback: parse from the raw case_spec
+        # Look at the case name for hints
+        case_id = case_spec.get("case_id", "")
+        
+        # For "counter_shear_open_sides": typically top/bottom have opposing velocities,
+        # left/right are open (do-nothing / zero traction)
+        # Let's try to parse BCs from the spec more carefully
+        
+        pde_spec = case_spec.get("pde", {})
+        bc_list = pde_spec.get("bcs", case_spec.get("bcs", []))
+        
+        for bc_spec in bc_list:
+            bc_type = bc_spec.get("type", "")
+            location = bc_spec.get("location", "")
+            
+            if location == "left":
+                marker = lambda x: np.isclose(x[0], 0.0)
+            elif location == "right":
+                marker = lambda x: np.isclose(x[0], 1.0)
+            elif location == "bottom":
+                marker = lambda x: np.isclose(x[1], 0.0)
+            elif location == "top":
+                marker = lambda x: np.isclose(x[1], 1.0)
+            elif location == "all":
+                marker = lambda x: (np.isclose(x[0], 0.0) | np.isclose(x[0], 1.0) |
+                                    np.isclose(x[1], 0.0) | np.isclose(x[1], 1.0))
+            else:
+                continue
+            
+            facets = mesh.locate_entities_boundary(domain, fdim, marker)
+            
+            if bc_type == "dirichlet":
+                component = bc_spec.get("component", None)
+                value = bc_spec.get("value", None)
+                
+                if component == "velocity" or component is None:
+                    if isinstance(value, list):
+                        expr_x = str(value[0])
+                        expr_y = str(value[1])
+                    elif isinstance(value, str):
+                        expr_x = value
+                        expr_y = value
+                    else:
+                        expr_x = str(value) if value is not None else "0.0"
+                        expr_y = str(value) if value is not None else "0.0"
+                    
+                    u_bc_func = fem.Function(V)
+                    
+                    def make_interp2(ex, ey):
+                        def interp_func(x):
+                            vals = np.zeros((2, x.shape[1]))
+                            from numpy import pi, sin, cos, exp, sqrt
+                            X = x[0]; Y = x[1]
+                            local_dict = {"__builtins__": {}, "np": np, "pi": pi,
+                                          "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                          "x": X, "y": Y, "X": X, "Y": Y}
+                            vals[0] = eval(ex, local_dict)
+                            vals[1] = eval(ey, local_dict)
+                            return vals
+                        return interp_func
+                    
+                    u_bc_func.interpolate(make_interp2(expr_x, expr_y))
+                    dofs = fem.locate_dofs_topological((W.sub(0), V), fdim, facets)
+                    bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0))
+                    bcs.append(bc)
+                    
+                elif component == "velocity_x":
+                    V0, _ = W.sub(0).sub(0).collapse()
+                    u_bc_func = fem.Function(V0)
+                    val_str = str(value) if value is not None else "0.0"
+                    
+                    def make_interp_s(es):
+                        def interp_func(x):
+                            from numpy import pi, sin, cos, exp, sqrt
+                            X = x[0]; Y = x[1]
+                            return eval(es, {"__builtins__": {}, "np": np, "pi": pi,
+                                             "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                             "x": X, "y": Y, "X": X, "Y": Y})
+                        return interp_func
+                    
+                    u_bc_func.interpolate(make_interp_s(val_str))
+                    dofs = fem.locate_dofs_topological((W.sub(0).sub(0), V0), fdim, facets)
+                    bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0).sub(0))
+                    bcs.append(bc)
+                    
+                elif component == "velocity_y":
+                    V1, _ = W.sub(0).sub(1).collapse()
+                    u_bc_func = fem.Function(V1)
+                    val_str = str(value) if value is not None else "0.0"
+                    
+                    def make_interp_s(es):
+                        def interp_func(x):
+                            from numpy import pi, sin, cos, exp, sqrt
+                            X = x[0]; Y = x[1]
+                            return eval(es, {"__builtins__": {}, "np": np, "pi": pi,
+                                             "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                             "x": X, "y": Y, "X": X, "Y": Y})
+                        return interp_func
+                    
+                    u_bc_func.interpolate(make_interp_s(val_str))
+                    dofs = fem.locate_dofs_topological((W.sub(0).sub(1), V1), fdim, facets)
+                    bc = fem.dirichletbc(u_bc_func, dofs, W.sub(0).sub(1))
+                    bcs.append(bc)
+                    
+                elif component == "pressure":
+                    p_bc_func = fem.Function(Q)
+                    val_str = str(value) if value is not None else "0.0"
+                    
+                    def make_interp_s(es):
+                        def interp_func(x):
+                            from numpy import pi, sin, cos, exp, sqrt
+                            X = x[0]; Y = x[1]
+                            return eval(es, {"__builtins__": {}, "np": np, "pi": pi,
+                                             "sin": sin, "cos": cos, "exp": exp, "sqrt": sqrt,
+                                             "x": X, "y": Y, "X": X, "Y": Y})
+                        return interp_func
+                    
+                    p_bc_func.interpolate(make_interp_s(val_str))
+                    dofs = fem.locate_dofs_topological((W.sub(1), Q), fdim, facets)
+                    bc = fem.dirichletbc(p_bc_func, dofs, W.sub(1))
+                    bcs.append(bc)
+    
+    # Define the nonlinear variational form
+    w_sol = fem.Function(W)
+    (u, p) = ufl.split(w_sol)
+    (v, q) = ufl.TestFunctions(W)
+    
+    nu_c = fem.Constant(domain, PETSc.ScalarType(nu_val))
+    
+    # Source term
+    f_val = ufl.as_vector([0.0, 0.0])
+    
+    # Residual: u·∇u - ν∇²u + ∇p = f, ∇·u = 0
+    # Weak form:
+    # ν(∇u, ∇v) + ((u·∇)u, v) - (p, ∇·v) + (∇·u, q) = (f, v)
+    F = (
+        nu_c * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+        + ufl.inner(ufl.grad(u) * u, v) * ufl.dx
+        - p * ufl.div(v) * ufl.dx
+        + q * ufl.div(u) * ufl.dx
+        - ufl.inner(f_val, v) * ufl.dx
+    )
+    
+    # Set initial guess to zero
+    w_sol.x.array[:] = 0.0
+    
+    # Set up Newton solver
+    problem = petsc.NonlinearProblem(F, w_sol, bcs=bcs)
+    solver = nls.petsc.NewtonSolver(comm, problem)
+    solver.convergence_criterion = "incremental"
+    solver.rtol = 1e-10
+    solver.atol = 1e-12
+    solver.max_it = 50
+    solver.relaxation_parameter = 1.0
+    
+    # Configure linear solver
+    ksp = solver.krylov_solver
+    ksp.setType(PETSc.KSP.Type.PREONLY)
+    pc = ksp.getPC()
+    pc.setType(PETSc.PC.Type.LU)
+    
+    n_iters, converged = solver.solve(w_sol)
+    assert converged, f"Newton solver did not converge after {n_iters} iterations"
+    w_sol.x.scatter_forward()
+    
+    # Extract velocity sub-function
+    u_sol = w_sol.sub(0).collapse()
+    
+    # Create evaluation grid 50x50
+    nx_eval, ny_eval = 50, 50
+    xs = np.linspace(0.0, 1.0, nx_eval)
+    ys = np.linspace(0.0, 1.0, ny_eval)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    
+    points = np.zeros((3, nx_eval * ny_eval))
+    points[0] = XX.ravel()
+    points[1] = YY.ravel()
+    
+    # Point evaluation
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    vel_mag = np.full(nx_eval * ny_eval, np.nan)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    
+    for i in range(nx_eval * ny_eval):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points.T[i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = u_sol.eval(pts_arr, cells_arr)
+        # vals shape: (n_points, 2) for 2D velocity
+        for idx, global_idx in enumerate(eval_map):
+            ux = vals[idx, 0]
+            uy = vals[idx, 1]
+            vel_mag[global_idx] = np.sqrt(ux**2 + uy**2)
+    
+    u_grid = vel_mag.reshape((nx_eval, ny_eval))
+    
+    solver_info = {
+        "mesh_resolution": N,
+        "element_degree": degree_u,
+        "ksp_type": "preonly",
+        "pc_type": "lu",
+        "rtol": 1e-10,
+        "nonlinear_iterations": [int(n_iters)],
+    }
+    
+    return {
+        "u": u_grid,
+        "solver_info": solver_info,
+    }
+```

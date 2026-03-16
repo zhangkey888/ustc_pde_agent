@@ -1,0 +1,231 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry, nls
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    mesh_resolution = 64
+    degree_u = 2
+    degree_p = 1
+    nu_val = 1.0
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, mesh_resolution, mesh_resolution, cell_type=mesh.CellType.triangle)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # Create function spaces (Taylor-Hood)
+    V = fem.functionspace(domain, ("Lagrange", degree_u, (domain.geometry.dim,)))
+    Q = fem.functionspace(domain, ("Lagrange", degree_p))
+    
+    # Mixed function space
+    mel = ufl.MixedElement([V.ufl_element(), Q.ufl_element()])
+    W = fem.functionspace(domain, mel)
+    
+    # Trial and test functions
+    (u, p) = ufl.TrialFunctions(W)
+    (v, q) = ufl.TestFunctions(W)
+    
+    # Source term
+    f = fem.Constant(domain, ScalarType((0.0, 0.0)))
+    nu = fem.Constant(domain, ScalarType(nu_val))
+    
+    # Bilinear form for Stokes
+    a = (nu * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+         - p * ufl.div(v) * ufl.dx
+         - q * ufl.div(u) * ufl.dx)
+    
+    L = ufl.inner(f, v) * ufl.dx
+    
+    # Boundary conditions
+    # "rotating_wall" case: typically lid-driven cavity with rotating wall
+    # Top wall: u = (1, 0) (lid driven)
+    # Other walls: u = (0, 0) (no-slip)
+    
+    # We need to identify boundaries
+    # Bottom: y = 0
+    # Top: y = 1
+    # Left: x = 0
+    # Right: x = 1
+    
+    # For "rotating_wall", interpret as a rotating boundary condition
+    # Common interpretation: the velocity on the boundary corresponds to a rotation
+    # around the center (0.5, 0.5), i.e., u = omega × (r - center)
+    # For 2D rotation with angular velocity omega=1: u = (-(y-0.5), (x-0.5))
+    
+    # Let's check the case spec for boundary conditions
+    bcs_spec = case_spec.get("bcs", [])
+    
+    bcs = []
+    
+    V_sub, V_sub_map = W.sub(0).collapse()
+    
+    for bc_spec in bcs_spec:
+        bc_type = bc_spec.get("type", "dirichlet")
+        location = bc_spec.get("location", "")
+        value = bc_spec.get("value", None)
+        
+        if bc_type == "dirichlet":
+            # Parse the value
+            if value is not None:
+                # value could be a list of strings or expressions
+                if isinstance(value, list) and len(value) == 2:
+                    val_str_x = value[0]
+                    val_str_y = value[1]
+                    
+                    # Create interpolation function
+                    u_bc = fem.Function(V_sub)
+                    
+                    # Build a lambda that evaluates the expressions
+                    def make_bc_func(sx, sy):
+                        def bc_func(x):
+                            from numpy import sin, cos, pi, exp, sqrt
+                            X = x[0]
+                            Y = x[1]
+                            vx = eval(sx, {"__builtins__": {}, "sin": np.sin, "cos": np.cos, 
+                                           "pi": np.pi, "exp": np.exp, "sqrt": np.sqrt,
+                                           "x": X, "y": Y, "np": np})
+                            vy = eval(sy, {"__builtins__": {}, "sin": np.sin, "cos": np.cos,
+                                           "pi": np.pi, "exp": np.exp, "sqrt": np.sqrt,
+                                           "x": X, "y": Y, "np": np})
+                            result = np.zeros((2, x.shape[1]))
+                            result[0] = vx
+                            result[1] = vy
+                            return result
+                        return bc_func
+                    
+                    # Replace common math in string
+                    sx = val_str_x.replace("^", "**")
+                    sy = val_str_y.replace("^", "**")
+                    
+                    u_bc.interpolate(make_bc_func(sx, sy))
+                else:
+                    u_bc = fem.Function(V_sub)
+                    u_bc.interpolate(lambda x: np.zeros((2, x.shape[1])))
+            else:
+                u_bc = fem.Function(V_sub)
+                u_bc.interpolate(lambda x: np.zeros((2, x.shape[1])))
+            
+            # Determine boundary facets
+            if location == "all" or location == "boundary":
+                facets = mesh.locate_entities_boundary(domain, fdim, 
+                    lambda x: np.ones(x.shape[1], dtype=bool))
+            elif location == "top":
+                facets = mesh.locate_entities_boundary(domain, fdim,
+                    lambda x: np.isclose(x[1], 1.0))
+            elif location == "bottom":
+                facets = mesh.locate_entities_boundary(domain, fdim,
+                    lambda x: np.isclose(x[1], 0.0))
+            elif location == "left":
+                facets = mesh.locate_entities_boundary(domain, fdim,
+                    lambda x: np.isclose(x[0], 0.0))
+            elif location == "right":
+                facets = mesh.locate_entities_boundary(domain, fdim,
+                    lambda x: np.isclose(x[0], 1.0))
+            else:
+                facets = mesh.locate_entities_boundary(domain, fdim,
+                    lambda x: np.ones(x.shape[1], dtype=bool))
+            
+            dofs = fem.locate_dofs_topological((W.sub(0), V_sub), fdim, facets)
+            bc = fem.dirichletbc(u_bc, dofs, W.sub(0))
+            bcs.append(bc)
+    
+    # If no BCs were parsed from spec, set up default rotating wall BCs
+    if len(bcs) == 0:
+        # Rotating wall: velocity on boundary = rotation around center
+        # u = (-(y - 0.5), (x - 0.5)) on all boundaries
+        
+        all_facets = mesh.locate_entities_boundary(domain, fdim,
+            lambda x: np.ones(x.shape[1], dtype=bool))
+        
+        u_bc_all = fem.Function(V_sub)
+        u_bc_all.interpolate(lambda x: np.vstack([-(x[1] - 0.5), (x[0] - 0.5)]))
+        
+        dofs_all = fem.locate_dofs_topological((W.sub(0), V_sub), fdim, all_facets)
+        bc_all = fem.dirichletbc(u_bc_all, dofs_all, W.sub(0))
+        bcs.append(bc_all)
+    
+    # Solve the linear Stokes problem
+    problem = petsc.LinearProblem(
+        a, L, bcs=bcs,
+        petsc_options={
+            "ksp_type": "gmres",
+            "pc_type": "lu",
+            "pc_factor_mat_solver_type": "mumps",
+            "ksp_rtol": "1e-10",
+            "ksp_max_it": "1000",
+            "ksp_monitor": "",
+        },
+        petsc_options_prefix="stokes_"
+    )
+    
+    wh = problem.solve()
+    wh.x.scatter_forward()
+    
+    # Extract velocity
+    u_sol = wh.sub(0).collapse()
+    
+    # Get iteration count from the solver
+    ksp = problem.solver
+    iterations = ksp.getIterationNumber()
+    
+    # Sample on 100x100 grid
+    nx_out, ny_out = 100, 100
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    
+    points = np.zeros((3, nx_out * ny_out))
+    points[0] = XX.ravel()
+    points[1] = YY.ravel()
+    
+    # Point evaluation
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points[:, i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    vel_magnitude = np.full(nx_out * ny_out, np.nan)
+    
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = u_sol.eval(pts_arr, cells_arr)
+        # vals shape: (n_points, 2) for 2D velocity
+        mag = np.sqrt(vals[:, 0]**2 + vals[:, 1]**2)
+        for idx, global_idx in enumerate(eval_map):
+            vel_magnitude[global_idx] = mag[idx]
+    
+    u_grid = vel_magnitude.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": mesh_resolution,
+        "element_degree": degree_u,
+        "ksp_type": "gmres",
+        "pc_type": "lu",
+        "rtol": 1e-10,
+        "iterations": iterations,
+    }
+    
+    return {
+        "u": u_grid,
+        "solver_info": solver_info,
+    }

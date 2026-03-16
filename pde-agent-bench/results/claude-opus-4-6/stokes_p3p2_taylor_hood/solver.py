@@ -1,0 +1,173 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    nu_val = 1.0
+    N = 32  # mesh resolution - P3/P2 Taylor-Hood on 32x32 should be very accurate
+    degree_u = 3
+    degree_p = 2
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    
+    # Function spaces - Taylor-Hood P3/P2
+    V = fem.functionspace(domain, ("Lagrange", degree_u, (domain.geometry.dim,)))
+    Q = fem.functionspace(domain, ("Lagrange", degree_p))
+    
+    # Mixed function space
+    from dolfinx.fem import functionspace
+    from basix.ufl import element, mixed_element
+    
+    vel_el = element("Lagrange", domain.basix_cell(), degree_u, shape=(domain.geometry.dim,))
+    pres_el = element("Lagrange", domain.basix_cell(), degree_p)
+    mixed_el = mixed_element([vel_el, pres_el])
+    W = functionspace(domain, mixed_el)
+    
+    # Trial and test functions
+    (u, p) = ufl.TrialFunctions(W)
+    (v, q) = ufl.TestFunctions(W)
+    
+    x = ufl.SpatialCoordinate(domain)
+    
+    # Manufactured solution
+    pi = ufl.pi
+    u_exact_0 = pi * ufl.cos(pi * x[1]) * ufl.sin(pi * x[0])
+    u_exact_1 = -pi * ufl.cos(pi * x[0]) * ufl.sin(pi * x[1])
+    u_exact = ufl.as_vector([u_exact_0, u_exact_1])
+    p_exact = ufl.cos(pi * x[0]) * ufl.cos(pi * x[1])
+    
+    # Source term: f = -nu * laplacian(u_exact) + grad(p_exact)
+    # For u_exact_0 = pi*cos(pi*y)*sin(pi*x):
+    #   d^2/dx^2 = -pi^3*cos(pi*y)*sin(pi*x)
+    #   d^2/dy^2 = -pi^3*cos(pi*y)*sin(pi*x) (wait, let me recompute)
+    # Actually let's just use UFL to compute it symbolically
+    # -nu * div(grad(u_exact)) + grad(p_exact) = f
+    # But u_exact is a vector, so div(grad(u)) means laplacian component-wise
+    
+    f = -nu_val * ufl.div(ufl.grad(u_exact)) + ufl.grad(p_exact)
+    
+    # Bilinear form for Stokes
+    nu_c = fem.Constant(domain, ScalarType(nu_val))
+    a = (nu_c * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+         - p * ufl.div(v) * ufl.dx
+         - q * ufl.div(u) * ufl.dx)
+    
+    L = ufl.inner(f, v) * ufl.dx
+    
+    # Boundary conditions - all boundary
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # Find all boundary facets
+    domain.topology.create_connectivity(fdim, tdim)
+    boundary_facets = mesh.exterior_facet_indices(domain.topology)
+    
+    # Velocity BC
+    V_sub, _ = W.sub(0).collapse()
+    u_bc_func = fem.Function(V_sub)
+    
+    u_exact_expr = fem.Expression(u_exact, V_sub.element.interpolation_points)
+    u_bc_func.interpolate(u_exact_expr)
+    
+    dofs_u = fem.locate_dofs_topological((W.sub(0), V_sub), fdim, boundary_facets)
+    bc_u = fem.dirichletbc(u_bc_func, dofs_u, W.sub(0))
+    
+    # Pin pressure at one point to fix the constant
+    # Find a DOF near (0,0) for pressure
+    Q_sub, _ = W.sub(1).collapse()
+    p_bc_func = fem.Function(Q_sub)
+    p_exact_expr = fem.Expression(p_exact, Q_sub.element.interpolation_points)
+    p_bc_func.interpolate(p_exact_expr)
+    
+    # Pin pressure at corner (0,0)
+    def corner(x):
+        return np.isclose(x[0], 0.0) & np.isclose(x[1], 0.0)
+    
+    # Actually, for manufactured solution with known pressure, let's pin pressure on boundary too
+    # Or better: just pin one pressure DOF
+    dofs_p = fem.locate_dofs_geometrical((W.sub(1), Q_sub), corner)
+    bc_p = fem.dirichletbc(p_bc_func, dofs_p, W.sub(1))
+    
+    bcs = [bc_u, bc_p]
+    
+    # Solve
+    ksp_type = "gmres"  # changed from minres since we have non-symmetric system with BC pinning
+    pc_type = "lu"
+    rtol = 1e-12
+    
+    problem = petsc.LinearProblem(
+        a, L, bcs=bcs,
+        petsc_options={
+            "ksp_type": "preonly",
+            "pc_type": "lu",
+            "pc_factor_mat_solver_type": "mumps",
+            "ksp_rtol": str(rtol),
+        },
+        petsc_options_prefix="stokes_"
+    )
+    wh = problem.solve()
+    wh.x.scatter_forward()
+    
+    # Extract velocity
+    uh = wh.sub(0).collapse()
+    
+    # Evaluate on 100x100 grid
+    nx_out, ny_out = 100, 100
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    
+    points = np.zeros((3, nx_out * ny_out))
+    points[0, :] = XX.ravel()
+    points[1, :] = YY.ravel()
+    
+    # Point evaluation
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points[:, i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    vel_mag = np.full(nx_out * ny_out, np.nan)
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = uh.eval(pts_arr, cells_arr)
+        # vals shape: (n_points, 2) for 2D velocity
+        vel_mag_local = np.sqrt(vals[:, 0]**2 + vals[:, 1]**2)
+        for idx, global_idx in enumerate(eval_map):
+            vel_mag[global_idx] = vel_mag_local[idx]
+    
+    u_grid = vel_mag.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": N,
+        "element_degree": degree_u,
+        "ksp_type": "preonly",
+        "pc_type": "lu",
+        "rtol": rtol,
+        "iterations": 1,
+    }
+    
+    return {
+        "u": u_grid,
+        "solver_info": solver_info,
+    }

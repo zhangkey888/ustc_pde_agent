@@ -1,0 +1,20 @@
+100x2 (velocity) + 100x100 (pressure) = 30,000. LU factorization will be very fast.
+Let's use a mesh resolution of 64x64 or 128x128. The evaluator will sample on a 100x100 grid.
+A 128x128 mesh will give high accuracy.
+```python
+mesh_resolution = 128
+domain = mesh.create_unit_square(comm, mesh_resolution, mesh_resolution, cell_type=mesh.CellType.triangle)
+```
+
+Let's check the evaluator requirements:
+- Output field: `velocity_magnitude`
+- Evaluator will sample solution on a 100 × 100 uniform grid
+- Return a dict with:
+  - `"u"`: u_grid, numpy array with shape (nx, ny) - final solution
+  - `"solver_info"`: dict with fields...
+
+Wait, the evaluator expects `"u"` to be the `velocity_magnitude` on a 100x100 grid?
+"Evaluator will sample solution on a 100 × 100 uniform grid"
+"Output field: velocity_magnitude"
+"Return a dict with: - 'u': u_grid, numpy array with shape (nx, ny) - final solution"
+Wait, does the evaluator do the sampling

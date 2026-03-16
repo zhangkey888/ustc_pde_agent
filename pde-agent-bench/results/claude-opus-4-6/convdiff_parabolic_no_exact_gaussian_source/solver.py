@@ -1,0 +1,201 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+
+    # Parse parameters
+    pde = case_spec["pde"]
+    eps_val = pde["coefficients"]["epsilon"]
+    beta_val = pde["coefficients"]["beta"]
+    time_params = pde["time"]
+    t_end = time_params["t_end"]
+    dt_suggested = time_params["dt"]
+
+    # Choose parameters
+    N = 80  # mesh resolution
+    degree = 1
+    dt = dt_suggested  # 0.02
+    n_steps = int(round(t_end / dt))
+
+    # Create mesh
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+
+    # Function space
+    V = fem.functionspace(domain, ("Lagrange", degree))
+
+    # Functions
+    u_n = fem.Function(V, name="u_n")  # solution at previous time step
+    u_n.x.array[:] = 0.0  # initial condition u0 = 0
+
+    uh = fem.Function(V, name="uh")  # solution at current time step
+
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+
+    # Spatial coordinate and time
+    x = ufl.SpatialCoordinate(domain)
+    t = fem.Constant(domain, ScalarType(0.0))
+
+    # Source term
+    f_expr = ufl.exp(-200.0 * ((x[0] - 0.3)**2 + (x[1] - 0.7)**2)) * ufl.exp(-t)
+
+    # Diffusion and convection
+    eps_c = fem.Constant(domain, ScalarType(eps_val))
+    beta = fem.Constant(domain, np.array(beta_val, dtype=ScalarType))
+    dt_c = fem.Constant(domain, ScalarType(dt))
+
+    # SUPG stabilization
+    h = ufl.CellDiameter(domain)
+    beta_norm = ufl.sqrt(ufl.dot(beta, beta))
+    Pe_cell = beta_norm * h / (2.0 * eps_c)
+    tau = h / (2.0 * beta_norm) * (ufl.conditional(ufl.gt(Pe_cell, 1.0),
+                                                      1.0 - 1.0 / Pe_cell,
+                                                      0.0))
+
+    # Backward Euler: (u - u_n)/dt - eps*laplacian(u) + beta.grad(u) = f
+    # Weak form (Galerkin part):
+    a_gal = (u / dt_c * v * ufl.dx
+             + eps_c * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+             + ufl.dot(beta, ufl.grad(u)) * v * ufl.dx)
+
+    L_gal = (u_n / dt_c * v * ufl.dx
+             + f_expr * v * ufl.dx)
+
+    # SUPG stabilization terms
+    # Residual of the strong form applied to trial function:
+    # R(u) = u/dt - eps*laplacian(u) + beta.grad(u) - f - u_n/dt
+    # For linear elements, laplacian(u) = 0 within each element
+    # So strong residual ≈ u/dt + beta.grad(u) - f - u_n/dt
+    # Test function modification: v_supg = tau * beta.grad(v)
+
+    v_supg = tau * ufl.dot(beta, ufl.grad(v))
+
+    a_supg = (u / dt_c * v_supg * ufl.dx
+              + ufl.dot(beta, ufl.grad(u)) * v_supg * ufl.dx)
+    # Note: for P1 elements, -eps*laplacian(u) = 0 element-wise, so we skip it
+
+    L_supg = (u_n / dt_c * v_supg * ufl.dx
+              + f_expr * v_supg * ufl.dx)
+
+    a_form = a_gal + a_supg
+    L_form = L_gal + L_supg
+
+    # Boundary conditions: u = g = 0 on all boundaries (since u0=0 and source is interior)
+    # The problem says u = g on boundary. With no exact solution specified and u0=0,
+    # we use g=0 (homogeneous Dirichlet)
+    boundary_facets = mesh.locate_entities_boundary(
+        domain, fdim, lambda x: np.ones(x.shape[1], dtype=bool))
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    bc = fem.dirichletbc(ScalarType(0.0), dofs, V)
+    bcs = [bc]
+
+    # Compile forms
+    a_compiled = fem.form(a_form)
+    L_compiled = fem.form(L_form)
+
+    # Assemble matrix (constant in time since coefficients don't change)
+    A = petsc.assemble_matrix(a_compiled, bcs=bcs)
+    A.assemble()
+
+    b = fem.petsc.create_vector(L_compiled)
+
+    # Setup solver
+    solver = PETSc.KSP().create(domain.comm)
+    solver.setOperators(A)
+    solver.setType(PETSc.KSP.Type.GMRES)
+    pc = solver.getPC()
+    pc.setType(PETSc.PC.Type.ILU)
+    solver.setTolerances(rtol=1e-8, atol=1e-12, max_it=1000)
+    solver.setUp()
+
+    total_iterations = 0
+
+    # Store initial condition for output
+    u_initial_values = u_n.x.array.copy()
+
+    # Time stepping
+    for step in range(n_steps):
+        t_new = (step + 1) * dt
+        t.value = t_new
+
+        # Assemble RHS
+        with b.localForm() as loc:
+            loc.set(0.0)
+        petsc.assemble_vector(b, L_compiled)
+        petsc.apply_lifting(b, [a_compiled], bcs=[bcs])
+        b.ghostUpdate(addv=PETSc.InsertMode.ADD, mode=PETSc.ScatterMode.REVERSE)
+        petsc.set_bc(b, bcs)
+
+        # Solve
+        solver.solve(b, uh.x.petsc_vec)
+        uh.x.scatter_forward()
+
+        total_iterations += solver.getIterationNumber()
+
+        # Update previous solution
+        u_n.x.array[:] = uh.x.array[:]
+
+    # Evaluate on 50x50 grid
+    nx_out, ny_out = 50, 50
+    xs = np.linspace(0.0, 1.0, nx_out)
+    ys = np.linspace(0.0, 1.0, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0, :] = XX.ravel()
+    points[1, :] = YY.ravel()
+
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points[:, i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+
+    u_values = np.full(nx_out * ny_out, np.nan)
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = uh.eval(pts_arr, cells_arr)
+        u_values[eval_map] = vals.flatten()
+
+    u_grid = u_values.reshape((nx_out, ny_out))
+
+    # Also evaluate initial condition (which is zero everywhere)
+    u_initial_grid = np.zeros((nx_out, ny_out))
+
+    solver.destroy()
+    A.destroy()
+    b.destroy()
+
+    return {
+        "u": u_grid,
+        "u_initial": u_initial_grid,
+        "solver_info": {
+            "mesh_resolution": N,
+            "element_degree": degree,
+            "ksp_type": "gmres",
+            "pc_type": "ilu",
+            "rtol": 1e-8,
+            "iterations": total_iterations,
+            "dt": dt,
+            "n_steps": n_steps,
+            "time_scheme": "backward_euler",
+        }
+    }

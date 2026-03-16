@@ -1,0 +1,183 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry, nls
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    nu_val = 0.2
+    nx = ny = 64
+    degree_u = 2
+    degree_p = 1
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, nx, ny, cell_type=mesh.CellType.triangle)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # Function spaces (Taylor-Hood P2/P1)
+    V_el = ("Lagrange", degree_u, (domain.geometry.dim,))
+    Q_el = ("Lagrange", degree_p)
+    
+    V = fem.functionspace(domain, V_el)
+    Q = fem.functionspace(domain, Q_el)
+    
+    # Mixed function space
+    from basix.ufl import mixed_element, element
+    vel_elem = element("Lagrange", domain.basix_cell(), degree_u, shape=(domain.geometry.dim,))
+    pres_elem = element("Lagrange", domain.basix_cell(), degree_p)
+    mixed_el = mixed_element([vel_elem, pres_elem])
+    W = fem.functionspace(domain, mixed_el)
+    
+    # Trial and test functions
+    (u, p) = ufl.TrialFunctions(W)
+    (v, q) = ufl.TestFunctions(W)
+    
+    # Bilinear form for Stokes
+    nu = fem.Constant(domain, ScalarType(nu_val))
+    f = fem.Constant(domain, ScalarType((0.0, 0.0)))
+    
+    a = (nu * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+         - p * ufl.div(v) * ufl.dx
+         - q * ufl.div(u) * ufl.dx)
+    
+    L = ufl.inner(f, v) * ufl.dx
+    
+    # Boundary conditions
+    # Lid-driven cavity: u = (1, 0) on top, u = (0, 0) on other walls
+    
+    # Top boundary: y = 1 (lid)
+    def top_boundary(x):
+        return np.isclose(x[1], 1.0)
+    
+    # Bottom boundary: y = 0
+    def bottom_boundary(x):
+        return np.isclose(x[1], 0.0)
+    
+    # Left boundary: x = 0
+    def left_boundary(x):
+        return np.isclose(x[0], 0.0)
+    
+    # Right boundary: x = 1
+    def right_boundary(x):
+        return np.isclose(x[0], 1.0)
+    
+    # No-slip walls (bottom, left, right)
+    def noslip_boundary(x):
+        return np.isclose(x[1], 0.0) | np.isclose(x[0], 0.0) | np.isclose(x[0], 1.0)
+    
+    bcs = []
+    
+    # No-slip on bottom, left, right
+    noslip_facets = mesh.locate_entities_boundary(domain, fdim, noslip_boundary)
+    u_noslip = fem.Function(V)
+    u_noslip.interpolate(lambda x: np.zeros((domain.geometry.dim, x.shape[1])))
+    dofs_noslip = fem.locate_dofs_topological((W.sub(0), V), fdim, noslip_facets)
+    bc_noslip = fem.dirichletbc(u_noslip, dofs_noslip, W.sub(0))
+    bcs.append(bc_noslip)
+    
+    # Lid velocity on top
+    lid_facets = mesh.locate_entities_boundary(domain, fdim, top_boundary)
+    u_lid = fem.Function(V)
+    u_lid.interpolate(lambda x: np.stack([np.ones_like(x[0]), np.zeros_like(x[0])]))
+    dofs_lid = fem.locate_dofs_topological((W.sub(0), V), fdim, lid_facets)
+    bc_lid = fem.dirichletbc(u_lid, dofs_lid, W.sub(0))
+    bcs.append(bc_lid)
+    
+    # Pin pressure at one point to remove nullspace
+    # Find a DOF near (0, 0)
+    def origin_point(x):
+        return np.isclose(x[0], 0.0) & np.isclose(x[1], 0.0)
+    
+    p_dofs = fem.locate_dofs_geometrical((W.sub(1), Q), origin_point)
+    p_zero = fem.Function(Q)
+    p_zero.x.array[:] = 0.0
+    bc_p = fem.dirichletbc(p_zero, p_dofs, W.sub(1))
+    bcs.append(bc_p)
+    
+    # Solve
+    ksp_type = "gmres"
+    pc_type = "ilu"
+    rtol = 1e-8
+    
+    problem = petsc.LinearProblem(
+        a, L, bcs=bcs,
+        petsc_options={
+            "ksp_type": ksp_type,
+            "pc_type": pc_type,
+            "ksp_rtol": str(rtol),
+            "ksp_max_it": "5000",
+            "ksp_monitor": None,
+        },
+        petsc_options_prefix="stokes_"
+    )
+    
+    wh = problem.solve()
+    wh.x.scatter_forward()
+    
+    # Get iteration count
+    ksp = problem.solver
+    iterations = ksp.getIterationNumber()
+    
+    # Extract velocity sub-function
+    u_sol = wh.sub(0).collapse()
+    
+    # Sample on 100x100 grid
+    nx_out, ny_out = 100, 100
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    
+    points = np.zeros((3, nx_out * ny_out))
+    points[0, :] = XX.ravel()
+    points[1, :] = YY.ravel()
+    
+    # Point evaluation
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points[:, i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    vel_mag = np.full(nx_out * ny_out, np.nan)
+    
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = u_sol.eval(pts_arr, cells_arr)
+        # vals shape: (n_points, gdim)
+        mag = np.sqrt(vals[:, 0]**2 + vals[:, 1]**2)
+        for idx, global_idx in enumerate(eval_map):
+            vel_mag[global_idx] = mag[idx]
+    
+    u_grid = vel_mag.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": nx,
+        "element_degree": degree_u,
+        "ksp_type": ksp_type,
+        "pc_type": pc_type,
+        "rtol": rtol,
+        "iterations": iterations,
+    }
+    
+    return {
+        "u": u_grid,
+        "solver_info": solver_info,
+    }

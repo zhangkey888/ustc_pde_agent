@@ -1,207 +1,144 @@
-"""
-Solver for steady incompressible Navier-Stokes using dolfinx 0.10.0
-  u·∇u - ν∇²u + ∇p = f   in Ω=[0,1]²
-  ∇·u = 0                 in Ω
-  u = g                   on ∂Ω
-Case: navier_stokes_sin3x2y_stream
-Manufactured:
-  u = [2π cos(2πy) sin(3πx), -3π cos(3πx) sin(2πy)]
-  p = cos(πx) cos(2πy)
-ν = 0.1, Taylor-Hood Q3/Q2 on quadrilaterals, Newton with MUMPS.
-"""
-
 import numpy as np
 from mpi4py import MPI
-from dolfinx import mesh, fem, geometry, nls
+from dolfinx import mesh, fem, geometry
 from dolfinx.fem import petsc
-from basix.ufl import element, mixed_element
 import ufl
 from petsc4py import PETSc
 
-ScalarType = PETSc.ScalarType
-
-
 def solve(case_spec: dict) -> dict:
-    pde = case_spec.get("pde", {})
-    params = pde.get("params", {})
-    nu_val = float(params.get("viscosity", 0.1))
-
-    N = 48
-    degree_u = 3
-    degree_p = 2
-    newton_rtol = 1e-10
-    newton_atol = 1e-12
-    ksp_type = "preonly"
-    pc_type = "lu"
-
     comm = MPI.COMM_WORLD
-    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.quadrilateral)
-    tdim = domain.topology.dim
-    fdim = tdim - 1
-
-    cell_name = domain.topology.cell_name()
-    vel_el = element("Lagrange", cell_name, degree_u, shape=(2,))
-    pres_el = element("Lagrange", cell_name, degree_p)
-    mel = mixed_element([vel_el, pres_el])
-    W = fem.functionspace(domain, mel)
-
-    w = fem.Function(W)
-    (u, p) = ufl.split(w)
-    (v, q) = ufl.TestFunctions(W)
-
+    
+    # Parameters
+    kappa = 10.0
+    t_end = 0.05
+    dt = 0.005
+    n_steps = int(round(t_end / dt))
+    
+    mesh_resolution = 64
+    degree = 2
+    
+    domain = mesh.create_unit_square(comm, mesh_resolution, mesh_resolution, cell_type=mesh.CellType.triangle)
+    V = fem.functionspace(domain, ("Lagrange", degree))
+    
+    # Initial condition
+    u_n = fem.Function(V)
     x = ufl.SpatialCoordinate(domain)
-    pi = ufl.pi
+    
+    # u0 = sin(pi*x)*sin(pi*y)
+    u0_expr = fem.Expression(ufl.sin(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1]), V.element.interpolation_points)
+    u_n.interpolate(u0_expr)
+    
+    def sample_on_grid(u_func, nx, ny):
+        x_coords = np.linspace(0, 1, nx)
+        y_coords = np.linspace(0, 1, ny)
+        X, Y = np.meshgrid(x_coords, y_coords, indexing='ij')
+        points = np.vstack((X.flatten(), Y.flatten(), np.zeros_like(X.flatten())))
+        
+        bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+        cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+        colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+        
+        points_on_proc = []
+        cells_on_proc = []
+        eval_map = []
+        for i in range(points.shape[1]):
+            links = colliding_cells.links(i)
+            if len(links) > 0:
+                points_on_proc.append(points.T[i])
+                cells_on_proc.append(links[0])
+                eval_map.append(i)
+                
+        u_values = np.full((points.shape[1],), np.nan)
+        if len(points_on_proc) > 0:
+            vals = u_func.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+            u_values[eval_map] = vals.flatten()
+            
+        return u_values.reshape((nx, ny))
 
-    # Manufactured exact solution
-    u_exact = ufl.as_vector([
-        2.0 * pi * ufl.cos(2.0 * pi * x[1]) * ufl.sin(3.0 * pi * x[0]),
-       -3.0 * pi * ufl.cos(3.0 * pi * x[0]) * ufl.sin(2.0 * pi * x[1])
-    ])
-    p_exact = ufl.cos(pi * x[0]) * ufl.cos(2.0 * pi * x[1])
-
-    nu = fem.Constant(domain, ScalarType(nu_val))
-
-    # Source term: f = u_exact·∇u_exact - ν∇²u_exact + ∇p_exact
-    f_source = (ufl.grad(u_exact) * u_exact
-                - nu * ufl.div(ufl.grad(u_exact))
-                + ufl.grad(p_exact))
-
-    # Weak form residual
-    F = (nu * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
-         + ufl.inner(ufl.grad(u) * u, v) * ufl.dx
-         - p * ufl.div(v) * ufl.dx
-         + q * ufl.div(u) * ufl.dx
-         - ufl.inner(f_source, v) * ufl.dx)
-
-    # Dirichlet BCs: u = u_exact on entire boundary
-    V_col, col_map_u = W.sub(0).collapse()
-    u_bc_func = fem.Function(V_col)
-
-    def _u_exact_np(x_arr):
-        xc, yc = x_arr[0], x_arr[1]
-        ux = 2.0 * np.pi * np.cos(2.0 * np.pi * yc) * np.sin(3.0 * np.pi * xc)
-        uy = -3.0 * np.pi * np.cos(3.0 * np.pi * xc) * np.sin(2.0 * np.pi * yc)
-        return np.vstack([ux, uy])
-
-    u_bc_func.interpolate(_u_exact_np)
-
-    boundary_facets = mesh.locate_entities_boundary(
-        domain, fdim, lambda x: np.ones(x.shape[1], dtype=bool)
-    )
-    dofs_u = fem.locate_dofs_topological((W.sub(0), V_col), fdim, boundary_facets)
-    bc_u = fem.dirichletbc(u_bc_func, dofs_u, W.sub(0))
-
-    # Pin one pressure DOF at origin to fix gauge
-    # p_exact(0,0) = cos(0)*cos(0) = 1.0
-    Q_col, col_map_p = W.sub(1).collapse()
-    p_bc_func = fem.Function(Q_col)
-    p_bc_func.interpolate(lambda x_arr: np.cos(np.pi * x_arr[0]) * np.cos(2.0 * np.pi * x_arr[1]))
-
-    def at_origin(x):
-        tol = 1e-10
-        return np.logical_and(np.abs(x[0]) < tol, np.abs(x[1]) < tol)
-
-    dofs_p = fem.locate_dofs_geometrical((W.sub(1), Q_col), at_origin)
-    bc_p = fem.dirichletbc(p_bc_func, dofs_p, W.sub(1))
-
-    bcs = [bc_u, bc_p]
-
-    w.x.array[:] = 0.0
-    w.x.scatter_forward()
-
-    # Newton solver
-    problem = petsc.NonlinearProblem(F, w, bcs=bcs)
-    solver = nls.petsc.NewtonSolver(comm, problem)
-    solver.convergence_criterion = "incremental"
-    solver.rtol = newton_rtol
-    solver.atol = newton_atol
-    solver.max_it = 50
-
-    ksp = solver.krylov_solver
-    ksp.setType(PETSc.KSP.Type.PREONLY)
-    pc = ksp.getPC()
-    pc.setType(PETSc.PC.Type.LU)
-    pc.setFactorSolverType("mumps")
-
-    # Viscosity continuation for robustness
-    total_newton = 0
-    newton_per_stage = []
-    if nu_val < 0.05:
-        nu_stages = [1.0, 0.5, 0.1, 0.05, nu_val]
-    elif nu_val < 0.1:
-        nu_stages = [0.5, 0.1, nu_val]
-    elif nu_val < 0.5:
-        nu_stages = [1.0, 0.5, nu_val]
-    else:
-        nu_stages = [nu_val]
-
-    for nu_step in nu_stages:
-        nu.value = nu_step
-        n_newton, converged = solver.solve(w)
-        assert converged, f"Newton did not converge at nu={nu_step} after {n_newton} iters"
-        w.x.scatter_forward()
-        total_newton += n_newton
-        newton_per_stage.append(int(n_newton))
-
-    # Extract velocity into collapsed space for evaluation
-    u_sol = fem.Function(V_col)
-    u_sol.x.array[:] = w.x.array[col_map_u]
-    u_sol.x.scatter_forward()
-
-    # Sample velocity magnitude on 50×50 grid
-    nx_out, ny_out = 50, 50
-    xs = np.linspace(0.0, 1.0, nx_out)
-    ys = np.linspace(0.0, 1.0, ny_out)
-    X, Y = np.meshgrid(xs, ys, indexing="ij")
-    points_3d = np.vstack([X.ravel(), Y.ravel(), np.zeros(nx_out * ny_out)])
-
-    vel_values = _probe_vector(u_sol, points_3d, domain)
-    vel_mag = np.sqrt(vel_values[:, 0]**2 + vel_values[:, 1]**2)
-    u_grid = vel_mag.reshape(nx_out, ny_out)
-
+    nx_eval, ny_eval = 50, 50
+    u_initial_grid = sample_on_grid(u_n, nx_eval, ny_eval)
+    
+    # Boundary condition (u=0 on boundary)
+    fdim = domain.topology.dim - 1
+    domain.topology.create_connectivity(fdim, domain.topology.dim)
+    boundary_facets = mesh.exterior_facet_indices(domain.topology)
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    bc = fem.dirichletbc(PETSc.ScalarType(0.0), dofs, V)
+    
+    # Trial and test functions
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+    
+    # Source term
+    t = 0.0
+    f_func = fem.Function(V)
+    
+    def f_eval(x_pts, current_t):
+        val = (2.0 * kappa * np.pi**2 - 1.0) * np.exp(-current_t) * np.sin(np.pi * x_pts[0]) * np.sin(np.pi * x_pts[1])
+        return val
+    
+    # Variational problem (Backward Euler)
+    a = ufl.inner(u, v) * ufl.dx + dt * kappa * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+    L = ufl.inner(u_n, v) * ufl.dx + dt * ufl.inner(f_func, v) * ufl.dx
+    
+    a_form = fem.form(a)
+    L_form = fem.form(L)
+    
+    A = petsc.assemble_matrix(a_form, bcs=[bc])
+    A.assemble()
+    
+    b = petsc.create_vector(L_form)
+    
+    solver = PETSc.KSP().create(domain.comm)
+    solver.setOperators(A)
+    solver.setType(PETSc.KSP.Type.CG)
+    solver.getPC().setType(PETSc.PC.Type.JACOBI)
+    solver.setTolerances(rtol=1e-9)
+    
+    u_sol = fem.Function(V)
+    u_sol.x.array[:] = u_n.x.array[:]
+    
+    total_iterations = 0
+    
+    for i in range(n_steps):
+        t += dt
+        
+        # Update source term
+        f_func.interpolate(lambda x_pts: f_eval(x_pts, t))
+        
+        # Assemble RHS
+        with b.localForm() as loc:
+            loc.set(0)
+        petsc.assemble_vector(b, L_form)
+        petsc.apply_lifting(b, [a_form], bcs=[[bc]])
+        b.ghostUpdate(addv=PETSc.InsertMode.ADD, mode=PETSc.ScatterMode.REVERSE)
+        petsc.set_bc(b, [bc])
+        
+        # Solve
+        solver.solve(b, u_sol.x.petsc_vec)
+        u_sol.x.scatter_forward()
+        
+        total_iterations += solver.getIterationNumber()
+        
+        # Update for next step
+        u_n.x.array[:] = u_sol.x.array[:]
+        
+    u_final_grid = sample_on_grid(u_sol, nx_eval, ny_eval)
+    
     solver_info = {
-        "mesh_resolution": N,
-        "element_degree": degree_u,
-        "ksp_type": ksp_type,
-        "pc_type": pc_type,
-        "rtol": newton_rtol,
-        "iterations": total_newton,
-        "nonlinear_iterations": newton_per_stage,
+        "mesh_resolution": mesh_resolution,
+        "element_degree": degree,
+        "ksp_type": "cg",
+        "pc_type": "jacobi",
+        "rtol": 1e-9,
+        "iterations": total_iterations,
+        "dt": dt,
+        "n_steps": n_steps,
+        "time_scheme": "backward_euler"
     }
-
-    return {"u": u_grid, "solver_info": solver_info}
-
-
-def _probe_vector(u_func, points_array, domain):
-    """Evaluate vector function u_func at points (shape (3, N)). Returns (N, dim) array."""
-    gdim = domain.geometry.dim
-    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
-    cell_candidates = geometry.compute_collisions_points(bb_tree, points_array.T)
-    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points_array.T)
-
-    pts, cells, idx_map = [], [], []
-    for i in range(points_array.shape[1]):
-        links = colliding_cells.links(i)
-        if len(links) > 0:
-            pts.append(points_array.T[i])
-            cells.append(links[0])
-            idx_map.append(i)
-
-    n_pts = points_array.shape[1]
-    values = np.full((n_pts, gdim), np.nan)
-    if pts:
-        vals = u_func.eval(np.array(pts), np.array(cells, dtype=np.int32))
-        values[idx_map] = vals[:, :gdim]
-
-    comm = domain.comm
-    if comm.size > 1:
-        all_vals = comm.gather(values, root=0)
-        if comm.rank == 0:
-            combined = np.full_like(values, np.nan)
-            for pv in all_vals:
-                mask = ~np.isnan(pv[:, 0])
-                combined[mask] = pv[mask]
-            values = combined
-        values = comm.bcast(values, root=0)
-
-    return values
+    
+    return {
+        "u": u_final_grid,
+        "u_initial": u_initial_grid,
+        "solver_info": solver_info
+    }

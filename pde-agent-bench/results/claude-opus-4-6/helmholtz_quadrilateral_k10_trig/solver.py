@@ -1,0 +1,110 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    k_val = 10.0
+    mesh_resolution = 64
+    element_degree = 2
+    
+    # Create quadrilateral mesh
+    domain = mesh.create_unit_square(comm, mesh_resolution, mesh_resolution, 
+                                      cell_type=mesh.CellType.quadrilateral)
+    
+    V = fem.functionspace(domain, ("Lagrange", element_degree))
+    
+    x = ufl.SpatialCoordinate(domain)
+    
+    # Manufactured solution
+    u_exact_expr = ufl.sin(2 * ufl.pi * x[0]) * ufl.cos(3 * ufl.pi * x[1])
+    
+    # Compute source term: f = -∇²u - k²u
+    # ∇²u = -(4π² + 9π²) sin(2πx)cos(3πy) = -13π² sin(2πx)cos(3πy)
+    # So -∇²u = 13π² sin(2πx)cos(3πy)
+    # f = -∇²u - k²u = 13π² sin(2πx)cos(3πy) - k² sin(2πx)cos(3πy)
+    # f = (13π² - k²) sin(2πx)cos(3πy)
+    f_expr = (13.0 * ufl.pi**2 - k_val**2) * ufl.sin(2 * ufl.pi * x[0]) * ufl.cos(3 * ufl.pi * x[1])
+    
+    # Trial and test functions
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+    
+    # Weak form: ∫ ∇u·∇v dx - k² ∫ u v dx = ∫ f v dx
+    a = ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx - k_val**2 * ufl.inner(u, v) * ufl.dx
+    L = ufl.inner(f_expr, v) * ufl.dx
+    
+    # Boundary conditions
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # All boundary
+    domain.topology.create_connectivity(fdim, tdim)
+    boundary_facets = mesh.exterior_facet_indices(domain.topology)
+    
+    u_bc = fem.Function(V)
+    u_bc.interpolate(fem.Expression(u_exact_expr, V.element.interpolation_points))
+    
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    bc = fem.dirichletbc(u_bc, dofs)
+    
+    # Solve using direct solver (LU) for robustness with indefinite Helmholtz
+    ksp_type = "preonly"
+    pc_type = "lu"
+    rtol = 1e-10
+    
+    problem = petsc.LinearProblem(
+        a, L, bcs=[bc],
+        petsc_options={
+            "ksp_type": ksp_type,
+            "pc_type": pc_type,
+        },
+        petsc_options_prefix="helmholtz_"
+    )
+    u_sol = problem.solve()
+    
+    # Sample on 50x50 grid
+    nx_out, ny_out = 50, 50
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0] = XX.ravel()
+    points[1] = YY.ravel()
+    
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points.T[i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    u_values = np.full(nx_out * ny_out, np.nan)
+    if len(points_on_proc) > 0:
+        vals = u_sol.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+        u_values[eval_map] = vals.flatten()
+    
+    u_grid = u_values.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": mesh_resolution,
+        "element_degree": element_degree,
+        "ksp_type": ksp_type,
+        "pc_type": pc_type,
+        "rtol": rtol,
+        "iterations": 1,
+    }
+    
+    return {"u": u_grid, "solver_info": solver_info}

@@ -1,0 +1,105 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    mesh_res = 100
+    degree = 2
+    k = 12.0
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, mesh_res, mesh_res, cell_type=mesh.CellType.triangle)
+    
+    # Function space
+    V = fem.functionspace(domain, ("Lagrange", degree))
+    
+    # Exact solution and source term
+    x = ufl.SpatialCoordinate(domain)
+    u_exact = ufl.exp(x[0]) * ufl.cos(2 * ufl.pi * x[1])
+    
+    # -Laplacian(u) = (1 - 4*pi^2) * u
+    # -Laplacian(u) - k^2 u = (4*pi^2 - 1 - k^2) * u
+    f = (4 * ufl.pi**2 - 1.0 - k**2) * u_exact
+    
+    # Boundary conditions
+    fdim = domain.topology.dim - 1
+    boundary_facets = mesh.locate_entities_boundary(domain, fdim, lambda x_pts: np.ones(x_pts.shape[1], dtype=bool))
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    
+    u_bc = fem.Function(V)
+    u_bc.interpolate(lambda x_pts: np.exp(x_pts[0]) * np.cos(2 * np.pi * x_pts[1]))
+    bc = fem.dirichletbc(u_bc, dofs)
+    
+    # Variational problem
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+    
+    a = ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx - k**2 * ufl.inner(u, v) * ufl.dx
+    L = ufl.inner(f, v) * ufl.dx
+    
+    # Solve
+    problem = petsc.LinearProblem(
+        a, L, bcs=[bc],
+        petsc_options={"ksp_type": "preonly", "pc_type": "lu"},
+        petsc_options_prefix="helmholtz_"
+    )
+    u_sol = problem.solve()
+    iters = problem.solver.getIterationNumber()
+    
+    # Evaluate on 50x50 grid
+    nx, ny = 50, 50
+    x_eval = np.linspace(0, 1, nx)
+    y_eval = np.linspace(0, 1, ny)
+    X, Y = np.meshgrid(x_eval, y_eval, indexing='ij')
+    points = np.vstack((X.flatten(), Y.flatten(), np.zeros_like(X.flatten())))
+    
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points.T[i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+            
+    local_u = np.zeros(points.shape[1])
+    local_mask = np.zeros(points.shape[1], dtype=int)
+    if len(points_on_proc) > 0:
+        vals = u_sol.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+        local_u[eval_map] = vals.flatten()
+        local_mask[eval_map] = 1
+        
+    global_u = np.zeros_like(local_u)
+    global_mask = np.zeros_like(local_mask)
+    comm.Allreduce(local_u, global_u, op=MPI.SUM)
+    comm.Allreduce(local_mask, global_mask, op=MPI.SUM)
+    
+    with np.errstate(divide='ignore', invalid='ignore'):
+        u_values = np.where(global_mask > 0, global_u / global_mask, np.nan)
+        
+    u_grid = u_values.reshape((nx, ny))
+    
+    solver_info = {
+        "mesh_resolution": mesh_res,
+        "element_degree": degree,
+        "ksp_type": "preonly",
+        "pc_type": "lu",
+        "rtol": 1e-8,
+        "iterations": iters
+    }
+    
+    return {
+        "u": u_grid,
+        "solver_info": solver_info
+    }

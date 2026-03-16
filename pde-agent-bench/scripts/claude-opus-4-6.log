@@ -1,0 +1,2803 @@
+nohup: ignoring input
+
+================================================================================
+🚀 PDEBench - LLM/Code Agent Evaluation
+================================================================================
+📁 Data: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/data/benchmark.jsonl
+📁 Output: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results
+🤖 Agents: claude-opus-4-6
+⏱️  Timeout: 300s
+================================================================================
+   ✓ claude-opus-4-6: LLM
+
+📊 Loaded 241 cases from benchmark
+
+
+################################################################################
+# Agent: claude-opus-4-6
+################################################################################
+
+[1/241]
+============================================================
+📋 Case: poisson_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6053, out=1311
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 0.501s
+   ✅ Status: PASS
+
+[2/241]
+============================================================
+📋 Case: poisson_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6082, out=1306
+   🔧 Executing solver...
+   📊 Error: 4.11e-04, Time: 0.539s
+   ✅ Status: PASS
+
+[3/241]
+============================================================
+📋 Case: poisson_quadrilateral
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6033, out=1457
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[4/241]
+============================================================
+📋 Case: poisson_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6022, out=1305
+   🔧 Executing solver...
+   📊 Error: 2.23e-06, Time: 0.507s
+   ✅ Status: FAIL
+
+[5/241]
+============================================================
+📋 Case: poisson_high_contrast_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6041, out=1470
+   🔧 Executing solver...
+   📊 Error: 1.31e-04, Time: 0.555s
+   ✅ Status: PASS
+
+[6/241]
+============================================================
+📋 Case: poisson_rhs_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6014, out=1252
+   🔧 Executing solver...
+   📊 Error: 3.52e-05, Time: 1.011s
+   ✅ Status: PASS
+
+[7/241]
+============================================================
+📋 Case: poisson_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6069, out=1327
+   🔧 Executing solver...
+   📊 Error: 1.25e-03, Time: 0.499s
+   ✅ Status: PASS
+
+[8/241]
+============================================================
+📋 Case: poisson_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6065, out=1460
+   🔧 Executing solver...
+   📊 Error: 1.20e-04, Time: 1.451s
+   ✅ Status: PASS
+
+[9/241]
+============================================================
+📋 Case: poisson_polynomial_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6047, out=1384
+   🔧 Executing solver...
+   📊 Error: 2.26e-04, Time: 0.991s
+   ✅ Status: PASS
+
+[10/241]
+============================================================
+📋 Case: poisson_constant_kappa10
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6055, out=1380
+   🔧 Executing solver...
+   📊 Error: 2.96e-04, Time: 1.026s
+   ✅ Status: PASS
+
+[11/241]
+============================================================
+📋 Case: poisson_p3_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6057, out=1613
+   🔧 Executing solver...
+   📊 Error: 1.43e-05, Time: 0.958s
+   ✅ Status: FAIL
+
+[12/241]
+============================================================
+📋 Case: poisson_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6044, out=1295
+   🔧 Executing solver...
+   📊 Error: 1.93e-05, Time: 0.539s
+   ✅ Status: PASS
+
+[13/241]
+============================================================
+📋 Case: poisson_oscillatory_rhs_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6048, out=1302
+   🔧 Executing solver...
+   📊 Error: 5.65e-04, Time: 0.538s
+   ✅ Status: PASS
+
+[14/241]
+============================================================
+📋 Case: poisson_smooth_high_contrast_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6081, out=1674
+   🔧 Executing solver...
+   📊 Error: 3.14e-05, Time: 1.054s
+   ✅ Status: PASS
+
+[15/241]
+============================================================
+📋 Case: poisson_quadrilateral_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6036, out=1217
+   🔧 Executing solver...
+   📊 Error: 1.49e-06, Time: 0.492s
+   ✅ Status: PASS
+
+[16/241]
+============================================================
+📋 Case: poisson_constant_kappa0p1
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6069, out=1454
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 0.504s
+   ✅ Status: PASS
+
+[17/241]
+============================================================
+📋 Case: poisson_variable_kappa_strong_smooth
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6107, out=1340
+   🔧 Executing solver...
+   📊 Error: 5.05e-04, Time: 0.604s
+   ✅ Status: PASS
+
+[18/241]
+============================================================
+📋 Case: poisson_variable_kappa_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6107, out=1388
+   🔧 Executing solver...
+   📊 Error: 2.49e-04, Time: 1.157s
+   ✅ Status: PASS
+
+[19/241]
+============================================================
+📋 Case: poisson_kappa_local_peak
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6108, out=1301
+   🔧 Executing solver...
+   📊 Error: 2.48e-04, Time: 1.527s
+   ✅ Status: PASS
+
+[20/241]
+============================================================
+📋 Case: poisson_kappa_two_peaks
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6137, out=1346
+   🔧 Executing solver...
+   📊 Error: 1.84e-04, Time: 1.559s
+   ✅ Status: PASS
+
+[21/241]
+============================================================
+📋 Case: poisson_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6090, out=1527
+   🔧 Executing solver...
+   📊 Error: 6.34e-04, Time: 1.450s
+   ✅ Status: PASS
+
+[22/241]
+============================================================
+📋 Case: poisson_nonseparable_xy
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6063, out=1419
+   🔧 Executing solver...
+   📊 Error: 4.98e-05, Time: 0.995s
+   ✅ Status: PASS
+
+[23/241]
+============================================================
+📋 Case: poisson_boundary_layer_y
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6067, out=1420
+   🔧 Executing solver...
+   📊 Error: 1.20e-04, Time: 1.413s
+   ✅ Status: PASS
+
+[24/241]
+============================================================
+📋 Case: poisson_exponential_corner
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6075, out=1285
+   🔧 Executing solver...
+   📊 Error: 1.99e-04, Time: 1.493s
+   ✅ Status: PASS
+
+[25/241]
+============================================================
+📋 Case: poisson_quadrilateral_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6059, out=1264
+   🔧 Executing solver...
+   📊 Error: 1.05e-06, Time: 0.506s
+   ✅ Status: FAIL
+
+[26/241]
+============================================================
+📋 Case: poisson_quadrilateral_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6096, out=1349
+   🔧 Executing solver...
+   📊 Error: 5.61e-04, Time: 0.560s
+   ✅ Status: PASS
+
+[27/241]
+============================================================
+📋 Case: poisson_p2_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6097, out=1342
+   🔧 Executing solver...
+   📊 Error: 1.80e-05, Time: 1.071s
+   ✅ Status: PASS
+
+[28/241]
+============================================================
+📋 Case: poisson_no_exact_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6042, out=1697
+   🔧 Executing solver...
+   📊 Error: 9.77e-01, Time: 1.334s
+   ✅ Status: FAIL
+
+[29/241]
+============================================================
+📋 Case: poisson_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6070, out=1271
+   🔧 Executing solver...
+   📊 Error: 2.05e-04, Time: 0.501s
+   ✅ Status: PASS
+
+[30/241]
+============================================================
+📋 Case: poisson_no_exact_variable_kappa_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6098, out=1532
+   🔧 Executing solver...
+   📊 Error: 2.48e-05, Time: 0.729s
+   ✅ Status: PASS
+
+[31/241]
+============================================================
+📋 Case: poisson_constant_kappa5
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6071, out=1477
+   🔧 Executing solver...
+   📊 Error: 7.60e-04, Time: 1.026s
+   ✅ Status: PASS
+
+[32/241]
+============================================================
+📋 Case: poisson_directional_high_freq_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6072, out=1459
+   🔧 Executing solver...
+   📊 Error: 1.82e-03, Time: 0.548s
+   ✅ Status: PASS
+
+[33/241]
+============================================================
+📋 Case: poisson_rotated_wave
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6073, out=1270
+   🔧 Executing solver...
+   📊 Error: 9.69e-04, Time: 1.585s
+   ✅ Status: PASS
+
+[34/241]
+============================================================
+📋 Case: poisson_gaussian_bump_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6078, out=1345
+   🔧 Executing solver...
+   📊 Error: 4.31e-04, Time: 1.459s
+   ✅ Status: PASS
+
+[35/241]
+============================================================
+📋 Case: poisson_polynomial_mixed_degree
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6060, out=1327
+   🔧 Executing solver...
+   📊 Error: 1.74e-04, Time: 1.580s
+   ✅ Status: PASS
+
+[36/241]
+============================================================
+📋 Case: poisson_nonseparable_exp_xy
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6066, out=1304
+   🔧 Executing solver...
+   📊 Error: 7.89e-05, Time: 1.104s
+   ✅ Status: PASS
+
+[37/241]
+============================================================
+📋 Case: poisson_variable_kappa_cos_sin_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6096, out=1359
+   🔧 Executing solver...
+   📊 Error: 6.97e-05, Time: 1.074s
+   ✅ Status: PASS
+
+[38/241]
+============================================================
+📋 Case: poisson_variable_kappa_stripes_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6089, out=1343
+   🔧 Executing solver...
+   📊 Error: 1.68e-04, Time: 1.117s
+   ✅ Status: PASS
+
+[39/241]
+============================================================
+📋 Case: poisson_variable_kappa_low_background
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6098, out=1320
+   🔧 Executing solver...
+   📊 Error: 7.87e-05, Time: 1.110s
+   ✅ Status: PASS
+
+[40/241]
+============================================================
+📋 Case: poisson_quadrilateral_high_freq_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6055, out=1322
+   🔧 Executing solver...
+   📊 Error: 1.91e-03, Time: 1.460s
+   ✅ Status: PASS
+
+[41/241]
+============================================================
+📋 Case: poisson_quadrilateral_boundary_layer_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6051, out=1486
+   🔧 Executing solver...
+   📊 Error: 1.29e-04, Time: 2.132s
+   ✅ Status: FAIL
+
+[42/241]
+============================================================
+📋 Case: poisson_p2_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6084, out=1507
+   🔧 Executing solver...
+   📊 Error: 4.07e-05, Time: 1.407s
+   ✅ Status: FAIL
+
+[43/241]
+============================================================
+📋 Case: poisson_p3_variable_kappa_mild
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6095, out=1341
+   🔧 Executing solver...
+   📊 Error: 1.01e-08, Time: 1.235s
+   ✅ Status: PASS
+
+[44/241]
+============================================================
+📋 Case: poisson_no_exact_gaussian_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6061, out=1387
+   🔧 Executing solver...
+   📊 Error: 9.99e-01, Time: 0.716s
+   ✅ Status: FAIL
+
+[45/241]
+============================================================
+📋 Case: poisson_no_exact_two_gaussian_sources
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6081, out=1278
+   🔧 Executing solver...
+   📊 Error: 4.84e-06, Time: 1.217s
+   ✅ Status: PASS
+
+[46/241]
+============================================================
+📋 Case: poisson_no_exact_variable_kappa_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=1352
+   🔧 Executing solver...
+   📊 Error: 7.03e-05, Time: 0.566s
+   ✅ Status: PASS
+
+[47/241]
+============================================================
+📋 Case: poisson_no_exact_high_freq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6048, out=1241
+   🔧 Executing solver...
+   📊 Error: 1.47e-03, Time: 0.548s
+   ✅ Status: PASS
+
+[48/241]
+============================================================
+📋 Case: poisson_no_exact_low_background_kappa_constant_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6085, out=1332
+   🔧 Executing solver...
+   📊 Error: 3.05e-06, Time: 1.081s
+   ✅ Status: PASS
+
+[49/241]
+============================================================
+📋 Case: poisson_no_exact_quadrilateral_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6076, out=1218
+   🔧 Executing solver...
+   📊 Error: 1.06e-04, Time: 0.562s
+   ✅ Status: PASS
+
+[50/241]
+============================================================
+📋 Case: poisson_exponential_trig_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6069, out=1372
+   🔧 Executing solver...
+   📊 Error: 4.69e-05, Time: 0.505s
+   ✅ Status: PASS
+
+[51/241]
+============================================================
+📋 Case: heat_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6137, out=2410
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[52/241]
+============================================================
+📋 Case: heat_longer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6107, out=2430
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[53/241]
+============================================================
+📋 Case: heat_variable_kappa
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6145, out=2301
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[54/241]
+============================================================
+📋 Case: heat_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6104, out=2244
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[55/241]
+============================================================
+📋 Case: heat_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6109, out=1967
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[56/241]
+============================================================
+📋 Case: heat_no_exact_long
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6115, out=2108
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[57/241]
+============================================================
+📋 Case: heat_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6134, out=2407
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[58/241]
+============================================================
+📋 Case: heat_stiff_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6119, out=2344
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[59/241]
+============================================================
+📋 Case: heat_large_kappa_fast_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6131, out=2322
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[60/241]
+============================================================
+📋 Case: heat_p3_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6123, out=2319
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[61/241]
+============================================================
+📋 Case: heat_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6137, out=2001
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[62/241]
+============================================================
+📋 Case: heat_oscillatory_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6119, out=2026
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[63/241]
+============================================================
+📋 Case: heat_variable_kappa_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6165, out=2166
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[64/241]
+============================================================
+📋 Case: heat_quadrilateral_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6120, out=1975
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[65/241]
+============================================================
+📋 Case: heat_multifrequency_u
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6167, out=2529
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[66/241]
+============================================================
+📋 Case: heat_boundary_layer_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6132, out=2406
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[67/241]
+============================================================
+📋 Case: heat_boundary_layer_y
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6132, out=2369
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[68/241]
+============================================================
+📋 Case: heat_variable_kappa_strong_smooth
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6183, out=2276
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[69/241]
+============================================================
+📋 Case: heat_variable_kappa_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6183, out=2477
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[70/241]
+============================================================
+📋 Case: heat_large_kappa10_fast_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6134, out=2192
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[71/241]
+============================================================
+📋 Case: heat_small_kappa0p1_slow_diffusion
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6135, out=2338
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[72/241]
+============================================================
+📋 Case: heat_quadrilateral_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6132, out=2371
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[73/241]
+============================================================
+📋 Case: heat_p2_variable_kappa_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6184, out=2224
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[74/241]
+============================================================
+📋 Case: heat_no_exact_constant_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=1808
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[75/241]
+============================================================
+📋 Case: heat_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6142, out=1888
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[76/241]
+============================================================
+📋 Case: heat_no_exact_gaussian_source_gaussian_ic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6152, out=1886
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[77/241]
+============================================================
+📋 Case: heat_no_exact_variable_kappa_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6161, out=2544
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[78/241]
+============================================================
+📋 Case: heat_gaussian_bump_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6143, out=2535
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[79/241]
+============================================================
+📋 Case: heat_rotated_wave_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6140, out=2352
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[80/241]
+============================================================
+📋 Case: heat_directional_high_freq_x
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6127, out=2391
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[81/241]
+============================================================
+📋 Case: heat_kappa_local_peak_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6172, out=2436
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[82/241]
+============================================================
+📋 Case: heat_kappa_stripes_x_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6160, out=2110
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[83/241]
+============================================================
+📋 Case: heat_kappa_low_background_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6169, out=2334
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[84/241]
+============================================================
+📋 Case: heat_quadrilateral_high_freq_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6126, out=2376
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[85/241]
+============================================================
+📋 Case: heat_p3_high_freq_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6129, out=2432
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[86/241]
+============================================================
+📋 Case: heat_long_time_moderate_dt
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6122, out=2294
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[87/241]
+============================================================
+📋 Case: heat_small_dt_short_time
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6124, out=2538
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[88/241]
+============================================================
+📋 Case: heat_no_exact_two_gaussian_sources
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6155, out=1903
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[89/241]
+============================================================
+📋 Case: heat_no_exact_high_freq_initial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6113, out=2267
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[90/241]
+============================================================
+📋 Case: heat_no_exact_variable_kappa_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6199, out=2119
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[91/241]
+============================================================
+📋 Case: convdiff_high_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6136, out=2044
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[92/241]
+============================================================
+📋 Case: convdiff_low_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6115, out=1971
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 1.726s
+   ✅ Status: PASS
+
+[93/241]
+============================================================
+📋 Case: convdiff_medium_pe_diagonal
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6139, out=1747
+   🔧 Executing solver...
+   📊 Error: 2.49e-04, Time: 1.961s
+   ✅ Status: PASS
+
+[94/241]
+============================================================
+📋 Case: convdiff_high_pe_xwind_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6145, out=1884
+   🔧 Executing solver...
+   📊 Error: 6.28e-05, Time: 1.710s
+   ✅ Status: PASS
+
+[95/241]
+============================================================
+📋 Case: convdiff_high_pe_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6141, out=1965
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[96/241]
+============================================================
+📋 Case: convdiff_p2_moderate_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6140, out=2221
+   🔧 Executing solver...
+   📊 Error: 8.15e-04, Time: 1.815s
+   ✅ Status: FAIL
+
+[97/241]
+============================================================
+📋 Case: convdiff_gaussian_source_no_exact
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6148, out=2113
+   🔧 Executing solver...
+   📊 Error: 3.78e-03, Time: 1.511s
+   ✅ Status: PASS
+
+[98/241]
+============================================================
+📋 Case: advection_pure_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6070, out=2313
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[99/241]
+============================================================
+📋 Case: convdiff_elliptic_low_pe_cos_mix
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6132, out=2129
+   🔧 Executing solver...
+   📊 Error: 1.38e-04, Time: 1.674s
+   ✅ Status: PASS
+
+[100/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_rotated
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6158, out=2038
+   🔧 Executing solver...
+   📊 Error: 5.92e-04, Time: 1.853s
+   ✅ Status: PASS
+
+[101/241]
+============================================================
+📋 Case: convdiff_elliptic_high_pe_strong_x_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6162, out=1784
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[102/241]
+============================================================
+📋 Case: convdiff_elliptic_high_pe_strong_y_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6162, out=1925
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[103/241]
+============================================================
+📋 Case: convdiff_elliptic_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6140, out=2280
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[104/241]
+============================================================
+📋 Case: convdiff_elliptic_p2_moderate_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6144, out=2047
+   🔧 Executing solver...
+   📊 Error: 2.47e-05, Time: 1.855s
+   ✅ Status: FAIL
+
+[105/241]
+============================================================
+📋 Case: convdiff_elliptic_quadrilateral_medium_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6145, out=1835
+   🔧 Executing solver...
+   📊 Error: 1.56e-03, Time: 1.810s
+   ✅ Status: PASS
+
+[106/241]
+============================================================
+📋 Case: convdiff_elliptic_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6131, out=2062
+   🔧 Executing solver...
+   📊 Error: 5.15e-03, Time: 1.588s
+   ✅ Status: PASS
+
+[107/241]
+============================================================
+📋 Case: convdiff_mixed_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6156, out=2033
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[108/241]
+============================================================
+📋 Case: convdiff_mixed_high_pe_xwind_supg_stronger
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6158, out=2042
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[109/241]
+============================================================
+📋 Case: convdiff_mixed_medium_pe_no_stabilization
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6143, out=2183
+   🔧 Executing solver...
+   📊 Error: 3.19e-04, Time: 1.903s
+   ✅ Status: PASS
+
+[110/241]
+============================================================
+📋 Case: convdiff_mixed_layer_exp_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6141, out=1936
+   🔧 Executing solver...
+   📊 Error: 2.73e-05, Time: 2.183s
+   ✅ Status: PASS
+
+[111/241]
+============================================================
+📋 Case: convdiff_mixed_quadrilateral_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6142, out=2176
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[112/241]
+============================================================
+📋 Case: convdiff_mixed_p2_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6157, out=1862
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[113/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6147, out=1888
+   🔧 Executing solver...
+   📊 Error: 1.45e-03, Time: 1.513s
+   ✅ Status: PASS
+
+[114/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_multifreq_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6169, out=2012
+   🔧 Executing solver...
+   📊 Error: 4.37e-03, Time: 1.573s
+   ✅ Status: PASS
+
+[115/241]
+============================================================
+📋 Case: convdiff_parabolic_basic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6235, out=3121
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[116/241]
+============================================================
+📋 Case: convdiff_parabolic_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6242, out=3006
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[117/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_forcing
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6224, out=2554
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[118/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_time_dependent_forcing
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6260, out=2574
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[119/241]
+============================================================
+📋 Case: convdiff_elliptic_low_pe_polynomial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6130, out=1568
+   🔧 Executing solver...
+   📊 Error: 1.76e-04, Time: 1.655s
+   ✅ Status: PASS
+
+[120/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_exp_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6152, out=2107
+   🔧 Executing solver...
+   📊 Error: 9.49e-05, Time: 1.859s
+   ✅ Status: PASS
+
+[121/241]
+============================================================
+📋 Case: convdiff_elliptic_medium_pe_diagonal_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6158, out=2402
+   🔧 Executing solver...
+   📊 Error: 2.30e-03, Time: 1.988s
+   ✅ Status: PASS
+
+[122/241]
+============================================================
+📋 Case: convdiff_elliptic_quadrilateral_low_pe
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6123, out=1731
+   🔧 Executing solver...
+   📊 Error: 1.20e-04, Time: 1.748s
+   ✅ Status: PASS
+
+[123/241]
+============================================================
+📋 Case: convdiff_elliptic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6136, out=1694
+   🔧 Executing solver...
+   📊 Error: 7.79e-04, Time: 1.538s
+   ✅ Status: PASS
+
+[124/241]
+============================================================
+📋 Case: convdiff_mixed_extreme_pe_supg_upwind3
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6157, out=2303
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[125/241]
+============================================================
+📋 Case: convdiff_mixed_reverse_flow_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6140, out=1736
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[126/241]
+============================================================
+📋 Case: convdiff_mixed_quadrilateral_supg_upwind2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6146, out=2146
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[127/241]
+============================================================
+📋 Case: convdiff_mixed_p3_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6157, out=2191
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[128/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6142, out=2191
+   🔧 Executing solver...
+   📊 Error: 5.67e-03, Time: 1.569s
+   ✅ Status: PASS
+
+[129/241]
+============================================================
+📋 Case: convdiff_mixed_no_exact_constant_source_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6125, out=3033
+   🔧 Executing solver...
+   📊 Error: 6.22e+00, Time: 1.511s
+   ✅ Status: FAIL
+
+[130/241]
+============================================================
+📋 Case: convdiff_parabolic_longer_time_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6228, out=2857
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[131/241]
+============================================================
+📋 Case: convdiff_parabolic_small_dt_high_pe_supg
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6246, out=2866
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[132/241]
+============================================================
+📋 Case: convdiff_parabolic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6250, out=2448
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[133/241]
+============================================================
+📋 Case: stokes_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6158, out=1904
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[134/241]
+============================================================
+📋 Case: stokes_low_viscosity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6161, out=2298
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[135/241]
+============================================================
+📋 Case: stokes_high_viscosity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6161, out=2128
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[136/241]
+============================================================
+📋 Case: stokes_high_frequency_flow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6151, out=2020
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[137/241]
+============================================================
+📋 Case: stokes_exponential_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6118, out=2438
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[138/241]
+============================================================
+📋 Case: stokes_p3p2_taylor_hood
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6165, out=2241
+   🔧 Executing solver...
+   📊 Error: 1.17e-07, Time: 1.397s
+   ✅ Status: PASS
+
+[139/241]
+============================================================
+📋 Case: stokes_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6162, out=2094
+   🔧 Executing solver...
+   📊 Error: 1.38e-08, Time: 2.316s
+   ✅ Status: PASS
+
+[140/241]
+============================================================
+📋 Case: stokes_no_exact_lid_driven_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6108, out=2189
+   🔧 Executing solver...
+   ❌ Error computation failed
+
+[141/241]
+============================================================
+📋 Case: stokes_no_exact_channel_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=2247
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[142/241]
+============================================================
+📋 Case: stokes_no_exact_mixed_bc_rotating_wall
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=2806
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[143/241]
+============================================================
+📋 Case: stokes_no_exact_corner_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6153, out=1928
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[144/241]
+============================================================
+📋 Case: stokes_no_exact_channel_poiseuille_low_nu
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6112, out=2142
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[145/241]
+============================================================
+📋 Case: stokes_no_exact_double_lid_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6108, out=2251
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[146/241]
+============================================================
+📋 Case: stokes_no_exact_counter_shear_open_sides
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6111, out=1833
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[147/241]
+============================================================
+📋 Case: stokes_no_exact_swirl_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6111, out=3804
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[148/241]
+============================================================
+📋 Case: stokes_no_exact_diagonal_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=2558
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[149/241]
+============================================================
+📋 Case: stokes_no_exact_constant_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6109, out=2225
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[150/241]
+============================================================
+📋 Case: stokes_no_exact_outflow_top_boundary
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6109, out=6178
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[151/241]
+============================================================
+📋 Case: navier_stokes_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6144, out=2120
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[152/241]
+============================================================
+📋 Case: navier_stokes_low_re
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6139, out=2353
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[153/241]
+============================================================
+📋 Case: navier_stokes_high_re
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6146, out=2352
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f0e203977e0>
+Traceback (most recent c
+
+[154/241]
+============================================================
+📋 Case: navier_stokes_high_frequency_flow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6157, out=1955
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[155/241]
+============================================================
+📋 Case: navier_stokes_p3p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6140, out=2096
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fbd3c68f7e0>
+Traceback (most recent c
+
+[156/241]
+============================================================
+📋 Case: navier_stokes_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6131, out=2146
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f3ba66e7560>
+Traceback (most recent c
+
+[157/241]
+============================================================
+📋 Case: navier_stokes_medium_re_stream_2x1
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6159, out=2365
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[158/241]
+============================================================
+📋 Case: navier_stokes_medium_re_stream_1x2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6159, out=2162
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[159/241]
+============================================================
+📋 Case: navier_stokes_high_nu_smooth_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6149, out=2393
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f05cbdd74c0>
+Traceback (most recent c
+
+[160/241]
+============================================================
+📋 Case: navier_stokes_low_nu_small_amplitude
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6139, out=2239
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f021197b560>
+Traceback (most recent c
+
+[161/241]
+============================================================
+📋 Case: navier_stokes_exponential_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6132, out=2268
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fe10edd7600>
+Traceback (most recent c
+
+[162/241]
+============================================================
+📋 Case: navier_stokes_boundary_layer_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6141, out=2313
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fbd22f2f4c0>
+Traceback (most recent c
+
+[163/241]
+============================================================
+📋 Case: navier_stokes_multiscale_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6185, out=2203
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[164/241]
+============================================================
+📋 Case: navier_stokes_polynomial_stream_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6129, out=2046
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fc5fe2fb4c0>
+Traceback (most recent c
+
+[165/241]
+============================================================
+📋 Case: navier_stokes_shear_layer_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6153, out=2364
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fad1e0734c0>
+Traceback (most recent c
+
+[166/241]
+============================================================
+📋 Case: navier_stokes_quadrilateral_multiscale
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6180, out=2358
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f1d7edd7560>
+Traceback (most recent c
+
+[167/241]
+============================================================
+📋 Case: navier_stokes_p4p3_small_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6141, out=2045
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[168/241]
+============================================================
+📋 Case: navier_stokes_no_exact_lid_driven_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6095, out=2381
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f2ac1b33560>
+Traceback (most recent c
+
+[169/241]
+============================================================
+📋 Case: navier_stokes_no_exact_channel_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6097, out=2471
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f1d2ee9b740>
+Traceback (most recent c
+
+[170/241]
+============================================================
+📋 Case: navier_stokes_localized_vortex_gaussian
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6182, out=2092
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fb5de2d3560>
+Traceback (most recent c
+
+[171/241]
+============================================================
+📋 Case: navier_stokes_two_vortices_gaussian_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6249, out=2438
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[172/241]
+============================================================
+📋 Case: navier_stokes_tanh_x_shear_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6174, out=2424
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f217712f560>
+Traceback (most recent c
+
+[173/241]
+============================================================
+📋 Case: navier_stokes_sin3x2y_stream
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6169, out=2321
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fdf67e6f600>
+Traceback (most recent c
+
+[174/241]
+============================================================
+📋 Case: navier_stokes_polynomial_stream_higher_degree
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6155, out=2299
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[175/241]
+============================================================
+📋 Case: navier_stokes_no_exact_double_lid_cavity
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6099, out=2806
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fbb6b5df560>
+Traceback (most recent c
+
+[176/241]
+============================================================
+📋 Case: navier_stokes_no_exact_counter_shear_open_sides
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6102, out=5163
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[177/241]
+============================================================
+📋 Case: navier_stokes_no_exact_swirl_inflow_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6102, out=2879
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f9ac230f880>
+Traceback (most recent c
+
+[178/241]
+============================================================
+📋 Case: navier_stokes_no_exact_constant_force_outflow
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6100, out=2513
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f9b64877560>
+Traceback (most recent c
+
+[179/241]
+============================================================
+📋 Case: helmholtz_basic_k5
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6088, out=1433
+   🔧 Executing solver...
+   📊 Error: 1.40e-04, Time: 1.607s
+   ✅ Status: PASS
+
+[180/241]
+============================================================
+📋 Case: helmholtz_low_k2_polynomial
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6090, out=1539
+   🔧 Executing solver...
+   📊 Error: 2.26e-04, Time: 1.249s
+   ✅ Status: PASS
+
+[181/241]
+============================================================
+📋 Case: helmholtz_k10_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6094, out=1479
+   🔧 Executing solver...
+   📊 Error: 5.02e-04, Time: 1.576s
+   ✅ Status: PASS
+
+[182/241]
+============================================================
+📋 Case: helmholtz_k12_exponential_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6091, out=1502
+   🔧 Executing solver...
+   📊 Error: 2.57e-04, Time: 6.043s
+   ✅ Status: PASS
+
+[183/241]
+============================================================
+📋 Case: helmholtz_k20_very_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6096, out=1622
+   🔧 Executing solver...
+   📊 Error: 1.47e-03, Time: 1.779s
+   ✅ Status: PASS
+
+[184/241]
+============================================================
+📋 Case: helmholtz_k25_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6090, out=1677
+   🔧 Executing solver...
+   📊 Error: 3.23e-05, Time: 1.675s
+   ✅ Status: PASS
+
+[185/241]
+============================================================
+📋 Case: helmholtz_no_exact_gaussian_source_k15
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6092, out=1332
+   🔧 Executing solver...
+   📊 Error: 1.28e-05, Time: 1.041s
+   ✅ Status: PASS
+
+[186/241]
+============================================================
+📋 Case: helmholtz_no_exact_two_gaussians_k18
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6117, out=1346
+   🔧 Executing solver...
+   📊 Error: 1.87e-05, Time: 1.082s
+   ✅ Status: PASS
+
+[187/241]
+============================================================
+📋 Case: helmholtz_no_exact_oscillatory_rhs_k22
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6084, out=1240
+   🔧 Executing solver...
+   📊 Error: 4.29e-04, Time: 1.747s
+   ✅ Status: PASS
+
+[188/241]
+============================================================
+📋 Case: helmholtz_no_exact_nonzero_bc_k12
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6072, out=2365
+   🔧 Executing solver...
+   📊 Error: 1.08e+00, Time: 0.706s
+   ✅ Status: FAIL
+
+[189/241]
+============================================================
+📋 Case: helmholtz_basic_k8_cos_sin
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6092, out=1444
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[190/241]
+============================================================
+📋 Case: helmholtz_k15_two_mode_superposition
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6110, out=1550
+   🔧 Executing solver...
+   📊 Error: 2.32e-04, Time: 1.150s
+   ✅ Status: PASS
+
+[191/241]
+============================================================
+📋 Case: helmholtz_k18_tanh_shear_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6100, out=1511
+   🔧 Executing solver...
+   📊 Error: 7.17e-05, Time: 2.128s
+   ✅ Status: PASS
+
+[192/241]
+============================================================
+📋 Case: helmholtz_quadrilateral_k10_trig
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6097, out=1441
+   🔧 Executing solver...
+   📊 Error: 5.61e-04, Time: 1.499s
+   ✅ Status: PASS
+
+[193/241]
+============================================================
+📋 Case: helmholtz_p2_k12_high_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6097, out=1512
+   🔧 Executing solver...
+   📊 Error: 3.26e-05, Time: 0.660s
+   ✅ Status: FAIL
+
+[194/241]
+============================================================
+📋 Case: helmholtz_direct_lu_k24_high_freq
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6098, out=1435
+   🔧 Executing solver...
+   📊 Error: 1.28e-03, Time: 1.594s
+   ✅ Status: PASS
+
+[195/241]
+============================================================
+📋 Case: helmholtz_no_exact_pointlike_source_k20
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6093, out=1337
+   🔧 Executing solver...
+   📊 Error: 1.20e-04, Time: 0.666s
+   ✅ Status: PASS
+
+[196/241]
+============================================================
+📋 Case: helmholtz_no_exact_sign_changing_rhs_k8
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6085, out=1337
+   🔧 Executing solver...
+   📊 Error: 4.36e-05, Time: 0.634s
+   ✅ Status: PASS
+
+[197/241]
+============================================================
+📋 Case: helmholtz_no_exact_quadrilateral_rhs_k16
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6085, out=1366
+   🔧 Executing solver...
+   📊 Error: 2.17e-05, Time: 1.202s
+   ✅ Status: PASS
+
+[198/241]
+============================================================
+📋 Case: biharmonic_basic_sin
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6066, out=1826
+   🔧 Executing solver...
+   📊 Error: 1.03e-04, Time: 1.086s
+   ✅ Status: PASS
+
+[199/241]
+============================================================
+📋 Case: biharmonic_polynomial_zero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6068, out=2294
+   🔧 Executing solver...
+   📊 Error: 1.47e-04, Time: 0.583s
+   ✅ Status: PASS
+
+[200/241]
+============================================================
+📋 Case: biharmonic_high_mode_trig
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6073, out=1973
+   🔧 Executing solver...
+   📊 Error: 3.19e-04, Time: 0.585s
+   ✅ Status: PASS
+
+[201/241]
+============================================================
+📋 Case: biharmonic_exponential_mode
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6065, out=2146
+   🔧 Executing solver...
+   📊 Error: 2.23e-05, Time: 1.506s
+   ✅ Status: PASS
+
+[202/241]
+============================================================
+📋 Case: biharmonic_boundary_layer_like
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6071, out=2689
+   🔧 Executing solver...
+   📊 Error: 4.64e-05, Time: 0.695s
+   ✅ Status: PASS
+
+[203/241]
+============================================================
+📋 Case: biharmonic_tanh_shear_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6076, out=1986
+   🔧 Executing solver...
+   📊 Error: 5.35e-05, Time: 2.085s
+   ✅ Status: PASS
+
+[204/241]
+============================================================
+📋 Case: biharmonic_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6072, out=2082
+   🔧 Executing solver...
+   📊 Error: 4.31e-04, Time: 0.653s
+   ✅ Status: PASS
+
+[205/241]
+============================================================
+📋 Case: biharmonic_p2_elements
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6071, out=2909
+   🔧 Executing solver...
+   📊 Error: 1.75e-05, Time: 0.592s
+   ✅ Status: FAIL
+
+[206/241]
+============================================================
+📋 Case: biharmonic_no_exact_gaussian_source
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6068, out=2664
+   🔧 Executing solver...
+   📊 Error: 1.38e-06, Time: 0.650s
+   ✅ Status: PASS
+
+[207/241]
+============================================================
+📋 Case: biharmonic_no_exact_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6060, out=1883
+   🔧 Executing solver...
+   📊 Error: 8.73e-04, Time: 0.663s
+   ✅ Status: PASS
+
+[208/241]
+============================================================
+📋 Case: biharmonic_no_exact_sign_changing_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6061, out=1897
+   🔧 Executing solver...
+   📊 Error: 3.59e-05, Time: 0.660s
+   ✅ Status: PASS
+
+[209/241]
+============================================================
+📋 Case: biharmonic_no_exact_nonzero_bc
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6077, out=2562
+   🔧 Executing solver...
+   📊 Error: 2.42e-04, Time: 0.623s
+   ✅ Status: PASS
+
+[210/241]
+============================================================
+📋 Case: biharmonic_multimode_superposition
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6090, out=2431
+   🔧 Executing solver...
+   📊 Error: 1.24e-04, Time: 1.514s
+   ✅ Status: PASS
+
+[211/241]
+============================================================
+📋 Case: biharmonic_quadrilateral_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6071, out=2071
+   🔧 Executing solver...
+   📊 Error: 5.54e-06, Time: 1.546s
+   ✅ Status: FAIL
+
+[212/241]
+============================================================
+📋 Case: biharmonic_no_exact_quadrilateral_oscillatory_rhs
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6064, out=1956
+   🔧 Executing solver...
+   📊 Error: 1.96e-04, Time: 0.679s
+   ✅ Status: PASS
+
+[213/241]
+============================================================
+📋 Case: linear_elasticity_near_incompressible_nu049
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6173, out=1474
+   🔧 Executing solver...
+   📊 Error: 3.46e-04, Time: 1.169s
+   ✅ Status: FAIL
+
+[214/241]
+============================================================
+📋 Case: linear_elasticity_nu045
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6167, out=1516
+   🔧 Executing solver...
+   📊 Error: 2.68e-04, Time: 0.893s
+   ✅ Status: FAIL
+
+[215/241]
+============================================================
+📋 Case: linear_elasticity_exponential_gradients
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6169, out=1463
+   🔧 Executing solver...
+   📊 Error: 3.63e-05, Time: 1.723s
+   ✅ Status: FAIL
+
+[216/241]
+============================================================
+📋 Case: linear_elasticity_tanh_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6180, out=1475
+   🔧 Executing solver...
+   📊 Error: 8.44e-05, Time: 2.381s
+   ✅ Status: FAIL
+
+[217/241]
+============================================================
+📋 Case: linear_elasticity_high_frequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6176, out=1505
+   🔧 Executing solver...
+   📊 Error: 6.26e-04, Time: 3.440s
+   ✅ Status: FAIL
+
+[218/241]
+============================================================
+📋 Case: linear_elasticity_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6176, out=1493
+   🔧 Executing solver...
+   📊 Error: 4.09e-04, Time: 1.884s
+   ✅ Status: FAIL
+
+[219/241]
+============================================================
+📋 Case: linear_elasticity_no_exact_boundary_driven
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6138, out=2040
+   🔧 Executing solver...
+   📊 Error: 9.38e-01, Time: 1.265s
+   ✅ Status: FAIL
+
+[220/241]
+============================================================
+📋 Case: reaction_diffusion_linear_basic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6246, out=2710
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[221/241]
+============================================================
+📋 Case: reaction_diffusion_linear_high_frequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6229, out=3939
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[222/241]
+============================================================
+📋 Case: reaction_diffusion_quadrilateral_mesh
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6225, out=3168
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[223/241]
+============================================================
+📋 Case: reaction_diffusion_cubic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6254, out=2806
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fccee1d74c0>
+Traceback (most recent c
+
+[224/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6244, out=3105
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f388df5f4c0>
+Traceback (most recent c
+
+[225/241]
+============================================================
+📋 Case: reaction_diffusion_logistic_manufactured
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6237, out=2995
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f86920034c0>
+Traceback (most recent c
+
+[226/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_p2
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6236, out=2615
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fd17c03f4c0>
+Traceback (most recent c
+
+[227/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_gaussian_source_allen_cahn
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6280, out=2497
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f2f960bb4c0>
+Traceback (most recent c
+
+[228/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_two_gaussians_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6321, out=2146
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f2444b93600>
+Traceback (most recent c
+
+[229/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_oscillatory_rhs_cubic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6258, out=2089
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f5a9046f560>
+Traceback (most recent c
+
+[230/241]
+============================================================
+📋 Case: reaction_diffusion_linear_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6212, out=2961
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[231/241]
+============================================================
+📋 Case: reaction_diffusion_linear_boundary_layer
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6214, out=2950
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[232/241]
+============================================================
+📋 Case: reaction_diffusion_linear_multifrequency
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6228, out=3955
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[233/241]
+============================================================
+📋 Case: reaction_diffusion_allen_cahn_stronger_reaction
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6233, out=2822
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f762d58f4c0>
+Traceback (most recent c
+
+[234/241]
+============================================================
+📋 Case: reaction_diffusion_logistic_high_rho
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6229, out=3112
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f11ca2ff560>
+Traceback (most recent c
+
+[235/241]
+============================================================
+📋 Case: reaction_diffusion_cubic_softening
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6222, out=2836
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f77538bb560>
+Traceback (most recent c
+
+[236/241]
+============================================================
+📋 Case: reaction_diffusion_transient_linear_time_decay
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6186, out=3095
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+[237/241]
+============================================================
+📋 Case: reaction_diffusion_transient_allen_cahn_time
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6202, out=2777
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f54ac1d3560>
+Traceback (most recent c
+
+[238/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_sign_changing_source_allen_cahn
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6240, out=2387
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fb238b534c0>
+Traceback (most recent c
+
+[239/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_localized_sink_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6277, out=2465
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7fbed9ee74c0>
+Traceback (most recent c
+
+[240/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_quadrilateral_logistic
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6228, out=2520
+   🔧 Executing solver...
+   ❌ Execution failed: Exception ignored in: <function NonlinearProblem.__del__ at 0x7f349366f4c0>
+Traceback (most recent c
+
+[241/241]
+============================================================
+📋 Case: reaction_diffusion_no_exact_multifrequency_source_linear
+============================================================
+   ✅ Using cached oracle
+   🤖 Calling claude-opus-4-6 (LLM)...
+   📊 Tokens: in=6248, out=2570
+   🔧 Executing solver...
+   ❌ Execution failed: Traceback (most recent call last):
+  File "/data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/
+
+────────────────────────────────────────────────────────────────────────────────
+📊 Summary: claude-opus-4-6
+────────────────────────────────────────────────────────────────────────────────
+Total Cases: 241
+Passed: 91 (37.8%)
+Avg Error: 9.17e-02
+Avg Time: 1.279s
+
+────────────────────────────────────────────────────────────────────────────────
+📊 Pass Rate by Equation Type
+────────────────────────────────────────────────────────────────────────────────
+
+  BIHARMONIC:
+    Total:      15 cases
+    Passed:     13 cases
+    Failed:     2 cases
+    Pass Rate:  86.7%
+    Avg Error:  1.75e-04
+    Avg Time:   0.941s
+
+  CONVECTION_DIFFUSION:
+    Total:      42 cases
+    Passed:     18 cases
+    Failed:     24 cases
+    Pass Rate:  42.9%
+    Avg Error:  2.98e-01
+    Avg Time:   1.740s
+
+  HEAT:
+    Total:      40 cases
+    Passed:     0 cases
+    Failed:     40 cases
+    Pass Rate:  0.0%
+
+  HELMHOLTZ:
+    Total:      19 cases
+    Passed:     16 cases
+    Failed:     3 cases
+    Pass Rate:  84.2%
+    Avg Error:  6.03e-02
+    Avg Time:   1.558s
+
+  LINEAR_ELASTICITY:
+    Total:      7 cases
+    Passed:     0 cases
+    Failed:     7 cases
+    Pass Rate:  0.0%
+    Avg Error:  1.34e-01
+    Avg Time:   1.822s
+
+  NAVIER_STOKES:
+    Total:      28 cases
+    Passed:     0 cases
+    Failed:     28 cases
+    Pass Rate:  0.0%
+
+  POISSON:
+    Total:      50 cases
+    Passed:     42 cases
+    Failed:     8 cases
+    Pass Rate:  84.0%
+    Avg Error:  4.06e-02
+    Avg Time:   0.982s
+
+  REACTION_DIFFUSION:
+    Total:      22 cases
+    Passed:     0 cases
+    Failed:     22 cases
+    Pass Rate:  0.0%
+
+  STOKES:
+    Total:      18 cases
+    Passed:     2 cases
+    Failed:     16 cases
+    Pass Rate:  11.1%
+    Avg Error:  6.53e-08
+    Avg Time:   1.856s
+
+────────────────────────────────────────────────────────────────────────────────
+📐 Math Type Sub-Leaderboards
+────────────────────────────────────────────────────────────────────────────────
+
+  ELLIPTIC:
+    Cases: 104
+    Pass Rate: 84/104 (80.8%)
+    Avg Metrics:
+      - condition_number_estimate: 266856.394
+      - degree: 2.019
+      - dof: 25,399
+      - efficiency_dof_per_sec: 25,182
+      - linear_iterations: 112.798
+      - resolution: 77.462
+
+  INCOMPRESSIBLE_FLOW:
+    Cases: 2
+    Pass Rate: 2/2 (100.0%)
+    Avg Metrics:
+      - linear_iterations: 3.500
+
+  MIXED_TYPE:
+    Cases: 6
+    Pass Rate: 5/6 (83.3%)
+    Avg Metrics:
+      - peclet_number: 1614.415
+      - total_variation: 251.652
+
+────────────────────────────────────────────────────────────────────────────────
+🚪 Gate Breakdown (实验 4.1)
+────────────────────────────────────────────────────────────────────────────────
+  Exec Valid:     112/241 (46.5%)
+  Accuracy Pass:   92/241 (38.2%)
+  Time Pass:       91/241 (37.8%)
+  Final Pass:      91/241 (37.8%)
+
+  Failure Distribution:
+    - accuracy: 20 (8.3%)
+    - exec: 129 (53.5%)
+    - time: 1 (0.4%)
+
+────────────────────────────────────────────────────────────────────────────────
+💰 Cost Analysis (实验 4.6)
+────────────────────────────────────────────────────────────────────────────────
+  Total Cost:     $0.0000
+  Total Tokens:   868,475
+  Avg Latency:    21.23s
+  Cost/Case:      $0.0000
+  Cost/Pass:      $0.0000
+  Tokens/Case:    7,754
+────────────────────────────────────────────────────────────────────────────────
+
+================================================================================
+✅ Benchmark Complete!
+📁 Results saved to: /data/home/bingodong/code/ustc_pde_agent/pde-agent-bench/results
+================================================================================

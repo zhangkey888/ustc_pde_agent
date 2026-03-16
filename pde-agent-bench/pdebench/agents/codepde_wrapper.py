@@ -58,7 +58,8 @@ class CodePDEWrapper(BaseAgent):
         
         # LLM 配置
         self.model_name = self.config.get('model', 'gpt-4o')
-        self.model_family = self._get_model_family(self.model_name)
+        # 优先从配置读取 model_family，否则自动推断
+        self.model_family = self.config.get('model_family') or self._get_model_family(self.model_name)
         self.api_key = self.config.get('api_key', None)
         self.temperature = self.config.get('temperature', 0.7)
         # 兼容不同 OpenAI 模型：gpt-5.* 需要 max_completion_tokens
@@ -228,6 +229,7 @@ class CodePDEWrapper(BaseAgent):
                     temperature=None,
                     max_tokens=None,
                     max_completion_tokens=None,
+                    thinking=False,
                 ):
                     self.name = name
                     self.family_name = family_name
@@ -236,6 +238,7 @@ class CodePDEWrapper(BaseAgent):
                     self.temperature = temperature
                     self.max_tokens = max_tokens
                     self.max_completion_tokens = max_completion_tokens
+                    self.thinking = thinking
             
             def __init__(
                 self,

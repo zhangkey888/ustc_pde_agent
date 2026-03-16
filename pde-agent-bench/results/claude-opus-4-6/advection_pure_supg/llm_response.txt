@@ -1,0 +1,162 @@
+```python
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    # Parameters
+    epsilon = case_spec["pde"]["coefficients"]["epsilon"]
+    beta = case_spec["pde"]["coefficients"]["beta"]
+    
+    # For pure advection (epsilon=0), we need SUPG stabilization
+    # Use a reasonably fine mesh
+    N = 80
+    degree = 1
+    
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    V = fem.functionspace(domain, ("Lagrange", degree))
+    
+    x = ufl.SpatialCoordinate(domain)
+    
+    # Exact solution
+    u_exact_ufl = ufl.sin(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1])
+    
+    # Velocity field
+    beta_vec = ufl.as_vector([ScalarType(beta[0]), ScalarType(beta[1])])
+    
+    # Source term: f = -epsilon * laplacian(u) + beta . grad(u)
+    # For u = sin(pi*x)*sin(pi*y):
+    # laplacian(u) = -2*pi^2 * sin(pi*x)*sin(pi*y)
+    # grad(u) = [pi*cos(pi*x)*sin(pi*y), pi*sin(pi*x)*cos(pi*y)]
+    # f = -epsilon * (-2*pi^2 * sin(pi*x)*sin(pi*y)) + beta . grad(u)
+    #   = 2*epsilon*pi^2*sin(pi*x)*sin(pi*y) + beta[0]*pi*cos(pi*x)*sin(pi*y) + beta[1]*pi*sin(pi*x)*cos(pi*y)
+    
+    f_ufl = (ScalarType(epsilon) * 2.0 * ufl.pi**2 * ufl.sin(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1])
+             + ScalarType(beta[0]) * ufl.pi * ufl.cos(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1])
+             + ScalarType(beta[1]) * ufl.pi * ufl.sin(ufl.pi * x[0]) * ufl.cos(ufl.pi * x[1]))
+    
+    # Trial and test functions
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+    
+    # Standard Galerkin terms
+    eps_val = ScalarType(epsilon)
+    a_standard = eps_val * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx + ufl.inner(ufl.dot(beta_vec, ufl.grad(u)), v) * ufl.dx
+    L_standard = ufl.inner(f_ufl, v) * ufl.dx
+    
+    # SUPG stabilization
+    # Compute element size h
+    h = ufl.CellDiameter(domain)
+    beta_norm = ufl.sqrt(ufl.dot(beta_vec, beta_vec))
+    
+    # SUPG stabilization parameter
+    # For pure advection, tau = h / (2 * |beta|)
+    # More general: tau = h / (2 * |beta|) * (coth(Pe_h) - 1/Pe_h) where Pe_h = |beta|*h/(2*epsilon)
+    # For epsilon=0, this simplifies to tau = h / (2 * |beta|)
+    if epsilon == 0.0:
+        tau = h / (2.0 * beta_norm + 1e-16)
+    else:
+        Pe_h = beta_norm * h / (2.0 * eps_val + 1e-16)
+        # Use a simpler formula that works for high Peclet
+        tau = h / (2.0 * beta_norm + 1e-16)
+    
+    # SUPG residual: R(u) = -epsilon * laplacian(u) + beta . grad(u) - f
+    # For linear elements, laplacian(u) = 0 within each element
+    # So R(u) = beta . grad(u) - f
+    R_u = ufl.dot(beta_vec, ufl.grad(u)) - f_ufl
+    
+    # SUPG test function modification: v_supg = tau * beta . grad(v)
+    v_supg = tau * ufl.dot(beta_vec, ufl.grad(v))
+    
+    a_supg = ufl.inner(R_u, v_supg) * ufl.dx
+    # Split into bilinear and linear parts
+    # R_u = beta.grad(u) - f
+    # inner(R_u, v_supg) = inner(beta.grad(u), v_supg) - inner(f, v_supg)
+    a_stab = ufl.inner(ufl.dot(beta_vec, ufl.grad(u)), v_supg) * ufl.dx
+    L_stab = ufl.inner(f_ufl, v_supg) * ufl.dx
+    
+    a = a_standard + a_stab
+    L = L_standard + L_stab
+    
+    # Boundary conditions: u = g = sin(pi*x)*sin(pi*y) on boundary
+    # On the unit square boundary, sin(pi*x)*sin(pi*y) = 0 everywhere
+    # (since either x or y is 0 or 1)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    boundary_facets = mesh.locate_entities_boundary(
+        domain, fdim, lambda x: np.ones(x.shape[1], dtype=bool)
+    )
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    
+    u_bc = fem.Function(V)
+    u_bc.interpolate(lambda x: np.sin(np.pi * x[0]) * np.sin(np.pi * x[1]))
+    bc = fem.dirichletbc(u_bc, dofs)
+    
+    # Solve
+    problem = petsc.LinearProblem(
+        a, L, bcs=[bc],
+        petsc_options={
+            "ksp_type": "gmres",
+            "pc_type": "ilu",
+            "ksp_rtol": "1e-10",
+            "ksp_max_it": "2000",
+        },
+        petsc_options_prefix="cdiff_"
+    )
+    u_sol = problem.solve()
+    
+    # Get iteration count
+    ksp = problem.solver
+    iterations = ksp.getIterationNumber()
+    
+    # Evaluate on 50x50 grid
+    nx_out, ny_out = 50, 50
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0] = XX.ravel()
+    points[1] = YY.ravel()
+    
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points.T[i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    u_values = np.full(nx_out * ny_out, np.nan)
+    if len(points_on_proc) > 0:
+        vals = u_sol.eval(np.array(points_on_proc), np.array(cells_on_proc, dtype=np.int32))
+        u_values[eval_map] = vals.flatten()
+    
+    u_grid = u_values.reshape((nx_out, ny_out))
+    
+    return {
+        "u": u_grid,
+        "solver_info": {
+            "mesh_resolution": N,
+            "element_degree": degree,
+            "ksp_type": "gmres",
+            "pc_type": "ilu",
+            "rtol": 1e-10,
+            "iterations": int(iterations),
+        }
+    }
+```

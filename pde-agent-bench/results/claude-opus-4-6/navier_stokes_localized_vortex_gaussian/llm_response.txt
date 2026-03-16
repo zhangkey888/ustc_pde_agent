@@ -1,0 +1,164 @@
+```python
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, nls, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+    
+    nu_val = 0.12
+    N = 64  # mesh resolution
+    degree_u = 2
+    degree_p = 1
+    
+    # Create mesh
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    
+    # Function spaces - Taylor-Hood
+    V = fem.functionspace(domain, ("Lagrange", degree_u, (domain.geometry.dim,)))
+    Q = fem.functionspace(domain, ("Lagrange", degree_p))
+    
+    # Mixed function space
+    from dolfinx.fem import Function
+    from basix.ufl import mixed_element, element
+    
+    vel_el = element("Lagrange", domain.basix_cell(), degree_u, shape=(domain.geometry.dim,))
+    pres_el = element("Lagrange", domain.basix_cell(), degree_p)
+    mel = mixed_element([vel_el, pres_el])
+    W = fem.functionspace(domain, mel)
+    
+    # Solution function
+    w = fem.Function(W)
+    (u, p) = ufl.split(w)
+    (v, q) = ufl.TestFunctions(W)
+    
+    x = ufl.SpatialCoordinate(domain)
+    nu = fem.Constant(domain, PETSc.ScalarType(nu_val))
+    
+    # Exact solution
+    u_exact_0 = -40*(x[1]-0.5)*ufl.exp(-20*((x[0]-0.5)**2 + (x[1]-0.5)**2))
+    u_exact_1 = 40*(x[0]-0.5)*ufl.exp(-20*((x[0]-0.5)**2 + (x[1]-0.5)**2))
+    u_exact = ufl.as_vector([u_exact_0, u_exact_1])
+    p_exact = ufl.as_vector([0.0])  # p = 0
+    
+    # Compute source term: f = u·∇u - ν∇²u + ∇p
+    # Since p=0, ∇p = 0
+    grad_u_exact = ufl.grad(u_exact)
+    f = ufl.grad(u_exact) * u_exact - nu * ufl.div(ufl.grad(u_exact))
+    
+    # Residual form
+    F = (
+        nu * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+        + ufl.inner(ufl.grad(u) * u, v) * ufl.dx
+        - ufl.inner(p, ufl.div(v)) * ufl.dx
+        + ufl.inner(ufl.div(u), q) * ufl.dx
+        - ufl.inner(f, v) * ufl.dx
+    )
+    
+    # Boundary conditions
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+    
+    # All boundary
+    domain.topology.create_connectivity(fdim, tdim)
+    boundary_facets = mesh.exterior_facet_indices(domain.topology)
+    
+    # Velocity BC
+    V_sub, _ = W.sub(0).collapse()
+    u_bc_func = fem.Function(V_sub)
+    
+    u_bc_expr = fem.Expression(u_exact, V_sub.element.interpolation_points)
+    u_bc_func.interpolate(u_bc_expr)
+    
+    dofs_u = fem.locate_dofs_topological((W.sub(0), V_sub), fdim, boundary_facets)
+    bc_u = fem.dirichletbc(u_bc_func, dofs_u, W.sub(0))
+    
+    # Pin pressure at one point to remove nullspace
+    Q_sub, _ = W.sub(1).collapse()
+    
+    def origin(x):
+        return np.isclose(x[0], 0.0) & np.isclose(x[1], 0.0)
+    
+    p_dofs = fem.locate_dofs_geometrical((W.sub(1), Q_sub), origin)
+    p_bc_func = fem.Function(Q_sub)
+    p_bc_func.x.array[:] = 0.0
+    bc_p = fem.dirichletbc(p_bc_func, p_dofs, W.sub(1))
+    
+    bcs = [bc_u, bc_p]
+    
+    # Initial guess: interpolate exact solution
+    w.sub(0).interpolate(u_bc_expr)
+    w.x.scatter_forward()
+    
+    # Solve
+    problem = petsc.NonlinearProblem(F, w, bcs=bcs)
+    solver = nls.petsc.NewtonSolver(comm, problem)
+    solver.convergence_criterion = "incremental"
+    solver.rtol = 1e-10
+    solver.atol = 1e-12
+    solver.max_it = 25
+    
+    ksp = solver.krylov_solver
+    ksp.setType(PETSc.KSP.Type.GMRES)
+    ksp.setTolerances(rtol=1e-10, max_it=2000)
+    pc = ksp.getPC()
+    pc.setType(PETSc.PC.Type.LU)
+    
+    n_iters, converged = solver.solve(w)
+    assert converged
+    w.x.scatter_forward()
+    
+    # Extract velocity
+    u_sol = w.sub(0).collapse()
+    
+    # Evaluate on 50x50 grid
+    nx_out, ny_out = 50, 50
+    xs = np.linspace(0, 1, nx_out)
+    ys = np.linspace(0, 1, ny_out)
+    XX, YY = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0] = XX.ravel()
+    points[1] = YY.ravel()
+    
+    bb_tree = geometry.bb_tree(domain, tdim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+    
+    vel_mag = np.full(nx_out * ny_out, np.nan)
+    
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(nx_out * ny_out):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points.T[i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+    
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = u_sol.eval(pts_arr, cells_arr)
+        for idx, i in enumerate(eval_map):
+            ux = vals[idx, 0]
+            uy = vals[idx, 1]
+            vel_mag[i] = np.sqrt(ux**2 + uy**2)
+    
+    u_grid = vel_mag.reshape((nx_out, ny_out))
+    
+    solver_info = {
+        "mesh_resolution": N,
+        "element_degree": degree_u,
+        "ksp_type": "gmres",
+        "pc_type": "lu",
+        "rtol": 1e-10,
+        "nonlinear_iterations": [int(n_iters)],
+    }
+    
+    return {"u": u_grid, "solver_info": solver_info}
+```

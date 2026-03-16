@@ -1,0 +1,151 @@
+import numpy as np
+from mpi4py import MPI
+from dolfinx import mesh, fem, geometry
+from dolfinx.fem import petsc
+import ufl
+from petsc4py import PETSc
+
+ScalarType = PETSc.ScalarType
+
+
+def solve(case_spec: dict) -> dict:
+    comm = MPI.COMM_WORLD
+
+    # Parameters
+    epsilon = case_spec["pde"]["params"]["epsilon"]
+    beta_vec = case_spec["pde"]["params"]["beta"]
+    
+    # Mesh resolution and element degree
+    N = 64
+    degree = 2
+
+    domain = mesh.create_unit_square(comm, N, N, cell_type=mesh.CellType.triangle)
+    V = fem.functionspace(domain, ("Lagrange", degree))
+
+    x = ufl.SpatialCoordinate(domain)
+
+    # Exact solution
+    u_exact_ufl = ufl.sin(ufl.pi * x[0]) * ufl.sin(ufl.pi * x[1])
+
+    # Compute source term from manufactured solution
+    beta = ufl.as_vector([ScalarType(beta_vec[0]), ScalarType(beta_vec[1])])
+    eps_c = fem.Constant(domain, ScalarType(epsilon))
+
+    f_ufl = -eps_c * ufl.div(ufl.grad(u_exact_ufl)) + ufl.dot(beta, ufl.grad(u_exact_ufl))
+
+    # Trial and test functions
+    u = ufl.TrialFunction(V)
+    v = ufl.TestFunction(V)
+
+    # SUPG stabilization
+    h = ufl.CellDiameter(domain)
+    beta_norm = ufl.sqrt(ufl.dot(beta, beta))
+    Pe_cell = beta_norm * h / (2.0 * eps_c)
+    # Optimal SUPG parameter
+    tau = h / (2.0 * beta_norm) * (1.0 / ufl.tanh(Pe_cell) - 1.0 / Pe_cell)
+
+    # Residual applied to trial function (for SUPG, we use the strong-form residual operator on u)
+    # Strong residual of the PDE operator applied to u: -eps*laplacian(u) + beta.grad(u) - f
+    # For linear SUPG with trial functions, we add stabilization to both a and L
+
+    # Standard Galerkin
+    a_gal = eps_c * ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx + ufl.dot(beta, ufl.grad(u)) * v * ufl.dx
+    L_gal = f_ufl * v * ufl.dx
+
+    # SUPG stabilization terms
+    # Test function modification: v_supg = tau * beta . grad(v)
+    v_supg = tau * ufl.dot(beta, ufl.grad(v))
+
+    # For the bilinear form, the SUPG contribution is:
+    # (L_operator(u), tau * beta.grad(v)) where L_operator(u) = -eps*div(grad(u)) + beta.grad(u)
+    # Since u is a trial function (linear), -eps*div(grad(u)) involves second derivatives
+    # For P2 elements on triangles, second derivatives of basis functions are constant (piecewise),
+    # but ufl.div(ufl.grad(u)) should work.
+    
+    # SUPG bilinear form contribution
+    a_supg = (-eps_c * ufl.div(ufl.grad(u)) + ufl.dot(beta, ufl.grad(u))) * v_supg * ufl.dx
+    L_supg = f_ufl * v_supg * ufl.dx
+
+    a = a_gal + a_supg
+    L = L_gal + L_supg
+
+    # Boundary conditions (u_exact = sin(pi*x)*sin(pi*y) = 0 on boundary of unit square)
+    tdim = domain.topology.dim
+    fdim = tdim - 1
+
+    def boundary(x):
+        return (np.isclose(x[0], 0.0) | np.isclose(x[0], 1.0) |
+                np.isclose(x[1], 0.0) | np.isclose(x[1], 1.0))
+
+    boundary_facets = mesh.locate_entities_boundary(domain, fdim, boundary)
+    dofs = fem.locate_dofs_topological(V, fdim, boundary_facets)
+    
+    u_bc = fem.Function(V)
+    u_bc.interpolate(lambda x: np.sin(np.pi * x[0]) * np.sin(np.pi * x[1]))
+    bc = fem.dirichletbc(u_bc, dofs)
+
+    # Solve
+    ksp_type = "gmres"
+    pc_type = "ilu"
+    rtol = 1e-10
+
+    problem = petsc.LinearProblem(
+        a, L, bcs=[bc],
+        petsc_options={
+            "ksp_type": ksp_type,
+            "pc_type": pc_type,
+            "ksp_rtol": str(rtol),
+            "ksp_max_it": "5000",
+            "ksp_monitor": None,
+        },
+        petsc_options_prefix="convdiff_"
+    )
+    u_sol = problem.solve()
+
+    # Get iteration count
+    ksp = problem.solver
+    iterations = ksp.getIterationNumber()
+
+    # Evaluate on 50x50 grid
+    nx_out, ny_out = 50, 50
+    xs = np.linspace(0.0, 1.0, nx_out)
+    ys = np.linspace(0.0, 1.0, ny_out)
+    X, Y = np.meshgrid(xs, ys, indexing='ij')
+    points = np.zeros((3, nx_out * ny_out))
+    points[0, :] = X.ravel()
+    points[1, :] = Y.ravel()
+
+    bb_tree = geometry.bb_tree(domain, domain.topology.dim)
+    cell_candidates = geometry.compute_collisions_points(bb_tree, points.T)
+    colliding_cells = geometry.compute_colliding_cells(domain, cell_candidates, points.T)
+
+    points_on_proc = []
+    cells_on_proc = []
+    eval_map = []
+    for i in range(points.shape[1]):
+        links = colliding_cells.links(i)
+        if len(links) > 0:
+            points_on_proc.append(points[:, i])
+            cells_on_proc.append(links[0])
+            eval_map.append(i)
+
+    u_values = np.full(nx_out * ny_out, np.nan)
+    if len(points_on_proc) > 0:
+        pts_arr = np.array(points_on_proc)
+        cells_arr = np.array(cells_on_proc, dtype=np.int32)
+        vals = u_sol.eval(pts_arr, cells_arr)
+        u_values[eval_map] = vals.flatten()
+
+    u_grid = u_values.reshape((nx_out, ny_out))
+
+    return {
+        "u": u_grid,
+        "solver_info": {
+            "mesh_resolution": N,
+            "element_degree": degree,
+            "ksp_type": ksp_type,
+            "pc_type": pc_type,
+            "rtol": rtol,
+            "iterations": iterations,
+        }
+    }
