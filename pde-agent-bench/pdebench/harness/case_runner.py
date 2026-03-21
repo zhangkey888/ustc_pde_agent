@@ -17,7 +17,7 @@ from typing import Dict, Any, Literal, Optional
 import numpy as np
 
 from ..sandbox.executor import execute_agent_script
-from ..oracle.oracle import generate
+from ..oracle import generate
 from ..evaluation.validator import validate_solution
 from ..metrics import compute_score, check_tier_levels, get_specialized_metrics_computer
 

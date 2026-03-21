@@ -1,3 +1,110 @@
+# Task: Solve Heat Equation (Transient)
+
+## Problem Description
+
+∂u/∂t - ∇·(κ ∇u) = f   in Ω × (0, T]
+  u = g                    on ∂Ω
+  u(x,0) = u₀(x)           in Ω
+
+Parabolic evolution problem requiring time-stepping.
+
+**Case ID:** heat_longer
+
+**Math Type:** parabolic
+
+**Manufactured Solution:** u = exp(-2*t)*cos(pi*x)*cos(pi*y)
+(Source term f and boundary data are derived from this exact solution)
+
+**Coefficients:**
+- κ = 0.5
+
+**Time Parameters:**
+- t_end = 0.2
+- dt (suggested) = 0.02
+- scheme: backward_euler
+
+**Domain:** [0,1] × [0,1] (unit square)
+
+**Output Requirements (handled by evaluator):**
+- Evaluator will sample the solution on a uniform grid (specific resolution is determined by the evaluator)
+- Output field: scalar
+
+---
+
+## Implementation Requirements
+
+Write a Python module using **dolfinx** (FEniCSx) that exposes:
+
+```python
+def solve(case_spec: dict) -> dict:
+    """
+    Return a dict with:
+    - "u": u_grid, 2-D numpy array of the solution sampled on a uniform grid.
+         Choose any grid resolution you find appropriate; the evaluator will
+         automatically resample your output to its reference grid before scoring.
+    - "solver_info": dict with fields organized by PDE type:
+    
+      ALWAYS REQUIRED (all PDEs):
+        - mesh_resolution (int): spatial mesh resolution (e.g., 64, 128)
+        - element_degree (int): polynomial degree (1, 2, 3, ...)
+        - ksp_type (str): linear solver type (e.g., 'cg', 'gmres')
+        - pc_type (str): preconditioner type (e.g., 'jacobi', 'ilu', 'hypre')
+        - rtol (float): relative tolerance for linear solver
+      
+      REQUIRED if you perform LINEAR solves (record actual solver behavior):
+        - iterations (int): total linear solver iterations across all solves
+      
+      REQUIRED if PDE contains TIME (check case_spec['pde']['time']):
+        - dt (float): time step size you used (e.g., 0.01)
+        - n_steps (int): number of time steps you actually computed (e.g., 50)
+        - time_scheme (str): time integrator you used ('backward_euler', 'crank_nicolson', or 'bdf2')
+        
+        Example for transient PDE:
+          "solver_info": {
+            "mesh_resolution": 120, "element_degree": 1,
+            "ksp_type": "gmres", "pc_type": "ilu", "rtol": 1e-8,
+            "iterations": 450,  # sum of all linear iterations
+            "dt": 0.01, "n_steps": 50, "time_scheme": "backward_euler"
+          }
+      
+      REQUIRED if PDE is NONLINEAR (e.g., reaction terms like u^3 or u(1-u)):
+        - nonlinear_iterations (list of int): Newton iterations per time step
+          (for steady: single value in list; for transient: one per time step)
+        
+        Example for nonlinear transient:
+          "nonlinear_iterations": [5, 4, 4, 3, ...]  # one per time step
+    
+    ADDITIONALLY for time-dependent PDEs (highly recommended for analysis):
+    - "u_initial": initial condition array, same shape as u (enables front propagation tracking)
+    """
+```
+
+Notes:
+1. Do NOT write files (no solution.npz / meta.json).
+2. Evaluator will time your solve() call and write outputs.
+3. You decide mesh resolution, element degree, solver, etc., but must report them in solver_info.
+4. Optional fields help compute specialized metrics (e.g., CFL number, workrate, Newton convergence).
+
+**Agent-Selectable Parameters:**
+- mesh_resolution: Spatial resolution
+- element_degree: FE degree
+- dt: Time step size
+
+---
+
+**Pass/Fail Criteria (single tier):**
+- Accuracy: error ≤ 7.46e-03
+- Time: wall_time_sec ≤ 2.659s
+
+---
+
+**Output only the complete, runnable Python code.** No explanations needed.
+
+
+---
+
+## DOLFINX 0.10.0 Guide
+
 # FEniCSx (dolfinx v0.10.0) Quick Reference Guide
 
 This guide provides the correct syntax and best practices for `dolfinx v0.10.0`. It is designed to help LLMs and developers avoid common API errors and deprecated patterns.

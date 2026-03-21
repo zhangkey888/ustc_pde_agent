@@ -1,1 +1,0 @@
-Wait, `a_form` is constant, so `A` is assembled once before the loop.

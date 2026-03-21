@@ -51,28 +51,18 @@ class LLMClient:
         'gpt-4o': {'provider': 'openai', 'model': 'gpt-4o'},
         'gpt-4o-mini': {'provider': 'openai', 'model': 'gpt-4o-mini'},
         'gpt-5.1': {'provider': 'openai', 'model': 'gpt-5.1'},
-        'gpt-5.2': {'provider': 'openai', 'model': 'gpt-5.2'},  # 实验 1.1 新增
+        'gpt-5.2': {'provider': 'openai', 'model': 'gpt-5.2'},  
         'o3-mini': {'provider': 'openai', 'model': 'o3-mini'},
         'sonnet-3.5': {'provider': 'anthropic', 'model': 'anthropic.claude-3-5-sonnet-20241022-v2:0'},
         'sonnet-3.6': {'provider': 'anthropic', 'model': 'anthropic.claude-sonnet-4-20250514-v1:0'},
-        'claude-opus-4-6': {'provider': 'anthropic', 'model': 'claude-opus-4-6'},  # 实验 1.1 新增
-        'haiku': {'provder': 'anthropic', 'model': 'anthropic.claude-3-haiku-20240307-v1:0'},
+        'claude-opus-4.5': {'provider': 'anthropic', 'model': 'anthropic.claude-opus-4-20250514-v1:0'},  # 实验 1.1 新增
+        'haiku': {'provider': 'anthropic', 'model': 'anthropic.claude-3-haiku-20240307-v1:0'},
         'gemini': {'provider': 'google', 'model': 'gemini-3.0-pro'},
         'gemini-3.0-pro': {'provider': 'google', 'model': 'gemini-3.0-pro'},  # 实验 1.1 别名
-        'gemini-3.1-pro': {'provider': 'anthropic', 'model': 'gemini-3.1-pro'},  # 通过 Venus 代理
-        'qwen3-max': {'provider': 'qwen', 'model': 'qwen3-max-2025-09-23'},  
-    }
-    
-    # Venus 代理配置（用于 Anthropic 模型）
-    # 设置环境变量 LLM_BASE_URL 启用代理模式（使用 OPENAI_API_KEY 作为密钥）
-    # 代理模式下的模型名映射
-    VENUS_MODEL_MAP = {
-        'sonnet-3.5': 'claude-3-5-sonnet-20241022',
-        'sonnet-3.6': 'claude-sonnet-4-20250514',
-        'claude-opus-4.5': 'claude-opus-4-20250514',
-        'claude-opus-4-6': 'claude-opus-4-6',
-        'haiku': 'claude-3-haiku-20240307',
-        'gemini-3.1-pro': 'gemini-3.1-pro',
+        'qwen3-max': {'provider': 'qwen', 'model': 'qwen3-max-2026-01-23'},  
+        'gpt-5.4': {'provider': 'openai', 'model': 'gpt-5.4'},
+        'claude-opus-4.6': {'provider': 'anthropic', 'model': 'anthropic.claude-opus-4-6-v1'},
+        'gemini-3.1-pro': {'provider': 'google', 'model': 'gemini-3.1-pro-preview'},
     }
     
     # 定价信息（USD per 1M tokens）- 实验 4.6 成本追踪
@@ -80,15 +70,15 @@ class LLMClient:
         # OpenAI
         'gpt-5.2': {'input': 1.75, 'output': 14.00}, 
         'o3-mini': {'input': 1.10, 'output': 4.40},
-        
+        'gpt-5.4': {'input': 2.5, 'output': 15.00},
         # Anthropic
         'sonnet-3.5': {'input': 3.00, 'output': 6.00},
-        'claude-opus-4.5': {'input': 5.00, 'output': 25.00},  # 估算
+        'claude-opus-4.5': {'input': 5.00, 'output': 25.00}, 
         'haiku': {'input': 1, 'output': 5},
-        
+        'claude-opus-4.6': {'input': 5.00, 'output': 25.00},
         # Google
         'gemini-3.0-pro': {'input': 2, 'output': 12},
-        'gemini-3.1-pro': {'input': 2.5, 'output': 15},  # 估算
+        'gemini-3.1-pro'
         # Qwen 
         'qwen3-max': {'input': 1.2, 'output': 6},
     }
@@ -109,19 +99,6 @@ class LLMClient:
         self.provider = self.config['provider']
         self.model = self.config['model']
         self.temperature = temperature
-        
-        # 检测是否使用 Venus 代理（针对 Anthropic 模型）
-        self.use_venus_proxy = False
-        if self.provider == 'anthropic':
-            llm_base_url = os.getenv("LLM_BASE_URL")
-            if llm_base_url:
-                api_key = os.getenv("OPENAI_API_KEY")
-                if api_key:
-                    self.use_venus_proxy = True
-                    self.venus_api_key = api_key
-                    self.venus_base_url = llm_base_url
-                    # 使用代理模式的模型名
-                    self.model = self.VENUS_MODEL_MAP.get(agent_name, self.model)
         
         # 初始化客户端
         self._init_client()
@@ -154,17 +131,8 @@ class LLMClient:
             self.client = OpenAI(api_key=api_key)
             
         elif self.provider == 'anthropic':
-            if self.use_venus_proxy:
-                # 使用 Venus 代理（OpenAI 兼容模式）
-                from openai import OpenAI
-                self.client = OpenAI(
-                    api_key=self.venus_api_key,
-                    base_url=self.venus_base_url
-                )
-            else:
-                # 使用 AWS Bedrock
-                import boto3
-                self.client = boto3.client("bedrock-runtime", region_name="us-west-2")
+            import boto3
+            self.client = boto3.client("bedrock-runtime", region_name="us-west-2")
             
         elif self.provider == 'google':
             from google import genai
@@ -270,57 +238,7 @@ class LLMClient:
         )
     
     def _call_anthropic(self, prompt: str, system_prompt: str) -> LLMResponse:
-        """调用Anthropic (via AWS Bedrock 或 Venus 代理)"""
-        
-        # Venus 代理模式（OpenAI 兼容 API）
-        if self.use_venus_proxy:
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ]
-            
-            # 记录开始时间
-            start_time = time.time()
-            
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                max_tokens=8000,
-                temperature=self.temperature,
-            )
-            
-            # 计算延迟
-            latency = time.time() - start_time
-            
-            raw_response = response.choices[0].message.content.strip()
-            code = extract_code(raw_response)
-            
-            usage = {}
-            if response.usage:
-                input_tokens = response.usage.prompt_tokens
-                output_tokens = response.usage.completion_tokens
-                total_tokens = response.usage.total_tokens
-                
-                # 计算成本
-                cost = self._calculate_cost(input_tokens, output_tokens)
-                
-                usage = {
-                    'input_tokens': input_tokens,
-                    'output_tokens': output_tokens,
-                    'total_tokens': total_tokens,
-                    'latency_sec': latency,
-                    'cost_usd': cost
-                }
-            
-            return LLMResponse(
-                success=True,
-                code=code,
-                raw_response=raw_response,
-                model=self.model,
-                usage=usage
-            )
-        
-        # AWS Bedrock 模式
+        """调用Anthropic (via AWS Bedrock)"""
         messages = [
             {"role": "user", "content": system_prompt + "\n\n" + prompt}
         ]

@@ -15,19 +15,24 @@ Code Agent 模块
     # 清理
     agent.cleanup()
 """
-# from .miniswe_wrapper import MiniSWEWrapper
+
 from .base_agent import BaseAgent, AgentResponse
 from .agent_registry import AgentRegistry, get_agent
 
 # 导入所有 agent wrappers
-from .openhands_wrapper import OpenHandsWrapper
-from .codepde_wrapper import CodePDEWrapper
 
+from .codepde_wrapper import CodePDEWrapper
+from .openhands_wrapper import OpenHandsWrapper
+from .mini_swe_agent_wrapper import MiniSWEAgentWrapper
+from .ustcpdeagent import MiniSWEWrapper
 
 # 注册所有 Agent
 AgentRegistry.register('codepde', CodePDEWrapper)
-# AgentRegistry.register('miniswepde', MiniSWEWrapper)
 AgentRegistry.register('openhands', OpenHandsWrapper)
+AgentRegistry.register('mini-swe-agent', MiniSWEAgentWrapper)
+AgentRegistry.register('ustcpdeagent', MiniSWEWrapper)
+
+
 # 导出
 __all__ = [
     'BaseAgent',
@@ -36,4 +41,6 @@ __all__ = [
     'get_agent',
     'CodePDEWrapper',
     'OpenHandsWrapper',
+    'MiniSWEAgentWrapper',
+    'MiniSWEWrapper',
 ]

@@ -1,1 +1,0 @@
-I will just leave it as is, maybe add a simple MPI gather if needed, but typically the evaluator runs on 1 rank. I'll add a simple check:
