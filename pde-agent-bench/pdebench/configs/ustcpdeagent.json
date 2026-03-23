@@ -1,0 +1,12 @@
+
+  {
+    "codepde_path": "/data5/store1/zky/ustc_pde_agent/auto-pde-agent",
+    "model": "openai/deepseek-chat",
+    "api_key": "sk-79edf0768e21480f81d675af7503f7ec",
+    "base_url": "https://api.deepseek.com/v1",  
+    "temperature": 0.1,
+    "timeout": 600,
+    "_comment": "miniswepde configuration...",
+    "mode": "yolo",
+    "max_turns": 60
+  }  
