@@ -24,13 +24,13 @@ from .agent_registry import AgentRegistry, get_agent
 from .codepde_wrapper import CodePDEWrapper
 from .openhands_wrapper import OpenHandsWrapper
 from .mini_swe_agent_wrapper import MiniSWEAgentWrapper
-from .ustcpdeagent import MiniSWEWrapper
+from .ustcpdeagent import AutoPDEWrapper
 
 # 注册所有 Agent
 AgentRegistry.register('codepde', CodePDEWrapper)
 AgentRegistry.register('openhands', OpenHandsWrapper)
 AgentRegistry.register('mini-swe-agent', MiniSWEAgentWrapper)
-AgentRegistry.register('ustcpdeagent', MiniSWEWrapper)
+AgentRegistry.register('ustcpdeagent', AutoPDEWrapper)
 
 
 # 导出
@@ -42,5 +42,5 @@ __all__ = [
     'CodePDEWrapper',
     'OpenHandsWrapper',
     'MiniSWEAgentWrapper',
-    'MiniSWEWrapper',
+    'AutoPDEWrapper',
 ]
