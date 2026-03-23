@@ -1,0 +1,133 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# === 🔄 换血 1：修改项目名为 autopdeagent ===
+name = "autopdeagent"
+dynamic = ["version"]
+# === 🔄 换血 2：修改项目描述 ===
+description = "AutoPDEAgent - An automated dual-agent framework for PDEBench"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE.md"}
+keywords = ["pde", "agents", "code-generation", "fenics"]
+# 
+authors = [
+    {name = "Your Name", email = "your.email@example.com" },
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3 :: Only",
+]
+
+# === 🔄 换血 3：极限精简依赖，删除了 textual, typer, datasets, prompt_toolkit 等 ===
+dependencies = [
+    "pyyaml",
+    "requests",
+    "jinja2",
+    "pydantic >= 2.0",
+    "litellm >= 1.75.5",
+    "tenacity",
+    "rich",
+    "python-dotenv",
+    "platformdirs",
+]
+
+[project.optional-dependencies]
+# === 🔄 换血 4：删除了旧的复杂环境，只保留基础的开发测试工具 ===
+dev = [
+    "pytest",
+    "pre-commit",
+    "ruff",
+]
+
+# === 🔄 换血 5：修改项目链接（发布前记得填写真实的 Github 地址） ===
+[project.urls]
+Repository = "https://github.com/your-org/AutoPDEAgent"
+"Bug Tracker" = "https://github.com/your-org/AutoPDEAgent/issues"
+
+# === 🔄 换血 6：彻底删除了旧的 [project.scripts] 命令行入口，解决打包报错 ===
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+# === 🔄 换血 7：修改动态版本获取的包名（解决 ModuleNotFoundError 的元凶） ===
+version = {attr = "autopdeagent.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+# === 🔄 换血 8：修改打包包含的文件夹名 ===
+include = ["autopdeagent*"]
+
+[tool.setuptools.package-data]
+# === 🔄 换血 9：修改附带配置文件的包名 ===
+autopdeagent = ["config/**/*"]
+
+
+# ==========================================
+# 下面的 Linter 配置 (Ruff, Pylint) 保持原样，这对保持代码整洁很有帮助
+# ==========================================
+
+[tool.ruff]
+exclude = [
+    ".bzr", ".direnv", ".eggs", ".git", ".git-rewrite", ".hg",
+    ".ipynb_checkpoints", ".mypy_cache", ".nox", ".pants.d", ".pyenv",
+    ".pytest_cache", ".pytype", ".ruff_cache", ".svn", ".tox", ".venv",
+    ".vscode", "__pypackages__", "_build", "buck-out", "build", "dist",
+    "node_modules", "site-packages", "venv", "config/commands",
+]
+line-length = 120
+indent-width = 4
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E", "PLE", "E713", "E714", "E711", "F821", "F822", "F401", "F841",
+    "F541", "F901", "I001", "I002", "UP", "C401", "C402", "C403", "C404",
+    "C405", "F632", "W605", "B006", "B007", "B009", "EM", "RET", "RUF019",
+    "PT", "SIM201", "PTH100", "PTH110", "PTH111", "PTH112", "PTH113",
+    "PTH114", "PTH117", "PTH118", "PTH119", "PTH120", "PTH121", "PTH122",
+    "PTH202", "PTH203", "PTH204", "PTH205",
+]
+ignore = [
+    "RET505", "RET506", "RET507", "E501", "E402", "E722", "E741",
+    "PT011", "PT018", "EM101", "EM102", "EM103",
+]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.typos.default.extend-identifiers]
+ACI = "ACI"
+
+[tool.typos.default.extend-words]
+aci = "aci"
+ba = "ba"
+
+[tool.pylint.messages_control]
+disable = [
+    "line-too-long", "missing-docstring", "missing-class-docstring",
+    "missing-function-docstring", "missing-module-docstring",
+    "unspecified-encoding", "duplicate-code", "too-few-public-methods",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "slow: marks tests as slow (deselect with '-k \"not slow\"')",
+]
