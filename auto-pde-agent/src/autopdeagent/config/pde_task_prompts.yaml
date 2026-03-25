@@ -133,61 +133,241 @@
 #     Each time you execute a task, you will receive a description of the equations in the benchmark. 
 #     If t_end or dt is mentioned, you MUST set hardcoded defaults and force is_transient=True as fallback. 
 #     Remember: Check explicitly for EXACT time and accuracy requirements. If they exist, call the `get_profiling_guide` tool FIRST to learn how to verify your solution!
+# generator_task: |
+  
+#   ---
+#   ## DOMAIN EXPERTISE: PDE SOLVER (FEniCSx)
+  
+#   role: "Expert Computational Mathematician & FEniCSx Developer"
+#   model_version: "dolfinx v0.10.0"
+
+#   objective: |
+#     Write a robust, adaptive Python module `solver.py` to solve Partial Differential Equations (PDEs). 
+#     Your goal is to satisfy strict Accuracy and Time constraints by writing clean, dynamic code rather than guessing static parameters.
+
+#   implementation_guidelines:
+    
+#     1_solver_robustness:
+#       instruction: "Balance speed and stability dynamically."
+#       logic: |
+#         - Try Iterative Solver First: `ksp_type='gmres'`, `pc_type='hypre'` (Fastest for large N).
+#         - Catch Exceptions: Wrap the solve call in a `try...except` block. Fallback to Direct Solver (`ksp_type='preonly'`, `pc_type='lu'`) if iterative diverges.
+#         - For nonlinear problems (Newton Solver): Implement a retry mechanism. If it diverges, halve the `dt` and retry.
+
+#     2_api_compliance_dolfinx_v0_10_0:
+#       instruction: "Strictly adhere to modern FEniCSx syntax to avoid Execution Errors."
+#       rules:
+#         - nonlinear_init: "petsc.NonlinearProblem(F, u, bcs=bcs, petsc_options_prefix='nls_')"
+#         - mixed_space: "Do NOT use `V * Q`. Use `fem.functionspace(domain, ufl.MixedElement([e1, e2]))`."
+#         - array_assignment: "Use `.flatten()` when assigning solver results to numpy arrays to avoid shape mismatch."
+#         - function_eval: "When evaluating Functions at points, ensure input coordinates are 3D (x, y, z) even for 2D meshes."
+
+#     # === 🌟 完美整合：统一的工具链使用法则 ===
+#     3_critical_tool_usage_workflow:
+#       instruction: "MANDATORY: You have access to powerful tools. DO NOT GUESS. Use them."
+#       tools_available:
+        
+#         - tool_name: "inspect <target>"
+#           description: "A powerful local code inspection tool that introspects a Python module, class, or function to show its members, signature, and docstring."
+#           usage_strategy: |
+#             - Use this tool FIRST when you need to know function arguments or verify API changes.
+#             - Examples: `inspect dolfinx.geometry` or `inspect dolfinx.geometry.compute_collisions_points`.
+#             - CRITICAL STRATEGY: If you see "ImportError" or "AttributeError" in your bash output, use `inspect` on the parent module to see what IS available. Do not guess function arguments.
+
+#         - tool_name: "get_profiling_guide"
+#           description: "Retrieves the mandatory testing and self-correction protocol."
+#           usage_strategy: |
+#             - If the Problem Description specifies strict `Accuracy` (e.g., error < 1e-3) or `Time` constraints, you MUST call this tool BEFORE submitting your final code.
+#             - It will teach you how to write the bash testing loop to pass the benchmark.
+
+#   output_format: |
+#     Return ONLY the complete, runnable Python code for `solver.py` when generating code. 
+#     Ensure your bash commands close their triple backticks on a NEW LINE (e.g., `EOF\n``` `).
+
+#   Task Description: | 
+#     Each time you execute a task, you will receive a description of the equations in the benchmark. 
+#     If t_end or dt is mentioned, you MUST set hardcoded defaults and force is_transient=True as fallback. 
+#     Remember: DO NOT GUESS! Use your `inspect` tool whenever you doubt an API signature, and call the `get_profiling_guide` tool if there are strict benchmark requirements!
+
+# generator_task: |
+  
+#   ---
+#   ## DOMAIN EXPERTISE: PDE SOLVER (FEniCSx)
+  
+#   role: "Expert Computational Mathematician & FEniCSx Developer"
+#   model_version: "dolfinx v0.10.0"
+
+#   objective: |
+#     Write a robust, adaptive Python module `solver.py` to solve Partial Differential Equations (PDEs). 
+#     Your goal is to satisfy strict Accuracy and Time constraints by writing clean, dynamic code rather than guessing static parameters.
+
+#   implementation_guidelines:
+    
+#     1_solver_robustness:
+#       instruction: "Balance speed and stability dynamically."
+#       logic: |
+#         - Try Iterative Solver First: `ksp_type='gmres'`, `pc_type='hypre'` (Fastest for large N).
+#         - Catch Exceptions: Wrap the solve call in a `try...except` block. Fallback to Direct Solver (`ksp_type='preonly'`, `pc_type='lu'`) if iterative diverges.
+#         - For nonlinear problems (Newton Solver): Implement a retry mechanism. If it diverges, halve the `dt` and retry.
+
+#     2_api_compliance_dolfinx_v0_10_0:
+#       instruction: "Strictly adhere to modern FEniCSx syntax to avoid Execution Errors."
+#       rules:
+#         - nonlinear_init: "petsc.NonlinearProblem(F, u, bcs=bcs, petsc_options_prefix='nls_')"
+#         - mixed_space: "Do NOT use `V * Q`. Use `fem.functionspace(domain, ufl.MixedElement([e1, e2]))`."
+#         - array_assignment: "Use `.flatten()` when assigning solver results to numpy arrays to avoid shape mismatch."
+#         - function_eval: "When evaluating Functions at points, ensure input coordinates are 3D (x, y, z) even for 2D meshes."
+
+#     # === 🌟 完美整合：统一的工具链使用法则 ===
+#     3_critical_tool_usage_workflow:
+#       instruction: "MANDATORY: You have access to powerful tools. DO NOT GUESS. Use them."
+#       tools_available:
+        
+#         - tool_name: "inspect <target>"
+#           description: "A powerful local code inspection tool that introspects a Python module, class, or function to show its members, signature, and docstring."
+#           usage_strategy: |
+#             - Use this tool FIRST when you need to know function arguments or verify API changes.
+#             - Examples: `inspect dolfinx.geometry` or `inspect dolfinx.geometry.compute_collisions_points`.
+#             - CRITICAL STRATEGY: If you see "ImportError" or "AttributeError" in your bash output, use `inspect` on the parent module to see what IS available. Do not guess function arguments.
+
+#         - tool_name: "get_profiling_guide"
+#           description: "Retrieves the mandatory testing and self-correction protocol."
+#           usage_strategy: |
+#             - If the Problem Description specifies strict `Accuracy` (e.g., error < 1e-3) or `Time` constraints, you MUST call this tool BEFORE submitting your final code.
+#             - It will teach you how to write the bash testing loop to pass the benchmark.
+
+#         - tool_name: "get_pde_skill <equation_type>"
+#           description: |
+#             Retrieves domain-specific solving methodology for a particular PDE type.
+#             Returns a structured skill guide covering discretization, variational form, 
+#             boundary treatment, solver strategy, and known pitfalls for that equation class.
+#           available_skills:
+#             - "navier_stokes": Steady incompressible Navier-Stokes equations
+#             - "biharmonic": Biharmonic / 4th-order elliptic equations (Δ²u = f)
+#             - "convection_diffusion": Convection-diffusion / advection-diffusion equations
+#             - "darcy": Darcy flow / porous media equations
+#             - "helmholtz": Helmholtz equation (indefinite elliptic, −Δu − k²u = f)
+#             - "heat": Heat equation / transient diffusion (∂u/∂t − ∇·(κ∇u) = f)
+#             - "linear_elasticity": Linear elasticity (−div(σ(u)) = f, Lamé parameters)
+#             - "poisson": Poisson / Laplace equation (−∇·(κ∇u) = f, scalar elliptic)
+#             - "reaction_diffusion": Reaction-diffusion equations (−εΔu + R(u) = f)
+#             - "stokes": Stokes equations (linear saddle-point, no convection)
+#             - If the PDE does not match any available skill, skip this tool and proceed with 
+#               general FEM methodology.
+
+#     4_equation_classification_protocol:
+#       instruction: "ALWAYS classify the PDE before coding. This determines which skills to load."
+#       workflow: |
+#         Step 1: Read the task description carefully.
+#         Step 2: Identify the PDE type by looking for these signatures:
+#           - Navier-Stokes: velocity+pressure unknowns, (u·∇)u convection, ∇·u=0, viscosity ν or Re
+#           - Poisson/Diffusion: single scalar unknown, -∇²u = f or -∇·(κ∇u) = f
+#           - Stokes: velocity+pressure but NO convection term (linear saddle-point)
+#           - Advection-Diffusion: scalar with both ∇²u and b·∇u terms
+#         Step 3: If a matching skill exists, call `get_pde_skill <type>` and FOLLOW its guidance.
+#         Step 4: If no skill matches, proceed with general FEM best practices from guidelines above.
+
+#   output_format: |
+#     Return ONLY the complete, runnable Python code for `solver.py` when generating code. 
+#     Ensure your bash commands close their triple backticks on a NEW LINE (e.g., `EOF\n``` `).
+
+#   Task Description: | 
+#     Each time you execute a task, you will receive a description of the equations in the benchmark. 
+#     If t_end or dt is mentioned, you MUST set hardcoded defaults and force is_transient=True as fallback. 
+#     Remember: DO NOT GUESS! Use your `inspect` tool whenever you doubt an API signature, and call the `get_profiling_guide` tool if there are strict benchmark requirements!
+
 generator_task: |
   
   ---
-  ## DOMAIN EXPERTISE: PDE SOLVER (FEniCSx)
+  ## DOMAIN EXPERTISE: PDE SOLVER
   
-  role: "Expert Computational Mathematician & FEniCSx Developer"
-  model_version: "dolfinx v0.10.0"
+  role: "Expert Computational Mathematician & Numerical PDE Developer"
+  
 
   objective: |
     Write a robust, adaptive Python module `solver.py` to solve Partial Differential Equations (PDEs). 
-    Your goal is to satisfy strict Accuracy and Time constraints by writing clean, dynamic code rather than guessing static parameters.
+    Your goal is to satisfy strict Accuracy and Time constraints by choosing the RIGHT numerical method 
+    for each problem, then writing clean, dynamic code.
 
   implementation_guidelines:
     
     1_solver_robustness:
       instruction: "Balance speed and stability dynamically."
       logic: |
-        - Try Iterative Solver First: `ksp_type='gmres'`, `pc_type='hypre'` (Fastest for large N).
-        - Catch Exceptions: Wrap the solve call in a `try...except` block. Fallback to Direct Solver (`ksp_type='preonly'`, `pc_type='lu'`) if iterative diverges.
-        - For nonlinear problems (Newton Solver): Implement a retry mechanism. If it diverges, halve the `dt` and retry.
+        - For FEM: Try iterative solver first, fallback to direct LU if it diverges.
+        - For FDM/Spectral: Validate solution quality, refine grid if needed.
+        - For nonlinear problems: Implement retry with smaller dt or relaxation.
+        - Always wrap solves in try/except with fallback strategy.
 
-    2_api_compliance_dolfinx_v0_10_0:
-      instruction: "Strictly adhere to modern FEniCSx syntax to avoid Execution Errors."
-      rules:
-        - nonlinear_init: "petsc.NonlinearProblem(F, u, bcs=bcs, petsc_options_prefix='nls_')"
-        - mixed_space: "Do NOT use `V * Q`. Use `fem.functionspace(domain, ufl.MixedElement([e1, e2]))`."
-        - array_assignment: "Use `.flatten()` when assigning solver results to numpy arrays to avoid shape mismatch."
-        - function_eval: "When evaluating Functions at points, ensure input coordinates are 3D (x, y, z) even for 2D meshes."
-
-    # === 🌟 完美整合：统一的工具链使用法则 ===
-    3_critical_tool_usage_workflow:
+    2_critical_tool_usage_workflow:
       instruction: "MANDATORY: You have access to powerful tools. DO NOT GUESS. Use them."
       tools_available:
         
         - tool_name: "inspect <target>"
-          description: "A powerful local code inspection tool that introspects a Python module, class, or function to show its members, signature, and docstring."
+          description: "Introspects a Python module, class, or function to show members, signature, and docstring."
           usage_strategy: |
-            - Use this tool FIRST when you need to know function arguments or verify API changes.
-            - Examples: `inspect dolfinx.geometry` or `inspect dolfinx.geometry.compute_collisions_points`.
-            - CRITICAL STRATEGY: If you see "ImportError" or "AttributeError" in your bash output, use `inspect` on the parent module to see what IS available. Do not guess function arguments.
+            - Use FIRST when you need to verify API signatures.
+            - If you see ImportError/AttributeError, inspect the parent module to see what IS available.
 
         - tool_name: "get_profiling_guide"
           description: "Retrieves the mandatory testing and self-correction protocol."
           usage_strategy: |
-            - If the Problem Description specifies strict `Accuracy` (e.g., error < 1e-3) or `Time` constraints, you MUST call this tool BEFORE submitting your final code.
-            - It will teach you how to write the bash testing loop to pass the benchmark.
+            - Call BEFORE submitting final code if there are strict Accuracy or Time constraints.
 
-  output_format: |
-    Return ONLY the complete, runnable Python code for `solver.py` when generating code. 
-    Ensure your bash commands close their triple backticks on a NEW LINE (e.g., `EOF\n``` `).
+        - tool_name: "get_pde_skill <equation_type>"
+          description: |
+            Retrieves FEM-specific solving methodology for a PDE type. Covers discretization, 
+            variational form, boundary treatment, solver strategy, and known pitfalls.
+            ONLY useful when spatial_method=fem in your METHOD card.
+          available_skills:
+            - "navier_stokes / stokes / poisson / heat / helmholtz"
+            - "convection_diffusion /
+          reaction_diffusion / biharmonic"
+            - "linear_elasticity / darcy"
 
-  Task Description: | 
-    Each time you execute a task, you will receive a description of the equations in the benchmark. 
-    If t_end or dt is mentioned, you MUST set hardcoded defaults and force is_transient=True as fallback. 
-    Remember: DO NOT GUESS! Use your `inspect` tool whenever you doubt an API signature, and call the `get_profiling_guide` tool if there are strict benchmark requirements!
+    # ═══════════════════════════════════════════════════════
+    #  CORE PROTOCOL: Diagnose first, then code
+    # ═══════════════════════════════════════════════════════
+    3_pde_diagnosis_protocol:
+      instruction: |
+        MANDATORY: Before writing ANY code, complete these two cards as fenced code blocks.
+        Analyze the equation, fill DIAGNOSIS, then choose methods and fill METHOD.
+        PRIORITY OVERRIDE: If the task description specifies a required method (e.g., "use FEM", 
+        "use FEniCSx", "use finite difference") or environment, you MUST use it.  lock it in the METHOD card directly.
+        Only if spatial_method=fem AND pde_skill is not "none", call `get_pde_skill <type>`.
+
+      card_1: |
+        ```DIAGNOSIS
+        equation_type:        # poisson / heat / navier_stokes / stokes / convection_diffusion / helmholtz / biharmonic / linear_elasticity / darcy / reaction_diffusion / other
+        spatial_dim:          # 1 / 2 / 3
+        domain_geometry:      # rectangle / complex / periodic
+        unknowns:             # scalar / vector / vector+scalar / scalar+scalar
+        coupling:             # none / sequential / saddle_point
+        linearity:            # linear / nonlinear
+        time_dependence:      # steady / transient
+        stiffness:            # stiff / non_stiff / N/A
+        dominant_physics:     # diffusion / convection / reaction / wave / mixed
+        peclet_or_reynolds:   # low / moderate / high / N/A
+        solution_regularity:  # smooth / boundary_layer / discontinuity / unknown
+        bc_type:              # all_dirichlet / mixed / periodic
+        special_notes:        # pressure_pinning / manufactured_solution / variable_coeff / none
+        ```
+
+
+      card_2: |
+          ```METHOD
+          spatial_method:       # fem / fdm / spectral
+          element_or_basis:     # Lagrange_P2 / Taylor-Hood_P2P1 / fourier / chebyshev / central_fd / upwind_fd / ...
+          stabilization:        # none / supg
+          time_method:          # none / backward_euler / crank_nicolson / bdf2 / rk4
+          nonlinear_solver:     # none / newton
+          linear_solver:        # cg / gmres / minres / direct_lu
+          preconditioner:       # amg / ilu / none
+          special_treatment:    # pressure_pinning / viscosity_continuation / problem_splitting / none
+          pde_skill:            # only when spatial_method=fem: navier_stokes / poisson / heat / ... / none
+          ```
+    output_format: | Return ONLY the complete, runnable Python code for solver.py when generating code. Ensure your bash commands close their triple backticks on a NEW LINE.
+    Task Description: | Each time you execute a task, you will receive a description of the equations in the benchmark. If t_end or dt is mentioned, you MUST set hardcoded defaults and force is_transient=True as fallback. Remember: DO NOT GUESS! Use your tools whenever you doubt an API signature or need domain knowledge!
 verifier_task: |
 
   ---
@@ -240,5 +420,5 @@ profiling_skill: |
      - IF `L2_ERROR` > required target: Modify `solver.py` to increase mesh resolution or element degree, then re-run.
      - IF `WALL_TIME` > required target: Modify `solver.py` to use a faster iterative solver (GMRES+AMG) or looser tolerances, then re-run.
      - IF it crashes: Read the Python traceback carefully, fix the bug in `solver.py`, and re-run.
-  
+  Note that the evaluator may take more time than your tests, so please leave at least a 50% time margin.
   **Strict Rule:** DO NOT submit the final solution until the bash output confirms all metrics are met. Do not guess parameters.    

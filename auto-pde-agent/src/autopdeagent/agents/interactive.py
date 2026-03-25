@@ -96,65 +96,125 @@ class InteractiveAgent(DefaultAgent):
                 interruption_message = "Temporary interruption caught."
             raise NonTerminatingException(f"Interrupted by user: {interruption_message}")
       
+    # def execute_action(self, action: dict) -> dict:
+    #     """
+    #     Intercept 'search' commands to run locally via Python tool.
+    #     Other commands are passed to the superclass (DefaultAgent) to run in the shell environment.
+    #     """
+    #     command = action.get("action", "").strip()
+
+    #     # 🆕 3. 拦截 search 命令
+    #     if command.startswith("search "):
+    #         # 依然遵循用户的确认模式 (Confirm Mode)
+    #         if self.should_ask_confirmation(command):
+    #             self.ask_confirmation()
+            
+    #         # 提取查询词
+    #         query = command[7:].strip() # 去掉 "search " 前缀
+            
+    #         # 运行搜索 (在当前 Python 进程，不走 Docker/Shell)
+    #         console.print(f"[bold blue]🔍 Searching web for: {query}...[/bold blue]")
+    #         result_str = self.search_tool.run(query)
+            
+    #         # 构造返回结果 (模拟 DefaultAgent 的返回格式)
+    #         # 这样 Agent 就会认为它成功执行了一个命令并看到了输出
+    #         return {
+    #             "output": result_str,
+    #             "returncode": 0  # 假装这是 exit code 0 (成功)
+    #         }
+    #     if command.startswith("inspect "):
+    #         if self.should_ask_confirmation(command):
+    #             self.ask_confirmation()
+            
+    #         target = command[8:].strip() # 去掉 "inspect "
+    #         console.print(f"[bold magenta]🔍 Inspecting python object: {target}...[/bold magenta]")
+            
+    #         result_str = self.inspect_tool.run(target)
+            
+    #         return {
+    #             "output": result_str,
+    #             "returncode": 0 # 必须带上这个！
+    #         }
+    #     # --- 原有逻辑 (处理普通 Shell 命令) ---
+    #     if command == "get_profiling_guide":
+    #         if self.should_ask_confirmation(command):
+    #             self.ask_confirmation()
+            
+    #         console.print("[bold cyan]📖 Retrieving Profiling Guide for the Agent...[/bold cyan]")
+            
+    #         # 直接将存好的文本包装成 output 返回给 Agent
+    #         return {
+    #             "output": self.profiling_guide_text,
+    #             "returncode": 0
+    #         }
+
+    #     # --- 原有逻辑 (处理普通 Shell 命令) ---
+    #     if self.should_ask_confirmation(action["action"]):
+    #         self.ask_confirmation()
+
+    #     return super().execute_action(action)
+        
     def execute_action(self, action: dict) -> dict:
         """
-        Intercept 'search' commands to run locally via Python tool.
-        Other commands are passed to the superclass (DefaultAgent) to run in the shell environment.
+        Intercept tool commands to run locally via Python tools.
+        Other commands are passed to the superclass (DefaultAgent) to run in the shell.
         """
         command = action.get("action", "").strip()
 
-        # 🆕 3. 拦截 search 命令
+        # ── 拦截 search 命令 ──
         if command.startswith("search "):
-            # 依然遵循用户的确认模式 (Confirm Mode)
             if self.should_ask_confirmation(command):
                 self.ask_confirmation()
-            
-            # 提取查询词
-            query = command[7:].strip() # 去掉 "search " 前缀
-            
-            # 运行搜索 (在当前 Python 进程，不走 Docker/Shell)
+            query = command[7:].strip()
             console.print(f"[bold blue]🔍 Searching web for: {query}...[/bold blue]")
             result_str = self.search_tool.run(query)
-            
-            # 构造返回结果 (模拟 DefaultAgent 的返回格式)
-            # 这样 Agent 就会认为它成功执行了一个命令并看到了输出
-            return {
-                "output": result_str,
-                "returncode": 0  # 假装这是 exit code 0 (成功)
-            }
+            return {"output": result_str, "returncode": 0}
+
+        # ── 拦截 inspect 命令 ──
         if command.startswith("inspect "):
             if self.should_ask_confirmation(command):
                 self.ask_confirmation()
-            
-            target = command[8:].strip() # 去掉 "inspect "
+            target = command[8:].strip()
             console.print(f"[bold magenta]🔍 Inspecting python object: {target}...[/bold magenta]")
-            
             result_str = self.inspect_tool.run(target)
-            
-            return {
-                "output": result_str,
-                "returncode": 0 # 必须带上这个！
-            }
-        # --- 原有逻辑 (处理普通 Shell 命令) ---
+            return {"output": result_str, "returncode": 0}
+
+        # ── 拦截 get_profiling_guide 命令 ──
         if command == "get_profiling_guide":
             if self.should_ask_confirmation(command):
                 self.ask_confirmation()
-            
-            console.print("[bold cyan]📖 Retrieving Profiling Guide for the Agent...[/bold cyan]")
-            
-            # 直接将存好的文本包装成 output 返回给 Agent
-            return {
-                "output": self.profiling_guide_text,
-                "returncode": 0
-            }
+            console.print("[bold cyan]📖 Retrieving Profiling Guide...[/bold cyan]")
+            return {"output": self.profiling_guide_text, "returncode": 0}
 
-        # --- 原有逻辑 (处理普通 Shell 命令) ---
+        # ── 🆕 拦截 get_pde_skill 命令 ──
+        if command.startswith("get_pde_skill"):
+            if self.should_ask_confirmation(command):
+                self.ask_confirmation()
+            
+            # 解析方程类型参数
+            parts = command.split(maxsplit=1)
+            if len(parts) < 2 or not parts[1].strip():
+                # agent 调用了 get_pde_skill 但没给参数
+                available = ", ".join(self.pde_skill_tool.available_skills)
+                result_str = (
+                    f"⚠️ Usage: get_pde_skill <equation_type>\n"
+                    f"Available skills: [{available}]\n"
+                    f"Example: get_pde_skill navier_stokes"
+                )
+            else:
+                equation_type = parts[1].strip()
+                console.print(
+                    f"[bold yellow]📚 Loading PDE skill: {equation_type}...[/bold yellow]"
+                )
+                result_str = self.pde_skill_tool.run(equation_type)
+            
+            return {"output": result_str, "returncode": 0}
+
+        # ── 兜底：普通 Shell 命令走原逻辑 ──
         if self.should_ask_confirmation(action["action"]):
             self.ask_confirmation()
 
         return super().execute_action(action)
-        
-    
 
     def should_ask_confirmation(self, action: str) -> bool:
         return self.config.mode == "confirm" and not any(re.match(r, action) for r in self.config.whitelist_actions)

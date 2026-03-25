@@ -1,0 +1,10 @@
+{
+    "agent_name": "ustcpdeagent",
+    "model": "deepseek/deepseek-chat",
+    "api_key": "sk-79edf0768e21480f81d675af7503f7ec",
+    "base_url": "https://api.deepseek.com",
+    "api_base": "https://api.deepseek.com",
+    "temperature": 0.2,
+    "max_tokens": 8192,
+    "results_root": "/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagent"
+}
