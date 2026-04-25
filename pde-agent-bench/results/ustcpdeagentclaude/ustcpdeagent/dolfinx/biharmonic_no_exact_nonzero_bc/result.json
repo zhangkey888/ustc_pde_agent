@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_no_exact_nonzero_bc",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 1.2627975866306445e-06,
+  "time": 3.653698205947876,
+  "oracle_error": 0.0003982236792847897,
+  "oracle_time": 0.9866125211119652,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.003982236792847897,
+  "target_time": 2.9598375633358955,
+  "fail_reason": "TIME_FAIL: time=3.654s > target=2.960s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.654s > target=2.960s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 83521,
+      "resolution": 144,
+      "degree": 2,
+      "efficiency_dof_per_sec": 22859.304543554168,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 16,
+      "condition_number_estimate": 256.0
+    }
+  }
+}

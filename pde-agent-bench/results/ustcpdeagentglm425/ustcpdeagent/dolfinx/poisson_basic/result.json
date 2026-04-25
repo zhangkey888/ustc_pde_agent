@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_basic",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 1.6971880442944141e-12,
+  "time": 4.367761850357056,
+  "oracle_error": 0.00019248068217108844,
+  "oracle_time": 2.3527179565280676,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0019248068217108845,
+  "target_time": 7.058153869584203,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 262144,
+      "resolution": 128,
+      "degree": 4,
+      "efficiency_dof_per_sec": 60017.92427821363,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 12,
+      "condition_number_estimate": 144.0
+    }
+  }
+}

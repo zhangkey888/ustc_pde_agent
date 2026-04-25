@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_quadrilateral_p2",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 3.090693640497509e-08,
+  "time": 5.759070634841919,
+  "oracle_error": 8.314421321261175e-07,
+  "oracle_time": 1.480695391073823,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 8.314421321261176e-06,
+  "target_time": 4.442086173221469,
+  "fail_reason": "TIME_FAIL: time=5.759s > target=4.442s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=5.759s > target=4.442s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 6401.032794592887,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 28,
+      "condition_number_estimate": 784.0
+    }
+  }
+}

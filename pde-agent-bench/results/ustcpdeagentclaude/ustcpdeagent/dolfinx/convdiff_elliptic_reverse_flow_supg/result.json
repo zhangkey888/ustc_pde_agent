@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_reverse_flow_supg",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 1.183351110364327e-06,
+  "time": 2.713773012161255,
+  "oracle_error": 4.201060964512525e-05,
+  "oracle_time": 0.9452570853754878,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0004201060964512525,
+  "target_time": 2.8357712561264634,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 6132.053021909548,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 328,
+      "condition_number_estimate": 107584.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_rhs_no_exact",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 4.572231259207486e-06,
+  "time": 1.1993649005889893,
+  "oracle_error": 0.00223792356962313,
+  "oracle_time": 1.1720096478238702,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0223792356962313,
+  "target_time": 3.5160289434716105,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 66049,
+      "resolution": 128,
+      "degree": 2,
+      "efficiency_dof_per_sec": 55069.979092738475,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 5,
+      "condition_number_estimate": 25.0
+    }
+  }
+}

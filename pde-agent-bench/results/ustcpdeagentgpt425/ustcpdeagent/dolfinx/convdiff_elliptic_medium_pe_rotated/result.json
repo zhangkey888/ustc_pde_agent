@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_medium_pe_rotated",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 0.0011613352508227299,
+  "time": 3.8070180416107178,
+  "oracle_error": 0.0005101355670620486,
+  "oracle_time": 1.123218022286892,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0051013556706204855,
+  "target_time": 3.369654066860676,
+  "fail_reason": "TIME_FAIL: time=3.807s > target=3.370s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.807s > target=3.370s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 4371.137677340592,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 273,
+      "condition_number_estimate": 74529.0
+    }
+  }
+}

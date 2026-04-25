@@ -1,0 +1,32 @@
+{
+  "case_id": "navier_stokes_basic",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 1.0,
+  "time": 3.351318120956421,
+  "oracle_error": 0.3261997434705027,
+  "oracle_time": 13.427273478358984,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 3.2619974347050267,
+  "target_time": 134.27273478358984,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu"
+    }
+  }
+}

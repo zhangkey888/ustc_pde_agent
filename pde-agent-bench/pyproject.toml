@@ -26,7 +26,15 @@ fenicsx = [
     "fenics-ufl>=2025.2.0",
     "mpi4py>=4.1.1",
     "petsc4py>=3.24.2",
+    # 复杂几何网格生成（L形、环形、多孔等非矩形域）
+    "pygmsh>=7.1.17",
+    "meshio>=5.3.5",
 ]
+agents = [
+    "mini-swe-agent",
+    "openhands",
+]
+
 dev = [
     "pytest>=7.0",
     "pytest-xdist>=2.5",

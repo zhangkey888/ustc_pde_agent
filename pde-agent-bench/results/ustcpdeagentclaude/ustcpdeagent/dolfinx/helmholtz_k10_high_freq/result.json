@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_k10_high_freq",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 2.265236146417056e-06,
+  "time": 4.240819931030273,
+  "oracle_error": 0.0028232060882901378,
+  "oracle_time": 20.78197232913226,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.028232060882901377,
+  "target_time": 62.34591698739678,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 103041,
+      "resolution": 160,
+      "degree": 2,
+      "efficiency_dof_per_sec": 24297.424006627654,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

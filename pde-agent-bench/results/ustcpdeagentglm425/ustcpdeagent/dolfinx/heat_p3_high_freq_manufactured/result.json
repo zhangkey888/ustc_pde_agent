@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_p3_high_freq_manufactured",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 6.258646225773741e-06,
+  "time": 2.3425333499908447,
+  "oracle_error": 2.272112367945388e-05,
+  "oracle_time": 26.358858404681087,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0002272112367945388,
+  "target_time": 79.07657521404326,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 21025,
+      "n_steps": 40,
+      "dt": 0.002,
+      "t_end": 0.08,
+      "agent_resolution": 48,
+      "agent_degree": 3,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 359013.03176891245,
+      "time_per_step": 0.058563333749771115,
+      "cfl_number": 4.6080000000000005,
+      "cfl_warning": "CFL=4.61 > 0.5 (explicit unstable)",
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 40
+    }
+  }
+}

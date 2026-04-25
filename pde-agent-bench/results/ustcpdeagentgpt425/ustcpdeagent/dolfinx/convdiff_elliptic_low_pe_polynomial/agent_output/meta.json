@@ -1,0 +1,41 @@
+{
+  "wall_time_sec": 1.3618698120117188,
+  "solver_info": {
+    "mesh_resolution": 80,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 6,
+    "verification_l2_error": 5.28000853101723e-10,
+    "verification_linf_error": 1.0137507383837976e-09,
+    "supg_used": false,
+    "adaptive_history": [
+      {
+        "mesh_resolution": 24,
+        "wall_time_sec": 0.07478663697838783,
+        "l2_error": 6.467242930275252e-08
+      },
+      {
+        "mesh_resolution": 36,
+        "wall_time_sec": 0.09936999902129173,
+        "l2_error": 1.282666794806546e-08
+      },
+      {
+        "mesh_resolution": 48,
+        "wall_time_sec": 0.1511780209839344,
+        "l2_error": 4.0658806257350255e-09
+      },
+      {
+        "mesh_resolution": 64,
+        "wall_time_sec": 0.3863372905179858,
+        "l2_error": 1.2881256325924768e-09
+      },
+      {
+        "mesh_resolution": 80,
+        "wall_time_sec": 0.4693329045549035,
+        "l2_error": 5.28000853101723e-10
+      }
+    ]
+  }
+}

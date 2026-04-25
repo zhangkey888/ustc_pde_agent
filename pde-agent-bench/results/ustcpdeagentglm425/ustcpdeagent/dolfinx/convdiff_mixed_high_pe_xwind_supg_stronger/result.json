@@ -1,0 +1,15 @@
+{
+  "case_id": "convdiff_mixed_high_pe_xwind_supg_stronger",
+  "equation_type": "convection_diffusion",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/solver.py\", line 18, in solve\n    eps = pde[\"coefficients\"][\"epsilon\"]  # 0.005\n          ~~~^^^^^^^^^^^^^^^^\nKeyError: 'coefficients'\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/solver.py\", line 18, in solve\n    eps = pde[\"coefficients\"][\"epsilon\"]  # 0.005\n          ~~~^^^^^^^^^^^^^^^^\nKeyError: 'coefficients'\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/convdiff_mixed_high_pe_xwind_supg_stronger/solver.py\", line 18, in solve\n    eps = pde[\"coefficients\"][\"epsilon\"]  # 0.005\n          ~~~^^^^^^^^^^^^^^^^\nKeyError: 'coefficients'\n"
+  }
+}

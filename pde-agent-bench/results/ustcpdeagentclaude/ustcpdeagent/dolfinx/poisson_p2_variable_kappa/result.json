@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_p2_variable_kappa",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 1.7219040356452073e-05,
+  "time": 3.670592784881592,
+  "oracle_error": 6.451139550412914e-05,
+  "oracle_time": 0.9312355732545257,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0006451139550412914,
+  "target_time": 2.793706719763577,
+  "fail_reason": "TIME_FAIL: time=3.671s > target=2.794s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.671s > target=2.794s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 4533.6001499651,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

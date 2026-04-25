@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_no_exact_two_gaussian_sources",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 7.143694849760917e-07,
+  "time": 5.2629430294036865,
+  "oracle_error": 0.00065957866996579,
+  "oracle_time": 1.2985963402315974,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0065957866996578995,
+  "target_time": 3.8957890206947923,
+  "fail_reason": "TIME_FAIL: time=5.263s > target=3.896s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=5.263s > target=3.896s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 591361,
+      "resolution": 384,
+      "degree": 2,
+      "efficiency_dof_per_sec": 112363.17716078406,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

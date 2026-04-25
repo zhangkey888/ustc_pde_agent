@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_no_exact_multifreq_source",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 0.002943681024194806,
+  "time": 4.248915672302246,
+  "oracle_error": 0.003621378735145895,
+  "oracle_time": 30.41182574722916,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.03621378735145895,
+  "target_time": 91.23547724168748,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 1341.640786499874,
+      "total_variation": 4.718809579016158
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_variable_kappa_stripes_x",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 3.6556012838357076e-06,
+  "time": 2.92710542678833,
+  "oracle_error": 0.0001896381949146042,
+  "oracle_time": 2.354679958894849,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.001896381949146042,
+  "target_time": 7.0640398766845465,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 28561,
+      "resolution": 84,
+      "degree": 2,
+      "efficiency_dof_per_sec": 9757.421013474604,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

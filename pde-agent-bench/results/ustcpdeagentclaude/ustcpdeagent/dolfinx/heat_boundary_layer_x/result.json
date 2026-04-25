@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_boundary_layer_x",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 9.241850212125577e-06,
+  "time": 10.308032751083374,
+  "oracle_error": 0.0001645816172669142,
+  "oracle_time": 5.887478708289564,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.001645816172669142,
+  "target_time": 17.66243612486869,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 66049,
+      "n_steps": 80,
+      "dt": 0.001,
+      "t_end": 0.08,
+      "agent_resolution": 128,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 512602.1742067768,
+      "time_per_step": 0.12885040938854217,
+      "cfl_number": 16.384,
+      "cfl_warning": "CFL=16.38 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 400
+    }
+  }
+}

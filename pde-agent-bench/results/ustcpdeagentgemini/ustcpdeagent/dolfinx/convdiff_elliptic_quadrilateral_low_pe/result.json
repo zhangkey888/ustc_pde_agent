@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_quadrilateral_low_pe",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 2.728946685921878e-09,
+  "time": 2.09342622756958,
+  "oracle_error": 6.264124061451793e-05,
+  "oracle_time": 0.8090810962021351,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0006264124061451794,
+  "target_time": 2.4272432886064053,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 17609.40964363395,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

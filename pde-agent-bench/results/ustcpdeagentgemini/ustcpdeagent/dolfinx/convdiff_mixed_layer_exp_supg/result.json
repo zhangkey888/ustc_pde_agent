@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_layer_exp_supg",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 1.5624786978165626e-06,
+  "time": 1.9497056007385254,
+  "oracle_error": 1.9362397973897735e-05,
+  "oracle_time": 1.4731502151116729,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00019362397973897736,
+  "target_time": 4.419450645335019,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 1200.0,
+      "total_variation": 1239.5678719569469
+    }
+  }
+}

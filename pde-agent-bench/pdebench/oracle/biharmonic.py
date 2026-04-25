@@ -32,6 +32,8 @@ from .common import (
     interpolate_expression,
     parse_expression,
     sample_scalar_on_grid,
+    _eval_exact_sym_on_grid,
+    _apply_domain_mask,
 )
 
 
@@ -55,6 +57,8 @@ class BiharmonicSolver:
         
         msh = create_mesh(case_spec["domain"], case_spec["mesh"])
         V = create_scalar_space(msh, case_spec["fem"]["family"], case_spec["fem"]["degree"])
+        # 新增这一行：显式定义积分域
+        dx = ufl.Measure("dx", domain=msh)
 
         pde_cfg = case_spec["pde"]
         manufactured = pde_cfg.get("manufactured_solution", {})
@@ -74,6 +78,11 @@ class BiharmonicSolver:
             f_sym = -(lap_w)  # -Δw = f
 
             f_expr = parse_expression(f_sym, x)
+
+            if f_sym.is_number:
+                f_expr = fem.Constant(msh, float(f_sym.evalf()))
+            else:
+                f_expr = parse_expression(f_sym, x)
 
             u_exact_expr = parse_expression(u_sym, x)
             w_exact_expr = parse_expression(w_sym, x)
@@ -97,8 +106,8 @@ class BiharmonicSolver:
         # -----------------------
         w = ufl.TrialFunction(V)
         v = ufl.TestFunction(V)
-        a_w = ufl.inner(ufl.grad(w), ufl.grad(v)) * ufl.dx
-        L_w = f_expr * v * ufl.dx
+        a_w = ufl.inner(ufl.grad(w), ufl.grad(v)) * dx
+        L_w = f_expr * v * dx
 
         if w_exact is not None:
             boundary_dofs = locate_all_boundary_dofs(msh, V)
@@ -121,8 +130,8 @@ class BiharmonicSolver:
         # -----------------------
         u = ufl.TrialFunction(V)
         q = ufl.TestFunction(V)
-        a_u = ufl.inner(ufl.grad(u), ufl.grad(q)) * ufl.dx
-        L_u = w_h * q * ufl.dx
+        a_u = ufl.inner(ufl.grad(u), ufl.grad(q)) * dx
+        L_u = w_h * q * dx
 
         if u_exact is not None:
             boundary_dofs = locate_all_boundary_dofs(msh, V)
@@ -152,9 +161,9 @@ class BiharmonicSolver:
         }
 
         if u_exact is not None:
-            _, _, u_exact_grid = sample_scalar_on_grid(
-                u_exact, grid_cfg["bbox"], grid_cfg["nx"], grid_cfg["ny"]
-            )
+            # 直接在格点上代入解析式求精确值，避免 FEM 投影误差
+            sx, sy = sp.symbols("x y", real=True)
+            u_exact_grid = _apply_domain_mask(u_grid, _eval_exact_sym_on_grid(u_sym, (sx, sy), grid_cfg))
             baseline_error = compute_rel_L2_grid(u_grid, u_exact_grid)
             u_grid = u_exact_grid
         else:
@@ -167,6 +176,7 @@ class BiharmonicSolver:
             ref_V = create_scalar_space(ref_msh, ref_fem_spec["family"], ref_fem_spec["degree"])
             ref_x = ufl.SpatialCoordinate(ref_msh)
             ref_f = _rhs_scalar(ref_msh, ref_x, source_expr)
+            ref_dx = ufl.Measure("dx", domain=ref_msh)
 
             ref_petsc = {
                 "ksp_type": ref_solver.get("ksp_type", petsc_options["ksp_type"]),
@@ -178,8 +188,8 @@ class BiharmonicSolver:
             # w_ref
             ref_w = ufl.TrialFunction(ref_V)
             ref_v = ufl.TestFunction(ref_V)
-            ref_a_w = ufl.inner(ufl.grad(ref_w), ufl.grad(ref_v)) * ufl.dx
-            ref_L_w = ref_f * ref_v * ufl.dx
+            ref_a_w = ufl.inner(ufl.grad(ref_w), ufl.grad(ref_v)) * ref_dx
+            ref_L_w = ref_f * ref_v * ref_dx
             ref_bcs_w = [build_dirichlet_bc(ref_msh, ref_V, "0.0")]
             ref_w_problem = LinearProblem(
                 ref_a_w,
@@ -193,8 +203,8 @@ class BiharmonicSolver:
             # u_ref
             ref_u = ufl.TrialFunction(ref_V)
             ref_q = ufl.TestFunction(ref_V)
-            ref_a_u = ufl.inner(ufl.grad(ref_u), ufl.grad(ref_q)) * ufl.dx
-            ref_L_u = ref_w_h * ref_q * ufl.dx
+            ref_a_u = ufl.inner(ufl.grad(ref_u), ufl.grad(ref_q)) * ref_dx
+            ref_L_u = ref_w_h * ref_q * ref_dx
             ref_bc_cfg = case_spec.get("bc", {}).get("dirichlet", {})
             ref_bc_value = ref_bc_cfg.get("value", "0.0")
             ref_bcs_u = [build_dirichlet_bc(ref_msh, ref_V, ref_bc_value)]
@@ -218,11 +228,14 @@ class BiharmonicSolver:
         # ⏱️ 结束计时（包含完整流程）
         baseline_time = time.perf_counter() - t_start_total
 
-        return OracleResult(
-            baseline_error=float(baseline_error),
-            baseline_time=float(baseline_time),
-            reference=u_grid,
-            solver_info=solver_info,
-            num_dofs=V.dofmap.index_map.size_global,
-        )
+        if msh.comm.rank == 0:
+            return OracleResult(
+                baseline_error=float(baseline_error),
+                baseline_time=float(baseline_time),
+                reference=u_grid,
+                solver_info=solver_info,
+                num_dofs=V.dofmap.index_map.size_global,
+            )
+        else:
+            return OracleResult(0.0, 0.0, np.array([]), {}, 0)
 

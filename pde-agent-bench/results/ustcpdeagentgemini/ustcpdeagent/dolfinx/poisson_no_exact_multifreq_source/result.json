@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_no_exact_multifreq_source",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 2.5754113932155517e-05,
+  "time": 6.204807758331299,
+  "oracle_error": 0.0026843686786315268,
+  "oracle_time": 2.4395430823788047,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.02684368678631527,
+  "target_time": 7.318629247136414,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 66049,
+      "resolution": 128,
+      "degree": 2,
+      "efficiency_dof_per_sec": 10644.810052545932,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 5,
+      "condition_number_estimate": 25.0
+    }
+  }
+}

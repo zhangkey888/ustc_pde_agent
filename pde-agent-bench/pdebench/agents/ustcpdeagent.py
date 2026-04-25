@@ -257,15 +257,16 @@ except ImportError as e:
 
 class AutoPDEWrapper(BaseAgent):
     def _setup(self):
-        # 1. 基础配置 (默认推荐模型可以按需修改，如 deepseek-chat)
-        self.model_name = self.config.get('model', 'deepseek/deepseek-chat')
-        
-        # 2. 提取 API Base 并强制写入双重环境变量
+        # 1. 基础配置
+        # self.model_name = self.config.get('model', 'openai/ep-pi3isx-1774582959665896921')
+        self.model_name = self.config.get('model', 'openai/ep-mfhhic-1775916032585015109')
+        # self.model_name = self.config.get('model', 'openai/ep-bq9oul-1775917200714421653')
+        # self.model_name = self.config.get('model', 'openai/ep-51rjin-1776868780446142114')
+        # self.model_name = self.config.get('model', 'openai/ep-wehwpc-1776869521607262947')
+        # 2. 提取 API Base（不再自动追加 /v1）
         self.api_base = self.config.get('api_base') or self.config.get('base_url')
         if self.api_base:
-            if not self.api_base.endswith("/v1") and not self.api_base.endswith("/v1/"):
-                self.api_base = self.api_base.rstrip("/") + "/v1"
-            
+            self.api_base = self.api_base.rstrip("/")
             os.environ["OPENAI_API_BASE"] = self.api_base
             os.environ["OPENAI_BASE_URL"] = self.api_base
             print(f"🌐 Global API Base set to: {self.api_base}")
@@ -277,8 +278,16 @@ class AutoPDEWrapper(BaseAgent):
             print(f"🔑 Global API Key loaded.")
             
         # 4. 设置结果存储路径 (更新为 autopdeagent 路径)
+        # 4. 设置结果存储路径 —— 每个 model 独立子目录，避免并行时互相覆盖
         default_root = "/data5/store1/zky/ustc_pde_agent/pde-agent-bench/results/autopdeagent"
-        self.results_root = Path(self.config.get('results_root', default_root))
+        base_root = Path(self.config.get('results_root', default_root))
+
+        # 🔧 把 model 名塞进路径，保证多 API 并行时结果隔离
+        model_tag = re.sub(r'[^A-Za-z0-9._-]', '_', self.model_name).strip("_")
+        self.results_root = base_root.parent / f"{base_root.name}__{model_tag}"
+        self.results_root.mkdir(parents=True, exist_ok=True)
+
+        print(f"📂 Model-scoped workspace: {self.results_root}")
         
         # 5. 加载基础配置 (default.yaml)
         self.default_config_path = package_dir / "config" / "default.yaml"

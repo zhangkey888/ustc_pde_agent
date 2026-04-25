@@ -1,0 +1,32 @@
+{
+  "case_id": "navier_stokes_tanh_x_shear_stream",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 1.6234712565898449e-06,
+  "time": 13.701977014541626,
+  "oracle_error": 0.6852599788191803,
+  "oracle_time": 50.83167888969183,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 6.852599788191803,
+  "target_time": 508.3167888969183,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu"
+    }
+  }
+}

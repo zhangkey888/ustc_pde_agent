@@ -1,0 +1,38 @@
+{
+  "case_id": "linear_elasticity_quadrilateral_mesh",
+  "equation_type": "linear_elasticity",
+  "status": "PASS",
+  "error": 3.781043367374635e-07,
+  "time": 15.239000797271729,
+  "oracle_error": 0.0003248650103920107,
+  "oracle_time": 8.630071391351521,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.003248650103920107,
+  "target_time": 25.890214174054563,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 148225,
+      "resolution": 192,
+      "degree": 2,
+      "efficiency_dof_per_sec": 9726.6875940145,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 11,
+      "condition_number_estimate": 121.0
+    }
+  }
+}

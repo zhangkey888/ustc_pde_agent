@@ -1,0 +1,17 @@
+{
+  "wall_time_sec": 0.00037288665771484375,
+  "solver_info": {
+    "mesh_resolution": 128,
+    "element_degree": 2,
+    "ksp_type": "preonly",
+    "pc_type": "lu",
+    "rtol": 1e-12,
+    "iterations": 0,
+    "verification": {
+      "manufactured_solution": "u=x*(1-x)*y*(1-y)",
+      "linf_error_on_output_grid": 0.0,
+      "l2_error_on_output_grid": 0.0,
+      "delta2_u_constant": 8.0
+    }
+  }
+}

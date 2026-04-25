@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_extreme_pe_supg_upwind3",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 9.472543829166683e-09,
+  "time": 21.01252794265747,
+  "oracle_error": 2.197672891574026e-05,
+  "oracle_time": 14.417214781977236,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0002197672891574026,
+  "target_time": 43.25164434593171,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 13462.91201783626,
+      "total_variation": 124.67064307986895
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_quadrilateral_supg_upwind2",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 1.2210645916909413e-07,
+  "time": 5.017602205276489,
+  "oracle_error": 4.4319320804054505e-05,
+  "oracle_time": 0.8379823807626963,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00044319320804054506,
+  "target_time": 2.513947142288089,
+  "fail_reason": "TIME_FAIL: time=5.018s > target=2.514s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=5.018s > target=2.514s"
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 3794.7331922020553,
+      "total_variation": 124.6706411543158
+    }
+  }
+}

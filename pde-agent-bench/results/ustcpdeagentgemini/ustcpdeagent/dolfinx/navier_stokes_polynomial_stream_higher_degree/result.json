@@ -1,0 +1,32 @@
+{
+  "case_id": "navier_stokes_polynomial_stream_higher_degree",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 4.964860868998789e-06,
+  "time": 6.201117753982544,
+  "oracle_error": 0.48890793391745113,
+  "oracle_time": 28.99832712393254,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 4.889079339174511,
+  "target_time": 289.9832712393254,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu"
+    }
+  }
+}

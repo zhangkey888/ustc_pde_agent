@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_medium_pe_diagonal",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 5.767806831377077e-06,
+  "time": 4.194242715835571,
+  "oracle_error": 0.0001405326908600227,
+  "oracle_time": 0.8246098030358553,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0014053269086002269,
+  "target_time": 2.473829409107566,
+  "fail_reason": "TIME_FAIL: time=4.194s > target=2.474s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=4.194s > target=2.474s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 37249,
+      "resolution": 96,
+      "degree": 2,
+      "efficiency_dof_per_sec": 8880.983415519697,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 8,
+      "condition_number_estimate": 64.0
+    }
+  }
+}

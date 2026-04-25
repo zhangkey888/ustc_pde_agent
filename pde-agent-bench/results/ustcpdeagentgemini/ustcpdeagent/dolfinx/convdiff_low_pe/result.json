@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_low_pe",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 2.152977329434305e-06,
+  "time": 1.3712084293365479,
+  "oracle_error": 0.0001631820175059153,
+  "oracle_time": 0.7247999142855406,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0016318201750591531,
+  "target_time": 2.1743997428566217,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 12136.010575760289,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_gaussian_source_no_exact",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 0.15639906493271166,
+  "time": 15.013517618179321,
+  "oracle_error": 0.1443326641461651,
+  "oracle_time": 5.744326444342732,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 1.443326641461651,
+  "target_time": 17.232979333028197,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 124609,
+      "n_steps": 40,
+      "dt": 0.0025,
+      "t_end": 0.1,
+      "agent_resolution": 176,
+      "agent_degree": 2,
+      "time_scheme": "crank_nicolson",
+      "efficiency_workrate": 331991.48439168045,
+      "time_per_step": 0.37533794045448304,
+      "cfl_number": 77.44,
+      "cfl_warning": "CFL=77.44 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "crank_nicolson",
+      "linear_iterations": 200
+    }
+  }
+}

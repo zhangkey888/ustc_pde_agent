@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_reverse_flow_supg",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 9.517012102088455e-08,
+  "time": 5.751163005828857,
+  "oracle_error": 0.000164033813324483,
+  "oracle_time": 1.7144505744799972,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00164033813324483,
+  "target_time": 5.1433517234399915,
+  "fail_reason": "TIME_FAIL: time=5.751s > target=5.143s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=5.751s > target=5.143s"
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 4123.105625617661,
+      "total_variation": 225.6096771817835
+    }
+  }
+}

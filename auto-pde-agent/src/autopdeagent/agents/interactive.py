@@ -19,7 +19,7 @@ from autopdeagent import global_config_dir
 from autopdeagent.agents.default import AgentConfig, DefaultAgent, LimitsExceeded, NonTerminatingException, Submitted
 from autopdeagent.tools.web_search import SearchTool
 from autopdeagent.tools.inspect_tool import InspectTool
-
+from autopdeagent.tools.pde_skill_tool import PdeSkillTool
 console = Console(highlight=False)
 prompt_session = PromptSession(history=FileHistory(global_config_dir / "interactive_history.txt"))
 
@@ -36,23 +36,35 @@ class InteractiveAgentConfig(AgentConfig):
 class InteractiveAgent(DefaultAgent):
     _MODE_COMMANDS_MAPPING = {"/u": "human", "/c": "confirm", "/y": "yolo"}
 
-    def __init__(self, *args, config_class=InteractiveAgentConfig, **kwargs):
-        # 🌟 1. 提取传入的指南文本（如果没传，给个默认报错）
-        self.profiling_guide_text = kwargs.pop("profiling_guide_text", "Error: Profiling guide not configured.")
+    # def __init__(self, *args, config_class=InteractiveAgentConfig, **kwargs):
+    #     # 🌟 1. 提取传入的指南文本（如果没传，给个默认报错）
+    #     self.profiling_guide_text = kwargs.pop("profiling_guide_text", "Error: Profiling guide not configured.")
         
+    #     super().__init__(*args, config_class=config_class, **kwargs)
+    #     self.cost_last_confirmed = 0.0
+    #     self.search_tool = SearchTool()
+    #     self.inspect_tool = InspectTool()
+    #     self.pde_skill_tool = PdeSkillTool() 
+    def __init__(self, *args, config_class=InteractiveAgentConfig, **kwargs):
+        self.profiling_guide_text = kwargs.pop(
+            "profiling_guide_text", "Error: Profiling guide not configured."
+        )
+        self.agent_name = kwargs.pop("agent_name", "PDEAgent")   # 🆕
+
         super().__init__(*args, config_class=config_class, **kwargs)
         self.cost_last_confirmed = 0.0
         self.search_tool = SearchTool()
         self.inspect_tool = InspectTool()
+        self.pde_skill_tool = PdeSkillTool()
     def add_message(self, role: str, content: str, **kwargs):
         # Extend supermethod to print messages
         super().add_message(role, content, **kwargs)
         if role == "assistant":
-            # === 🔄 修改 2：修改终端打印时的 Agent 名称 ===
             console.print(
-                f"\n[red][bold]PDEAgent[/bold] (step [bold]{self.model.n_calls}[/bold], [bold]${self.model.cost:.2f}[/bold]):[/red]\n",
-                end="",
-                highlight=False,
+                f"\n[red][bold]{self.agent_name}[/bold] "
+                f"(step [bold]{self.model.n_calls}[/bold], "
+                f"[bold]${self.model.cost:.2f}[/bold]):[/red]\n",
+                end="", highlight=False,
             )
         else:
             console.print(f"\n[bold green]{role.capitalize()}[/bold green]:\n", end="", highlight=False)

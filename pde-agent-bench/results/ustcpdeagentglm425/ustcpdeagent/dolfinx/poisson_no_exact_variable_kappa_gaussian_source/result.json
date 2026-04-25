@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_no_exact_variable_kappa_gaussian_source",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 2.4979675849397957e-05,
+  "time": 5.861999988555908,
+  "oracle_error": 0.0004652495267623549,
+  "oracle_time": 2.8726744316518307,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00465249526762355,
+  "target_time": 8.618023294955492,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 263169,
+      "resolution": 256,
+      "degree": 2,
+      "efficiency_dof_per_sec": 44894.063547214566,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

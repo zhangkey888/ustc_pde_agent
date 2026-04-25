@@ -1,0 +1,19 @@
+{
+  "wall_time_sec": 5.227238416671753,
+  "solver_info": {
+    "mesh_resolution": 64,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 371,
+    "dt": 0.007547169811320755,
+    "n_steps": 53,
+    "time_scheme": "backward_euler",
+    "l2_error": 0.0007630776316041382,
+    "relative_l2_error": 0.0009007373329683489,
+    "diagnosis": "equation_type: reaction_diffusion; spatial_dim: 2; domain_geometry: rectangle; unknowns: scalar; coupling: none; linearity: linear; time_dependence: transient; stiffness: stiff; dominant_physics: mixed; peclet_or_reynolds: N/A; solution_regularity: smooth; bc_type: all_dirichlet; special_notes: manufactured_solution",
+    "method": "spatial_method: fem; element_or_basis: Lagrange_P2; stabilization: none; time_method: backward_euler; nonlinear_solver: none; linear_solver: cg; preconditioner: hypre; special_treatment: none; pde_skill: reaction_diffusion",
+    "wall_time_level": 3.485010886564851
+  }
+}

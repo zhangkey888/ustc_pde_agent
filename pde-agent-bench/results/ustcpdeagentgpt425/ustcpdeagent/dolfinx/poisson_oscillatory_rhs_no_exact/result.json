@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_oscillatory_rhs_no_exact",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 3.0811482156708975e-05,
+  "time": 3.8379273414611816,
+  "oracle_error": 0.009846568435755492,
+  "oracle_time": 2.5884426971897483,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.09846568435755493,
+  "target_time": 7.765328091569245,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 201601,
+      "resolution": 224,
+      "degree": 2,
+      "efficiency_dof_per_sec": 52528.61298912609,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

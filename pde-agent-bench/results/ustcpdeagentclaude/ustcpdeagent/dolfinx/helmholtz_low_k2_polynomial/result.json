@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_low_k2_polynomial",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 1.8703135018744595e-06,
+  "time": 1.8096883296966553,
+  "oracle_error": 0.00036927099353487443,
+  "oracle_time": 1.4183399472385645,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0036927099353487444,
+  "target_time": 4.2550198417156935,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 9195.506058653431,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

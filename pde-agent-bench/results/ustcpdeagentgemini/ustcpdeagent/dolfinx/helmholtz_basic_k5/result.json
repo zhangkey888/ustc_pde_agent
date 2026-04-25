@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_basic_k5",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 2.694324950620774e-07,
+  "time": 2.322660446166992,
+  "oracle_error": 0.000651797578036633,
+  "oracle_time": 0.8793269526213408,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.006517975780366329,
+  "target_time": 2.6379808578640223,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 66049,
+      "resolution": 128,
+      "degree": 2,
+      "efficiency_dof_per_sec": 28436.78683597442,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

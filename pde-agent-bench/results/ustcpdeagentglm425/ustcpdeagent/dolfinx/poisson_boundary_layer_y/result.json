@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_boundary_layer_y",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 4.6376548634943636e-07,
+  "time": 3.585982322692871,
+  "oracle_error": 0.0001397189685857459,
+  "oracle_time": 0.47295471001416445,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.001397189685857459,
+  "target_time": 1.4188641300424933,
+  "fail_reason": "TIME_FAIL: time=3.586s > target=1.419s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.586s > target=1.419s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 9216,
+      "resolution": 32,
+      "degree": 3,
+      "efficiency_dof_per_sec": 2570.0070916912114,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 138,
+      "condition_number_estimate": 19044.0
+    }
+  }
+}

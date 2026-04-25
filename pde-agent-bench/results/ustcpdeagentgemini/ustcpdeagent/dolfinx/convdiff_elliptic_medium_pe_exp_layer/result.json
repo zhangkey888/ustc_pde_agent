@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_medium_pe_exp_layer",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 2.928731479119719e-06,
+  "time": 2.4672787189483643,
+  "oracle_error": 2.8366533170270784e-05,
+  "oracle_time": 0.8619309067726135,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00028366533170270784,
+  "target_time": 2.5857927203178406,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 66049,
+      "resolution": 128,
+      "degree": 2,
+      "efficiency_dof_per_sec": 26769.979205329615,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

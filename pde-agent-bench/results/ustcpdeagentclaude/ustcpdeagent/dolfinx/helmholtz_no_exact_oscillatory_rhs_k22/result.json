@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_no_exact_oscillatory_rhs_k22",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 1.552002000800427e-05,
+  "time": 9.949664831161499,
+  "oracle_error": 0.015832583124910343,
+  "oracle_time": 36.620499612763524,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.15832583124910343,
+  "target_time": 109.86149883829057,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 230400,
+      "resolution": 160,
+      "degree": 3,
+      "efficiency_dof_per_sec": 23156.558930347775,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

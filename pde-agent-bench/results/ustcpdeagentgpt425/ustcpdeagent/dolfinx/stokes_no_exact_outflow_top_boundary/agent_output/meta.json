@@ -1,0 +1,19 @@
+{
+  "wall_time_sec": 1.1115391254425049,
+  "solver_info": {
+    "mesh_resolution": 56,
+    "element_degree": 2,
+    "ksp_type": "minres",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 1,
+    "verification": {
+      "divergence_l2": 0.8640617078024387,
+      "bc_max_error_x0": 1.3976829739970054e-06,
+      "bc_max_error_y0": 4.555897014946557e-18,
+      "bc_max_error_x1": 2.9911119768920205e-17,
+      "grid_diff_prev_to_40": 0.00674215150070788,
+      "grid_diff_prev_to_56": 0.0031964921496986792
+    }
+  }
+}

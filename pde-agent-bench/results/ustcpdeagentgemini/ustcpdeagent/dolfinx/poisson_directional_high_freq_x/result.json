@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_directional_high_freq_x",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 0.0003562693451220087,
+  "time": 2.4316468238830566,
+  "oracle_error": 0.0018941066298430028,
+  "oracle_time": 1.212293273769319,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.01894106629843003,
+  "target_time": 3.636879821307957,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 6843.5102649595565,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 106,
+      "condition_number_estimate": 11236.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_p2",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 9.17399543164178e-09,
+  "time": 3.4284348487854004,
+  "oracle_error": 5.640022884484401e-07,
+  "oracle_time": 0.21772216074168682,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 5.640022884484401e-06,
+  "target_time": 0.6531664822250605,
+  "fail_reason": "TIME_FAIL: time=3.428s > target=0.653s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.428s > target=0.653s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 10752.42833127189,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

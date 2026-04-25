@@ -1,0 +1,16 @@
+{
+  "wall_time_sec": 4.054699420928955,
+  "solver_info": {
+    "mesh_resolution": 128,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "ilu",
+    "rtol": 1e-10,
+    "iterations": 362,
+    "l2_error": 3.5324278454054285e-05,
+    "sample_linf_error": 7.106780285748293e-05,
+    "diagnosis": "equation_type=convection_diffusion; spatial_dim=2; domain_geometry=rectangle; unknowns=scalar; coupling=none; linearity=linear; time_dependence=steady; dominant_physics=mixed; peclet_or_reynolds=high; solution_regularity=smooth; bc_type=all_dirichlet; special_notes=manufactured_solution",
+    "method": "spatial_method=fem; element_or_basis=Lagrange_P2; stabilization=supg; time_method=none; nonlinear_solver=none; linear_solver=gmres; preconditioner=ilu; special_treatment=none; pde_skill=convection_diffusion",
+    "wall_time_estimate": 3.9920004922896624
+  }
+}

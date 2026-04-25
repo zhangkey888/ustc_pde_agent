@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_gaussian_source_no_exact",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 0.010585660346928441,
+  "time": 2.5059823989868164,
+  "oracle_error": 0.0086721656879233,
+  "oracle_time": 9.045226112008095,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.086721656879233,
+  "target_time": 27.135678336024284,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16384,
+      "resolution": 128,
+      "degree": 1,
+      "efficiency_dof_per_sec": 6537.95493800122,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

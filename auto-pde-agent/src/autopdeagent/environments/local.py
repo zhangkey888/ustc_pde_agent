@@ -9,7 +9,7 @@ from pydantic import BaseModel
 class LocalEnvironmentConfig(BaseModel):
     cwd: str = ""
     env: dict[str, str] = {}
-    timeout: int = 30
+    timeout: int = 300
 
 
 class LocalEnvironment:

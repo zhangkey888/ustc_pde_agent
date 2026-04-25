@@ -20,6 +20,9 @@ from .common import (
     parse_expression,
     parse_vector_expression,
     sample_vector_magnitude_on_grid,
+    _sample_vector_mag_grid,
+    _eval_exact_vec_mag_on_grid,
+    _apply_domain_mask,
 )
 
 
@@ -252,6 +255,8 @@ class StokesSolver:
             "pc_type": solver_params.get("pc_type", "hypre"),
             "ksp_rtol": solver_params.get("rtol", 1e-10),
         }
+        if "pc_factor_mat_solver_type" in solver_params:
+            petsc_options["pc_factor_mat_solver_type"] = solver_params["pc_factor_mat_solver_type"]
 
         problem = LinearProblem(
             a, L, bcs=bcs, petsc_options=petsc_options, petsc_options_prefix="oracle_stokes_"
@@ -262,17 +267,18 @@ class StokesSolver:
         p_h = w_h.sub(1).collapse()
 
         grid_cfg = case_spec["output"]["grid"]
-        _, _, u_grid = sample_vector_magnitude_on_grid(
-            u_h, grid_cfg["bbox"], grid_cfg["nx"], grid_cfg["ny"]
-        )
+        u_grid = _sample_vector_mag_grid(u_h, grid_cfg)
 
         baseline_error = 0.0
         if u_exact is not None:
-            _, _, u_exact_grid = sample_vector_magnitude_on_grid(
-                u_exact, grid_cfg["bbox"], grid_cfg["nx"], grid_cfg["ny"]
+            # 直接在格点上计算速度模长，避免 FEM 投影误差
+            sx, sy, sz = sp.symbols("x y z", real=True)
+            coords_sym = [sx, sy, sz][:dim]
+            u_exact_grid = _apply_domain_mask(
+                u_grid,
+                _eval_exact_vec_mag_on_grid(u_sym_vec, tuple(coords_sym), grid_cfg),
             )
             baseline_error = compute_rel_L2_grid(u_grid, u_exact_grid)
-            # Use exact grid as reference for evaluation alignment.
             u_grid = u_exact_grid
         else:
             ref_cfg = case_spec.get("reference_config", {})
@@ -345,6 +351,10 @@ class StokesSolver:
                 "pc_type": ref_solver.get("pc_type", petsc_options["pc_type"]),
                 "ksp_rtol": ref_solver.get("rtol", 1e-12),
             }
+            if ref_solver.get("pc_factor_mat_solver_type") or petsc_options.get("pc_factor_mat_solver_type"):
+                ref_petsc_options["pc_factor_mat_solver_type"] = ref_solver.get(
+                    "pc_factor_mat_solver_type", petsc_options.get("pc_factor_mat_solver_type", "mumps")
+                )
             ref_problem = LinearProblem(
                 ref_a,
                 ref_L,
@@ -354,9 +364,7 @@ class StokesSolver:
             )
             ref_w = ref_problem.solve()
             ref_u_h = ref_w.sub(0).collapse()
-            _, _, ref_grid = sample_vector_magnitude_on_grid(
-                ref_u_h, grid_cfg["bbox"], grid_cfg["nx"], grid_cfg["ny"]
-            )
+            ref_grid = _sample_vector_mag_grid(ref_u_h, grid_cfg)
             baseline_error = compute_rel_L2_grid(u_grid, ref_grid)
             u_grid = ref_grid
 

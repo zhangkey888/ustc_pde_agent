@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_high_pe_strong_y_supg",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 6.559947808273302e-07,
+  "time": 5.7197792530059814,
+  "oracle_error": 6.848790300464908e-05,
+  "oracle_time": 0.7145135141909122,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0006848790300464908,
+  "target_time": 2.1435405425727367,
+  "fail_reason": "TIME_FAIL: time=5.720s > target=2.144s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=5.720s > target=2.144s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 37249,
+      "resolution": 96,
+      "degree": 2,
+      "efficiency_dof_per_sec": 6512.314261153366,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 367,
+      "condition_number_estimate": 134689.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_basic_k8_cos_sin",
+  "equation_type": "helmholtz",
+  "status": "FAIL",
+  "error": 6.158064439708113e-07,
+  "time": 4.483635902404785,
+  "oracle_error": 0.0003887149152609923,
+  "oracle_time": 0.8507812488824129,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.003887149152609923,
+  "target_time": 2.5523437466472387,
+  "fail_reason": "TIME_FAIL: time=4.484s > target=2.552s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=4.484s > target=2.552s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 37249,
+      "resolution": 96,
+      "degree": 2,
+      "efficiency_dof_per_sec": 8307.766466947418,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_high_contrast_no_exact",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 0.00012642724943065284,
+  "time": 3.695802688598633,
+  "oracle_error": 0.0032234055817583177,
+  "oracle_time": 6.641296615824103,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.03223405581758318,
+  "target_time": 19.92388984747231,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 263169,
+      "resolution": 256,
+      "degree": 2,
+      "efficiency_dof_per_sec": 71207.53518900326,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 7,
+      "condition_number_estimate": 49.0
+    }
+  }
+}

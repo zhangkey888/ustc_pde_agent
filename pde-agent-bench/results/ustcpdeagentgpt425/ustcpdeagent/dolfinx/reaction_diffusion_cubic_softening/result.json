@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_cubic_softening",
+  "equation_type": "reaction_diffusion",
+  "status": "PASS",
+  "error": 0.00045992975087318,
+  "time": 19.534547805786133,
+  "oracle_error": 0.0006230775730779654,
+  "oracle_time": 65.86320870369673,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.006230775730779654,
+  "target_time": 197.58962611109018,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 56,
+      "element_degree": 2,
+      "linear_iterations": 0,
+      "newton_iterations_mean": 0.0,
+      "newton_iterations_max": 0,
+      "dt": 0.005,
+      "n_steps": 50,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

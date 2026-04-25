@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_basic_sin",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 6.380155623729545e-07,
+  "time": 15.907307386398315,
+  "oracle_error": 0.00026046594482227384,
+  "oracle_time": 1.195205606520176,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0026046594482227385,
+  "target_time": 3.585616819560528,
+  "fail_reason": "TIME_FAIL: time=15.907s > target=3.586s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=15.907s > target=3.586s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 37249,
+      "resolution": 96,
+      "degree": 2,
+      "efficiency_dof_per_sec": 2341.628227530832,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 14,
+      "condition_number_estimate": 196.0
+    }
+  }
+}

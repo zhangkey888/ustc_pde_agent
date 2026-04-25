@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_kappa_stripes_x_manufactured",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 5.539828855444928e-05,
+  "time": 6.155553817749023,
+  "oracle_error": 0.00018546842159235458,
+  "oracle_time": 3.802486446686089,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0018546842159235459,
+  "target_time": 11.407459340058267,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 37249,
+      "n_steps": 20,
+      "dt": 0.005,
+      "t_end": 0.1,
+      "agent_resolution": 96,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 121025.66593633096,
+      "time_per_step": 0.30777769088745116,
+      "cfl_number": 46.080000000000005,
+      "cfl_warning": "CFL=46.08 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 100
+    }
+  }
+}

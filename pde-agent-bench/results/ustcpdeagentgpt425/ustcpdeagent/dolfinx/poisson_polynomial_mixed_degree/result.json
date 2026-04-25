@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_polynomial_mixed_degree",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 7.909612012162474e-06,
+  "time": 3.0319862365722656,
+  "oracle_error": 0.00022873964641174864,
+  "oracle_time": 0.5687558110803366,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0022873964641174863,
+  "target_time": 1.7062674332410097,
+  "fail_reason": "TIME_FAIL: time=3.032s > target=1.706s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=3.032s > target=1.706s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 6561,
+      "resolution": 40,
+      "degree": 2,
+      "efficiency_dof_per_sec": 2163.928028716044,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

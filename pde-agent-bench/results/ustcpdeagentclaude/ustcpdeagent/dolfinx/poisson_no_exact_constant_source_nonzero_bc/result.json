@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_no_exact_constant_source_nonzero_bc",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 5.1895675366045794e-08,
+  "time": 2.4844119548797607,
+  "oracle_error": 6.569103136666975e-05,
+  "oracle_time": 1.8378259651362896,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0006569103136666976,
+  "target_time": 5.513477895408869,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 14838.118906807516,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

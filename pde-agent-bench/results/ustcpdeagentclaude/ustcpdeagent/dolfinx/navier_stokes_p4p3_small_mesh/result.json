@@ -1,0 +1,33 @@
+{
+  "case_id": "navier_stokes_p4p3_small_mesh",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 2.9428984327199153e-08,
+  "time": 4.0612897872924805,
+  "oracle_error": 0.3191808366113592,
+  "oracle_time": 26.422658412717283,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 3.191808366113592,
+  "target_time": 264.2265841271728,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "linear_elasticity_exponential_gradients",
+  "equation_type": "linear_elasticity",
+  "status": "FAIL",
+  "error": 2.5332977223934443e-09,
+  "time": 12.379379510879517,
+  "oracle_error": 3.391197705781448e-05,
+  "oracle_time": 3.120188773609698,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0003391197705781448,
+  "target_time": 9.360566320829093,
+  "fail_reason": "TIME_FAIL: time=12.379s > target=9.361s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=12.379s > target=9.361s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 2977.855228333728,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 15,
+      "condition_number_estimate": 225.0
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "wall_time_sec": 2.361880302429199,
+  "solver_info": {
+    "mesh_resolution": 64,
+    "element_degree": 3,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 10,
+    "l2_error_fem": 4.661052097574038e-09,
+    "wall_time_sec": 2.3618061430752277,
+    "manufactured_solution": "sin(pi*x)*sin(pi*y)"
+  }
+}

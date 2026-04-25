@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_oscillatory_source_no_exact",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 0.00046388486462825524,
+  "time": 4.01805567741394,
+  "oracle_error": 0.013346519508202604,
+  "oracle_time": 6.748253636993468,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.13346519508202603,
+  "target_time": 20.244760910980403,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 16641,
+      "n_steps": 6,
+      "dt": 0.02,
+      "t_end": 0.12,
+      "agent_resolution": 64,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 24849.332118827646,
+      "time_per_step": 0.6696759462356567,
+      "cfl_number": 65.536,
+      "cfl_warning": "CFL=65.54 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "ilu",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 402
+    }
+  }
+}

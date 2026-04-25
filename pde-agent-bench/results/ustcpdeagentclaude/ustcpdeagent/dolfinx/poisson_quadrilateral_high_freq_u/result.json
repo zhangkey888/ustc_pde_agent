@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_quadrilateral_high_freq_u",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 5.8028731229408195e-05,
+  "time": 2.9283411502838135,
+  "oracle_error": 0.0010812655043397255,
+  "oracle_time": 0.7343743778765202,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.010812655043397255,
+  "target_time": 2.2031231336295605,
+  "fail_reason": "TIME_FAIL: time=2.928s > target=2.203s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=2.928s > target=2.203s"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 5682.739525887263,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 9,
+      "condition_number_estimate": 81.0
+    }
+  }
+}

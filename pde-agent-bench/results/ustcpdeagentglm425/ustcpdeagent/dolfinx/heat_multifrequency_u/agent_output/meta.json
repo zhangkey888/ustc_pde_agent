@@ -1,0 +1,14 @@
+{
+  "wall_time_sec": 0.5018250942230225,
+  "solver_info": {
+    "mesh_resolution": 40,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "jacobi",
+    "rtol": 1e-10,
+    "iterations": 1339,
+    "dt": 0.01,
+    "n_steps": 10,
+    "time_scheme": "backward_euler"
+  }
+}

@@ -288,7 +288,7 @@ generator_task: |
     Write a robust, adaptive Python module `solver.py` to solve Partial Differential Equations (PDEs). 
     Your goal is to satisfy strict Accuracy and Time constraints by choosing the RIGHT numerical method 
     for each problem, then writing clean, dynamic code.
-
+    Required  Your evaluation time must be half of the specified evaluation time. For any test, when generating code, first set the evaluation time to half of the regulated time as the baseline
   implementation_guidelines:
     
     1_solver_robustness:
@@ -371,40 +371,68 @@ generator_task: |
 verifier_task: |
 
   ---
-    ## DOMAIN EXPERTISE: CODE REVIEWER & NUMERICAL ANALYST
+  ## DOMAIN EXPERTISE: HANDS-ON CODE REVIEWER & FIXER
 
-    role: "Result-Driven Verifier & PDE Diagnostics"
+  role: "Result-Driven Verifier who also FIXES small bugs"
+ 
   objective: |
-    Your sole purpose is to definitively answer one question: "Does `solver.py` meet the strict Accuracy and Time constraints?"
-    You are entirely result-driven. You DO NOT perform static syntax analysis. If the code runs and the numbers pass, you approve immediately. If it fails, you diagnose the numerical bottleneck.
-
+    A Generator agent has already written `solver.py` in the current
+    workspace. Your job is to verify it ACTUALLY works end-to-end, and if
+    there are small bugs (typos, sign errors, missing output fields,
+    dtype issues, edge-case crashes), you FIX them yourself with minimal
+    edits. You are NOT supposed to redesign the numerical method.
+    Required  Your evaluation time must be half of the specified evaluation time. For any test, when generating code, first set the evaluation time to half of the regulated time as the baseline
   core_philosophy: |
-    **"Test First, Diagnose Later."**
-    1. Do not waste compute on syntax checks. Python will throw an error if the syntax is wrong.
-    2. The actual L2 error and execution time are your only sources of truth.
-    3. If constraints are met -> Instant PASS.
-    4. If constraints are missed -> Focus your feedback ONLY on fixing the specific metric that failed (Accuracy or Time).
+    **"Run it, then fix the smallest thing that makes it pass."**
+    1. Trust the Generator's high-level design.
+    2. Re-run the code in a fresh context — Generators often have
+       long-context blind spots (forgotten imports, off-by-one, wrong
+       key names in output dict, etc.).
+    3. If Accuracy & Time constraints are already met — submit immediately.
+    4. If it crashes or narrowly misses a constraint — patch `solver.py`
+       in place with the SMALLEST possible change, re-run, then submit.
+    5. If the numerical method itself is fundamentally wrong (bad scheme,
+       wrong equation) — DO NOT rewrite. Just report the issue clearly
+       in your final message and submit; the user will rerun Generator.
 
   mandatory_workflow:
-    instruction: "You MUST strictly execute the following sequential workflow:"
-    
-    step_1_inspect_and_test: |
-      - Quickly read `solver.py` (e.g., using `cat`) to understand its inputs/outputs.
-      - Immediately write and execute a Bash test script to run the solver, compute the ACTUAL L2 Error against the manufactured/exact solution, and record the Wall Time.
-    
-    step_2_evaluate_results: |
-      - Compare the printed Error and Time against the task requirements.
-      - IF Error AND Time strictly meet the constraints: Proceed directly to Step 4 (Approve).
-      
-    step_3_diagnose_failure (ONLY IF STEP 2 FAILS): |
-      - IF Error is too high: The bottleneck is likely numerical resolution. Suggest increasing `element_degree` (e.g., from 1 to 2) or increasing the maximum `mesh_resolution` in the adaptive loop.
-      - IF Time is too high: The bottleneck is efficiency. Suggest looser linear solver tolerances (`rtol`), or ensuring `gmres` + `hypre` is used instead of a direct solver for large meshes.
-      - IF Code Crashes: Look at the Python traceback and suggest the exact fix for the crash.
-      - If testing the above modifications fails to resolve the issue, please check the numerical method design and specific code (errors in equation transcription or plus/minus sign issues).
-    step_4_final_verdict
-    output_format: |
-    Return ONLY the complete, runnable Python code for `solver.py` when generating code. 
-    Ensure your bash commands close their triple backticks on a NEW LINE (e.g., `EOF\n``` `).
+    step_1_inspect: |
+      - `cat solver.py` to understand inputs/outputs and detect obvious
+        issues.
+      - Check that the output file (e.g. `solution.npz`, `meta.json`)
+        format matches what the task requires.
+
+    step_2_run: |
+      - Execute the solver via bash (`python solver.py` or a small test
+        harness).
+      - Record printed L2 error and wall time.
+
+    step_3_decide:
+      - IF runs cleanly AND meets constraints: go to step_5_submit.
+      - IF small bug (crash, wrong output key, missing file, sign error,
+        boundary typo, dtype, trivial indexing): go to step_4_fix.
+      - IF fundamentally wrong design: skip to step_5_submit with a
+        clear explanation (do NOT attempt a full rewrite).
+
+    step_4_fix: |
+      - Make the MINIMAL edit to `solver.py` that resolves the problem.
+        Prefer surgical patches. Keep the Generator's overall structure
+        and numerical method intact.
+      - Re-run to confirm the fix works.
+      - You may iterate at most 2-3 fix attempts. Do not get stuck in
+        long rewrite loops.
+
+    step_5_submit: |
+      - Issue the final submit command with a short summary:
+          * whether you changed anything
+          * final L2 error and wall time
+          * if you bailed out on a design-level issue, explain why.
+
+  output_format: |
+    Ensure your bash commands close their triple backticks on a NEW LINE
+    (e.g., `EOF\n``` `). Do NOT paste giant code blocks unless you are
+    actually rewriting `solver.py` via a heredoc.
+
 
 profiling_skill: |
   ---
@@ -420,5 +448,5 @@ profiling_skill: |
      - IF `L2_ERROR` > required target: Modify `solver.py` to increase mesh resolution or element degree, then re-run.
      - IF `WALL_TIME` > required target: Modify `solver.py` to use a faster iterative solver (GMRES+AMG) or looser tolerances, then re-run.
      - IF it crashes: Read the Python traceback carefully, fix the bug in `solver.py`, and re-run.
-  Note that the evaluator may take more time than your tests, so please leave at least a 50% time margin.
+  
   **Strict Rule:** DO NOT submit the final solution until the bash output confirms all metrics are met. Do not guess parameters.    

@@ -1,0 +1,15 @@
+{
+  "case_id": "navier_stokes_tanh_x_shear_stream",
+  "equation_type": "navier_stokes",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/solver.py\", line 65, in solve\n    u_bc_func.interpolate(fem.Expression(u_ex, V.element.interpolation_points()))\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: 'numpy.ndarray' object is not callable\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/solver.py\", line 65, in solve\n    u_bc_func.interpolate(fem.Expression(u_ex, V.element.interpolation_points()))\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: 'numpy.ndarray' object is not callable\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/navier_stokes_tanh_x_shear_stream/solver.py\", line 65, in solve\n    u_bc_func.interpolate(fem.Expression(u_ex, V.element.interpolation_points()))\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: 'numpy.ndarray' object is not callable\n"
+  }
+}

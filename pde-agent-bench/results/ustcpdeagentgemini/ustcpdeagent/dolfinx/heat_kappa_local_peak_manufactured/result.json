@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_kappa_local_peak_manufactured",
+  "equation_type": "heat",
+  "status": "FAIL",
+  "error": 1.839485326780757,
+  "time": 4.58005428314209,
+  "oracle_error": 0.00015630906125711463,
+  "oracle_time": 6.131119546480477,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0015630906125711462,
+  "target_time": 18.39335863944143,
+  "fail_reason": "ACCURACY_FAIL: error=1.84e+00 > target=1.56e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=1.84e+00 > target=1.56e-03"
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 66049,
+      "n_steps": 10,
+      "dt": 0.01,
+      "t_end": 0.1,
+      "agent_resolution": 128,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 144210.08118420793,
+      "time_per_step": 0.458005428314209,
+      "cfl_number": 163.84,
+      "cfl_warning": "CFL=163.84 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 60
+    }
+  }
+}

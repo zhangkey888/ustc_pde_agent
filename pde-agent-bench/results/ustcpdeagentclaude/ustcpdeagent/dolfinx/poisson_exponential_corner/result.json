@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_exponential_corner",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 2.5353698758760704e-07,
+  "time": 1.6374306678771973,
+  "oracle_error": 0.00023924687594114756,
+  "oracle_time": 0.663490486331284,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0023924687594114756,
+  "target_time": 1.9904714589938521,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 20736,
+      "resolution": 48,
+      "degree": 3,
+      "efficiency_dof_per_sec": 12663.742292601999,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 10,
+      "condition_number_estimate": 100.0
+    }
+  }
+}

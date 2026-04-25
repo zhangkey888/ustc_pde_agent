@@ -1,0 +1,17 @@
+{
+  "wall_time_sec": 0.06203293800354004,
+  "solver_info": {
+    "mesh_resolution": 28,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 9,
+    "verification": {
+      "manufactured_solution": "exp(x)*cos(2*pi*y)",
+      "l2_error": 8.204359756285617e-05
+    },
+    "diagnosis": "```DIAGNOSIS\nequation_type: poisson\nspatial_dim: 2\ndomain_geometry: rectangle\nunknowns: scalar\ncoupling: none\nlinearity: linear\ntime_dependence: steady\nstiffness: N/A\ndominant_physics: diffusion\npeclet_or_reynolds: N/A\nsolution_regularity: smooth\nbc_type: all_dirichlet\nspecial_notes: manufactured_solution\n```",
+    "method": "```METHOD\nspatial_method: fem\nelement_or_basis: Lagrange_Q2\nstabilization: none\ntime_method: none\nnonlinear_solver: none\nlinear_solver: cg\npreconditioner: hypre\nspecial_treatment: none\npde_skill: poisson\n```"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_gaussian_bump_manufactured",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 4.1438196847752446e-05,
+  "time": 2.1768805980682373,
+  "oracle_error": 0.0005628663857679711,
+  "oracle_time": 1.2423789985477924,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.005628663857679711,
+  "target_time": 3.7271369956433773,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16641,
+      "resolution": 64,
+      "degree": 2,
+      "efficiency_dof_per_sec": 7644.424785983767,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 5,
+      "condition_number_estimate": 25.0
+    }
+  }
+}

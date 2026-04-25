@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_no_exact_oscillatory_rhs_cubic",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.37023351661812676,
+  "time": 132.04290008544922,
+  "oracle_error": 0.003809332749377706,
+  "oracle_time": 1732.2459598258138,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.03809332749377706,
+  "target_time": 5196.737879477441,
+  "fail_reason": "ACCURACY_FAIL: error=3.70e-01 > target=3.81e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=3.70e-01 > target=3.81e-02"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 128,
+      "element_degree": 2,
+      "linear_iterations": 972,
+      "newton_iterations_mean": 1.7666666666666666,
+      "newton_iterations_max": 2,
+      "dt": 0.005,
+      "n_steps": 60,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

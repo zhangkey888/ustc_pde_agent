@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_kappa_two_peaks",
+  "equation_type": "poisson",
+  "status": "FAIL",
+  "error": 0.007713856088547828,
+  "time": 3.755127191543579,
+  "oracle_error": 0.00017977285235778914,
+  "oracle_time": 0.3199368016794324,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0017977285235778913,
+  "target_time": 0.9598104050382972,
+  "fail_reason": "ACCURACY_FAIL: error=7.71e-03 > target=1.80e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=7.71e-03 > target=1.80e-03"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 576,
+      "resolution": 24,
+      "degree": 1,
+      "efficiency_dof_per_sec": 153.39027697840243,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 7,
+      "condition_number_estimate": 49.0
+    }
+  }
+}

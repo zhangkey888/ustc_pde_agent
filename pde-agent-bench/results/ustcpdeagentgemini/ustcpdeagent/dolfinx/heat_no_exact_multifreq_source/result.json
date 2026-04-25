@@ -1,0 +1,15 @@
+{
+  "case_id": "heat_no_exact_multifreq_source",
+  "equation_type": "heat",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/solver.py\", line 60, in solve\n    A = fem.petsc.assemble_matrix(a_form, bcs=[bc])\n        ^^^^^^^^^\nAttributeError: module 'dolfinx.fem' has no attribute 'petsc'\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/solver.py\", line 60, in solve\n    A = fem.petsc.assemble_matrix(a_form, bcs=[bc])\n        ^^^^^^^^^\nAttributeError: module 'dolfinx.fem' has no attribute 'petsc'\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentgemini/ustcpdeagent/dolfinx/heat_no_exact_multifreq_source/solver.py\", line 60, in solve\n    A = fem.petsc.assemble_matrix(a_form, bcs=[bc])\n        ^^^^^^^^^\nAttributeError: module 'dolfinx.fem' has no attribute 'petsc'\n"
+  }
+}

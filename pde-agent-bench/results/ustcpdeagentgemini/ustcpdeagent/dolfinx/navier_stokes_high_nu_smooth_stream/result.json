@@ -1,0 +1,33 @@
+{
+  "case_id": "navier_stokes_high_nu_smooth_stream",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 1.2918589622419618e-06,
+  "time": 2.3059020042419434,
+  "oracle_error": 0.04656132814714266,
+  "oracle_time": 1.9817517092451453,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 0.46561328147142655,
+  "target_time": 19.817517092451453,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1
+    }
+  }
+}
