@@ -1,0 +1,45 @@
+{
+  "case_id": "convdiff_parabolic_small_dt_high_pe_supg",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 0.0013907108462066398,
+  "time": 2.9611942768096924,
+  "oracle_error": 0.000485872253041126,
+  "oracle_time": 9.15705773793161,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00485872253041126,
+  "target_time": 27.471173213794827,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 7744,
+      "n_steps": 20,
+      "dt": 0.003,
+      "t_end": 0.06,
+      "agent_resolution": 88,
+      "agent_degree": 1,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 52303.22144444483,
+      "time_per_step": 0.1480597138404846,
+      "cfl_number": 23.232,
+      "cfl_warning": "CFL=23.23 > 0.5 (explicit unstable)",
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 300
+    }
+  }
+}

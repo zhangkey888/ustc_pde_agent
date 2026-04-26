@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_no_exact_gaussian_source_k15",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 0.0003201748898896602,
+  "time": 1.5820317268371582,
+  "oracle_error": 0.016335751663352324,
+  "oracle_time": 62.95432214438915,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.16335751663352324,
+  "target_time": 188.86296643316746,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 9409,
+      "resolution": 48,
+      "degree": 2,
+      "efficiency_dof_per_sec": 5947.415491350945,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 667,
+      "condition_number_estimate": 444889.0
+    }
+  }
+}

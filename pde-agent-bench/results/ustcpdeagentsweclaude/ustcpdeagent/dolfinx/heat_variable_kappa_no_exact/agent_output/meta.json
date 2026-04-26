@@ -1,0 +1,18 @@
+{
+  "wall_time_sec": 0.4988217353820801,
+  "solver_info": {
+    "mesh_resolution": 72,
+    "element_degree": 1,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-09,
+    "iterations": 100,
+    "dt": 0.005,
+    "n_steps": 20,
+    "time_scheme": "backward_euler",
+    "accuracy_verification": {
+      "type": "self_temporal_or_resolution_check",
+      "indicator_l2_grid": 7.549830905170004e-05
+    }
+  }
+}

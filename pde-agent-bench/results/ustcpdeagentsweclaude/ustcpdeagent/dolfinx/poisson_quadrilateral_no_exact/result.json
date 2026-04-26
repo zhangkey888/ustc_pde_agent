@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_quadrilateral_no_exact",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 4.798446031365993e-08,
+  "time": 1.911980390548706,
+  "oracle_error": 0.00014398042407563942,
+  "oracle_time": 4.771592070348561,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0014398042407563942,
+  "target_time": 14.314776211045682,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 173889,
+      "resolution": 208,
+      "degree": 2,
+      "efficiency_dof_per_sec": 90947.06245920064,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 16,
+      "condition_number_estimate": 256.0
+    }
+  }
+}

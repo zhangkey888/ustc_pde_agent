@@ -1,0 +1,17 @@
+{
+  "wall_time_sec": 24.989081144332886,
+  "solver_info": {
+    "mesh_resolution": 96,
+    "element_degree": 2,
+    "ksp_type": "minres",
+    "pc_type": "hypre",
+    "rtol": 1e-09,
+    "iterations": 144,
+    "verification": {
+      "divergence_l2": 0.684522490521012,
+      "left_boundary_flux": -0.6666666666621547,
+      "target_inflow_flux": -0.6666666666666666,
+      "flux_mismatch": 4.511946372076636e-12
+    }
+  }
+}

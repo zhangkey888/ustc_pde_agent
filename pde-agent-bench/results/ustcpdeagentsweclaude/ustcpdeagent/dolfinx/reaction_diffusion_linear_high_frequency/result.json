@@ -1,0 +1,36 @@
+{
+  "case_id": "reaction_diffusion_linear_high_frequency",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.24696094213494785,
+  "time": 3.7866666316986084,
+  "oracle_error": 0.0011536804396132907,
+  "oracle_time": 28.395762060768902,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.011536804396132907,
+  "target_time": 85.1872861823067,
+  "fail_reason": "ACCURACY_FAIL: error=2.47e-01 > target=1.15e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=2.47e-01 > target=1.15e-02"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 24,
+      "element_degree": 2,
+      "linear_iterations": 180,
+      "dt": 0.005,
+      "n_steps": 60,
+      "time_integrator": "crank_nicolson"
+    }
+  }
+}

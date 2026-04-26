@@ -1,0 +1,17 @@
+{
+  "wall_time_sec": 19.211368799209595,
+  "solver_info": {
+    "mesh_resolution": 64,
+    "element_degree": 2,
+    "ksp_type": "minres",
+    "pc_type": "hypre",
+    "rtol": 1e-09,
+    "iterations": 262,
+    "verification": {
+      "divergence_l2": 2.052277891874458,
+      "boundary_residual_max": 0.9999999999999999,
+      "diagnosis": "DIAGNOSIS\nequation_type: stokes\nspatial_dim: 2\ndomain_geometry: rectangle\nunknowns: vector+scalar\ncoupling: saddle_point\nlinearity: linear\ntime_dependence: steady\nstiffness: N/A\ndominant_physics: diffusion\npeclet_or_reynolds: low\nsolution_regularity: boundary_layer\nbc_type: all_dirichlet\nspecial_notes: pressure_pinning\n",
+      "method": "METHOD\nspatial_method: fem\nelement_or_basis: Taylor-Hood_P2P1\nstabilization: none\ntime_method: none\nnonlinear_solver: none\nlinear_solver: minres\npreconditioner: hypre\nspecial_treatment: pressure_pinning\npde_skill: stokes\n"
+    }
+  }
+}

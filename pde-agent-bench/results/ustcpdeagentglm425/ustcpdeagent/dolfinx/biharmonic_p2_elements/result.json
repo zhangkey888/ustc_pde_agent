@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_p2_elements",
+  "equation_type": "biharmonic",
+  "status": "PASS",
+  "error": 6.385991238260802e-07,
+  "time": 4.320071697235107,
+  "oracle_error": 2.61962623019009e-06,
+  "oracle_time": 1.9831650853157043,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 2.6196262301900897e-05,
+  "target_time": 5.949495255947113,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 148225,
+      "resolution": 192,
+      "degree": 2,
+      "efficiency_dof_per_sec": 34310.77315102562,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 12,
+      "condition_number_estimate": 144.0
+    }
+  }
+}

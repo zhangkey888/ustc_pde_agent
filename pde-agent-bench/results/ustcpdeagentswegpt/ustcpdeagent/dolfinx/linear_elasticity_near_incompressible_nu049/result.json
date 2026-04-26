@@ -1,0 +1,38 @@
+{
+  "case_id": "linear_elasticity_near_incompressible_nu049",
+  "equation_type": "linear_elasticity",
+  "status": "PASS",
+  "error": 1.1304815204822151e-06,
+  "time": 3.5655181407928467,
+  "oracle_error": 2.8909972114873083e-06,
+  "oracle_time": 1.3826584992930293,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 2.8909972114873083e-05,
+  "target_time": 4.147975497879088,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 21025,
+      "resolution": 72,
+      "degree": 2,
+      "efficiency_dof_per_sec": 5896.758667261969,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 24,
+      "condition_number_estimate": 576.0
+    }
+  }
+}

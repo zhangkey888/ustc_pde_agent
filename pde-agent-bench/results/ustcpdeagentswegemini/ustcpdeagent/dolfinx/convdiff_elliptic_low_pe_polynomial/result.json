@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_low_pe_polynomial",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 9.56702576692562e-07,
+  "time": 0.6390993595123291,
+  "oracle_error": 0.00023028819579515886,
+  "oracle_time": 0.7775213262066245,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0023028819579515884,
+  "target_time": 2.3325639786198735,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 25921,
+      "resolution": 80,
+      "degree": 2,
+      "efficiency_dof_per_sec": 40558.63867518075,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_no_exact_two_gaussians_k18",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 7.058492627651689e-05,
+  "time": 204.07255053520203,
+  "oracle_error": 0.012325991578922666,
+  "oracle_time": 126.44634846691042,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.12325991578922667,
+  "target_time": 379.33904540073127,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 25921,
+      "resolution": 80,
+      "degree": 2,
+      "efficiency_dof_per_sec": 127.01855262757982,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

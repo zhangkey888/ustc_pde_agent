@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_tanh_shear_layer",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 0.19679601230553598,
+  "time": 12.72467041015625,
+  "oracle_error": 0.00011251863953284375,
+  "oracle_time": 2.491077935323119,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0011251863953284375,
+  "target_time": 7.4732338059693575,
+  "fail_reason": "ACCURACY_FAIL: error=1.97e-01 > target=1.13e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=1.97e-01 > target=1.13e-03"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 43681,
+      "resolution": 104,
+      "degree": 2,
+      "efficiency_dof_per_sec": 3432.7804644068283,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 12,
+      "condition_number_estimate": 144.0
+    }
+  }
+}

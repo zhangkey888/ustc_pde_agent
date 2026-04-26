@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_quadrilateral_high_freq_manufactured",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 9.13214593570799e-05,
+  "time": 14.15744161605835,
+  "oracle_error": 0.0010770013729897998,
+  "oracle_time": 17.115382857620716,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.010770013729897998,
+  "target_time": 51.34614857286215,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 12769,
+      "n_steps": 40,
+      "dt": 0.0025,
+      "t_end": 0.1,
+      "agent_resolution": 56,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 36077.139772249575,
+      "time_per_step": 0.35393604040145876,
+      "cfl_number": 7.840000000000001,
+      "cfl_warning": "CFL=7.84 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 280
+    }
+  }
+}

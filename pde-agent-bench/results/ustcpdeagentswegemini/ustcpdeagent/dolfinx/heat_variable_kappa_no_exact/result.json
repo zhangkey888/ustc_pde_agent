@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_variable_kappa_no_exact",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 0.0491703200376489,
+  "time": 1.8186373710632324,
+  "oracle_error": 0.09038519965207739,
+  "oracle_time": 6.625075860880315,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.9038519965207739,
+  "target_time": 19.875227582640946,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 4096,
+      "n_steps": 20,
+      "dt": 0.005,
+      "t_end": 0.1,
+      "agent_resolution": 64,
+      "agent_degree": 1,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 45044.713862943994,
+      "time_per_step": 0.09093186855316163,
+      "cfl_number": 20.48,
+      "cfl_warning": "CFL=20.48 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 300
+    }
+  }
+}

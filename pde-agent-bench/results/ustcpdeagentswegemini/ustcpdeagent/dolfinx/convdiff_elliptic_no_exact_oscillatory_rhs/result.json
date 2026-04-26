@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_elliptic_no_exact_oscillatory_rhs",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 0.027665983784158098,
+  "time": 1.7376389503479004,
+  "oracle_error": 0.0014160575938828486,
+  "oracle_time": 12.793900881893933,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.014160575938828485,
+  "target_time": 38.3817026456818,
+  "fail_reason": "ACCURACY_FAIL: error=2.77e-02 > target=1.42e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=2.77e-02 > target=1.42e-02"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 16384,
+      "resolution": 128,
+      "degree": 1,
+      "efficiency_dof_per_sec": 9428.886246316984,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 121,
+      "condition_number_estimate": 14641.0
+    }
+  }
+}

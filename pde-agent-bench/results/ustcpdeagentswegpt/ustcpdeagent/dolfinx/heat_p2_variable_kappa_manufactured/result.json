@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_p2_variable_kappa_manufactured",
+  "equation_type": "heat",
+  "status": "PASS",
+  "error": 4.6416057379417153e-05,
+  "time": 1.6643521785736084,
+  "oracle_error": 0.0001512195766733443,
+  "oracle_time": 1.3862361563369632,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0015121957667334428,
+  "target_time": 4.1587084690108895,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 9409,
+      "n_steps": 15,
+      "dt": 0.004,
+      "t_end": 0.06,
+      "agent_resolution": 48,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 84798.75943140606,
+      "time_per_step": 0.11095681190490722,
+      "cfl_number": 9.216000000000001,
+      "cfl_warning": "CFL=9.22 > 0.5 (explicit unstable)",
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 75
+    }
+  }
+}

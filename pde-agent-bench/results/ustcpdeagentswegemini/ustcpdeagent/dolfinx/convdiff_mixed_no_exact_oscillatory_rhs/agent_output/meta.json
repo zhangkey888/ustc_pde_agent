@@ -1,0 +1,14 @@
+{
+  "wall_time_sec": 8.488277435302734,
+  "solver_info": {
+    "mesh_resolution": 224,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "ilu",
+    "rtol": 1e-09,
+    "iterations": 175,
+    "verification_refinement_indicator": 0.0001331111147498655,
+    "verification_walltime_last_solve": 3.6278719305992126,
+    "verification_note": "SUPG stabilized FEM; refinement indicator compares sampled grids."
+  }
+}

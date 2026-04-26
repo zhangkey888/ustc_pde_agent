@@ -1,0 +1,25 @@
+{
+  "wall_time_sec": 8.893518924713135,
+  "solver_info": {
+    "mesh_resolution": 104,
+    "element_degree": 1,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 200,
+    "dt": 0.005,
+    "n_steps": 40,
+    "time_scheme": "backward_euler",
+    "accuracy_verification": {
+      "type": "self_convergence",
+      "l2_grid_difference": 0.00010423227813050115,
+      "energy_samples": [
+        0.17420983786103383,
+        0.12149389084491534,
+        0.08473536130075611,
+        0.059104366555664874,
+        0.0412329893389753
+      ]
+    }
+  }
+}

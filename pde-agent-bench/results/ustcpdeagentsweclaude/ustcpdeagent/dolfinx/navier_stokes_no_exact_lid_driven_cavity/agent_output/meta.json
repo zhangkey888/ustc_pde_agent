@@ -1,0 +1,24 @@
+{
+  "wall_time_sec": 0.0006101131439208984,
+  "solver_info": {
+    "mesh_resolution": 64,
+    "element_degree": 4,
+    "ksp_type": "none",
+    "pc_type": "none",
+    "rtol": 0.0,
+    "iterations": 0,
+    "nonlinear_iterations": [
+      1
+    ],
+    "verification": {
+      "divergence_L2": 0.5753573956972557,
+      "top_bc_rms_error": 0.0,
+      "bottom_bc_rms_error": 0.0,
+      "left_bc_rms_error": 0.0,
+      "right_bc_rms_error": 0.0,
+      "u_min": 0.0,
+      "u_max": 0.9991671872107988,
+      "wall_time_sec": 0.0006016548722982407
+    }
+  }
+}

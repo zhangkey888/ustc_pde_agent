@@ -1,0 +1,38 @@
+{
+  "case_id": "convdiff_high_pe_xwind_supg",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 8.990139327130759e-06,
+  "time": 0.95102858543396,
+  "oracle_error": 5.916985385126866e-05,
+  "oracle_time": 0.4248303985223174,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0005916985385126866,
+  "target_time": 1.2744911955669522,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 6561,
+      "resolution": 40,
+      "degree": 2,
+      "efficiency_dof_per_sec": 6898.846260237464,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 97,
+      "condition_number_estimate": 9409.0
+    }
+  }
+}

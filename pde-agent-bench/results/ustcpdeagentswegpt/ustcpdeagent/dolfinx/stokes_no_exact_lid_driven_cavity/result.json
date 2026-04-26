@@ -1,0 +1,33 @@
+{
+  "case_id": "stokes_no_exact_lid_driven_cavity",
+  "equation_type": "stokes",
+  "status": "PASS",
+  "error": 0.18373255991299617,
+  "time": 19.211368799209595,
+  "oracle_error": 0.03375148209087194,
+  "oracle_time": 106.31700307503343,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 0.3375148209087194,
+  "target_time": 1063.1700307503343,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "minres",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 262
+    }
+  }
+}

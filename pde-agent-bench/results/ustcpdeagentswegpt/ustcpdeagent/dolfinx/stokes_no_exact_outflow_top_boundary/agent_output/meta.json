@@ -1,0 +1,22 @@
+{
+  "wall_time_sec": 2.0918047428131104,
+  "solver_info": {
+    "mesh_resolution": 36,
+    "element_degree": 2,
+    "ksp_type": "minres",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 0,
+    "verification": {
+      "divergence_l2": 0.8640521221743314,
+      "velocity_l2": 0.32455197554720155,
+      "solve_time_last": 0.5830267490819097,
+      "bc_max_error_x0": 5.265868842641019e-06,
+      "bc_max_error_y0": 8.887714911676908e-18,
+      "bc_max_error_x1": 3.552641334378756e-17,
+      "grid_diff_prev_to_20": 0.014903878464346154,
+      "grid_diff_prev_to_28": 0.006417940622837293,
+      "grid_diff_prev_to_36": 0.003286786192569252
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_no_exact_sign_changing_source_allen_cahn",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.9376652877405283,
+  "time": 30.536571264266968,
+  "oracle_error": 0.003674765944233456,
+  "oracle_time": 1128.0891622798517,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.03674765944233456,
+  "target_time": 3384.267486839555,
+  "fail_reason": "ACCURACY_FAIL: error=9.38e-01 > target=3.67e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=9.38e-01 > target=3.67e-02"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 96,
+      "element_degree": 2,
+      "linear_iterations": 40,
+      "newton_iterations_mean": 1.225,
+      "newton_iterations_max": 2,
+      "dt": 0.005,
+      "n_steps": 40,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

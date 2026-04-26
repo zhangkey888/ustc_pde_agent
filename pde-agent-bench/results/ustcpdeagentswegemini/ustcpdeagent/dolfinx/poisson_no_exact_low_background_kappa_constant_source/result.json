@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_no_exact_low_background_kappa_constant_source",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 2.5182785251829536e-06,
+  "time": 1.327660083770752,
+  "oracle_error": 0.0002622368325058237,
+  "oracle_time": 1.5158436624333262,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.002622368325058237,
+  "target_time": 4.547530987299979,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 37249,
+      "resolution": 96,
+      "degree": 2,
+      "efficiency_dof_per_sec": 28056.1270579193,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_polynomial_zero_bc",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 1.4964355411617503e-05,
+  "time": 0.24968171119689941,
+  "oracle_error": 0.0003056442879644091,
+  "oracle_time": 0.13038315158337355,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.003056442879644091,
+  "target_time": 0.39114945475012064,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 4225,
+      "resolution": 32,
+      "degree": 2,
+      "efficiency_dof_per_sec": 16921.54375162928,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

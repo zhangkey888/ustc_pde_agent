@@ -1,0 +1,39 @@
+{
+  "wall_time_sec": 16.899566888809204,
+  "solver_info": {
+    "mesh_resolution": 192,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "ilu",
+    "rtol": 1e-09,
+    "iterations": 603,
+    "verification": {
+      "type": "mesh_residual_indicator",
+      "residual_indicator": 0.0009484074363127357,
+      "l2_norm": 0.002657174561516456,
+      "h1_seminorm": 0.04822252412971485,
+      "history": [
+        {
+          "mesh_resolution": 64,
+          "residual_indicator": 0.002579268581688849,
+          "solve_time": 0.49155454616993666
+        },
+        {
+          "mesh_resolution": 96,
+          "residual_indicator": 0.0018534320375875307,
+          "solve_time": 1.3752888413146138
+        },
+        {
+          "mesh_resolution": 128,
+          "residual_indicator": 0.0014307116702375223,
+          "solve_time": 2.579662819392979
+        },
+        {
+          "mesh_resolution": 160,
+          "residual_indicator": 0.0011496186814320818,
+          "solve_time": 4.442969634197652
+        }
+      ]
+    }
+  }
+}

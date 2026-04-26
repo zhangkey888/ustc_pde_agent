@@ -1,0 +1,36 @@
+{
+  "case_id": "reaction_diffusion_no_exact_multifrequency_source_linear",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.10250943833204318,
+  "time": 4.319154739379883,
+  "oracle_error": 0.009214673218957728,
+  "oracle_time": 505.0746434563771,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.09214673218957728,
+  "target_time": 1515.2239303691313,
+  "fail_reason": "ACCURACY_FAIL: error=1.03e-01 > target=9.21e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=1.03e-01 > target=9.21e-02"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 128,
+      "element_degree": 2,
+      "linear_iterations": 250,
+      "dt": 0.002,
+      "n_steps": 250,
+      "time_integrator": "crank_nicolson"
+    }
+  }
+}

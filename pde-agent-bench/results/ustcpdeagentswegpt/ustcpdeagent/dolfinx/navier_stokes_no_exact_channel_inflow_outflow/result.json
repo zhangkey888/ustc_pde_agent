@@ -1,0 +1,33 @@
+{
+  "case_id": "navier_stokes_no_exact_channel_inflow_outflow",
+  "equation_type": "navier_stokes",
+  "status": "FAIL",
+  "error": 1.7273921356077615,
+  "time": 13.757169246673584,
+  "oracle_error": 0.019233410969444174,
+  "oracle_time": 191.18028048239648,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 0.19233410969444173,
+  "target_time": 1911.8028048239648,
+  "fail_reason": "ACCURACY_FAIL: error=1.73e+00 > target=1.92e-01",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=1.73e+00 > target=1.92e-01"
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 0
+    }
+  }
+}

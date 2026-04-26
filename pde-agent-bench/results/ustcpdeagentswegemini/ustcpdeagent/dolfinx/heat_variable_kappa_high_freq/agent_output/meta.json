@@ -1,0 +1,32 @@
+{
+  "wall_time_sec": 2.2533674240112305,
+  "solver_info": {
+    "mesh_resolution": 48,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 200,
+    "dt": 0.0025,
+    "n_steps": 40,
+    "time_scheme": "backward_euler",
+    "l2_error_vs_manufactured": 7.592091954888653e-06,
+    "accuracy_verification": {
+      "type": "manufactured_solution_l2_error",
+      "tested_configs": [
+        {
+          "mesh_resolution": 36,
+          "element_degree": 1,
+          "dt": 0.005,
+          "l2_error": 0.003910513134868623
+        },
+        {
+          "mesh_resolution": 48,
+          "element_degree": 2,
+          "dt": 0.0025,
+          "l2_error": 7.592091954888653e-06
+        }
+      ]
+    }
+  }
+}

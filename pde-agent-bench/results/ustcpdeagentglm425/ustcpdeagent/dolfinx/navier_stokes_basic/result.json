@@ -1,0 +1,15 @@
+{
+  "case_id": "navier_stokes_basic",
+  "equation_type": "navier_stokes",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/solver.py\", line 13, in solve\n    nu = pde[\"nu\"]\n         ~~~^^^^^^\nKeyError: 'nu'\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/solver.py\", line 13, in solve\n    nu = pde[\"nu\"]\n         ~~~^^^^^^\nKeyError: 'nu'\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentglm425/ustcpdeagent/dolfinx/navier_stokes_basic/solver.py\", line 13, in solve\n    nu = pde[\"nu\"]\n         ~~~^^^^^^\nKeyError: 'nu'\n"
+  }
+}

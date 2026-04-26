@@ -1,0 +1,16 @@
+{
+  "wall_time_sec": 7.506613731384277,
+  "solver_info": {
+    "mesh_resolution": 96,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 0,
+    "verification": {
+      "weak_residual_w_plus_laplace_u_l2": 1.1163296112634854e-07,
+      "weak_residual_laplace_w_plus_f_l2": 1.401844290792528,
+      "u_l2_norm": 1.4776195806779615e-13
+    }
+  }
+}

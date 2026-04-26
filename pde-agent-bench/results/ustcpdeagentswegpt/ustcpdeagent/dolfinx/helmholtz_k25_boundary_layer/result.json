@@ -1,0 +1,37 @@
+{
+  "case_id": "helmholtz_k25_boundary_layer",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 5.6821657286093044e-06,
+  "time": 2.9840493202209473,
+  "oracle_error": 0.00011880445380413066,
+  "oracle_time": 213.35599385760725,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0011880445380413067,
+  "target_time": 640.0679815728217,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 9409,
+      "resolution": 48,
+      "degree": 2,
+      "efficiency_dof_per_sec": 3153.098018937345,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 0
+    }
+  }
+}

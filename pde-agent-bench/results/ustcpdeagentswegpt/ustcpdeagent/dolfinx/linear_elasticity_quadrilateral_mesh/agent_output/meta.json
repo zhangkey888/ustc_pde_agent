@@ -1,0 +1,17 @@
+{
+  "wall_time_sec": 14.884292840957642,
+  "solver_info": {
+    "mesh_resolution": 80,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 9,
+    "l2_error_verification": 8.70497785514247e-08,
+    "h1_error_verification": 3.517891746932223e-05,
+    "grid_rmse_verification": 3.6267196293686362e-06,
+    "lambda": 0.5769230769230769,
+    "mu": 0.3846153846153846,
+    "wall_time_solve": 2.0731970258057117
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "wall_time_sec": 1.6464662551879883,
+  "solver_info": {
+    "mesh_resolution": 72,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-08,
+    "iterations": 100,
+    "dt": 0.006,
+    "n_steps": 20,
+    "time_scheme": "backward_euler",
+    "accuracy_verification": {
+      "consistency_rel_l2": 0.0007668403133501765,
+      "previous_mesh_resolution": 56,
+      "current_mesh_resolution": 72,
+      "previous_dt": 0.008,
+      "current_dt": 0.006
+    },
+    "wall_time_sec_estimate": 1.646433019079268,
+    "last_run_sec": 0.8298745872452855
+  }
+}

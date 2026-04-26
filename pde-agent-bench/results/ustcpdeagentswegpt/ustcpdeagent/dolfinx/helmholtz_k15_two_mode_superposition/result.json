@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_k15_two_mode_superposition",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 3.936227120243717e-05,
+  "time": 4.181603908538818,
+  "oracle_error": 0.00045183968556962916,
+  "oracle_time": 63.96839380264282,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.004518396855696292,
+  "target_time": 191.90518140792847,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 9409,
+      "resolution": 48,
+      "degree": 2,
+      "efficiency_dof_per_sec": 2250.0935540037303,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 2714,
+      "condition_number_estimate": 7365796.0
+    }
+  }
+}

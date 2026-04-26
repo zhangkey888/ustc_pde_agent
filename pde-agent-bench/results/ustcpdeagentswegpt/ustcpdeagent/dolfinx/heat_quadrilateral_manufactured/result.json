@@ -1,0 +1,45 @@
+{
+  "case_id": "heat_quadrilateral_manufactured",
+  "equation_type": "heat",
+  "status": "FAIL",
+  "error": 1.4101201632323869e-05,
+  "time": 2.1653125286102295,
+  "oracle_error": 0.00011124154882735863,
+  "oracle_time": 0.5811276054009795,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0011124154882735863,
+  "target_time": 1.7433828162029386,
+  "fail_reason": "TIME_FAIL: time=2.165s > target=1.743s",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "time",
+    "failure_reason": "TIME_FAIL: time=2.165s > target=1.743s"
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 16641,
+      "n_steps": 160,
+      "dt": 0.000625,
+      "t_end": 0.1,
+      "agent_resolution": 64,
+      "agent_degree": 2,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 1229642.356389505,
+      "time_per_step": 0.013533203303813935,
+      "cfl_number": 2.56,
+      "cfl_warning": "CFL=2.56 > 0.5 (explicit unstable)",
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 160
+    }
+  }
+}

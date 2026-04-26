@@ -1,0 +1,21 @@
+{
+  "wall_time_sec": 13.92733097076416,
+  "solver_info": {
+    "mesh_resolution": 120,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "ilu",
+    "rtol": 1e-09,
+    "iterations": 142,
+    "verification": {
+      "l2_diff_40_to_56": 0.004114923272788463,
+      "l2_diff_56_to_72": 0.0038763117106467306,
+      "l2_diff_72_to_88": 0.0036612609492824694,
+      "l2_diff_88_to_104": 0.0035083325958341523,
+      "l2_diff_104_to_120": 0.0033938749138791927
+    },
+    "wall_time_sec": 13.92729985062033,
+    "diagnosis": "DIAGNOSIS: equation_type=helmholtz, spatial_dim=2, domain_geometry=rectangle, unknowns=scalar, coupling=none, linearity=linear, time_dependence=steady, dominant_physics=wave, bc_type=all_dirichlet",
+    "method": "METHOD: spatial_method=fem, element_or_basis=Lagrange_P2, stabilization=none, time_method=none, nonlinear_solver=none, linear_solver=gmres, preconditioner=ilu, pde_skill=helmholtz"
+  }
+}

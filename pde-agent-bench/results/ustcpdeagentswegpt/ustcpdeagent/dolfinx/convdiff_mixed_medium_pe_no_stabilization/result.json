@@ -1,0 +1,33 @@
+{
+  "case_id": "convdiff_mixed_medium_pe_no_stabilization",
+  "equation_type": "convection_diffusion",
+  "status": "FAIL",
+  "error": 0.002923067227606239,
+  "time": 1.5102412700653076,
+  "oracle_error": 0.00020120930242816025,
+  "oracle_time": 0.6403549741953611,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0020120930242816023,
+  "target_time": 1.9210649225860834,
+  "fail_reason": "ACCURACY_FAIL: error=2.92e-03 > target=2.01e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=2.92e-03 > target=2.01e-03"
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 316.22776601683796,
+      "total_variation": 248.77467552292615,
+      "stabilization_method": "SUPG"
+    }
+  }
+}

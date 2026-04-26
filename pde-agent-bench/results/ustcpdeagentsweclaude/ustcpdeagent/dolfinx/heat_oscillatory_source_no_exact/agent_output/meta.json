@@ -1,0 +1,52 @@
+{
+  "wall_time_sec": 22.461754083633423,
+  "solver_info": {
+    "mesh_resolution": 88,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 180,
+    "dt": 0.004,
+    "n_steps": 30,
+    "time_scheme": "backward_euler",
+    "verification": {
+      "type": "manufactured_solution",
+      "samples": [
+        {
+          "mesh_resolution": 24,
+          "element_degree": 1,
+          "dt": 0.01,
+          "l2_error": 0.0007669365954813614,
+          "rel_l2_error": 0.028507274699379415,
+          "runtime_sec": 0.01294289156794548
+        },
+        {
+          "mesh_resolution": 32,
+          "element_degree": 1,
+          "dt": 0.005,
+          "l2_error": 0.000394338328051843,
+          "rel_l2_error": 0.01465767979843545,
+          "runtime_sec": 0.03849474620074034
+        },
+        {
+          "mesh_resolution": 40,
+          "element_degree": 1,
+          "dt": 0.0025,
+          "l2_error": 0.00020505639208502117,
+          "rel_l2_error": 0.0076220106492147655,
+          "runtime_sec": 0.1167486198246479
+        },
+        {
+          "mesh_resolution": 48,
+          "element_degree": 2,
+          "dt": 0.0025,
+          "l2_error": 0.00017668871781857722,
+          "rel_l2_error": 0.00656757526608043,
+          "runtime_sec": 0.4700198760256171
+        }
+      ],
+      "observed_order_estimate": 0.8166642460704578
+    }
+  }
+}

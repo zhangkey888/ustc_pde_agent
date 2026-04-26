@@ -1,0 +1,14 @@
+{
+  "case_id": "convdiff_elliptic_p2_moderate_pe",
+  "equation_type": "convection_diffusion",
+  "status": "AGENT_ERROR",
+  "error_message": null,
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Unknown"
+  }
+}

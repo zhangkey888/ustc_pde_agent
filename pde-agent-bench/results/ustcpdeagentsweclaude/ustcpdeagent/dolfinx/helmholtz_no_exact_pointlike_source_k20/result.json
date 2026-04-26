@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_no_exact_pointlike_source_k20",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 4.0358722048344294e-05,
+  "time": 258.25552892684937,
+  "oracle_error": 0.016293891286043968,
+  "oracle_time": 262.3505623424426,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.16293891286043968,
+  "target_time": 787.0516870273277,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 50625,
+      "resolution": 112,
+      "degree": 2,
+      "efficiency_dof_per_sec": 196.02678095747365,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

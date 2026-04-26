@@ -1,0 +1,22 @@
+{
+  "wall_time_sec": 1.89920973777771,
+  "solver_info": {
+    "mesh_resolution": 144,
+    "element_degree": 1,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-09,
+    "iterations": 200,
+    "dt": 0.0025,
+    "n_steps": 40,
+    "time_scheme": "backward_euler",
+    "wall_time_sec": 1.3295216662809253,
+    "verification": {
+      "grad_L2_sq": 7.311453483680472,
+      "self_convergence_l2_grid": 0.0025888568300135315,
+      "self_convergence_linf_grid": 0.006321734156220171,
+      "coarse_mesh_resolution": 96,
+      "coarse_dt": 0.005
+    }
+  }
+}

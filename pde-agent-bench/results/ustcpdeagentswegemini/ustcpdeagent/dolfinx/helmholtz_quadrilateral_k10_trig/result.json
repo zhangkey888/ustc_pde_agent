@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_quadrilateral_k10_trig",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 7.726768821526924e-05,
+  "time": 19.130473852157593,
+  "oracle_error": 0.0007320180883851161,
+  "oracle_time": 65.56593947671354,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0073201808838511614,
+  "target_time": 196.69781843014061,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 6561,
+      "resolution": 40,
+      "degree": 2,
+      "efficiency_dof_per_sec": 342.9606632174472,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 5000,
+      "condition_number_estimate": 25000000.0
+    }
+  }
+}

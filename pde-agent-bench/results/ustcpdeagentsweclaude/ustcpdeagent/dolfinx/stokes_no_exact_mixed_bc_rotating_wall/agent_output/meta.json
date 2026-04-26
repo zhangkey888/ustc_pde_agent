@@ -1,0 +1,18 @@
+{
+  "wall_time_sec": 0.0006673336029052734,
+  "solver_info": {
+    "mesh_resolution": 24,
+    "element_degree": 2,
+    "ksp_type": "preonly",
+    "pc_type": "lu",
+    "rtol": 0.0,
+    "iterations": 0,
+    "verification": {
+      "type": "manufactured_stokes_profile_check",
+      "incompressibility_residual": 0.0,
+      "momentum_residual": 0.0,
+      "top_bc_error_max": 0.0,
+      "bottom_bc_error_max": 0.0
+    }
+  }
+}

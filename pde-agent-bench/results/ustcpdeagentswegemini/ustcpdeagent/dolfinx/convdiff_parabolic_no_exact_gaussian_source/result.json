@@ -1,0 +1,45 @@
+{
+  "case_id": "convdiff_parabolic_no_exact_gaussian_source",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 0.008564879131741174,
+  "time": 1.4456100463867188,
+  "oracle_error": 0.07229433305455292,
+  "oracle_time": 42.968606553040445,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.7229433305455292,
+  "target_time": 128.90581965912133,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "parabolic"
+  ],
+  "math_type_metrics": {
+    "parabolic": {
+      "dof": 9216,
+      "n_steps": 10,
+      "dt": 0.01,
+      "t_end": 0.1,
+      "agent_resolution": 96,
+      "agent_degree": 1,
+      "time_scheme": "backward_euler",
+      "efficiency_workrate": 63751.6322125407,
+      "time_per_step": 0.14456100463867189,
+      "cfl_number": 92.16000000000001,
+      "cfl_warning": "CFL=92.16 > 0.5 (explicit unstable)",
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "time_integrator": "backward_euler",
+      "linear_iterations": 182
+    }
+  }
+}

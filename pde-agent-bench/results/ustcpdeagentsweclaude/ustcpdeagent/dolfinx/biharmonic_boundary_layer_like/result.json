@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_boundary_layer_like",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 0.4602389883069463,
+  "time": 8.262279748916626,
+  "oracle_error": 4.4053367199641956e-05,
+  "oracle_time": 2.5824245596304536,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.00044053367199641956,
+  "target_time": 7.747273678891361,
+  "fail_reason": "ACCURACY_FAIL: error=4.60e-01 > target=4.41e-04",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=4.60e-01 > target=4.41e-04"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 36864,
+      "resolution": 64,
+      "degree": 3,
+      "efficiency_dof_per_sec": 4461.722565716044,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "wall_time_sec": 14.064517974853516,
+  "solver_info": {
+    "mesh_resolution": 168,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-09,
+    "iterations": 175,
+    "dt": 0.002857142857142857,
+    "n_steps": 35,
+    "time_scheme": "backward_euler",
+    "accuracy_verification": {
+      "type": "two_level_self_convergence_probe",
+      "reference_mesh_resolution": 152,
+      "reference_dt": 0.0033333333333333335,
+      "probe_l2_difference_to_reference": 2.061759796720585e-06,
+      "n_probe_points": 1089
+    }
+  }
+}

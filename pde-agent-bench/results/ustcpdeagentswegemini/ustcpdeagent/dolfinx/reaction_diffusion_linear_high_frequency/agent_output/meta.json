@@ -1,0 +1,19 @@
+{
+  "wall_time_sec": 31.976397275924683,
+  "solver_info": {
+    "mesh_resolution": 72,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 240,
+    "dt": 0.005,
+    "n_steps": 60,
+    "time_scheme": "crank_nicolson",
+    "accuracy_verification": {
+      "manufactured_solution": "exp(-t)*sin(4*pi*x)*sin(3*pi*y)",
+      "l2_error_final": 2.2293865545969375e-06,
+      "target_threshold": 0.0115
+    }
+  }
+}

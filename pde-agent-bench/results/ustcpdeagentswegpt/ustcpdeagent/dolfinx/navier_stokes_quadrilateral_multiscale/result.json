@@ -1,0 +1,33 @@
+{
+  "case_id": "navier_stokes_quadrilateral_multiscale",
+  "equation_type": "navier_stokes",
+  "status": "PASS",
+  "error": 2.8720813489933147e-05,
+  "time": 6.595195293426514,
+  "oracle_error": 1.4372224209307628e-05,
+  "oracle_time": 12.274998270906508,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 0.0001437222420930763,
+  "target_time": 122.74998270906508,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1
+    }
+  }
+}

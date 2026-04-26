@@ -1,0 +1,32 @@
+{
+  "case_id": "convdiff_mixed_no_exact_oscillatory_rhs",
+  "equation_type": "convection_diffusion",
+  "status": "PASS",
+  "error": 0.00119626503510775,
+  "time": 4.622247934341431,
+  "oracle_error": 0.0026821029073061864,
+  "oracle_time": 25.653294603340328,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.026821029073061865,
+  "target_time": 76.95988381002098,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "mixed_type"
+  ],
+  "math_type_metrics": {
+    "mixed_type": {
+      "peclet_number": 3310.5890714493694,
+      "total_variation": 3.765363457867297
+    }
+  }
+}

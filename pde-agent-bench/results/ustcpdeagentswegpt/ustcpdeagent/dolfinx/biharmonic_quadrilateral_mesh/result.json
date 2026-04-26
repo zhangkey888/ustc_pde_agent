@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_quadrilateral_mesh",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 2.7051134778942303,
+  "time": 6.728299379348755,
+  "oracle_error": 0.00046374804869791136,
+  "oracle_time": 2.495107560418546,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0046374804869791135,
+  "target_time": 7.485322681255639,
+  "fail_reason": "ACCURACY_FAIL: error=2.71e+00 > target=4.64e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=2.71e+00 > target=4.64e-03"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 7921,
+      "resolution": 44,
+      "degree": 2,
+      "efficiency_dof_per_sec": 1177.2662828161324,
+      "linear_solver_type": "gmres",
+      "preconditioner_type": "ilu",
+      "linear_iterations": 156,
+      "condition_number_estimate": 24336.0
+    }
+  }
+}

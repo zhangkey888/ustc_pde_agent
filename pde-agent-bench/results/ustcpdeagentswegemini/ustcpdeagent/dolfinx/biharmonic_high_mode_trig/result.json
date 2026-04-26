@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_high_mode_trig",
+  "equation_type": "biharmonic",
+  "status": "PASS",
+  "error": 2.459030331796882e-05,
+  "time": 2.7310945987701416,
+  "oracle_error": 0.0009001449557123693,
+  "oracle_time": 2.4107231153175235,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.009001449557123693,
+  "target_time": 7.23216934595257,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 21025,
+      "resolution": 72,
+      "degree": 2,
+      "efficiency_dof_per_sec": 7698.37852173554,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 12,
+      "condition_number_estimate": 144.0
+    }
+  }
+}

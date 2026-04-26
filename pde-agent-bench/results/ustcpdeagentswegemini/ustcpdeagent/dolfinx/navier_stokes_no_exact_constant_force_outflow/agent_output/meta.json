@@ -1,0 +1,19 @@
+{
+  "wall_time_sec": 71.48082184791565,
+  "solver_info": {
+    "mesh_resolution": 72,
+    "element_degree": 2,
+    "ksp_type": "gmres",
+    "pc_type": "lu",
+    "rtol": 1e-09,
+    "iterations": 30,
+    "nonlinear_iterations": [
+      30
+    ],
+    "wall_time_sec": 71.48063808586448,
+    "verification": {
+      "residual_l2": NaN,
+      "divergence_l2": NaN
+    }
+  }
+}

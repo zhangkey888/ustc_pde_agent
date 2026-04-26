@@ -1,0 +1,15 @@
+{
+  "wall_time_sec": 8.592174291610718,
+  "solver_info": {
+    "mesh_resolution": 64,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "gamg",
+    "rtol": 1e-10,
+    "iterations": 2,
+    "l2_error_exact": 0.4999999488708866,
+    "wall_time_sec": 8.592146552167833,
+    "formulation": "mixed_biharmonic_with_auxiliary_w_equals_minus_laplacian_u",
+    "manufactured_solution": "sin(2*pi*x)*sin(pi*y)"
+  }
+}

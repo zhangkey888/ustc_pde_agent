@@ -1,0 +1,38 @@
+{
+  "case_id": "helmholtz_k18_tanh_shear_layer",
+  "equation_type": "helmholtz",
+  "status": "PASS",
+  "error": 4.117385308146936e-06,
+  "time": 1.5035145282745361,
+  "oracle_error": 0.0001618512724567144,
+  "oracle_time": 215.7517987024039,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.001618512724567144,
+  "target_time": 647.2553961072117,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 21025,
+      "resolution": 72,
+      "degree": 2,
+      "efficiency_dof_per_sec": 13983.902120406325,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

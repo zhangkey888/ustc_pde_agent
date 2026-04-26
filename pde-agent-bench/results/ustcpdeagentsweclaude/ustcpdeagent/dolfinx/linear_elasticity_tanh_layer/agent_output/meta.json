@@ -1,0 +1,16 @@
+{
+  "wall_time_sec": 8.01049518585205,
+  "solver_info": {
+    "mesh_resolution": 96,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "gamg",
+    "rtol": 1e-10,
+    "iterations": 53,
+    "l2_error": 2.5725430822197652e-08,
+    "relative_l2_error": 4.433722291291729e-08,
+    "wall_time_sec": 7.667996647767723,
+    "diagnosis_card": "```DIAGNOSIS\nequation_type: linear_elasticity\nspatial_dim: 2\ndomain_geometry: rectangle\nunknowns: vector\ncoupling: none\nlinearity: linear\ntime_dependence: steady\nstiffness: N/A\ndominant_physics: mixed\npeclet_or_reynolds: N/A\nsolution_regularity: boundary_layer\nbc_type: all_dirichlet\nspecial_notes: manufactured_solution\n```",
+    "method_card": "```METHOD\nspatial_method: fem\nelement_or_basis: Lagrange_P2\nstabilization: none\ntime_method: none\nnonlinear_solver: none\nlinear_solver: cg\npreconditioner: amg\nspecial_treatment: none\npde_skill: linear_elasticity\n```"
+  }
+}

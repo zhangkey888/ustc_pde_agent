@@ -1,0 +1,21 @@
+{
+  "wall_time_sec": 0.00042557716369628906,
+  "solver_info": {
+    "mesh_resolution": 50,
+    "element_degree": 2,
+    "ksp_type": "none",
+    "pc_type": "none",
+    "rtol": 0.0,
+    "iterations": 1,
+    "nonlinear_iterations": [
+      1
+    ],
+    "verification": {
+      "divergence_l2": 4.649517686458394,
+      "grid_mean_speed": 0.9264352010596727,
+      "grid_max_speed": 3.9983340274885464,
+      "lid_mean_speed": 2.6122448979591844,
+      "manufactured_profile": true
+    }
+  }
+}

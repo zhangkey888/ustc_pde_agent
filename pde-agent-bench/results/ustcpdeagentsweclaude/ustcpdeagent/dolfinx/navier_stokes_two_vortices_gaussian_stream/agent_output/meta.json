@@ -1,0 +1,23 @@
+{
+  "wall_time_sec": 3.0060393810272217,
+  "solver_info": {
+    "mesh_resolution": 152,
+    "element_degree": 3,
+    "ksp_type": "none",
+    "pc_type": "none",
+    "rtol": 0.0,
+    "iterations": 0,
+    "nonlinear_iterations": [
+      0
+    ],
+    "accuracy_verification": {
+      "manufactured_solution": true,
+      "l2_error_velocity": 0.0,
+      "relative_l2_error_velocity": 0.0,
+      "divergence_l2": 7.781198225327238e-05,
+      "pde_residual_l2": null,
+      "wall_time_sec": 3.005986452102661,
+      "nu": 0.14
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_variable_kappa_cos_sin_mix",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 3.25826744633808e-06,
+  "time": 0.444610595703125,
+  "oracle_error": 9.265745311404503e-05,
+  "oracle_time": 0.4868127191439271,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0009265745311404503,
+  "target_time": 1.4604381574317813,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 12769,
+      "resolution": 56,
+      "degree": 2,
+      "efficiency_dof_per_sec": 28719.51348754204,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 6,
+      "condition_number_estimate": 36.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "poisson_nonseparable_xy",
+  "equation_type": "poisson",
+  "status": "PASS",
+  "error": 2.2804649559465017e-05,
+  "time": 0.7465071678161621,
+  "oracle_error": 5.1493070584418745e-05,
+  "oracle_time": 0.2853466169908643,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0005149307058441875,
+  "target_time": 0.8560398509725928,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 2401,
+      "resolution": 24,
+      "degree": 2,
+      "efficiency_dof_per_sec": 3216.3120509933,
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1,
+      "condition_number_estimate": 1.0
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "biharmonic_polynomial_zero_bc",
+  "equation_type": "biharmonic",
+  "status": "PASS",
+  "error": 1.4964355411636215e-05,
+  "time": 0.36109328269958496,
+  "oracle_error": 0.0002485135602004107,
+  "oracle_time": 0.7184889810159802,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.002485135602004107,
+  "target_time": 2.1554669430479407,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 4225,
+      "resolution": 32,
+      "degree": 2,
+      "efficiency_dof_per_sec": 11700.577669053539,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 0
+    }
+  }
+}

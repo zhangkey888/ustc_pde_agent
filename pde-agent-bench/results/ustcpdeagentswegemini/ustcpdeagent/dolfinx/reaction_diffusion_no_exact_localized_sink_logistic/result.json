@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_no_exact_localized_sink_logistic",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.8013328279789653,
+  "time": 61.82257866859436,
+  "oracle_error": 0.007164123479842245,
+  "oracle_time": 1061.0369589347392,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.07164123479842245,
+  "target_time": 3183.1108768042177,
+  "fail_reason": "ACCURACY_FAIL: error=8.01e-01 > target=7.16e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=8.01e-01 > target=7.16e-02"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 70,
+      "element_degree": 2,
+      "linear_iterations": 1370,
+      "newton_iterations_mean": 2.0,
+      "newton_iterations_max": 2,
+      "dt": 0.005,
+      "n_steps": 70,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

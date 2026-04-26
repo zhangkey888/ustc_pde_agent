@@ -1,0 +1,33 @@
+{
+  "case_id": "stokes_no_exact_channel_inflow_outflow",
+  "equation_type": "stokes",
+  "status": "FAIL",
+  "error": 1.7704307020359322,
+  "time": 0.0009284019470214844,
+  "oracle_error": 0.008607489216461631,
+  "oracle_time": 83.67620405647904,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 10,
+  "target_error": 0.0860748921646163,
+  "target_time": 836.7620405647904,
+  "fail_reason": "ACCURACY_FAIL: error=1.77e+00 > target=8.61e-02",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=1.77e+00 > target=8.61e-02"
+  },
+  "math_types": [
+    "incompressible_flow"
+  ],
+  "math_type_metrics": {
+    "incompressible_flow": {
+      "linear_solver_type": "preonly",
+      "preconditioner_type": "lu",
+      "linear_iterations": 1
+    }
+  }
+}

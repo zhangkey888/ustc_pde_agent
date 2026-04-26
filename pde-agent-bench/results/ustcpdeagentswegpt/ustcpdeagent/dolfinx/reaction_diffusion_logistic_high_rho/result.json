@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_logistic_high_rho",
+  "equation_type": "reaction_diffusion",
+  "status": "PASS",
+  "error": 0.00010208234119298093,
+  "time": 76.46635794639587,
+  "oracle_error": 0.0002669078373907334,
+  "oracle_time": 58.09529590141028,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.002669078373907334,
+  "target_time": 174.28588770423084,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 72,
+      "element_degree": 2,
+      "linear_iterations": 960,
+      "newton_iterations_mean": 2.0,
+      "newton_iterations_max": 2,
+      "dt": 0.0025,
+      "n_steps": 80,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

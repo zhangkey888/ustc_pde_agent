@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_transient_allen_cahn_time",
+  "equation_type": "reaction_diffusion",
+  "status": "FAIL",
+  "error": 0.005339326682355994,
+  "time": 2.2396819591522217,
+  "oracle_error": 0.0002094039409858469,
+  "oracle_time": 22.204435067251325,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.002094039409858469,
+  "target_time": 66.61330520175397,
+  "fail_reason": "ACCURACY_FAIL: error=5.34e-03 > target=2.09e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=5.34e-03 > target=2.09e-03"
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 32,
+      "element_degree": 1,
+      "linear_iterations": 95,
+      "newton_iterations_mean": 3.0,
+      "newton_iterations_max": 3,
+      "dt": 0.02,
+      "n_steps": 15,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

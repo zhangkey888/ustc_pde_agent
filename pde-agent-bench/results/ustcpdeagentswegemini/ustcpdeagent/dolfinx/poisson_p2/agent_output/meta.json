@@ -1,0 +1,15 @@
+{
+  "wall_time_sec": 0.6606366634368896,
+  "solver_info": {
+    "mesh_resolution": 160,
+    "element_degree": 2,
+    "ksp_type": "cg",
+    "pc_type": "hypre",
+    "rtol": 1e-10,
+    "iterations": 6,
+    "verification_L2_error": 6.882752392080996e-08,
+    "verification_max_dof_error": 1.4493193312148378e-09,
+    "wall_time_sec": 0.657848572358489,
+    "case_id": "poisson_p2"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "biharmonic_multimode_superposition",
+  "equation_type": "biharmonic",
+  "status": "FAIL",
+  "error": 0.2249301948158001,
+  "time": 5.785581827163696,
+  "oracle_error": 0.00034817875970216076,
+  "oracle_time": 3.1762118535116315,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0034817875970216076,
+  "target_time": 9.528635560534894,
+  "fail_reason": "ACCURACY_FAIL: error=2.25e-01 > target=3.48e-03",
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "accuracy",
+    "failure_reason": "ACCURACY_FAIL: error=2.25e-01 > target=3.48e-03"
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 31329,
+      "resolution": 88,
+      "degree": 2,
+      "efficiency_dof_per_sec": 5415.012860574927,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 12,
+      "condition_number_estimate": 144.0
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "biharmonic_no_exact_oscillatory_rhs",
+  "equation_type": "biharmonic",
+  "status": "PASS",
+  "error": 0.0008726506561068189,
+  "time": 2.45076584815979,
+  "oracle_error": 0.015079345871358563,
+  "oracle_time": 6.416093382053077,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.15079345871358563,
+  "target_time": 19.24828014615923,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "elliptic"
+  ],
+  "math_type_metrics": {
+    "elliptic": {
+      "dof": 25921,
+      "resolution": 80,
+      "degree": 2,
+      "efficiency_dof_per_sec": 10576.693819796508,
+      "linear_solver_type": "cg",
+      "preconditioner_type": "hypre",
+      "linear_iterations": 0
+    }
+  }
+}
