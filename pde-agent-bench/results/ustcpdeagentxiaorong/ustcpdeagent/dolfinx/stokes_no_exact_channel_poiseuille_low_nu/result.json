@@ -1,0 +1,15 @@
+{
+  "case_id": "stokes_no_exact_channel_poiseuille_low_nu",
+  "equation_type": "stokes",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/solver.py\", line 10, in solve\n    nu_val = case_spec[\"pde\"][\"viscosity\"]\n             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'viscosity'\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/solver.py\", line 10, in solve\n    nu_val = case_spec[\"pde\"][\"viscosity\"]\n             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'viscosity'\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/stokes_no_exact_channel_poiseuille_low_nu/solver.py\", line 10, in solve\n    nu_val = case_spec[\"pde\"][\"viscosity\"]\n             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'viscosity'\n"
+  }
+}

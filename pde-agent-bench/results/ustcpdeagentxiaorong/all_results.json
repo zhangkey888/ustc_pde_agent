@@ -1,0 +1,93 @@
+{
+  "ustcpdeagent": {
+    "agent_name": "ustcpdeagent",
+    "timestamp": "2026-04-27T01:10:13.040444",
+    "total_cases": 1,
+    "passed_cases": 1,
+    "pass_rate": 1.0,
+    "avg_error": 1.5398531528875734e-09,
+    "avg_time": 1.44801926612854,
+    "equation_type_summary": {
+      "poisson": {
+        "cases": 1,
+        "passed": 1,
+        "failed": 0,
+        "pass_rate": 1.0,
+        "avg_error": 1.5398531528875734e-09,
+        "avg_time": 1.44801926612854
+      }
+    },
+    "math_type_summary": {
+      "elliptic": {
+        "cases": 1,
+        "passed": 1,
+        "pass_rate": 1.0,
+        "avg_metrics": {
+          "dof": 90000.0,
+          "resolution": 100.0,
+          "degree": 3.0,
+          "efficiency_dof_per_sec": 62153.86915439752,
+          "linear_iterations": 13.0,
+          "condition_number_estimate": 169.0
+        }
+      }
+    },
+    "gate_statistics": {
+      "total_cases": 1,
+      "exec_valid_count": 1,
+      "accuracy_pass_count": 1,
+      "time_pass_count": 1,
+      "final_pass_count": 1,
+      "exec_valid_rate": 1.0,
+      "accuracy_pass_rate": 1.0,
+      "time_pass_rate": 1.0,
+      "final_pass_rate": 1.0,
+      "accuracy_pass_rate_given_exec": 1.0,
+      "time_pass_rate_given_accuracy": 1.0,
+      "failure_breakdown": {},
+      "failure_breakdown_pct": {}
+    },
+    "cost_analysis": {},
+    "multi_attempt_stats": null,
+    "results": [
+      {
+        "case_id": "poisson_basic",
+        "equation_type": "poisson",
+        "status": "PASS",
+        "error": 1.5398531528875734e-09,
+        "time": 1.44801926612854,
+        "oracle_error": 0.00019248068217108844,
+        "oracle_time": 2.294666290283203,
+        "tolerance": 10,
+        "accuracy_tolerance": 10,
+        "time_tolerance": 3,
+        "target_error": 0.0019248068217108845,
+        "target_time": 6.883998870849609,
+        "fail_reason": null,
+        "gate_breakdown": {
+          "exec_valid": true,
+          "accuracy_pass": true,
+          "time_pass": true,
+          "final_pass": true,
+          "failure_stage": null,
+          "failure_reason": null
+        },
+        "math_types": [
+          "elliptic"
+        ],
+        "math_type_metrics": {
+          "elliptic": {
+            "dof": 90000,
+            "resolution": 100,
+            "degree": 3,
+            "efficiency_dof_per_sec": 62153.86915439752,
+            "linear_solver_type": "cg",
+            "preconditioner_type": "hypre",
+            "linear_iterations": 13,
+            "condition_number_estimate": 169.0
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "reaction_diffusion_allen_cahn_manufactured",
+  "equation_type": "reaction_diffusion",
+  "status": "PASS",
+  "error": 0.0006436618122055483,
+  "time": 14.174926519393921,
+  "oracle_error": 0.00030844729351689666,
+  "oracle_time": 40.95973974280059,
+  "tolerance": 10,
+  "accuracy_tolerance": 10,
+  "time_tolerance": 3,
+  "target_error": 0.0030844729351689666,
+  "target_time": 122.87921922840178,
+  "fail_reason": null,
+  "gate_breakdown": {
+    "exec_valid": true,
+    "accuracy_pass": true,
+    "time_pass": true,
+    "final_pass": true,
+    "failure_stage": null,
+    "failure_reason": null
+  },
+  "math_types": [
+    "reaction_diffusion"
+  ],
+  "math_type_metrics": {
+    "reaction_diffusion": {
+      "mesh_resolution": 64,
+      "element_degree": 2,
+      "linear_iterations": 49,
+      "newton_iterations_mean": 1.6333333333333333,
+      "newton_iterations_max": 20,
+      "dt": 0.005,
+      "n_steps": 30,
+      "time_integrator": "backward_euler"
+    }
+  }
+}

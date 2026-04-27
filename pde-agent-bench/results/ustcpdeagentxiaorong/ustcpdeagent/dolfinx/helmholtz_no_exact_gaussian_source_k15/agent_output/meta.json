@@ -1,0 +1,11 @@
+{
+  "wall_time_sec": 11.851618528366089,
+  "solver_info": {
+    "mesh_resolution": 250,
+    "element_degree": 3,
+    "ksp_type": "preonly",
+    "pc_type": "lu",
+    "rtol": 1e-10,
+    "iterations": 1
+  }
+}

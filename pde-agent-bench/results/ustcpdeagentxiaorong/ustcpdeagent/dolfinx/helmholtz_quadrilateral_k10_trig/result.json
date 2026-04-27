@@ -1,0 +1,15 @@
+{
+  "case_id": "helmholtz_quadrilateral_k10_trig",
+  "equation_type": "helmholtz",
+  "status": "EXECUTION_ERROR",
+  "error_message": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/solver.py\", line 15, in solve\n    k_val = case_spec[\"pde\"][\"helmholtz\"][\"k\"]\n            ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'helmholtz'\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/solver.py\", line 15, in solve\n    k_val = case_spec[\"pde\"][\"helmholtz\"][\"k\"]\n            ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'helmholtz'\n",
+  "gate_breakdown": {
+    "exec_valid": false,
+    "accuracy_pass": false,
+    "time_pass": false,
+    "final_pass": false,
+    "failure_stage": "exec",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 132, in <module>\n    main()\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/agent_output/_runner.py\", line 33, in main\n    result = solver(case_spec)\n             ^^^^^^^^^^^^^^^^^\n  File \"/home/yuanyuan06/MLLMImage/zhangkeyao/ustc_pde_agent/pde-agent-bench/results/ustcpdeagentxiaorong/ustcpdeagent/dolfinx/helmholtz_quadrilateral_k10_trig/solver.py\", line 15, in solve\n    k_val = case_spec[\"pde\"][\"helmholtz\"][\"k\"]\n            ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'helmholtz'\n"
+  }
+}
