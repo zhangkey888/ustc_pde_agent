@@ -1,1 +1,0 @@
-"""Transient heat equation solver in dolfinx 0.10.0.

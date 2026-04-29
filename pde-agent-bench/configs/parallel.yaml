@@ -1,0 +1,109 @@
+# =============================================================================
+# PDEBench Parallel Benchmark — 多 Worker 并发评测配置
+# =============================================================================
+# Usage: python scripts/run_benchmark_parallel.py --config configs/parallel.yaml
+#
+# 全局参数作用于所有 worker，每个 worker 可在自身定义中覆盖。
+
+# ─── 全局设置 ────────────────────────────────────────────────────────────────
+
+# Benchmark 数据文件
+#   v1: data/benchmark_v1.jsonl   (仅 dolfinx)
+#   v2: data/benchmark_v2.jsonl   (多后端)
+data_file: data/benchmark_v1.jsonl
+
+# 输出目录
+output_dir: results/
+
+# FEM 后端: dolfinx (默认) | firedrake | dealii
+solver_library: dolfinx
+
+# 数据集版本简写 (设置了 version 后会自动指向正确的 data_file)
+version: v1
+
+# 全局默认超时 (秒)，worker 级别可覆盖
+timeout: 600
+
+# 全局 case 过滤 (空 = 全部)，worker 级别可覆盖
+cases: []
+equation_types: []
+
+# ─── Worker 列表 ─────────────────────────────────────────────────────────────
+#
+# 每个 worker 独立跑全部 cases。
+# 所有 worker 共享一个线程池，总并发 = Σ(各 worker 的 concurrency)。
+#
+# 字段说明:
+#   name:              worker 名称 (同时也是 results/ 下的子目录名)
+#   agent:             LLM 名 (gpt-4o, sonnet-3.5, ...)
+#                      或 Code Agent 名 (mini-swe-agent, codepde, openhands, ustcpdeagent)
+#   agent_config:      [可选] Code Agent 专属配置 (model, api_key, base_url, ...)
+#                      未定义时自动从 pdebench/configs/{agent}.json 读取
+#   concurrency:       该 worker 的并发数
+#   timeout:           [可选] 覆盖全局超时
+#   cases:             [可选] 覆盖全局 case 过滤 (空 = 全部)
+#   equation_types:    [可选] 覆盖全局方程类型过滤
+#   skip_generation:   [可选] 跳过 agent 调用，直接用已有的 solver.py
+#   eval_existing_dir: [可选] 从已有目录批量评估 (类似原 run_benchmark.py 的 --eval-existing-dir)
+#   max_attempts:      [可选] 多轮迭代次数 (实验 2.1)
+
+workers:
+
+  # === Code Agent: mini-swe-agent + GPT-4o ===
+  # - name: mini-swe-gpt
+  #   agent: mini-swe-agent
+  #   agent_config:
+  #     model: openai/gpt-4o
+  #     api_key: ${OPENAI_API_KEY}
+  #     step_limit: 50
+  #     cost_limit: 3.0
+  #   concurrency: 2
+  #   timeout: 600
+
+  # # === Code Agent: mini-swe-agent + Claude (via litellm) ===
+  # - name: mini-swe-claude
+  #   agent: mini-swe-agent
+  #   agent_config:
+  #     model: anthropic/claude-sonnet-4-20250514
+  #     api_key: ${ANTHROPIC_API_KEY}
+  #     step_limit: 50
+  #     cost_limit: 3.0
+  #   concurrency: 2
+
+  # === Code Agent: mini-swe-agent + DeepSeek (via litellm) ===
+  - name: mini-swe-deepseek
+    agent: mini-swe-agent
+    agent_config:
+      model: deepseek/deepseek-chat
+      api_key: sk-
+      base_url: https://api.deepseek.com/v1
+    concurrency: 1
+
+  # # === 纯 LLM: GPT-4o 直连 ===
+  # - name: gpt-4o-direct
+  #   agent: gpt-4o
+  #   concurrency: 3
+
+  # # === 纯 LLM: Qwen3-Max 直连 ===
+  # - name: qwen3-max-direct
+  #   agent: qwen3-max
+  #   concurrency: 2
+
+  # # === 纯 LLM: Gemini 直连 ===
+  # - name: gemini-direct
+  #   agent: gemini
+  #   concurrency: 2
+
+  # === 快速评估模式: 用已有 solver 评估 (不调 agent) ===
+  # - name: fast-eval
+  #   agent: gpt-4o
+  #   concurrency: 2
+  #   skip_generation: true
+  #   eval_existing_dir: results/gpt-4o-direct/dolfinx
+
+  # === 只测特定 case 子集 ===
+  # - name: quick-check
+  #   agent: gpt-4o
+  #   concurrency: 2
+  #   cases: [poisson_basic, heat_basic]
+  #   equation_types: [poisson]
